@@ -1,0 +1,28 @@
+{
+    "name": "adenfraser/flare",
+    "description": "Got to have a flare for something",
+    "keywords": [
+        "Packager",
+        "Laravel",
+        "package",
+        "skeleton",
+        "Github"
+    ],
+    "homepage": "https://github.com/AdenFraser/flare",
+    "license": "",
+    "authors": [
+        {
+            "name": "Aden Fraser",
+            "email": "aden@fraserjilani.com.com",
+            "homepage": "https://github.com/AdenFraser"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "AdenFraser\\Flare\\": "src"
+        }
+    }
+}
