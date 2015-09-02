@@ -5,13 +5,11 @@ namespace JacobBaileyLtd\Flare\Admin;
 use \Route;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use JacobBaileyLtd\Flare\Admin\ModelAdminCollection;
-use Illuminate\Routing\Controller as BaseController;
+use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class ModelAdminController extends BaseController
+class ModelAdminController extends FlareController
 {
-    use DispatchesJobs, ValidatesRequests;
-
     /**
      * ModelAdmin instance which has been resolved
      * 
@@ -26,6 +24,11 @@ class ModelAdminController extends BaseController
      */
     protected $modelAdminCollection;
 
+    /**
+     * __construct
+     * 
+     * @param ModelAdminCollection $modelAdminCollection
+     */
     public function __construct(ModelAdminCollection $modelAdminCollection)
     {
         $this->modelAdmin = $this->getModelAdminInstance();
@@ -33,6 +36,11 @@ class ModelAdminController extends BaseController
 
     }
   
+    /**
+     * Index page for ModelAdmin
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getIndex()
     {
         $data = [
@@ -43,6 +51,11 @@ class ModelAdminController extends BaseController
         return view('flare::admin.modelAdmin.index', $data);
     }
 
+    /**
+     * Create a new Model Entry from ModelAdmin Create Page
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getCreate()
     {
         $data = [
@@ -53,6 +66,11 @@ class ModelAdminController extends BaseController
         return view('flare::admin.modelAdmin.create', $data);
     }
 
+    /**
+     * View a Model Entry from ModelAdmin View Page
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getView()
     {
         $data = [
@@ -63,6 +81,11 @@ class ModelAdminController extends BaseController
         return view('flare::admin.modelAdmin.view', $data);
     }
 
+    /**
+     * Edit Model Entry from ModelAdmin Edit Page
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getEdit()
     {
         $data = [
@@ -73,6 +96,11 @@ class ModelAdminController extends BaseController
         return view('flare::admin.modelAdmin.edit', $data);
     }
 
+    /**
+     * Delete Model Entry from ModelAdmin Delete Page
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getDelete()
     {
         $data = [
@@ -98,6 +126,11 @@ class ModelAdminController extends BaseController
         parent::missingMethod();
     }
 
+    /**
+     * Returns an instance of the ModelAdmin
+     * 
+     * @return ModelAdmin
+     */
     private function getModelAdminInstance()
     {
         $className = \Route::current()->getAction()['namespace']; 

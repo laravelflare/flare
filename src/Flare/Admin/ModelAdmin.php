@@ -2,12 +2,14 @@
 
 namespace JacobBaileyLtd\Flare\Admin;
 
-use App\Models\User as User;
 use \Route;
 use Illuminate\Support\Str;
+use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
 
 abstract class ModelAdmin
 {
+    use AttributeAccess;
+
     /**
      * List of managed {@link Model}s 
      *
@@ -49,6 +51,10 @@ abstract class ModelAdmin
         //$this->setUpManagedModels();
     }
 
+    /**
+     * This doesn't work as we are instantiating a new model instance everytime
+     * which means we're receiving an empty object. DUh. Too much Aberlour for me.
+     */
     public function model($modelName = null)
     {
         if (!isset($this->managedModels) || $this->managedModels === null) {
@@ -217,6 +223,14 @@ abstract class ModelAdmin
         return static::$urlPrefix;
     }
 
+
+
+
+// I'M NOT SURE HOW THIS SECTION IS GOING TO WORK YET,
+// THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT
+// HOW DO WE DEFINE A KEY IF MORE THAN ONE MODEL IS
+// DEFINED?
+
     /**
      * Handle dynamic method calls  ModelAdmin (and its children)
      *
@@ -227,21 +241,22 @@ abstract class ModelAdmin
      */
     public function __call($method, $parameters)
     {
-        // Check callabe on ModelAdmin:
-            // getAttribute 
-            // setAttribute
-            // viewAttribute - View the Attribute in a 'Field', perhaps implement a AttributeField class
-            // updateAttribute  - Store the Attribute, much like setAttribute, but for handling POST data of Attribute
-        // If not, check exist on Model
-        // Else, use
-            // Model->getAttribute
-            // Model->setAttribute
-            // ModelAdmin->viewAttribute
-            // ModelAdmin->updateAttribute
+        // I'd like to implement Permissions on the Attribute view, edit and update... 
+        if (starts_with($method, 'view') && ends_with($method, 'Attribute')) {
+            return call_user_func_array( array($this, 'getViewAttribute'), array_merge(array($method), $parameters) );
+        }
+
+        if (starts_with($method, 'edit') && ends_with($method, 'Attribute')) {
+            return call_user_func_array( array($this, 'getEditAttribute'), array_merge(array($method), $parameters) );
+        }
+
+        if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
+            return call_user_func_array( array($this, 'getUpdateAttribute'), array_merge([$key], $parameters) );
+        } 
     }
 
     /**
-     * Handle dynamic static method calls on ModelAdmin (and its children)
+     * Handle dynamic static method calls into the ModelAdmin.
      *
      * @param  string  $method
      * @param  array   $parameters
@@ -250,7 +265,8 @@ abstract class ModelAdmin
      */
     public static function __callStatic($method, $parameters)
     {
-        // Similar to __call()
-    }
+        $instance = new static;
 
+        return call_user_func_array([$instance, $method], $parameters);
+    }
 }
