@@ -19,10 +19,10 @@ Route::get('/admin', function () {
 Route::group(['prefix' => 'admin'], function()
 {
     // Admin routes should really have auth filter, or actually, our own permissions filter.
-    (new \AdenFraser\Flare\Admin\ModelAdminCollection)->registerRoutes();
+    (new \JacobBaileyLtd\Flare\Admin\ModelAdminCollection)->registerRoutes();
 
     // Admin Default Routes, make sure not to ovverride!
-    Route::controller('/', '\AdenFraser\Flare\Http\Controllers\AdminController');
+    Route::controller('/', '\JacobBaileyLtd\Flare\Http\Controllers\AdminController');
 });
 
 //dd(\Route::getRoutes());

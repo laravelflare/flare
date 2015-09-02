@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin;
 
 use App\Models\User as User;
 use \Route;
@@ -148,9 +148,9 @@ abstract class ModelAdmin
         {
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 
-            //      Route::controller('/', '\AdenFraser\Flare\Admin\?Controller');
+            //      Route::controller('/', '\JacobBaileyLtd\Flare\Admin\?Controller');
             // Otherwise, use the default ModelAdminController
-            Route::controller('/', '\AdenFraser\Flare\Admin\ModelAdminController');
+            Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
         });
     }
 
@@ -199,6 +199,7 @@ abstract class ModelAdmin
      */
     public static function Url()
     {
+        // Update 'admin' to use Admin config variable
         return url('admin/' . static::UrlPrefix());
     }
 
@@ -215,4 +216,41 @@ abstract class ModelAdmin
         
         return static::$urlPrefix;
     }
+
+    /**
+     * Handle dynamic method calls  ModelAdmin (and its children)
+     *
+     * @param  string  $method
+     * @param  array   $parameters
+     * 
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        // Check callabe on ModelAdmin:
+            // getAttribute 
+            // setAttribute
+            // viewAttribute - View the Attribute in a 'Field', perhaps implement a AttributeField class
+            // updateAttribute  - Store the Attribute, much like setAttribute, but for handling POST data of Attribute
+        // If not, check exist on Model
+        // Else, use
+            // Model->getAttribute
+            // Model->setAttribute
+            // ModelAdmin->viewAttribute
+            // ModelAdmin->updateAttribute
+    }
+
+    /**
+     * Handle dynamic static method calls on ModelAdmin (and its children)
+     *
+     * @param  string  $method
+     * @param  array   $parameters
+     * 
+     * @return mixed
+     */
+    public static function __callStatic($method, $parameters)
+    {
+        // Similar to __call()
+    }
+
 }

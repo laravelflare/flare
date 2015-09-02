@@ -1,14 +1,14 @@
 <?php
 
-namespace AdenFraser\Flare\Admin\Users;
+namespace JacobBaileyLtd\Flare\Admin\Users;
 
 use App\Models\User as User;
-use AdenFraser\Flare\Admin\ModelAdmin;
-use AdenFraser\Flare\Contracts\PermissionsContract;
+use JacobBaileyLtd\Flare\Admin\ModelAdmin;
+use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 
 class UserAdmin extends ModelAdmin implements PermissionsContract
 {
-    use \AdenFraser\Flare\Traits\Permissionable;
+    use \JacobBaileyLtd\Flare\Traits\Permissionable;
 
     /**
      * List of managed {@link Model}s 

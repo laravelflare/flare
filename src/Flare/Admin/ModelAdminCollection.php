@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin;
 
 use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Collection;
@@ -67,7 +67,7 @@ class ModelAdminCollection extends Collection
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
-        if ($class == 'AdenFraser\Flare\Admin\ModelAdmin') return false;
+        if ($class == 'JacobBaileyLtd\Flare\Admin\ModelAdmin') return false;
         
         if (!$this->checkModelAdminPermissions($class)){
             return false;
@@ -88,7 +88,7 @@ class ModelAdminCollection extends Collection
      */
     private function checkModelAdminPermissions($class)
     {
-        if (!is_subclass_of($class, \AdenFraser\Flare\Contracts\PermissionsContract::class)) {
+        if (!is_subclass_of($class, \JacobBaileyLtd\Flare\Contracts\PermissionsContract::class)) {
             return true;
         }
 

@@ -1,19 +1,21 @@
 {
-    "name": "adenfraser/flare",
-    "description": "Got to have a flare for something",
+    "name": "jacobbaileyltd/flare",
+    "description": "Flare CMS",
     "keywords": [
-        "Packager",
         "Laravel",
-        "package",
-        "skeleton",
-        "Github"
+        "CMS"
     ],
-    "homepage": "https://github.com/AdenFraser/flare",
+    "homepage": "https://github.com/JacobBaileyLtd/flare",
     "license": "",
     "authors": [
         {
+            "name": "Jacob Bailey Ltd",
+            "email": "tech.studio@jacobbailey.com",
+            "homepage": "https://github.com/JacobBaileyLtd"
+        },
+        {
             "name": "Aden Fraser",
-            "email": "aden@fraserjilani.com.com",
+            "email": "aden@jacobbailey.com",
             "homepage": "https://github.com/AdenFraser"
         }
     ],
@@ -22,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AdenFraser\\Flare\\": "src/Flare"
+            "JacobBaileyLtd\\Flare\\": "src/Flare"
         }
     }
 }

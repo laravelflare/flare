@@ -1,16 +1,16 @@
 <?php
 
-namespace AdenFraser\Flare\Http\Controllers;
+namespace JacobBaileyLtd\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use AdenFraser\Flare\Admin\ModelAdminCollection;
+use JacobBaileyLtd\Flare\Admin\ModelAdminCollection;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 /**
  * I kind of feel that this file should be
- * \AdenFraser\Flare\Admin\Http\Controllers
+ * \JacobBaileyLtd\Flare\Admin\Http\Controllers
  * But really, we will only do that if we add a frontend
  * to the CMS rather than just a backend
  */

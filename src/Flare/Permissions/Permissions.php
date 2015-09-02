@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Permissions;
+namespace JacobBaileyLtd\Flare\Permissions;
 
 class Permissions
 {

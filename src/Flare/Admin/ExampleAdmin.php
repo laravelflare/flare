@@ -1,13 +1,13 @@
 <?php
 
-namespace AdenFraser\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin;
 
-use AdenFraser\Flare\Admin\ModelAdmin;
-use AdenFraser\Flare\Contracts\PermissionsContract;
+use JacobBaileyLtd\Flare\Admin\ModelAdmin;
+use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 
 class ExampleAdmin extends ModelAdmin implements PermissionsContract
 {
-    use \AdenFraser\Flare\Traits\Permissionable;
+    use \JacobBaileyLtd\Flare\Traits\Permissionable;
 
     /**
      * List of managed {@link Model}s 

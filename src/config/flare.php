@@ -15,9 +15,9 @@ return [
     */
 
     'models' => [
-        AdenFraser\Flare\Admin\ModelAdmin::class,
-        AdenFraser\Flare\Admin\ExampleAdmin::class,
-        AdenFraser\Flare\Admin\Users\UserAdmin::class,
+        JacobBaileyLtd\Flare\Admin\ModelAdmin::class,
+        JacobBaileyLtd\Flare\Admin\ExampleAdmin::class,
+        JacobBaileyLtd\Flare\Admin\Users\UserAdmin::class,
     ],
 
 ];

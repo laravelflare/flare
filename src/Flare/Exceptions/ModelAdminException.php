@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Exceptions;
+namespace JacobBaileyLtd\Flare\Exceptions;
 
 class ModelAdminException extends \Exception
 {

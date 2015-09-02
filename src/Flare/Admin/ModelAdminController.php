@@ -1,10 +1,10 @@
 <?php
 
-namespace AdenFraser\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin;
 
 use \Route;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use AdenFraser\Flare\Admin\ModelAdminCollection;
+use JacobBaileyLtd\Flare\Admin\ModelAdminCollection;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 

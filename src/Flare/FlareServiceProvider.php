@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare;
+namespace JacobBaileyLtd\Flare;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Contracts;
+namespace JacobBaileyLtd\Flare\Contracts;
 
 interface VersionsContract
 {

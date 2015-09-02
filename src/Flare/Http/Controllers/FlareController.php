@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Http\Controllers;
+namespace JacobBaileyLtd\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

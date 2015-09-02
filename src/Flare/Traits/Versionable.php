@@ -1,6 +1,6 @@
 <?php
 
-namespace AdenFraser\Flare\Traits;
+namespace JacobBaileyLtd\Flare\Traits;
 
 trait Versionable
 {
