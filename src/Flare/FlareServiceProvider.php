@@ -19,6 +19,11 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/../../vendor/twbs/bootstrap/dist' => public_path('vendor/bootstrap'),
         ], 'public');
 
+        // Config - I would prefer to call this something self-descriptive, such as 'admin.php'
+        $this->publishes([
+            __DIR__.'/../config/flare.php' => config_path('flare.php'),
+        ]);
+
         // Routes
         if (! $this->app->routesAreCached()) {            
             require __DIR__.'/Http/routes.php';
@@ -38,6 +43,9 @@ class FlareServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Merge Config 
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/flare.php', 'flare'
+        );
     }
 }

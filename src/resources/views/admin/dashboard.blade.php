@@ -2,12 +2,14 @@
 
 @section('page_title', 'Dashboard')
 
+@section('sidebar')
+    @include('flare::admin.sections.sidebar')
+@stop
+
 @section('content')
+    <div class="">
+        <h1>Dashboard</h1>
 
-<div class="">
-    <h1>Dashboard</h1>
 
-
-</div>
-
+    </div>
 @stop

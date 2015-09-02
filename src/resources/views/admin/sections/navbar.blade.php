@@ -3,7 +3,7 @@
         &#9776;
     </button>
     <div class="collapse navbar-toggleable-xs" id="flareNavbar">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url('admin') }}">
             Flare
         </a>
         <ul class="nav navbar-nav">
@@ -27,8 +27,3 @@
         </form>
     </div>
 </header>
-
-<aside class="sidebar col-lg-2">
-    Sidebar
-</aside>
-

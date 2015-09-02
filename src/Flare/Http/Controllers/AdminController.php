@@ -4,6 +4,7 @@ namespace AdenFraser\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AdenFraser\Flare\Admin\ModelAdminCollection;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
  */
 class AdminController extends BaseController
 {
-    use DispatchesJobs, ValidatesRequests;
+    use AuthenticatesUsers, DispatchesJobs, ValidatesRequests;
 
     protected $modelAdminCollection;
 
@@ -24,12 +25,21 @@ class AdminController extends BaseController
         $this->modelAdminCollection = $modelAdminCollection;
     }
 
-    /*public function getLogin()
+    /**
+     * Show the application login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogin()
     {
-        // I'd like to move this to be triggered by middleware and redirect to a FlareAuthController...
-        echo '<h1>Time to login</h1>'; die();
-    }*/
+        return view('flare::admin.login');
+    }
 
+    /**
+     * Show the Dashboard
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function getIndex()
     {
         $data = [

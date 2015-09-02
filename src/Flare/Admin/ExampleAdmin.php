@@ -15,15 +15,4 @@ class ExampleAdmin extends ModelAdmin implements PermissionsContract
      * @var array|string
      */
     protected $managedModels = null;
-
-    /**
-     * Overrides the default Title with a custom set one. 
-     * The use of $title and $pluralTitle is preferred
-     * to overriding the Title() method.
-     *
-     * @return string
-     */
-    //public static function Title()
-   
-     
 }

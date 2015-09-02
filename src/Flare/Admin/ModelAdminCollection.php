@@ -34,15 +34,9 @@ class ModelAdminCollection extends Collection
      */
     public function getModelAdminClasses()
     {
-        $temp = [  
-                    \AdenFraser\Flare\Admin\ModelAdmin::class,
-                    \AdenFraser\Flare\Admin\ExampleAdmin::class,
-                    \AdenFraser\Flare\Admin\Users\UserAdmin::class
-                ];
-
         $classCollection = [];
 
-        foreach ($temp as $class) {
+        foreach (config('flare.models') as $class) {
             if (! $this->usableClass($class)) continue;
             $classCollection[] = $class;
         }
@@ -72,6 +66,7 @@ class ModelAdminCollection extends Collection
      */
     private function usableClass($class)
     {
+        // Should replace this with ReflectionClass::getShortName();
         if ($class == 'AdenFraser\Flare\Admin\ModelAdmin') return false;
         
         if (!$this->checkModelAdminPermissions($class)){
