@@ -57,10 +57,7 @@ trait ViewModelAttribute
      */
     protected function defaultViewAttribute($method, $attribute = false)
     {
-        return 'Existing value is:  {{coming soon}}  from ' . ($attribute ? $attribute : $this->attributeFromMethod($method)) . '<br>';
-        // Attribute as string
-        // We will use __toString for this by defualt,
-        // however, we can in theory return any string
-        // here, blade view or even a __toString 
+        // Returns the Attribute View which will probably be a blade tempalte as a string, but this could be overridden with a ClassName->__toString() or even just a string.
+        return view('flare::admin.attributes.default.view', ['value' => ($attribute ? $attribute : $this->attributeFromMethod($method))]);
     }
 }
