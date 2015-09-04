@@ -2,9 +2,6 @@
 
 namespace JacobBaileyLtd\Flare\Forms;
 
-/**
- * We might remove this and implement Laravel Collective Forms.
- */
 class FormField
 {
     /**
@@ -13,13 +10,6 @@ class FormField
      * @var string
      */
     protected $name;
-
-    /**
-     * Field Title (Human Readbable Field Label).
-     * 
-     * @var string
-     */
-    protected $title;
 
     /**
      * Value of Field.
@@ -32,46 +22,69 @@ class FormField
      * Creates a new form field.
      *
      * @param string $name  Field Name
-     * @param string $title The human-readable field label.
      * @param mixed  $value The value of the field.
      */
-    public function __construct($name, $title = null, $value = null)
+    public function __construct($name, $value = null)
     {
         $this->name = $name;
-        $this->title = ($title === null) ? self::name_to_label($name) : $title;
         if ($value !== null) {
             $this->value = $value;
         }
     }
 
     /**
-     * Takes a fieldname and converts camelcase to spaced
-     * words. Also resolves combined fieldnames with dot syntax
-     * to spaced words.
-     *
-     * @param string $fieldName
-     *
-     * @return string
+     * Render a form field
+     * 
+     * @return
      */
-    public static function name_to_label($fieldName)
+    public function render()
     {
-        if (strpos($fieldName, '.') !== false) {
-            $parts = explode('.', $fieldName);
-            $label = $parts[count($parts) - 2].' '.$parts[count($parts) - 1];
-        } else {
-            $label = $fieldName;
-        }
-
-        $label = preg_replace('/([a-z]+)([A-Z])/', '$1 $2', $label);
-
-        return $label;
+        return '<input type="text" name="'.$this->name().'" value="'.$this->value().'" id="'.$this->name().'_Input">';
+    }
+    
+    /**
+     * Return the Field Name
+     * 
+     * @return 
+     */
+    public function name()
+    {
+        return $this->name;
     }
 
+    /**
+     * Return the Field Value
+     * 
+     * @return
+     */
+    public function value()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Creates a new static FormField and returns the rendered view
+     * 
+     * @param string $name  Field Name
+     * @param mixed  $value The value of the field.
+     * 
+     * @return 
+     */
+    public static function renderNew($name, $title = null, $value = null)
+    {
+        return (new static($name, $value))->render();
+    }
+
+    /**
+     * Retrospectively, this was a terrible idea for an implementation.
+     * I didn't really think of the affect that a broken blade template would have
+     * on the result of the __toString method.
+     *
+     * We should replace this with a view render.
+     * 
+     * @return string 
+     */
     public function __toString()
     {
-        return '
-            <label for="'.$this->name.'_Input">'.$this->title.'</label>
-            <input type="text" name="'.$this->name.'" value="'.$this->value.'" id="'.$this->name.'_Input">
-        ';
     }
 }
