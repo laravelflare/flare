@@ -16,8 +16,20 @@ return [
 
     'models' => [
         JacobBaileyLtd\Flare\Admin\ModelAdmin::class,
-        JacobBaileyLtd\Flare\Admin\ExampleAdmin::class,
+        //JacobBaileyLtd\Flare\Admin\ExampleAdmin::class,
         JacobBaileyLtd\Flare\Admin\Users\UserAdmin::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Administration Modules
+    |--------------------------------------------------------------------------
+    |
+    | This array of Module Providers, coming soon
+    |
+    */
+   'modules' => [
+
+   ],
 
 ];

@@ -13,11 +13,18 @@
                         <span class="sr-only">(current)</span>
                 </a>
             </li>
-            @foreach($modelAdminCollection as $admin)
-            <li class="nav-item">
-                <a class="nav-link" href="{{ $admin::Url() }}">
-                    {{ $admin::PluralTitle() }}
+            @foreach($modelAdminCollection as $modelAdmin)
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ $modelAdmin::Url('users') }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{ $modelAdmin::PluralTitle() }}
                 </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}">All Users</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/create">Create User</a>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/edit">Edit User</a>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/delete">Delete User</a>
+                </div>
             </li>
             @endforeach
         </ul>

@@ -2,30 +2,26 @@
 
 namespace JacobBaileyLtd\Flare\Admin;
 
-use \Route;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use JacobBaileyLtd\Flare\Admin\ModelAdminCollection;
 use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ModelAdminController extends FlareController
 {
     /**
-     * ModelAdmin instance which has been resolved
+     * ModelAdmin instance which has been resolved.
      * 
      * @var ModelAdmin
      */
     protected $modelAdmin;
 
     /**
-     * ModelAdminCollection 
+     * ModelAdminCollection.
      *
      * @var ModelAdminCollection
      */
     protected $modelAdminCollection;
 
     /**
-     * __construct
+     * __construct.
      * 
      * @param ModelAdminCollection $modelAdminCollection
      */
@@ -33,11 +29,10 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin = $this->getModelAdminInstance();
         $this->modelAdminCollection = $modelAdminCollection;
-
     }
-  
+
     /**
-     * Index page for ModelAdmin
+     * Index page for ModelAdmin.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +47,7 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Create a new Model Entry from ModelAdmin Create Page
+     * Create a new Model Entry from ModelAdmin Create Page.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -67,7 +62,7 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * View a Model Entry from ModelAdmin View Page
+     * View a Model Entry from ModelAdmin View Page.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -82,7 +77,7 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Edit Model Entry from ModelAdmin Edit Page
+     * Edit Model Entry from ModelAdmin Edit Page.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -97,7 +92,7 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Delete Model Entry from ModelAdmin Delete Page
+     * Delete Model Entry from ModelAdmin Delete Page.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -107,15 +102,15 @@ class ModelAdminController extends FlareController
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
         ];
-        
+
         return view('flare::admin.modelAdmin.delete', $data);
     }
 
     /**
      * Method is called when the appropriate controller
-     * method is unable to be found or called
+     * method is unable to be found or called.
      * 
-     * @param  array  $parameters
+     * @param array $parameters
      * 
      * @return
      */
@@ -127,13 +122,14 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Returns an instance of the ModelAdmin
+     * Returns an instance of the ModelAdmin.
      * 
      * @return ModelAdmin
      */
     private function getModelAdminInstance()
     {
-        $className = \Route::current()->getAction()['namespace']; 
+        $className = \Route::current()->getAction()['namespace'];
+
         return new $className();
     }
 }

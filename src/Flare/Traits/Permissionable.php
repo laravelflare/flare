@@ -5,7 +5,7 @@ namespace JacobBaileyLtd\Flare\Traits;
 trait Permissionable
 {
     /**
-     * Permission Provider
+     * Permission Provider.
      * 
      * @return 
      */
@@ -15,7 +15,7 @@ trait Permissionable
     }
 
     /**
-     * Can the current User Create
+     * Can the current User Create.
      * 
      * @return 
      */
@@ -25,7 +25,7 @@ trait Permissionable
     }
 
     /**
-     * Can the current User View
+     * Can the current User View.
      * 
      * @return 
      */
@@ -35,7 +35,7 @@ trait Permissionable
     }
 
     /**
-     * Can the current User Edit
+     * Can the current User Edit.
      * 
      * @return 
      */
@@ -45,7 +45,7 @@ trait Permissionable
     }
 
     /**
-     * Can the current User View
+     * Can the current User View.
      * 
      * @return 
      */

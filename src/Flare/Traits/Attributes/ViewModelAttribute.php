@@ -7,9 +7,9 @@ use Illuminate\Support\Str;
 trait ViewModelAttribute
 {
     /**
-     * Determine if an attribute has a view defined
+     * Determine if an attribute has a view defined.
      *
-     * @param  string  $key
+     * @param string $key
      * 
      * @return bool
      */
@@ -19,10 +19,10 @@ trait ViewModelAttribute
     }
 
     /**
-     * Get the view of an attribute
+     * Get the view of an attribute.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param string $key
+     * @param mixed  $value
      * 
      * @return mixed
      */
@@ -33,9 +33,9 @@ trait ViewModelAttribute
 
     /**
      * If the requested Attribute View has been custom defined, load that
-     * otherwise we will load the defaultViewAttribute method
+     * otherwise we will load the defaultViewAttribute method.
      * 
-     * @param  string   $key 
+     * @param string $key
      * 
      * @return          
      */
@@ -49,9 +49,9 @@ trait ViewModelAttribute
     }
 
     /**
-     * Returns the default Attribute View for the Model Attribute
+     * Returns the default Attribute View for the Model Attribute.
      *
-     * @param  string  $key 
+     * @param string $key
      * 
      * @return       
      */

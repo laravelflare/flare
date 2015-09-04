@@ -2,8 +2,8 @@
 
 namespace JacobBaileyLtd\Flare\Admin;
 
-use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Collection;
+use Symfony\Component\Finder\Finder;
 
 class ModelAdminCollection extends Collection
 {
@@ -15,7 +15,7 @@ class ModelAdminCollection extends Collection
     protected $items = [];
 
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {
@@ -37,7 +37,9 @@ class ModelAdminCollection extends Collection
         $classCollection = [];
 
         foreach (config('flare.models') as $class) {
-            if (! $this->usableClass($class)) continue;
+            if (!$this->usableClass($class)) {
+                continue;
+            }
             $classCollection[] = $class;
         }
 
@@ -45,14 +47,14 @@ class ModelAdminCollection extends Collection
     }
 
     /**
-     * Register ModelAdmin Routes
+     * Register ModelAdmin Routes.
      * 
      * @return
      */
     public function registerRoutes()
     {
         foreach ($this->items as $class) {
-            (new $class)->registerRoutes();
+            (new $class())->registerRoutes();
         }
     }
 
@@ -60,16 +62,18 @@ class ModelAdminCollection extends Collection
      * Determines if a class is usable by the currently
      * defined user and their permission set.
      * 
-     * @param  string $class 
+     * @param string $class
      * 
      * @return
      */
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
-        if ($class == 'JacobBaileyLtd\Flare\Admin\ModelAdmin') return false;
-        
-        if (!$this->checkModelAdminPermissions($class)){
+        if ($class == 'JacobBaileyLtd\Flare\Admin\ModelAdmin') {
+            return false;
+        }
+
+        if (!$this->checkModelAdminPermissions($class)) {
             return false;
         }
 
@@ -82,7 +86,7 @@ class ModelAdminCollection extends Collection
      * it will return true, since all users have access
      * to this model admin.
      * 
-     * @param  string $class 
+     * @param string $class
      * 
      * @return        
      */
@@ -110,7 +114,8 @@ class ModelAdminCollection extends Collection
     }
 
     /**
-     * Finds all 
+     * Finds all.
+     *
      * @return [type] [description]
      */
     public static function findClasses()
@@ -130,9 +135,9 @@ class ModelAdminCollection extends Collection
     }
 
     /**
-     * NOTE: This should be moved to a more appropriate class
+     * NOTE: This should be moved to a more appropriate class.
      * 
-     * @param string $parent 
+     * @param string $parent
      * 
      * @return
      */

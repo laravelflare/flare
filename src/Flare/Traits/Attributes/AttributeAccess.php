@@ -2,10 +2,6 @@
 
 namespace JacobBaileyLtd\Flare\Traits\Attributes;
 
-use JacobBaileyLtd\Flare\Traits\Attributes\ViewModelAttribute;
-use JacobBaileyLtd\Flare\Traits\Attributes\EditModelAttribute;
-use JacobBaileyLtd\Flare\Traits\Attributes\UpdateModelAttribute;
-
 trait AttributeAccess
 {
     use ViewModelAttribute, EditModelAttribute, UpdateModelAttribute;
@@ -16,9 +12,9 @@ trait AttributeAccess
 // DEFINED?
 
 
-    protected function attributeFromMethod($method) 
+    protected function attributeFromMethod($method)
     {
-        if(strlen(($attribute = substr(substr($method, 0, -9), 4))) > 0) {
+        if (strlen(($attribute = substr(substr($method, 0, -9), 4))) > 0) {
             return $attribute;
         }
 
@@ -26,14 +22,15 @@ trait AttributeAccess
     }
 
     /**
-     * [attributeType description]
-     * @param  [type] $key [description]
-     * @return [type]      [description]
+     * [attributeType description].
+     *
+     * @param [type] $key [description]
+     *
+     * @return [type] [description]
      */
     protected function attributeType($key)
     {
         // We might do a lookup for custom attribute types in a lookup array at some point
         // but for now, ignore this method.
     }
-
 }

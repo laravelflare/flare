@@ -7,9 +7,9 @@ use Illuminate\Support\Str;
 trait UpdateModelAttribute
 {
     /**
-     * Determine if an attribute has Field update logic defined
+     * Determine if an attribute has Field update logic defined.
      *
-     * @param  string  $key
+     * @param string $key
      * 
      * @return bool
      */
@@ -19,10 +19,10 @@ trait UpdateModelAttribute
     }
 
     /**
-     * Update the value of an attribute
+     * Update the value of an attribute.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param string $key
+     * @param mixed  $value
      * 
      * @return mixed
      */
@@ -33,9 +33,9 @@ trait UpdateModelAttribute
 
     /**
      * If the requested Update Attribute has been custom defined, use that
-     * otherwise we will load the defaultUpdateAttribute method
+     * otherwise we will load the defaultUpdateAttribute method.
      * 
-     * @param  string   $key 
+     * @param string $key
      * 
      * @return          
      */
@@ -50,9 +50,9 @@ trait UpdateModelAttribute
 
     /**
      * Performs the default Attribute Update Action for the Model Attribute
-     * Which in essence, is just the setAttribute action
+     * Which in essence, is just the setAttribute action.
      * 
-     * @param  string  $key 
+     * @param string $key
      * 
      * @return       
      */

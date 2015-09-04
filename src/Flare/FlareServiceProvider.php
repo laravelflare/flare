@@ -8,8 +8,6 @@ class FlareServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -25,7 +23,7 @@ class FlareServiceProvider extends ServiceProvider
         ]);
 
         // Routes
-        if (! $this->app->routesAreCached()) {            
+        if (!$this->app->routesAreCached()) {
             require __DIR__.'/Http/routes.php';
         }
 
@@ -38,8 +36,6 @@ class FlareServiceProvider extends ServiceProvider
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register()
     {

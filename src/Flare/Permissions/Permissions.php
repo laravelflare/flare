@@ -6,7 +6,6 @@ class Permissions
 {
     public function __construct()
     {
-        
     }
 
     /**
@@ -17,6 +16,6 @@ class Permissions
      */
     public static function check()
     {
-        return true;
+        return false;
     }
 }

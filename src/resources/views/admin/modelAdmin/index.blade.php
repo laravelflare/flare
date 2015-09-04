@@ -11,7 +11,9 @@
 <div class="">
     <h1>{{ $modelAdmin::PluralTitle() }}</h1>
 
-    @foreach($modelAdmin->model('User')->getFillable() as $attribute)
+    <h2>{{ $modelAdmin::PluralTitle() }} have the following attributes:</h2>
+
+    @foreach($modelAdmin->model()->getFillable() as $attribute)
 
         {!! $modelAdmin->viewAttribute($attribute) !!}
 

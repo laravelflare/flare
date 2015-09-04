@@ -2,8 +2,9 @@
 
 namespace JacobBaileyLtd\Flare\Admin;
 
-use \Route;
+use Route;
 use Illuminate\Support\Str;
+use JacobBaileyLtd\Flare\Exceptions\ModelAdminException;
 use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
 
 abstract class ModelAdmin
@@ -11,7 +12,7 @@ abstract class ModelAdmin
     use AttributeAccess;
 
     /**
-     * List of managed {@link Model}s 
+     * List of managed {@link Model}s.
      *
      * Note: This must either be a single Namespaced String
      * or an Array of Namespaced Strings
@@ -23,31 +24,42 @@ abstract class ModelAdmin
     protected $managedModels = null;
 
     /**
-     * Title of Model Admin
+     * Map Model Attributes to AttributeTypes with
+     * additional parameters.
+     * 
+     * @var array
+     */
+    protected $mapping = [];
+
+    /**
+     * Title of Model Admin.
      *
      * @var string
      */
     protected $title = null;
 
     /**
-     * Title of Model Admin
+     * Title of Model Admin.
      *
      * @var string
      */
     protected $pluralTitle = null;
 
     /**
-     * URL Prefix Model Admin
+     * URL Prefix Model Admin.
      *
      * @var string
      */
     protected $urlPrefix = null;
 
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {
+        if (!isset($this->managedModels) || $this->managedModels === null) {
+            throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
+        }
         //$this->setUpManagedModels();
     }
 
@@ -57,15 +69,20 @@ abstract class ModelAdmin
      */
     public function model($modelName = null)
     {
-        if (!isset($this->managedModels) || $this->managedModels === null) {
-            return null; // Return a NullModel for Bantz?
-        }
-
         if (!is_array($modelName = $this->managedModels)) {
             return new $modelName();
         }
 
         return new $modelName();
+    }
+
+    public function getManagedModels()
+    {
+        if (is_array($this->managedModels)) {
+            return $this->managedModels;
+        }
+
+        return [$this->managedModels];
     }
 
     // /**
@@ -138,7 +155,7 @@ abstract class ModelAdmin
     // }
 
     /**
-     * Register the routes for this ModelAdmin
+     * Register the routes for this ModelAdmin.
      *
      * Default routes include, create:, read:, update:, delete:
      *
@@ -150,8 +167,7 @@ abstract class ModelAdmin
      */
     public function registerRoutes()
     {
-        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix(), /*'before' => 'admin_auth'*/], function()
-        {
+        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 
             //      Route::controller('/', '\JacobBaileyLtd\Flare\Admin\?Controller');
@@ -161,17 +177,17 @@ abstract class ModelAdmin
     }
 
     /**
-     * ShortName of a ModelAdmin Class
+     * ShortName of a ModelAdmin Class.
      *
      * @return string
      */
     public static function ShortName()
     {
-        return (new \ReflectionClass(new static))->getShortName();
+        return (new \ReflectionClass(new static()))->getShortName();
     }
 
     /**
-     * Title of a ModelAdmin Class
+     * Title of a ModelAdmin Class.
      *
      * @return string
      */
@@ -180,12 +196,12 @@ abstract class ModelAdmin
         if (!isset(static::$title) || !static::$title) {
             return str_replace('Admin', '',  static::ShortName());
         }
-        
+
         return static::$title;
     }
 
     /**
-     * Plural of the ModelAdmin Class Title
+     * Plural of the ModelAdmin Class Title.
      *
      * @return string
      */
@@ -199,18 +215,18 @@ abstract class ModelAdmin
     }
 
     /**
-     * URL to a ModelAdmin Top Level Page
+     * URL to a ModelAdmin Top Level Page.
      *
      * @return string
      */
     public static function Url()
     {
         // Update 'admin' to use Admin config variable
-        return url('admin/' . static::UrlPrefix());
+        return url('admin/'.static::UrlPrefix());
     }
 
     /**
-     * URL Prefix to a ModelAdmin Top Level Page
+     * URL Prefix to a ModelAdmin Top Level Page.
      *
      * @return string
      */
@@ -219,12 +235,9 @@ abstract class ModelAdmin
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
             return strtolower(str_replace('Admin', '',  static::PluralTitle()));
         }
-        
+
         return static::$urlPrefix;
     }
-
-
-
 
 // I'M NOT SURE HOW THIS SECTION IS GOING TO WORK YET,
 // THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT
@@ -232,10 +245,10 @@ abstract class ModelAdmin
 // DEFINED?
 
     /**
-     * Handle dynamic method calls  ModelAdmin (and its children)
+     * Handle dynamic method calls  ModelAdmin (and its children).
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param string $method
+     * @param array  $parameters
      * 
      * @return mixed
      */
@@ -243,29 +256,29 @@ abstract class ModelAdmin
     {
         // I'd like to implement Permissions on the Attribute view, edit and update... 
         if (starts_with($method, 'view') && ends_with($method, 'Attribute')) {
-            return call_user_func_array( array($this, 'getViewAttribute'), array_merge(array($method), $parameters) );
+            return call_user_func_array(array($this, 'getViewAttribute'), array_merge(array($method), $parameters));
         }
 
         if (starts_with($method, 'edit') && ends_with($method, 'Attribute')) {
-            return call_user_func_array( array($this, 'getEditAttribute'), array_merge(array($method), $parameters) );
+            return call_user_func_array(array($this, 'getEditAttribute'), array_merge(array($method), $parameters));
         }
 
         if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
-            return call_user_func_array( array($this, 'getUpdateAttribute'), array_merge([$key], $parameters) );
-        } 
+            return call_user_func_array(array($this, 'getUpdateAttribute'), array_merge([$key], $parameters));
+        }
     }
 
     /**
      * Handle dynamic static method calls into the ModelAdmin.
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param string $method
+     * @param array  $parameters
      * 
      * @return mixed
      */
     public static function __callStatic($method, $parameters)
     {
-        $instance = new static;
+        $instance = new static();
 
         return call_user_func_array([$instance, $method], $parameters);
     }

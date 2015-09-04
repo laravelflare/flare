@@ -12,7 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
  * I kind of feel that this file should be
  * \JacobBaileyLtd\Flare\Admin\Http\Controllers
  * But really, we will only do that if we add a frontend
- * to the CMS rather than just a backend
+ * to the CMS rather than just a backend.
  */
 class AdminController extends BaseController
 {
@@ -36,7 +36,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Show the Dashboard
+     * Show the Dashboard.
      * 
      * @return \Illuminate\Http\Response
      */

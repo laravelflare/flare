@@ -5,7 +5,7 @@ namespace JacobBaileyLtd\Flare\Contracts;
 interface PermissionsContract
 {
     /**
-     * Permission Provider
+     * Permission Provider.
      * 
      * @return 
      */
