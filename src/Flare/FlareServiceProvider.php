@@ -9,7 +9,7 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Perform post-registration booting of services.
      */
-    public function boot()
+    public function boot(\Illuminate\Routing\Router $router)
     {
         // Assets
         $this->publishes([
@@ -21,6 +21,9 @@ class FlareServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/flare.php' => config_path('flare.php'),
         ]);
+
+        // Middleware
+        $router->middleware('checkpermissions', 'JacobBaileyLtd\Flare\Http\Middleware\CheckPermissions');
 
         // Routes
         if (!$this->app->routesAreCached()) {

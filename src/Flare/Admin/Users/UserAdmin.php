@@ -4,13 +4,9 @@ namespace JacobBaileyLtd\Flare\Admin\Users;
 
 use App\Models\User as User;
 use JacobBaileyLtd\Flare\Admin\ModelAdmin;
-use JacobBaileyLtd\Flare\Traits\Permissionable;
-use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 
-class UserAdmin extends ModelAdmin implements PermissionsContract
+class UserAdmin extends ModelAdmin 
 {
-    use Permissionable;
-
     /**
      * List of managed {@link Model}s.
      *
@@ -27,8 +23,19 @@ class UserAdmin extends ModelAdmin implements PermissionsContract
      * @var array
      */
     protected $mapping = [
-                            'name' => ['type' => 'text', 'length' => 32],
-                            'email' => ['type' => 'email', 'length' => 255],
-                            'password' => ['type' => 'password', 'length' => 32],
-                        ];
+        'name' => ['type' => 'text', 'length' => 32],
+        'email' => ['type' => 'email', 'length' => 255],
+        'password' => ['type' => 'password', 'length' => 32],
+    ];
+
+    /**
+     * Validation Rules for onCreate, onEdit actions
+     * 
+     * @var array
+     */
+    protected $rules = [
+        'name'   => 'required|max:32',
+        'email'    => 'required|email',
+        'password' => 'required|confirmed|min:8|max:32'
+    ];
 }

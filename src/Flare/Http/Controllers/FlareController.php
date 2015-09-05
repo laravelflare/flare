@@ -9,4 +9,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 abstract class FlareController extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+        $this->middleware('checkpermissions');
+    }
 }

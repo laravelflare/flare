@@ -4,12 +4,14 @@ namespace JacobBaileyLtd\Flare\Admin;
 
 use Route;
 use Illuminate\Support\Str;
+use JacobBaileyLtd\Flare\Traits\Permissionable;
+use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminException;
 use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
 
-abstract class ModelAdmin
+abstract class ModelAdmin implements PermissionsContract
 {
-    use AttributeAccess;
+    use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
     /**
      * List of managed {@link Model}s.
@@ -83,6 +85,34 @@ abstract class ModelAdmin
         }
 
         return [$this->managedModels];
+    }
+
+    public function create()
+    {
+        //
+        // Create is effectively an alias of Update, since it is exactly the same except
+        // we 'create' a new object rather than load the existing record from the database.
+        // 
+    }
+
+    public function update()
+    {
+        // Check permissions for update() first
+        // 
+        // Check permissions for each attribute
+        //  
+        // Check Validation
+        // 
+        // // PreUpdate
+        // 
+        // // Update
+        // 
+        // // PostUpdate
+    }
+
+    public function delete()
+    {
+
     }
 
     // /**
@@ -243,6 +273,10 @@ abstract class ModelAdmin
 // THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT
 // HOW DO WE DEFINE A KEY IF MORE THAN ONE MODEL IS
 // DEFINED?
+// 
+// We could use Model.Key (Model.Attribute) and convert accordingly
+// 
+// Although saying that, at any given time perhaps only one Model is managed?
 
     /**
      * Handle dynamic method calls  ModelAdmin (and its children).

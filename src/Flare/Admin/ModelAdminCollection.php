@@ -19,6 +19,8 @@ class ModelAdminCollection extends Collection
      */
     public function __construct()
     {
+        parent::__construct();
+        
         $this->items = $this->getModelAdminClasses();
     }
 

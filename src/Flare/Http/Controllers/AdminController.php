@@ -22,6 +22,8 @@ class AdminController extends BaseController
 
     public function __construct(ModelAdminCollection $modelAdminCollection)
     {
+        $this->middleware('checkpermissions', ['except' => ['getLogin']]);
+
         $this->modelAdminCollection = $modelAdminCollection;
     }
 
