@@ -20,7 +20,7 @@ class FormGroup
     protected $helpText;
 
     /**
-     * __construct
+     * __construct.
      * 
      * @param FormLabel $label [description]
      * @param FormField $field [description]
@@ -32,7 +32,7 @@ class FormGroup
     }
 
     /**
-     * Adds HelpText to the FormGroup
+     * Adds HelpText to the FormGroup.
      * 
      * @param string $helpText
      *
@@ -50,7 +50,7 @@ class FormGroup
     }
 
     /**
-     * Render a form field
+     * Render a form field.
      * 
      * @return string
      */
@@ -63,7 +63,7 @@ class FormGroup
     }
 
     /**
-     * Creates a new static FormField and returns the rendered view
+     * Creates a new static FormField and returns the rendered view.
      * 
      * @param FormLabel $label [description]
      * @param FormField $field [description]
@@ -76,7 +76,7 @@ class FormGroup
     }
 
     /**
-     * Returns the FormLabel instance
+     * Returns the FormLabel instance.
      * 
      * @return 
      */
@@ -86,7 +86,7 @@ class FormGroup
     }
 
     /**
-     * Returns the FormField instance
+     * Returns the FormField instance.
      * 
      * @return
      */
@@ -96,7 +96,7 @@ class FormGroup
     }
 
     /**
-     * Returns the raw help text
+     * Returns the raw help text.
      *
      *  In future we should move this to a FormHelpText class
      *  

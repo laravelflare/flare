@@ -5,7 +5,7 @@ namespace JacobBaileyLtd\Flare\Admin\Users;
 use App\Models\User as User;
 use JacobBaileyLtd\Flare\Admin\ModelAdmin;
 
-class UserAdmin extends ModelAdmin 
+class UserAdmin extends ModelAdmin
 {
     /**
      * List of managed {@link Model}s.
@@ -29,13 +29,13 @@ class UserAdmin extends ModelAdmin
     ];
 
     /**
-     * Validation Rules for onCreate, onEdit actions
+     * Validation Rules for onCreate, onEdit actions.
      * 
      * @var array
      */
     protected $rules = [
-        'name'   => 'required|max:32',
-        'email'    => 'required|email',
-        'password' => 'required|confirmed|min:8|max:32'
+        'name' => 'required|max:32',
+        'email' => 'required|email',
+        'password' => 'required|confirmed|min:8|max:32',
     ];
 }

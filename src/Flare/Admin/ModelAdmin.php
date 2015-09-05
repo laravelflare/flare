@@ -112,7 +112,6 @@ abstract class ModelAdmin implements PermissionsContract
 
     public function delete()
     {
-
     }
 
     // /**

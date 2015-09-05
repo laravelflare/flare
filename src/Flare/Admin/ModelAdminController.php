@@ -31,7 +31,7 @@ class ModelAdminController extends FlareController
         // we need to redeclare checkpermissions
         // middleware
         parent::__construct();
-        
+
         $this->modelAdmin = $this->getModelAdminInstance();
         $this->modelAdminCollection = $modelAdminCollection;
     }
@@ -67,21 +67,18 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Receive new Model Entry Post Data, validate it and return user
+     * Receive new Model Entry Post Data, validate it and return user.
      * 
      * @return \Illuminate\Http\Response
      */
     public function postCreate()
     {
         // Do something like this:   
-        try
-        {
+        try {
             // Perhaps we could change this to ->create, ->edit and ->delete
             $this->modelAdmin->create('User', $data); // And perhaps 1st arg could be Model OR Data, since ModelAdmin's managing a single model do not need that. 
             // Or we could be awesome and autodetect the Model... perhaps some hidden input.
-        }
-        catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             // Probably validation redirect here
         }
     }
@@ -117,13 +114,12 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Receive Model Entry Update Post Data, validate it and return user
+     * Receive Model Entry Update Post Data, validate it and return user.
      * 
      * @return \Illuminate\Http\Response
      */
     public function postEdit()
     {
-
     }
 
     /**
@@ -142,13 +138,12 @@ class ModelAdminController extends FlareController
     }
 
     /**
-     * Receive Model Entry Delete Post Data, validate it and return user
+     * Receive Model Entry Delete Post Data, validate it and return user.
      * 
      * @return \Illuminate\Http\Response
      */
     public function postDelete()
     {
-
     }
 
     /**
@@ -162,6 +157,7 @@ class ModelAdminController extends FlareController
     public function missingMethod($parameters = array())
     {
         // Feel Free to Expand Here
+        var_dump($parameters);
 
         parent::missingMethod();
     }

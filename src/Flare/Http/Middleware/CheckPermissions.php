@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 namespace JacobBaileyLtd\Flare\Http\Middleware;
 
@@ -7,13 +8,13 @@ use Illuminate\Contracts\Routing\Middleware;
 use JacobBaileyLtd\Flare\Permissions\Permissions;
 use JacobBaileyLtd\Flare\Exceptions\PermissionsException;
 
-class CheckPermissions implements Middleware {
-
+class CheckPermissions implements Middleware
+{
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      * 
      * @return mixed
      */
@@ -54,5 +55,4 @@ class CheckPermissions implements Middleware {
 
         return $next($request);
     }
-
 }

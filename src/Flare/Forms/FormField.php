@@ -33,7 +33,7 @@ class FormField
     }
 
     /**
-     * Render a form field
+     * Render a form field.
      * 
      * @return
      */
@@ -41,9 +41,9 @@ class FormField
     {
         return '<input type="text" name="'.$this->name().'" value="'.$this->value().'" id="'.$this->name().'_Input">';
     }
-    
+
     /**
-     * Return the Field Name
+     * Return the Field Name.
      * 
      * @return 
      */
@@ -53,7 +53,7 @@ class FormField
     }
 
     /**
-     * Return the Field Value
+     * Return the Field Value.
      * 
      * @return
      */
@@ -63,7 +63,7 @@ class FormField
     }
 
     /**
-     * Creates a new static FormField and returns the rendered view
+     * Creates a new static FormField and returns the rendered view.
      * 
      * @param string $name  Field Name
      * @param mixed  $value The value of the field.
@@ -82,7 +82,7 @@ class FormField
      *
      * We should replace this with a view render.
      * 
-     * @return string 
+     * @return string
      */
     public function __toString()
     {
