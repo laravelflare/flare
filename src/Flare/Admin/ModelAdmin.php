@@ -78,6 +78,11 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
             return new $modelName();
         }
 
+
+        // Need to detect 
+
+
+        $modelName = $this->managedModels[0];
         return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.
     }
 
@@ -173,22 +178,38 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
      */
     public function registerRoutes()
     {
-        // We need to do some magic here so that multi-managing modeladmins (modeladmins with more than one model attached)
-        // are able to be routed correctly, eg:
-        // UserAdmin:
-        //      admin/users
-        //      admin/users/create
-        //      admin/users/usergroups
-        //      admin/users/usergroups/create
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
         Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
+            $this->registerSubRoutes();
+
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 
             //      Route::controller('/', '\JacobBaileyLtd\Flare\Admin\?Controller');
             // Otherwise, use the default ModelAdminController
             Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
         });
+    }
+
+    /**
+     * Register subRoutes for ModelAdmin instances 
+     * which have more than one managedModel
+     *
+     * @return
+     */
+    public function registerSubRoutes()
+    {
+        if (!is_array($this->managedModels)) {
+            return;
+        }
+
+        foreach ($this->managedModels as $modelName) {
+            $modelUrl = strtolower(substr($modelName, strrpos($modelName, "\\") + 1));
+            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl], function () {
+                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController'); 
+                // If first $modelName, redirect (301) back to base ModelAdmin
+            });
+        }
     }
 
     /**

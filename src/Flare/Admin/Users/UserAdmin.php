@@ -15,7 +15,7 @@ class UserAdmin extends ModelAdmin
      *
      * Perhaps in the future we will allow App\Models\Model::class format aswell!
      */
-    protected $managedModels = 'App\Models\User';
+    protected $managedModels = ['App\Models\User', 'App\Models\UserGroup'];
 
     /**
      * Map User Attributes to their Attribute Types.

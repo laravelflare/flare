@@ -24,6 +24,12 @@
                     <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/create">Create User</a>
                     <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/edit">Edit User</a>
                     <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/delete">Delete User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/usergroup">All User Groups</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/usergroup/create">Create User Group</a>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/usergroup/edit">Edit User Group</a>
+                    <a class="dropdown-item" href="{{ $modelAdmin::Url() }}/usergroup/delete">Delete User Group</a>
                 </div>
             </li>
             @endforeach
