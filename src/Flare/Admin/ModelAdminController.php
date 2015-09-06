@@ -145,7 +145,7 @@ class ModelAdminController extends FlareController
     public function postDelete()
     {
     }
-
+    
     /**
      * Method is called when the appropriate controller
      * method is unable to be found or called.

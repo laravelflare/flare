@@ -22,11 +22,11 @@ trait AttributeAccess
     }
 
     /**
-     * [attributeType description].
+     * 
      *
-     * @param [type] $key [description]
+     * @param string $key
      *
-     * @return [type] [description]
+     * @return 
      */
     protected function attributeType($key)
     {

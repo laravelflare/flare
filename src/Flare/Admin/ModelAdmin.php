@@ -7,9 +7,13 @@ use Illuminate\Support\Str;
 use JacobBaileyLtd\Flare\Traits\Permissionable;
 use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminException;
+use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelWriteable;
+use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelValidation;
 use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
+use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelWriteableContract;
+use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
-abstract class ModelAdmin implements PermissionsContract
+abstract class ModelAdmin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
@@ -85,33 +89,6 @@ abstract class ModelAdmin implements PermissionsContract
         }
 
         return [$this->managedModels];
-    }
-
-    public function create()
-    {
-        //
-        // Create is effectively an alias of Update, since it is exactly the same except
-        // we 'create' a new object rather than load the existing record from the database.
-        // 
-    }
-
-    public function update()
-    {
-        // Check permissions for update() first
-        // 
-        // Check permissions for each attribute
-        //  
-        // Check Validation
-        // 
-        // // PreUpdate
-        // 
-        // // Update
-        // 
-        // // PostUpdate
-    }
-
-    public function delete()
-    {
     }
 
     // /**
@@ -196,6 +173,15 @@ abstract class ModelAdmin implements PermissionsContract
      */
     public function registerRoutes()
     {
+        // We need to do some magic here so that multi-managing modeladmins (modeladmins with more than one model attached)
+        // are able to be routed correctly, eg:
+        // UserAdmin:
+        //      admin/users
+        //      admin/users/create
+        //      admin/users/usergroups
+        //      admin/users/usergroups/create
+        // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
+        // such as (create, edit, view, delete etc) 
         Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 

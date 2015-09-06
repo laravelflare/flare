@@ -16,6 +16,6 @@ class Permissions
      */
     public static function check()
     {
-        return false;
+        return true;
     }
 }

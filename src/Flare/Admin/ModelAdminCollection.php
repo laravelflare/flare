@@ -112,7 +112,7 @@ class ModelAdminCollection extends Collection
     private function checkUserHasModelAdminPermissions($class)
     {
         // Replace this with actual Permission Implementation Check
-        return true;
+        return Permissions::check();
     }
 
     /**
