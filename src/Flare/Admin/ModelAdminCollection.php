@@ -4,6 +4,7 @@ namespace JacobBaileyLtd\Flare\Admin;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\Finder;
+use JacobBaileyLtd\Flare\Permissions\Permissions;
 
 class ModelAdminCollection extends Collection
 {

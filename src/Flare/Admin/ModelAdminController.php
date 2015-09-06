@@ -3,6 +3,9 @@
 namespace JacobBaileyLtd\Flare\Admin;
 
 use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
+use JacobBaileyLtd\Flare\Exceptions\PermissionsException as PermissionsException;
+use JacobBaileyLtd\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
+use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 class ModelAdminController extends FlareController
 {
@@ -71,16 +74,32 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postCreate()
-    {
-        // Do something like this:   
+    public function postCreate(\Illuminate\Http\Request $request)
+    { 
+        $this->modelAdmin->input = $request->all();
+        
         try {
-            // Perhaps we could change this to ->create, ->edit and ->delete
-            $this->modelAdmin->create('User', $data); // And perhaps 1st arg could be Model OR Data, since ModelAdmin's managing a single model do not need that. 
-            // Or we could be awesome and autodetect the Model... perhaps some hidden input.
-        } catch (Exception $exception) {
-            // Probably validation redirect here
+            $this->modelAdmin->canCreate();
+        } catch (PermissionsException $exception) {
+            echo 'Permissions Exception: <br>';
+            var_export($exception);
         }
+
+        try {
+            $this->modelAdmin->validate();
+        } catch (ValidationException $exception) {
+            echo 'Validation Exception: <br>';
+            var_dump($exception);
+        }
+
+        try {
+            $this->modelAdmin->create();
+        } catch (WriteableException $exception) {
+            echo 'Writeable Exception: <br>';
+            var_dump($exception);
+        }
+
+        echo 'All done!';
     }
 
     /**

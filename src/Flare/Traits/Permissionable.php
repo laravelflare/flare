@@ -2,6 +2,8 @@
 
 namespace JacobBaileyLtd\Flare\Traits;
 
+use JacobBaileyLtd\Flare\Permissions\Permissions; // This should actually use a Permissions Implementation, so that the PermissionProvider class can be swapped out
+
 trait Permissionable
 {
     /**
@@ -21,7 +23,10 @@ trait Permissionable
      */
     public function canCreate()
     {
+        // Check Model Permissions First
         Permissions::check();
+
+        // Check Individual Method Permissions
     }
 
     /**

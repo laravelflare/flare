@@ -30,14 +30,6 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
     protected $managedModels = null;
 
     /**
-     * Map Model Attributes to AttributeTypes with
-     * additional parameters.
-     * 
-     * @var array
-     */
-    protected $mapping = [];
-
-    /**
      * Title of Model Admin.
      *
      * @var string
@@ -57,6 +49,13 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
      * @var string
      */
     protected $urlPrefix = null;
+
+    /**
+     * Temporary array of Input recieved during a POST request
+     *
+     * @var array
+     */
+    public $input = [];
 
     /**
      * __construct.
@@ -79,8 +78,9 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
             return new $modelName();
         }
 
-        return new $modelName();
+        return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.
     }
+
 
     public function getManagedModels()
     {
@@ -262,6 +262,7 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
 // We could use Model.Key (Model.Attribute) and convert accordingly
 // 
 // Although saying that, at any given time perhaps only one Model is managed?
+// 
 
     /**
      * Handle dynamic method calls  ModelAdmin (and its children).

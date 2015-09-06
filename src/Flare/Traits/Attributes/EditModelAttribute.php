@@ -41,7 +41,7 @@ trait EditModelAttribute
      */
     protected function getEditAttribute($method, $attribute = false)
     {
-        if ($this->hasView($key = substr(substr($method, 0, -9), 4))) {
+        if (!$attribute && $this->hasEdit($key = substr(substr($method, 0, -9), 4))) {
             return call_user_func(array($this, 'edit'.Str::studly($key).'Attribute'), [$key]);
         }
 
@@ -65,5 +65,9 @@ trait EditModelAttribute
         // however, we can in theory return any string
         // here, blade view or even a __toString of
         // a FieldGroup :D
+        
+
+
+        return view('flare::admin.attributes.default.edit', ['value' => ($attribute ? $attribute : $this->attributeFromMethod($method))]);
     }
 }

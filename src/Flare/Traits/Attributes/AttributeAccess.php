@@ -5,6 +5,14 @@ namespace JacobBaileyLtd\Flare\Traits\Attributes;
 trait AttributeAccess
 {
     use ViewModelAttribute, EditModelAttribute, UpdateModelAttribute;
+    
+    /**
+     * Map Model Attributes to AttributeTypes with
+     * additional parameters.
+     * 
+     * @var array
+     */
+    protected $mapping = [];
 
 // I'M NOT SURE HOW THIS SECTION IS GOING TO WORK YET,
 // THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT

@@ -36,6 +36,6 @@ class UserAdmin extends ModelAdmin
     protected $rules = [
         'name' => 'required|max:32',
         'email' => 'required|email',
-        'password' => 'required|confirmed|min:8|max:32',
+        'password' => 'required|min:8|max:32', // removed `confirmed` while we are looping through fillable
     ];
 }

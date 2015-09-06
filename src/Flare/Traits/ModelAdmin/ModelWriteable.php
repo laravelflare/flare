@@ -107,7 +107,16 @@ trait ModelWriteable
         /**
          * Pre-processing is required.
          */
-        $this->save();
+        
+        // Unguard the model so we can set and store non-fillable entries
+        $this->model()->unguard();
+
+        unset($this->input['_token']); // This is incredibly dirty. Really we want to loop through the input and only use the attributes which are assigned to a Model
+
+        $this->model()->create($this->input);
+
+        // Reguard.
+        $this->model()->reguard();
     }
 
     /**

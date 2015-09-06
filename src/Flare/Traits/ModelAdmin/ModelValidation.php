@@ -2,10 +2,18 @@
 
 namespace JacobBaileyLtd\Flare\Traits\ModelAdmin;
 
+use Validator;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 trait ModelValidation
 {
+    /**
+     * Validation Rules for onCreate, onEdit actions.
+     * 
+     * @var array
+     */
+    protected $rules = [];
+
     /**
      * Used by beforeValidate() to ensure child classes call parent::beforeValidate()
      * 
@@ -19,6 +27,16 @@ trait ModelValidation
      * @var boolean
      */
     protected $brokenAfterValidate = false;
+
+    /**
+     * Retrunes the Rules Array
+     * 
+     * @return
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
 
     /**
      * Method fired before the Validate action is undertaken
@@ -60,7 +78,17 @@ trait ModelValidation
      */
     private function doValidate()
     {
-        
+        $validator = Validator::make($this->input, $this->rules);
+
+        /*$validator->after(function($validator) {
+            if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            }
+        });*/
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator->errors()); //We need some nice Custom Validator Exception which can hold error messages for fields etc
+        }
     }
 
     /**
