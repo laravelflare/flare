@@ -12,28 +12,28 @@ interface PermissionsContract
     public function providePermissions();
 
     /**
-     * Can Create 
+     * Can Create.
      * 
      * @return 
      */
     public function canCreate();
 
     /**
-     * Can View
+     * Can View.
      * 
      * @return
      */
     public function canView();
 
     /**
-     * Can Edit
+     * Can Edit.
      * 
      * @return 
      */
     public function canEdit();
 
     /**
-     * Can Delete
+     * Can Delete.
      * 
      * @return
      */

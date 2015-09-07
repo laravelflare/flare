@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JacobBaileyLtd\Flare\Http\Middleware;
 
 use Closure;

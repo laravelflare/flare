@@ -2,7 +2,7 @@
 
 namespace JacobBaileyLtd\Flare\Exceptions;
 
-class ModelAdminValidationWriteable extends \Exception
+class ModelAdminWriteableException extends \Exception
 {
     //
 }

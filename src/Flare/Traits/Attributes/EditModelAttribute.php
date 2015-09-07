@@ -65,7 +65,6 @@ trait EditModelAttribute
         // however, we can in theory return any string
         // here, blade view or even a __toString of
         // a FieldGroup :D
-        
 
 
         return view('flare::admin.attributes.default.edit', ['value' => ($attribute ? $attribute : $this->attributeFromMethod($method))]);

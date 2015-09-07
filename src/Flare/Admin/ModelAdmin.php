@@ -51,7 +51,7 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
     protected $urlPrefix = null;
 
     /**
-     * Temporary array of Input recieved during a POST request
+     * Temporary array of Input recieved during a POST request.
      *
      * @var array
      */
@@ -78,14 +78,13 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
             return new $modelName();
         }
 
-
         // Need to detect 
 
 
         $modelName = $this->managedModels[0];
+
         return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.
     }
-
 
     public function getManagedModels()
     {
@@ -193,7 +192,7 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
 
     /**
      * Register subRoutes for ModelAdmin instances 
-     * which have more than one managedModel
+     * which have more than one managedModel.
      *
      * @return
      */
@@ -204,9 +203,9 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
         }
 
         foreach ($this->managedModels as $modelName) {
-            $modelUrl = strtolower(substr($modelName, strrpos($modelName, "\\") + 1));
+            $modelUrl = strtolower(substr($modelName, strrpos($modelName, '\\') + 1));
             Route::group(['prefix' => $modelUrl, 'as' => $modelUrl], function () {
-                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController'); 
+                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });
         }

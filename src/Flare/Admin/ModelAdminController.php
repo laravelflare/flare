@@ -75,9 +75,9 @@ class ModelAdminController extends FlareController
      * @return \Illuminate\Http\Response
      */
     public function postCreate(\Illuminate\Http\Request $request)
-    { 
+    {
         $this->modelAdmin->input = $request->all();
-        
+
         try {
             $this->modelAdmin->canCreate();
         } catch (PermissionsException $exception) {
@@ -164,7 +164,7 @@ class ModelAdminController extends FlareController
     public function postDelete()
     {
     }
-    
+
     /**
      * Method is called when the appropriate controller
      * method is unable to be found or called.

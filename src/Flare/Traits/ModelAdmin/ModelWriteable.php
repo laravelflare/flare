@@ -7,63 +7,63 @@ use JacobBaileyLtd\Flare\Exceptions\ModelAdminWriteableException as WriteableExc
 trait ModelWriteable
 {
     /**
-     * Used by beforeCreate() to ensure child classes call parent::beforeCreate()
+     * Used by beforeCreate() to ensure child classes call parent::beforeCreate().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenBeforeCreate = false;
 
     /**
-     * Used by afterCreate() to ensure child classes call parent::afterCreate()
+     * Used by afterCreate() to ensure child classes call parent::afterCreate().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenAfterCreate = false;
-    
+
     /**
-     * Used by beforeEdit() to ensure child classes call parent::beforeEdit()
+     * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenBeforeEdit = false;
 
     /**
-     * Used by afterEdit() to ensure child classes call parent::afterEdit()
+     * Used by afterEdit() to ensure child classes call parent::afterEdit().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenAfterEdit = false;
-    
+
     /**
-     * Used by beforeSave() to ensure child classes call parent::beforeSave()
+     * Used by beforeSave() to ensure child classes call parent::beforeSave().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenBeforeSave = false;
 
     /**
-     * Used by afterSave() to ensure child classes call parent::afterSave()
+     * Used by afterSave() to ensure child classes call parent::afterSave().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenAfterSave = false;
-    
+
     /**
-     * Used by beforeDelete() to ensure child classes call parent::beforeDelete()
+     * Used by beforeDelete() to ensure child classes call parent::beforeDelete().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenBeforeDelete = false;
 
     /**
-     * Used by afterDelete() to ensure child classes call parent::afterDelete()
+     * Used by afterDelete() to ensure child classes call parent::afterDelete().
      * 
-     * @var boolean
+     * @var bool
      */
     protected $brokenAfterDelete = false;
-    
+
     /**
-     * Method fired before the Create action is undertaken
+     * Method fired before the Create action is undertaken.
      * 
      * @return
      */
@@ -71,9 +71,9 @@ trait ModelWriteable
     {
         $this->brokenBeforeCreate = false;
     }
-    
+
     /**
-     * Create Action
+     * Create Action.
      *
      * Fires off beforeCreate(), doCreate() and afterCreate()
      * 
@@ -84,15 +84,15 @@ trait ModelWriteable
         $this->brokenBeforeCreate = true;
         $this->beforeCreate();
         if ($this->brokenBeforeCreate) {
-            throw new WriteableException("ModelAdmin has a broken beforeCreate method. Make sure you call parent::beforeCreate() on all instances of beforeCreate()", 1);
+            throw new WriteableException('ModelAdmin has a broken beforeCreate method. Make sure you call parent::beforeCreate() on all instances of beforeCreate()', 1);
         }
-        
+
         $this->doCreate();
 
         $this->brokenAfterCreate = true;
         $this->afterCreate();
         if ($this->brokenAfterCreate) {
-            throw new WriteableException("ModelAdmin has a broken afterCreate method. Make sure you call parent::afterCreate() on all instances of afterCreate()", 1);
+            throw new WriteableException('ModelAdmin has a broken afterCreate method. Make sure you call parent::afterCreate() on all instances of afterCreate()', 1);
         }
     }
 
@@ -104,10 +104,10 @@ trait ModelWriteable
      */
     private function doCreate()
     {
-        /**
+        /*
          * Pre-processing is required.
          */
-        
+
         // Unguard the model so we can set and store non-fillable entries
         $this->model()->unguard();
 
@@ -120,7 +120,7 @@ trait ModelWriteable
     }
 
     /**
-     * Method fired after the Create action is complete
+     * Method fired after the Create action is complete.
      * 
      * @return
      */
@@ -128,9 +128,9 @@ trait ModelWriteable
     {
         $this->brokenAfterCreate = false;
     }
-    
+
     /**
-     * Method fired before the Edit action is undertaken
+     * Method fired before the Edit action is undertaken.
      * 
      * @return
      */
@@ -140,7 +140,7 @@ trait ModelWriteable
     }
 
     /**
-     * Edit Action
+     * Edit Action.
      *
      * Fires off beforeEdit(), doEdit() and afterEdit()
      * 
@@ -151,15 +151,15 @@ trait ModelWriteable
         $this->brokenBeforeEdit = true;
         $this->beforeEdit();
         if ($this->brokenBeforeEdit) {
-            throw new WriteableException("ModelAdmin has a broken beforeEdit method. Make sure you call parent::beforeEdit() on all instances of beforeEdit()", 1);
+            throw new WriteableException('ModelAdmin has a broken beforeEdit method. Make sure you call parent::beforeEdit() on all instances of beforeEdit()', 1);
         }
-        
+
         $this->doEdit();
 
         $this->brokenAfterEdit = true;
         $this->afterEdit();
         if ($this->brokenAfterEdit) {
-            throw new WriteableException("ModelAdmin has a broken afterEdit method. Make sure you call parent::afterEdit() on all instances of afterEdit()", 1);
+            throw new WriteableException('ModelAdmin has a broken afterEdit method. Make sure you call parent::afterEdit() on all instances of afterEdit()', 1);
         }
     }
 
@@ -171,14 +171,14 @@ trait ModelWriteable
      */
     private function doEdit()
     {
-        /**
+        /*
          * Pre=processing is required.
          */
         $this->save();
     }
 
     /**
-     * Method fired after the Edit action is complete
+     * Method fired after the Edit action is complete.
      * 
      * @return
      */
@@ -188,7 +188,7 @@ trait ModelWriteable
     }
 
     /**
-     * Method fired before the Save action is undertaken
+     * Method fired before the Save action is undertaken.
      * 
      * @return
      */
@@ -198,7 +198,7 @@ trait ModelWriteable
     }
 
     /**
-     * Save Action
+     * Save Action.
      *
      * Fires off beforeSave(), doSave() and afterSave()
      * 
@@ -209,15 +209,15 @@ trait ModelWriteable
         $this->brokenBeforeSave = true;
         $this->beforeSave();
         if ($this->brokenBeforeSave) {
-            throw new WriteableException("ModelAdmin has a broken beforeSave method. Make sure you call parent::beforeSave() on all instances of beforeSave()", 1);
+            throw new WriteableException('ModelAdmin has a broken beforeSave method. Make sure you call parent::beforeSave() on all instances of beforeSave()', 1);
         }
-        
+
         $this->doSave();
 
         $this->brokenAfterSave = true;
         $this->afterSave();
         if ($this->brokenAfterSave) {
-            throw new WriteableException("ModelAdmin has a broken afterSave method. Make sure you call parent::afterSave() on all instances of afterSave()", 1);
+            throw new WriteableException('ModelAdmin has a broken afterSave method. Make sure you call parent::afterSave() on all instances of afterSave()', 1);
         }
     }
 
@@ -229,7 +229,7 @@ trait ModelWriteable
      */
     private function doSave()
     {
-        /**
+        /*
          *
          *  --- AMAZING STUFF IS GOING TO HAPPEN HERE ---
          * 
@@ -237,7 +237,7 @@ trait ModelWriteable
     }
 
     /**
-     * Method fired after the Save action is complete
+     * Method fired after the Save action is complete.
      * 
      * @return
      */
@@ -247,7 +247,7 @@ trait ModelWriteable
     }
 
     /**
-     * Method fired before the Delete action is undertaken
+     * Method fired before the Delete action is undertaken.
      * 
      * @return
      */
@@ -257,7 +257,7 @@ trait ModelWriteable
     }
 
     /**
-     * Delete Action
+     * Delete Action.
      *
      * Fires off beforeDelete(), doDelete() and afterDelete()
      * 
@@ -268,21 +268,21 @@ trait ModelWriteable
         $this->brokenBeforeDelete = true;
         $this->beforeDelete();
         if ($this->brokenBeforeDelete) {
-            throw new WriteableException("ModelAdmin has a broken beforeDelete method. Make sure you call parent::beforeDelete() on all instances of beforeDelete()", 1);
+            throw new WriteableException('ModelAdmin has a broken beforeDelete method. Make sure you call parent::beforeDelete() on all instances of beforeDelete()', 1);
         }
-        
+
         $this->doDelete();
 
         $this->brokenAfterDelete = true;
         $this->afterDelete();
         if ($this->brokenAfterDelete) {
-            throw new WriteableException("ModelAdmin has a broken afterDelete method. Make sure you call parent::afterDelete() on all instances of afterDelete()", 1);
+            throw new WriteableException('ModelAdmin has a broken afterDelete method. Make sure you call parent::afterDelete() on all instances of afterDelete()', 1);
         }
     }
 
     private function doDelete()
     {
-        /**
+        /*
          * Delete the Model entry, or SoftDelete it.
          *
          * I guess if a Model has SoftDeletes, we should SoftDelete it first. Then allow full deletion.
@@ -290,7 +290,7 @@ trait ModelWriteable
     }
 
     /**
-     * Method fired after the Delete action is complete
+     * Method fired after the Delete action is complete.
      * 
      * @return
      */
