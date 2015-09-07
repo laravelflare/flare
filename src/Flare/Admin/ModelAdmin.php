@@ -65,7 +65,6 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
         if (!isset($this->managedModels) || $this->managedModels === null) {
             throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
         }
-        //$this->setUpManagedModels();
     }
 
     /**
@@ -94,75 +93,6 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
 
         return [$this->managedModels];
     }
-
-    // /**
-    //  * Determines if our $managedModels is an array or not,
-    //  * if it is not, it will attempt to create a single
-    //  * model instance. Otherwise it will loop the
-    //  * $managedModels array and create objects
-    //  *
-    //  * @return
-    //  */
-    // private function setUpManagedModels()
-    // {
-    //     if (!isset($this->managedModels) || !is_array($this->managedModels)) {
-    //         $this->singleManagedModel();
-    //     }
-
-    //     $this->loopManagedModels();
-    // }
-
-    // /**
-    //  * If $managedModels is not set (null), or is false
-    //  * we will use newAutoManagedModel() to determine
-    //  * this ModelAdmins appropriate class.
-    //  * 
-    //  * @return
-    //  */
-    // private function singleManagedModel()
-    // {
-    //     if (!isset($this->managedModels) || !$this->managedModels) {
-    //         echo 'here';
-    //         $this->newAutoManagedModel();
-    //     }
-
-    //     $this->newManagedModel($this->managedModels);
-    // }
-
-    // /**
-    //  * Loops teh array of $managedModels
-    //  * 
-    //  * @return 
-    //  */
-    // private function loopManagedModels()
-    // {
-    //     foreach ($this->loopManagedModels as $managedModel) {
-    //         $this->newManagedModel($managedModel);
-    //     }
-    // }
-
-    // /**
-    //  * Automatically create a managedModel instance
-    //  * from this ModelAdmin's classname 
-    //  * @return
-    //  */
-    // private function newAutoManagedModel()
-    // {
-    //     $model = str_replace('Admin', '',  static::ShortName());
-    //     echo $model; die();
-    //     $this->$$model = new $model();
-    // }
-
-    // /**
-    //  * Creates a new Managed Model instance
-    //  * 
-    //  * @param  $model 
-    //  * @return
-    //  */
-    // private function newManagedModel($model)
-    // {
-    //     $this->$$model = new $model();
-    // }
 
     /**
      * Register the routes for this ModelAdmin.
@@ -273,16 +203,6 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
 
         return static::$urlPrefix;
     }
-
-// I'M NOT SURE HOW THIS SECTION IS GOING TO WORK YET,
-// THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT
-// HOW DO WE DEFINE A KEY IF MORE THAN ONE MODEL IS
-// DEFINED?
-// 
-// We could use Model.Key (Model.Attribute) and convert accordingly
-// 
-// Although saying that, at any given time perhaps only one Model is managed?
-// 
 
     /**
      * Handle dynamic method calls  ModelAdmin (and its children).

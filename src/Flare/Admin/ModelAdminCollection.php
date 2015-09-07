@@ -26,9 +26,6 @@ class ModelAdminCollection extends Collection
     }
 
     /**
-     * Note: I don't think this will load SubClasses of ModelAdmin children? 
-     *       The question is, do we want it to? 
-     * 
      * Gets ModelAdmin classes based on the current users permissions
      * which have been set. If a ModelAdmin class has not had the
      * Permissions provided, it will be displayed by default.
@@ -51,8 +48,11 @@ class ModelAdminCollection extends Collection
 
     /**
      * Register ModelAdmin Routes.
+     *
+     * Loops through all of the ModelAdmin classes in the collection
+     * and registers their ModelAdmin Routes
      * 
-     * @return
+     * @return void
      */
     public function registerRoutes()
     {
@@ -67,7 +67,7 @@ class ModelAdminCollection extends Collection
      * 
      * @param string $class
      * 
-     * @return
+     * @return boolean
      */
     private function usableClass($class)
     {
@@ -91,7 +91,7 @@ class ModelAdminCollection extends Collection
      * 
      * @param string $class
      * 
-     * @return        
+     * @return boolean     
      */
     private function checkModelAdminPermissions($class)
     {
@@ -108,52 +108,11 @@ class ModelAdminCollection extends Collection
      * 
      * @param  $class
      * 
-     * @return         
+     * @return boolean     
      */
     private function checkUserHasModelAdminPermissions($class)
     {
         // Replace this with actual Permission Implementation Check
         return Permissions::check();
-    }
-
-    /**
-     * Finds all.
-     *
-     * @return [type] [description]
-     */
-    public static function findClasses()
-    {
-        /*$finder = new Finder();
-        $finder->files()->name('*.php')->in(base_path());
-
-        foreach ($finder as $file) {
-            $ns = $namespace;
-            if ($relativePath = $file->getRelativePath()) {
-                $ns .= '\\'.strtr($relativePath, '/', '\\');
-            }
-            $class = $ns.'\\'.$file->getBasename('.php');
-
-            $r = new \ReflectionClass($class);
-        }*/
-    }
-
-    /**
-     * NOTE: This should be moved to a more appropriate class.
-     * 
-     * @param string $parent
-     * 
-     * @return
-     */
-    private static function getSubClassesOf($parent)
-    {
-        $subClasses = [];
-
-        foreach (get_declared_classes() as $class) {
-            if (is_subclass_of($class, $parent)) {
-                $result[] = $class;
-            }
-        }
-
-        return $subClasses;
     }
 }
