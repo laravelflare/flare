@@ -2,10 +2,6 @@
 
 @section('page_title', 'Manage '.$modelAdmin::PluralTitle())
 
-@section('sidebar')
-    @include('flare::admin.modelAdmin.sidebar')
-@stop
-
 @section('content')
 
 <div class="">
