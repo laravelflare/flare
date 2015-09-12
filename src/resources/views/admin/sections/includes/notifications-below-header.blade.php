@@ -23,7 +23,7 @@
                         {!! $notification['message'] !!}
                         @endif
                     </div>
-                </div><!-- /.col -->
+                </div>
             </div>
         @endforeach
     </section>

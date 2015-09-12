@@ -16,7 +16,10 @@
                         <label class="control-label" for="name">Name *</label>
                         <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $modelItem->name) }}">
                         @if ($errors->has('name'))
-                            <span class="help-block">{{ $errors->first('name') }}</span>
+                            <span class="help-block">
+                                <i class="fa fa-times-circle-o"></i>
+                                {{ $errors->first('name') }}
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -27,7 +30,10 @@
                         <label class="control-label" for="email">Email *</label>
                         <input class="form-control" type="text" name="email" id="email" value="{{ old('email', $modelItem->email) }}">
                         @if ($errors->has('email'))
-                            <span class="help-block">{{ $errors->first('email') }}</span>
+                            <span class="help-block">
+                                <i class="fa fa-times-circle-o"></i>
+                                {{ $errors->first('email') }}
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -38,7 +44,10 @@
                         <label class="control-label" for="password">Password *</label>
                         <input class="form-control" type="password" name="password" id="password" value="{{ old('password', $modelItem->password) }}">
                         @if ($errors->has('password'))
-                            <span class="help-block">{{ $errors->first('password') }}</span>
+                            <span class="help-block">
+                                <i class="fa fa-times-circle-o"></i>
+                                {{ $errors->first('password') }}
+                            </span>
                         @endif
                     </div>
                 </div>

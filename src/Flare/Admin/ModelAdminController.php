@@ -170,7 +170,7 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        $this->modelAdmin->model()->find($modelitem_id)->remove();
+        $this->modelAdmin->model()->find($modelitem_id)->delete();
 
         return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully removed.', 'dismissable' => false] ]);
     }
