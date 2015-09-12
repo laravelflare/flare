@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="">
-    <h1>Delete {{ $modelAdmin::Title() }}</h1>
 
 
 </div>

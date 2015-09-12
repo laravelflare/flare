@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="">
-    <h1>Edit {{ $modelAdmin::Title() }}</h1>
 
 
+    
 </div>
 
 @stop

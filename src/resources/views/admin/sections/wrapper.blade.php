@@ -5,16 +5,16 @@
         @include('flare::admin.sections.header')
 
         <div class="content-wrapper">
+                @include('flare::admin.sections.includes.notifications-above-header')
+
                 <section class="content-header">
                     <h1>
                         @yield('page_title')
                         <small>{{ $page_description or null }}</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                        <li class="active">Here</li>
-                    </ol>
                 </section>
+
+                @include('flare::admin.sections.includes.notifications-below-header')
 
                 <!-- Main content -->
                 <section class="content">          

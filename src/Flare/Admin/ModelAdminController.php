@@ -3,6 +3,8 @@
 namespace JacobBaileyLtd\Flare\Admin;
 
 use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
+use JacobBaileyLtd\Flare\Http\Requests\ModelAdminAddRequest;
+use JacobBaileyLtd\Flare\Http\Requests\ModelAdminEditRequest;
 use JacobBaileyLtd\Flare\Exceptions\PermissionsException as PermissionsException;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationException;
@@ -32,7 +34,7 @@ class ModelAdminController extends FlareController
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
-        // middleware
+        // middleware for authentication check
         parent::__construct();
 
         $this->modelAdmin = $this->getModelAdminInstance();
@@ -74,7 +76,7 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postCreate(\Illuminate\Http\Request $request)
+    public function postCreate(ModelAdminAddRequest $request)
     {
         $this->modelAdmin->input = $request->all();
 
@@ -137,7 +139,7 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postEdit()
+    public function postEdit(ModelAdminEditRequest $request)
     {
     }
 

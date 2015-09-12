@@ -4,8 +4,7 @@
 
 @section('content')
 
-<div class="">
-    <h1>View {{ $modelAdmin::Title() }}</h1>
+<div class="">  
 
 
 </div>

@@ -21,12 +21,25 @@
         <ul class="sidebar-menu">
             <li class="active">
                 <a href="{{ url('admin') }}">
+                    <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             @foreach($modelAdminCollection as $modelAdmin)
-            <li class="header">
-                {{ $modelAdmin::PluralTitle() }}
+            <li class="treeview">
+                <a href="{{ $modelAdmin::Url() }}">
+                    <i class="fa fa-user"></i>
+                    <span>
+                    {{ $modelAdmin::PluralTitle() }}
+                    </span>
+                </a>
+            <ul class="treeview-menu">
+            <li>
+                <a href="{{ $modelAdmin::Url() }}">
+                    <span>
+                        All Users
+                    </span>
+                </a>
             </li>
             <li>
                 <a href="{{ $modelAdmin::Url() }}/create">
@@ -51,6 +64,7 @@
             </li>
             <li class="treeview">
                 <a href="{{ $modelAdmin::Url() }}/usergroup">
+                    <i class="fa fa-users" style="width: 17px;"></i>
                     <span>
                         User Groups
                     </span>
@@ -79,6 +93,7 @@
                     </li>
                 </ul>
             </li>
+        </ul></li>
             @endforeach
         </ul>
     </section>
