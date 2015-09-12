@@ -48,12 +48,10 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        $data = [
+        return view('flare::admin.modelAdmin.index', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-        ];
-
-        return view('flare::admin.modelAdmin.index', $data);
+        ]);
     }
 
     /**
@@ -63,12 +61,10 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
-        $data = [
+        return view('flare::admin.modelAdmin.create', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-        ];
-
-        return view('flare::admin.modelAdmin.create', $data);
+        ]);
     }
 
     /**
@@ -101,7 +97,9 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        echo 'All done!';
+        $this->modelAdmin->model()->create($request->only($this->modelAdmin->model()->getFillable()));
+
+        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully created.', 'dismissable' => false] ]);
     }
 
     /**
@@ -111,60 +109,70 @@ class ModelAdminController extends FlareController
      */
     public function getView()
     {
-        $data = [
+        return view('flare::admin.modelAdmin.view', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-        ];
-
-        return view('flare::admin.modelAdmin.view', $data);
+        ]);
     }
 
     /**
      * Edit Model Entry from ModelAdmin Edit Page.
+     *
+     * @param int $modelitem_id
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getEdit()
+    public function getEdit($modelitem_id)
     {
-        $data = [
+        return view('flare::admin.modelAdmin.edit', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-        ];
-
-        return view('flare::admin.modelAdmin.edit', $data);
+            'modelItem' => $this->modelAdmin->model()->find($modelitem_id),
+        ]);
     }
 
     /**
      * Receive Model Entry Update Post Data, validate it and return user.
      * 
+     * @param int $modelitem_id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function postEdit(ModelAdminEditRequest $request)
+    public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
+        $this->modelAdmin->model()->find($modelitem_id)->update($request->only($this->modelAdmin->model()->getFillable()));
+
+        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully updated.', 'dismissable' => false] ]);
     }
 
     /**
      * Delete Model Entry from ModelAdmin Delete Page.
+     *
+     * @param  int $modelitem_id
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getDelete()
+    public function getDelete($modelitem_id)
     {
-        $data = [
+        return view('flare::admin.modelAdmin.delete', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-        ];
-
-        return view('flare::admin.modelAdmin.delete', $data);
+            'modelItem' => $this->modelAdmin->model()->find($modelitem_id),
+        ]);
     }
 
     /**
      * Receive Model Entry Delete Post Data, validate it and return user.
+     *
+     * @param  int $modelitem_id
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postDelete()
+    public function postDelete($modelitem_id)
     {
+        $this->modelAdmin->model()->find($modelitem_id)->remove();
+
+        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully removed.', 'dismissable' => false] ]);
     }
 
     /**

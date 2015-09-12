@@ -180,17 +180,6 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
     }
 
     /**
-     * URL to a ModelAdmin Top Level Page.
-     *
-     * @return string
-     */
-    public static function Url()
-    {
-        // Update 'admin' to use Admin config variable
-        return url('admin/'.static::UrlPrefix());
-    }
-
-    /**
      * URL Prefix to a ModelAdmin Top Level Page.
      *
      * @return string
@@ -204,6 +193,28 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
         return static::$urlPrefix;
     }
 
+    /**
+     * URL to a ModelAdmin Top Level Page.
+     *
+     * @return string
+     */
+    public static function Url()
+    {
+        // Update 'admin' to use Admin config variable
+        return url('admin/'.static::UrlPrefix());
+    }
+
+    /**
+     * Relative URL to a ModelAdmin Top Level Page.
+     *
+     * @return string
+     */
+    public static function RelativeUrl()
+    {
+        // Update 'admin' to use Admin config variable
+        return 'admin/'.static::UrlPrefix();
+    }
+    
     /**
      * Handle dynamic method calls  ModelAdmin (and its children).
      *

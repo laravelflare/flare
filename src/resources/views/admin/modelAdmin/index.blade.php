@@ -44,11 +44,11 @@
                                     {{ $modelItem->updated_at }}
                                 </td>
                                 <td style="width: 1%; white-space:nowrap">
-                                    <a class="btn btn-primary btn-xs" href="#">
+                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::URL() }}/edit/{{ $modelItem->id }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" href="#">
-                                        <i class="fa fa-remove"></i>
+                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::URL() }}/delete/{{ $modelItem->id }}">
+                                        <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

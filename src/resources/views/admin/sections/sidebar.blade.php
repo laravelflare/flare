@@ -19,81 +19,60 @@
             </div>
         </form>
         <ul class="sidebar-menu">
-            <li class="active">
+            <li class="{{ Request::is('admin') ? 'active' : '' }}">
                 <a href="{{ url('admin') }}">
                     <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span>
+                        Dashboard
+                    </span>
                 </a>
             </li>
             @foreach($modelAdminCollection as $modelAdmin)
-            <li class="treeview">
+            <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
                 <a href="{{ $modelAdmin::Url() }}">
                     <i class="fa fa-user"></i>
                     <span>
                     {{ $modelAdmin::PluralTitle() }}
                     </span>
                 </a>
-            <ul class="treeview-menu">
-            <li>
-                <a href="{{ $modelAdmin::Url() }}">
-                    <span>
-                        All Users
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ $modelAdmin::Url() }}/create">
-                    <span>
-                        Create User
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ $modelAdmin::Url() }}/edit">
-                    <span>
-                        Edit User
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ $modelAdmin::Url() }}/delete">
-                    <span>
-                        Delete User
-                    </span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="{{ $modelAdmin::Url() }}/usergroup">
-                    <i class="fa fa-users" style="width: 17px;"></i>
-                    <span>
-                        User Groups
-                    </span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
+                        <a href="{{ $modelAdmin::Url() }}">
+                            <span>
+                                All Users
+                            </span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/create') ? 'active' : '' }}">
+                        <a href="{{ $modelAdmin::Url() }}/create">
+                            <span>
+                                Create User
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/*') ? 'active' : '' }}">
                         <a href="{{ $modelAdmin::Url() }}/usergroup">
-                            All User Groups
+                            <i class="fa fa-users" style="width: 17px;"></i>
+                            <span>
+                                User Groups
+                            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                    </li>
-                    <li>
-                        <a href="{{ $modelAdmin::Url() }}/usergroup/create">
-                            Create User Group
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ $modelAdmin::Url() }}/usergroup/edit">
-                            Edit User Group
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ $modelAdmin::Url() }}/usergroup/delete">
-                            Delete User Group
-                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/*') ? 'active' : '' }}">
+                                <a href="{{ $modelAdmin::Url() }}/usergroup">
+                                    All User Groups
+                                </a>
+                            </li>
+                            <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/create') ? 'active' : '' }}">
+                                <a href="{{ $modelAdmin::Url() }}/usergroup/create">
+                                    Create User Group
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
-        </ul></li>
             @endforeach
         </ul>
     </section>
