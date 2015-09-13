@@ -18,7 +18,7 @@ Route::get('/admin', function () {
 // We should allow 'admin' to be determined as a config variable
 Route::group(['prefix' => 'admin'], function () {
     // Admin routes should really have auth filter, or actually, our own permissions filter.
-    (new \JacobBaileyLtd\Flare\Admin\ModelAdminCollection())->registerRoutes();
+    (new \JacobBaileyLtd\Flare\Admin\Models\ModelAdminCollection())->registerRoutes();
 
     // Admin Default Routes, make sure not to ovverride!
     Route::controller('/', '\JacobBaileyLtd\Flare\Http\Controllers\AdminController');

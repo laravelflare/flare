@@ -84,7 +84,7 @@ class ModelAdminCollection extends Collection
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
-        if ($class == 'JacobBaileyLtd\Flare\Admin\ModelAdmin') {
+        if ($class == 'JacobBaileyLtd\Flare\Admin\Models\ModelAdmin') {
             return false;
         }
 

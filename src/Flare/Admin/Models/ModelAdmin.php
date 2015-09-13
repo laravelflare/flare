@@ -1,10 +1,11 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin\Models;
 
 use Route;
 use Request;
 use Illuminate\Support\Str;
+use JacobBaileyLtd\Flare\Admin\Admin;
 use JacobBaileyLtd\Flare\Traits\Permissionable;
 use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
 use JacobBaileyLtd\Flare\Exceptions\ModelAdminException;
@@ -142,7 +143,7 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
             // If it does... load it. 
             //      Route::controller('/', '\JacobBaileyLtd\Flare\Admin\?Controller');
             // Otherwise, use the default ModelAdminController
-            Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
+            Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
         });
     }
 
@@ -161,7 +162,7 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
         foreach ($this->managedModels as $modelName) {
             $modelUrl = strtolower(substr($modelName, strrpos($modelName, '\\') + 1));
             Route::group(['prefix' => $modelUrl, 'as' => $modelUrl, 'model' => $modelName], function () {
-                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
+                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });
         }

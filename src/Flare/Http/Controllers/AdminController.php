@@ -3,7 +3,7 @@
 namespace JacobBaileyLtd\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use JacobBaileyLtd\Flare\Admin\ModelAdminCollection;
+use JacobBaileyLtd\Flare\Admin\Models\ModelAdminCollection;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
