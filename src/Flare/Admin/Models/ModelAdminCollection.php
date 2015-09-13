@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\Finder;
@@ -44,6 +44,18 @@ class ModelAdminCollection extends Collection
         }
 
         return $classCollection;
+    }
+
+    /**
+     * Returns an instance of the ModelAdmin.
+     * 
+     * @return ModelAdmin
+     */
+    public function getModelAdminInstance()
+    {
+        $className = \Route::current()->getAction()['namespace'];
+
+        return new $className();
     }
 
     /**

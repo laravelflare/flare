@@ -3,6 +3,7 @@
 namespace JacobBaileyLtd\Flare\Admin;
 
 use Route;
+use Request;
 use Illuminate\Support\Str;
 use JacobBaileyLtd\Flare\Traits\Permissionable;
 use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
@@ -13,7 +14,7 @@ use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
 use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelWriteableContract;
 use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
-abstract class ModelAdmin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
+abstract class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
@@ -28,6 +29,13 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
      * @var array|string
      */
     protected $managedModels = null;
+
+    /**
+     * The current model to be managed
+     * 
+     * @var string
+     */
+    protected $currentModel;
 
     /**
      * Title of Model Admin.
@@ -60,11 +68,13 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
     /**
      * __construct.
      */
-    public function __construct()
+    public function __construct($model = false)
     {
         if (!isset($this->managedModels) || $this->managedModels === null) {
             throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
         }
+
+        $this->currentModel = $model ? $model : $this->model();
     }
 
     /**
@@ -77,12 +87,28 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
             return new $modelName();
         }
 
-        // Need to detect 
-
+        if ($modelName = $this->getRequestedModel()) {
+            return new $modelName();
+        }
 
         $modelName = $this->managedModels[0];
 
         return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.
+    }
+
+    public function getRequestedModel()
+    {
+        if (!\Route::current()) {
+            return;
+        }   
+
+        $currentAction = \Route::current()->getAction();
+
+        if (isset($currentAction['model'])) {
+            return $currentAction['model'];
+        }
+
+        return;
     }
 
     public function getManagedModels()
@@ -134,7 +160,7 @@ abstract class ModelAdmin implements PermissionsContract, ModelValidationContrac
 
         foreach ($this->managedModels as $modelName) {
             $modelUrl = strtolower(substr($modelName, strrpos($modelName, '\\') + 1));
-            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl], function () {
+            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl, 'model' => $modelName], function () {
                 Route::controller('/', '\JacobBaileyLtd\Flare\Admin\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });

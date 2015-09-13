@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin;
+namespace JacobBaileyLtd\Flare\Admin\Models;
 
 use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
 use JacobBaileyLtd\Flare\Http\Requests\ModelAdminAddRequest;
@@ -12,18 +12,20 @@ use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationE
 class ModelAdminController extends FlareController
 {
     /**
+     * ModelAdminCollection.
+     *
+     * @var ModelAdminCollection
+     */
+    protected $modelAdminCollection;
+
+    /**
      * ModelAdmin instance which has been resolved.
      * 
      * @var ModelAdmin
      */
     protected $modelAdmin;
 
-    /**
-     * ModelAdminCollection.
-     *
-     * @var ModelAdminCollection
-     */
-    protected $modelAdminCollection;
+    protected $model;
 
     /**
      * __construct.
@@ -37,8 +39,9 @@ class ModelAdminController extends FlareController
         // middleware for authentication check
         parent::__construct();
 
-        $this->modelAdmin = $this->getModelAdminInstance();
         $this->modelAdminCollection = $modelAdminCollection;
+        $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
+        $this->model = $this->modelAdmin->model();
     }
 
     /**
@@ -127,7 +130,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.edit', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->modelAdmin->model()->find($modelitem_id),
+            'modelItem' => $this->model->find($modelitem_id),
         ]);
     }
 
@@ -140,7 +143,7 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        $this->modelAdmin->model()->find($modelitem_id)->update($request->only($this->modelAdmin->model()->getFillable()));
+        $this->model->find($modelitem_id)->update($request->only($this->model->getFillable()));
 
         return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully updated.', 'dismissable' => false] ]);
     }
@@ -157,7 +160,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.delete', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->modelAdmin->model()->find($modelitem_id),
+            'modelItem' => $this->model->find($modelitem_id),
         ]);
     }
 
@@ -189,17 +192,5 @@ class ModelAdminController extends FlareController
         //var_dump($parameters);
 
         parent::missingMethod();
-    }
-
-    /**
-     * Returns an instance of the ModelAdmin.
-     * 
-     * @return ModelAdmin
-     */
-    private function getModelAdminInstance()
-    {
-        $className = \Route::current()->getAction()['namespace'];
-
-        return new $className();
     }
 }

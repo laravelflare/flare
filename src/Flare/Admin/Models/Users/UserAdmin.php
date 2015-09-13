@@ -3,7 +3,7 @@
 namespace JacobBaileyLtd\Flare\Admin\Users;
 
 use App\Models\User as User;
-use JacobBaileyLtd\Flare\Admin\ModelAdmin;
+use JacobBaileyLtd\Flare\Admin\Models\ModelAdmin;
 
 class UserAdmin extends ModelAdmin
 {
@@ -37,5 +37,18 @@ class UserAdmin extends ModelAdmin
         'name' => 'required|max:32',
         'email' => 'required|email',
         'password' => 'required|min:8|max:32', // removed `confirmed` while we are looping through fillable
+    ];
+
+    /**
+     * Validation Rules for onCreate, onEdit actions.
+     * 
+     * @var array
+     */
+    protected $summary_fields = [
+        'id' => 'ID',
+        'name',
+        'email',
+        'created_at' => 'Created',
+        'updated_at' => 'Updated',
     ];
 }
