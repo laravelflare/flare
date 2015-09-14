@@ -12,6 +12,7 @@ abstract class FlareController extends BaseController
 
     public function __construct()
     {
+        //$this->middleware('flareauthenticate');
         $this->middleware('checkpermissions');
     }
 }

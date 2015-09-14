@@ -36,7 +36,7 @@ class ModelAdminCollection extends Collection
     {
         $classCollection = [];
 
-        foreach (config('flare.models') as $class) {
+        foreach (config('flare.modeladmins') as $class) {
             if (!$this->usableClass($class)) {
                 continue;
             }

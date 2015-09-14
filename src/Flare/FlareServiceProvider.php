@@ -23,6 +23,7 @@ class FlareServiceProvider extends ServiceProvider
         ]);
 
         // Middleware
+        $router->middleware('flareauthenticate', 'JacobBaileyLtd\Flare\Http\Middleware\FlareAuthenticate');
         $router->middleware('checkpermissions', 'JacobBaileyLtd\Flare\Http\Middleware\CheckPermissions');
 
         // Routes

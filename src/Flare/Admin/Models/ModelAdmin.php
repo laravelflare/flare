@@ -15,7 +15,7 @@ use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
 use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelWriteableContract;
 use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
-abstract class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
+class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
@@ -34,9 +34,16 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
     /**
      * The current model to be managed
      * 
-     * @var string
+     * @var
      */
-    protected $currentModel;
+    protected $model;
+
+    /**
+     * The current model managed
+     *
+     * @var
+     */
+    protected $modelManager;
 
     /**
      * Title of Model Admin.
@@ -69,22 +76,33 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
     /**
      * __construct.
      */
-    public function __construct($model = false)
+    public function __construct()
     {
         if (!isset($this->managedModels) || $this->managedModels === null) {
             throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
         }
 
-        $this->currentModel = $model ? $model : $this->model();
+        $this->modelManager = $this->modelManager();
+        $this->model = $this->model();
+        //$this->currentModel = $model ? $model : $this->model();
     }
 
     /**
      * This doesn't work as we are instantiating a new model instance everytime
      * which means we're receiving an empty object. DUh. Too much Aberlour for me.
      */
-    public function model($modelName = null)
+    public function model()
     {
-        if (!is_array($modelName = $this->managedModels)) {
+        if (!$this->modelManager) {
+            return;
+        }
+
+        if ($modelName = $this->getRequestedModel()) {
+            return new $modelName();
+        }
+
+        return new $this->modelManager->managedModel;
+       /* if (!is_array($modelName = $this->managedModels)) {
             return new $modelName();
         }
 
@@ -94,8 +112,24 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
 
         $modelName = $this->managedModels[0];
 
-        return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.
+        return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.*/
+
+        
     }
+
+    public function modelManager()
+    {
+        if (!is_array($this->managedModels)) {
+            $modelManagerName = $this->managedModels;
+
+            return new $modelManagerName();
+        }
+        
+        $modelManagerName = $this->managedModels[0];
+
+        return new $modelManagerName();
+    }
+
 
     public function getRequestedModel()
     {
@@ -136,7 +170,7 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
+        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix(), /*'before' => 'admin_auth'*/], function () {
             $this->registerSubRoutes();
 
             // We chould check if the ModelAdminController file exists in the user's App
@@ -159,9 +193,10 @@ abstract class ModelAdmin extends Admin implements PermissionsContract, ModelVal
             return;
         }
 
-        foreach ($this->managedModels as $modelName) {
-            $modelUrl = strtolower(substr($modelName, strrpos($modelName, '\\') + 1));
-            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl, 'model' => $modelName], function () {
+        foreach ($this->managedModels as $managedModel) {
+            $managedModel = new $managedModel();
+            $modelUrl = strtolower(substr($managedModel->managedModel, strrpos($managedModel->managedModel, '\\') + 1));
+            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl, 'model' => $managedModel->managedModel], function () {
                 Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });

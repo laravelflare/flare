@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'models' => [
+    'modeladmins' => [
         JacobBaileyLtd\Flare\Admin\Models\ModelAdmin::class,
         JacobBaileyLtd\Flare\Admin\Models\Users\UserAdmin::class,
     ],

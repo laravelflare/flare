@@ -5,24 +5,22 @@ namespace JacobBaileyLtd\Flare\Admin\Models\Users;
 use App\Models\User as User;
 use JacobBaileyLtd\Flare\Admin\Models\ManagedModel;
 
-class ManagedUser extends ManagedModel
+class ManagedUserGroup extends ManagedModel
 {
     /**
      * Managed Model Instance
      * 
      * @var string
      */
-    public $managedModel = 'App\Models\User';
+    public $managedModel = 'App\Models\UserGroup';
 
     /**
-     * Map User Attributes to their Attribute Types.
+     * Map User Group Attributes to their Attribute Types.
      * 
      * @var array
      */
     protected $mapping = [
         'name' => ['type' => 'text', 'length' => 32],
-        'email' => ['type' => 'email', 'length' => 255],
-        'password' => ['type' => 'password', 'length' => 32],
     ];
 
     /**
@@ -32,8 +30,6 @@ class ManagedUser extends ManagedModel
      */
     protected $rules = [
         'name' => 'required|max:32',
-        'email' => 'required|email',
-        'password' => 'required|min:8|max:32', // removed `confirmed` while we are looping through fillable
     ];
 
     /**
@@ -44,8 +40,5 @@ class ManagedUser extends ManagedModel
     protected $summary_fields = [
         'id' => 'ID',
         'name',
-        'email',
-        'created_at' => 'Created',
-        'updated_at' => 'Updated',
     ];
 }

@@ -41,6 +41,7 @@ class ModelAdminController extends FlareController
 
         $this->modelAdminCollection = $modelAdminCollection;
         $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
+        //$this->managedModel = $this->modelAdmin->getModelAdminInstance(); This is getting a bit out of hand
         $this->model = $this->modelAdmin->model();
     }
 
@@ -54,6 +55,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.index', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
+            'model' => $this->model,
         ]);
     }
 
@@ -67,6 +69,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.create', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
+            'model' => $this->model,
         ]);
     }
 
@@ -115,6 +118,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.view', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
+            'model' => $this->model,
         ]);
     }
 
@@ -130,6 +134,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.edit', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
+            'model' => $this->model,
             'modelItem' => $this->model->find($modelitem_id),
         ]);
     }
@@ -160,6 +165,7 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.delete', [
             'modelAdminCollection' => $this->modelAdminCollection,
             'modelAdmin' => $this->modelAdmin,
+            'model' => $this->model,
             'modelItem' => $this->model->find($modelitem_id),
         ]);
     }
