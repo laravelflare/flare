@@ -294,29 +294,29 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         return 'admin/'.static::UrlPrefix();
     }
     
-    /**
-     * Handle dynamic method calls  ModelAdmin (and its children).
-     *
-     * @param string $method
-     * @param array  $parameters
-     * 
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        // I'd like to implement Permissions on the Attribute view, edit and update... 
-        if (starts_with($method, 'view') && ends_with($method, 'Attribute')) {
-            return call_user_func_array(array($this, 'getViewAttribute'), array_merge(array($method), $parameters));
-        }
+    // /**
+    //  * Handle dynamic method calls  ModelAdmin (and its children).
+    //  *
+    //  * @param string $method
+    //  * @param array  $parameters
+    //  * 
+    //  * @return mixed
+    //  */
+    // public function __call($method, $parameters)
+    // {
+    //     // I'd like to implement Permissions on the Attribute view, edit and update... 
+    //     if (starts_with($method, 'view') && ends_with($method, 'Attribute')) {
+    //         return call_user_func_array(array($this, 'getViewAttribute'), array_merge(array($method), $parameters));
+    //     }
 
-        if (starts_with($method, 'edit') && ends_with($method, 'Attribute')) {
-            return call_user_func_array(array($this, 'getEditAttribute'), array_merge(array($method), $parameters));
-        }
+    //     if (starts_with($method, 'edit') && ends_with($method, 'Attribute')) {
+    //         return call_user_func_array(array($this, 'getEditAttribute'), array_merge(array($method), $parameters));
+    //     }
 
-        if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
-            return call_user_func_array(array($this, 'getUpdateAttribute'), array_merge([$key], $parameters));
-        }
-    }
+    //     if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
+    //         return call_user_func_array(array($this, 'getUpdateAttribute'), array_merge([$key], $parameters));
+    //     }
+    // }
 
     /**
      * Handle dynamic static method calls into the ModelAdmin.

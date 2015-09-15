@@ -109,14 +109,30 @@ trait ModelWriteable
          */
 
         // Unguard the model so we can set and store non-fillable entries
-        $this->model()->unguard();
+        $this->modelManager->model->unguard();
+
+        //$this->modelAdmin->model()->getFillable()->except( _token )
 
         unset($this->input['_token']); // This is incredibly dirty. Really we want to loop through the input and only use the attributes which are assigned to a Model
 
-        $this->model()->create($this->input);
+        foreach ($this->input as $key => $value) {
+
+            if ($this->modelManager->hasSetMutator($key)) {
+
+                $this->modelManager->setAttribute($key, $value);
+
+            } else {
+
+                $this->modelManager->model->setAttribute($key, $value);
+
+            }
+
+        }
+
+        $this->modelManager->model->save();
 
         // Reguard.
-        $this->model()->reguard();
+        $this->modelManager->model->reguard();
     }
 
     /**

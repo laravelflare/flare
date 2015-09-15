@@ -51,4 +51,16 @@ class ManagedUser extends ManagedModel
         'created_at' => 'Created',
         'updated_at' => 'Updated',
     ];
+
+    /**
+     * When a new password is set, hash it
+     * 
+     * @param string
+     *
+     * @return void
+     */
+    protected function setPasswordAttribute($value)
+    {
+        $this->model->setAttribute('password', bcrypt($value));
+    }
 }

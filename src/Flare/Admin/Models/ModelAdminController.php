@@ -103,8 +103,6 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        $this->modelAdmin->model()->create($request->only($this->modelAdmin->model()->getFillable()));
-
         return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully created.', 'dismissable' => false] ]);
     }
 

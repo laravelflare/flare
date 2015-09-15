@@ -141,4 +141,54 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
 
         return [$this->model->primaryKey];
     }
+
+    /**
+     * Set a given attribute on the model.
+     *
+     * @param  string  $key
+     * @param  mixed   $value
+     * 
+     * @return void
+     */
+    public function setAttribute($key, $value)
+    {
+        if ($this->hasSetMutator($key)) {
+            $method = 'set'.Str::studly($key).'Attribute';
+
+            return $this->{$method}($value);
+        }
+
+        if ($this->isJsonCastable($key) && ! is_null($value)) {
+            $value = json_encode($value);
+        }
+
+        $this->model->attributes[$key] = $value;
+    }
+
+    /**
+     * Determine if a set mutator exists for an attribute.
+     *
+     * @param  string  $key
+     * 
+     * @return bool
+     */
+    public function hasSetMutator($key)
+    {
+        return method_exists($this, 'set'.Str::studly($key).'Attribute');
+    }
+
+    /**
+     * Handle dynamic method calls to the Managed Model
+     *
+     * @param string $method
+     * @param array  $parameters
+     * 
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        /*if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
+            return call_user_func_array(array($this, 'getUpdateAttribute'), array_merge([$key], $parameters));
+        }*/
+    }
 }
