@@ -14,12 +14,11 @@ trait AttributeAccess
      */
     protected $mapping = [];
 
-// I'M NOT SURE HOW THIS SECTION IS GOING TO WORK YET,
-// THE THEORY WORKS FINE IF ONE MODEL IS MANAGED, BUT
-// HOW DO WE DEFINE A KEY IF MORE THAN ONE MODEL IS
-// DEFINED?
-
-
+    public function getMapping()
+    {
+        return $this->mapping;
+    }
+    
     protected function attributeFromMethod($method)
     {
         if (strlen(($attribute = substr(substr($method, 0, -9), 4))) > 0) {

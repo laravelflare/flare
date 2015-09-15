@@ -77,7 +77,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
 
         $this->modelManager = $this->modelManager();
         $this->model = $this->model();
-        //$this->currentModel = $model ? $model : $this->model();
     }
 
     /**
@@ -95,19 +94,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         }
 
         return new $this->modelManager->managedModel;
-       /* if (!is_array($modelName = $this->managedModels)) {
-            return new $modelName();
-        }
-
-        if ($modelName = $this->getRequestedModel()) {
-            return new $modelName();
-        }
-
-        $modelName = $this->managedModels[0];
-
-        return new $modelName(); // This is stupid. Blame the Talisker. We need to check the modelName existance, and ensure it is not NULL.*/
-
-        
     }
 
     public function getRequestedModel()
@@ -286,7 +272,17 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         // Update 'admin' to use Admin config variable
         return 'admin/'.static::UrlPrefix();
     }
-    
+
+    public static function CurrentUrl()
+    {
+        return url(static::RelativeCurrentUrl());
+    }
+
+    public static function RelativeCurrentUrl()
+    {
+        return \Route::current()->getPrefix();
+    }
+
     // /**
     //  * Handle dynamic method calls  ModelAdmin (and its children).
     //  *

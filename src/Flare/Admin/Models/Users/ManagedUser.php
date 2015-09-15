@@ -53,6 +53,16 @@ class ManagedUser extends ManagedModel
     ];
 
     /**
+     * The number of models to return for pagination.
+     *
+     * If int greater than 0 then pagination is used, otherwise
+     * all entries will be output.
+     *
+     * @var int
+     */
+    protected $perPage = 10;
+
+    /**
      * When a new password is set, hash it
      * 
      * @param string

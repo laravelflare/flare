@@ -36,6 +36,13 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
      */
     protected $summary_fields = [];
 
+    /**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    protected $perPage = 15;
+
     public function __construct()
     {
         if (!isset($this->managedModel) || $this->managedModel === null) {
@@ -98,6 +105,20 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     }
 
     /**
+     * Returns Model Items, either all() or paginated() 
+     * 
+     * @return
+     */
+    public function items()
+    {
+        if ($this->perPage > 0) {
+            return $this->model->paginate($this->perPage);
+        }
+
+        return $this->model->all();
+    }
+
+    /**
      * Formats and returns the Summary fields
      * 
      * @return
@@ -141,6 +162,28 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
 
         return [$this->model->primaryKey];
     }
+
+    /**
+     * Get the number of models to return per page.
+     *
+     * @return int
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * Set the number of models to return per page.
+     *
+     * @param  int   $perPage
+     * @return void
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = $perPage;
+    }
+
 
     /**
      * Set a given attribute on the model.

@@ -42,4 +42,14 @@ class ManagedUserGroup extends ManagedModel
         'name',
         'users.count' => 'Total Users',
     ];
+
+    /**
+     * The number of models to return for pagination.
+     *
+     * If int greater than 0 then pagination is used, otherwise
+     * all entries will be output.
+     *
+     * @var int
+     */
+    protected $perPage = false;
 }

@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', 'Manage '.$modelAdmin->modelManager()->PluralTitle())
+@section('page_title', $modelAdmin->Title())
 
 @section('content')
 
@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($modelAdmin->model()->all() as $modelItem)    
+                        @foreach($modelAdmin->modelManager()->items() as $modelItem)    
                             <tr>
                                 <td>
                                     {{ $modelItem->id }}.
@@ -44,10 +44,10 @@
                                     {{ $modelItem->updated_at }}
                                 </td>
                                 <td style="width: 1%; white-space:nowrap">
-                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::URL() }}/edit/{{ $modelItem->id }}">
+                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl() }}/edit/{{ $modelItem->id }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::URL() }}/delete/{{ $modelItem->id }}">
+                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl() }}/delete/{{ $modelItem->id }}">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
@@ -58,15 +58,16 @@
                 </div>
                 <div class="box-footer clearfix">
                     <div class="pull-left">
-                        <a href="{{ $modelAdmin::URL() }}/create" class="btn btn-success">
+                        <a href="{{ $modelAdmin::CurrentUrl() }}/create" class="btn btn-success">
                             Add {{ $modelAdmin->modelManager()->Title() }}
                         </a>
                     </div>
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+
+                    @if ($modelAdmin->modelManager()->getPerPage())
+                    <div class="pull-right" style="margin-top: -20px; margin-bottom: -20px;">
+                        {!! $modelAdmin->modelManager()->items()->render() !!}
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

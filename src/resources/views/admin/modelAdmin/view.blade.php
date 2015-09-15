@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', 'View '.$modelAdmin::Title())
+@section('page_title', $modelAdmin::Title())
 
 @section('content')
 

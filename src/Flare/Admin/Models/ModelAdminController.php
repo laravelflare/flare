@@ -106,7 +106,7 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully created.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully created.', 'dismissable' => false] ]);
     }
 
     /**
@@ -175,7 +175,7 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully updated.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully updated.', 'dismissable' => false] ]);
     }
 
     /**
@@ -215,7 +215,7 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully removed.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully removed.', 'dismissable' => false] ]);
     }
 
     /**
