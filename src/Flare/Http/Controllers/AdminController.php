@@ -28,7 +28,7 @@ class AdminController extends BaseController
     {
         $this->auth = $auth;
         
-        //$this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
+        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
 
         $this->middleware('checkpermissions', ['except' => ['getLogin']]);
 
@@ -36,7 +36,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Show the application login form.
+     * Show the login form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -45,6 +45,11 @@ class AdminController extends BaseController
         return view('flare::admin.login');
     }
 
+    /**
+     * Processes the login form
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function postLogin(Request $request)
     {
         $this->validate($request, [
@@ -64,6 +69,19 @@ class AdminController extends BaseController
                         'email' => $this->getFailedLoginMessage(),
                     ]);
     }
+
+    /**
+     * Log the user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout()
+    {
+        $this->auth->logout();
+
+        return redirect('/');
+    }
+
 
     /**
      * Show the Dashboard.

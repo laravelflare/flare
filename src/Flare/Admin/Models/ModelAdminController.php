@@ -80,8 +80,11 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        $this->modelAdmin->input = $request->all();
-
+        /**
+         * I don't like this, we should validate using the Request,
+         * and check Permissions with Middleware, then try and create.
+         */
+        
         try {
             $this->modelAdmin->canCreate();
         } catch (PermissionsException $exception) {
@@ -89,12 +92,12 @@ class ModelAdminController extends FlareController
             var_export($exception);
         }
 
-        try {
-            $this->modelAdmin->validate();
-        } catch (ValidationException $exception) {
-            echo 'Validation Exception: <br>';
-            var_dump($exception);
-        }
+        // try {
+        //     $this->modelAdmin->validate();
+        // } catch (ValidationException $exception) {
+        //     echo 'Validation Exception: <br>';
+        //     var_dump($exception);
+        // }
 
         try {
             $this->modelAdmin->create();
@@ -146,7 +149,31 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        $this->model->find($modelitem_id)->update($request->only($this->model->getFillable()));
+        /**
+         * I don't like this, we should validate using the Request,
+         * and check Permissions with Middleware, then try and Edit.
+         */
+
+        try {
+            $this->modelAdmin->canEdit();
+        } catch (PermissionsException $exception) {
+            echo 'Permissions Exception: <br>';
+            var_export($exception);
+        }
+
+        // try {
+        //     $this->modelAdmin->validate();
+        // } catch (ValidationException $exception) {
+        //     echo 'Validation Exception: <br>';
+        //     var_dump($exception);
+        // }
+
+        try {
+            $this->modelAdmin->edit($modelitem_id);
+        } catch (WriteableException $exception) {
+            echo 'Writeable Exception: <br>';
+            var_dump($exception);
+        }
 
         return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully updated.', 'dismissable' => false] ]);
     }
@@ -177,7 +204,16 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        $this->modelAdmin->model()->find($modelitem_id)->delete();
+        /**
+         * I don't like this, we should check Permissions with Middleware, then try and delete.
+         */
+        
+        try {
+            $this->modelAdmin->delete($modelitem_id);
+        } catch (WriteableException $exception) {
+            echo 'Writeable Exception: <br>';
+            var_dump($exception);
+        }
 
         return redirect($this->modelAdmin->Url())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->Title() . ' was successfully removed.', 'dismissable' => false] ]);
     }

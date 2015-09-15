@@ -67,13 +67,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     protected $urlPrefix = null;
 
     /**
-     * Temporary array of Input recieved during a POST request.
-     *
-     * @var array
-     */
-    public $input = [];
-
-    /**
      * __construct.
      */
     public function __construct()

@@ -73,6 +73,19 @@ trait ModelWriteable
     }
 
     /**
+     * Finds an existing Model entry and sets it to the current modelManager model
+     * 
+     * @return
+     */
+    public function find($modelitem_id)
+    {
+        /**
+         * We should validate that a model is found etc/
+         */
+        $this->modelManager->model = $this->modelManager->model->find($modelitem_id);
+    }
+
+    /**
      * Create Action.
      *
      * Fires off beforeCreate(), doCreate() and afterCreate()
@@ -111,11 +124,7 @@ trait ModelWriteable
         // Unguard the model so we can set and store non-fillable entries
         $this->modelManager->model->unguard();
 
-        //$this->modelAdmin->model()->getFillable()->except( _token )
-
-        unset($this->input['_token']); // This is incredibly dirty. Really we want to loop through the input and only use the attributes which are assigned to a Model
-
-        foreach ($this->input as $key => $value) {
+        foreach (\Request::except('_token') as $key => $value) {
 
             if ($this->modelManager->hasSetMutator($key)) {
 
@@ -129,7 +138,7 @@ trait ModelWriteable
 
         }
 
-        $this->modelManager->model->save();
+        $this->save();
 
         // Reguard.
         $this->modelManager->model->reguard();
@@ -162,15 +171,17 @@ trait ModelWriteable
      * 
      * @return
      */
-    public function edit()
+    public function edit($modelitem_id)
     {
+        $this->find($modelitem_id);
+
         $this->brokenBeforeEdit = true;
         $this->beforeEdit();
         if ($this->brokenBeforeEdit) {
             throw new WriteableException('ModelAdmin has a broken beforeEdit method. Make sure you call parent::beforeEdit() on all instances of beforeEdit()', 1);
         }
 
-        $this->doEdit();
+        $this->doEdit($modelitem_id);
 
         $this->brokenAfterEdit = true;
         $this->afterEdit();
@@ -190,7 +201,28 @@ trait ModelWriteable
         /*
          * Pre=processing is required.
          */
+        // Unguard the model so we can set and store non-fillable entries
+        
+        $this->modelManager->model->unguard();
+
+        foreach (\Request::except('_token') as $key => $value) {
+
+            if ($this->modelManager->hasSetMutator($key)) {
+
+                $this->modelManager->setAttribute($key, $value);
+
+            } else {
+
+                $this->modelManager->model->setAttribute($key, $value);
+
+            }
+
+        }
+
         $this->save();
+
+        // Reguard.
+        $this->modelManager->model->reguard();
     }
 
     /**
@@ -244,10 +276,18 @@ trait ModelWriteable
      * @return
      */
     private function doSave()
-    {
+    {       
         /*
          *
          *  --- AMAZING STUFF IS GOING TO HAPPEN HERE ---
+         * 
+         */
+        
+        $this->modelManager->model->save();  
+
+        /*
+         *
+         *  --- AND HERE TOO, HOPEFULLY! ---
          * 
          */
     }
@@ -279,15 +319,17 @@ trait ModelWriteable
      * 
      * @return
      */
-    public function delete()
+    public function delete($modelitem_id)
     {
+        $this->find($modelitem_id);
+
         $this->brokenBeforeDelete = true;
         $this->beforeDelete();
         if ($this->brokenBeforeDelete) {
             throw new WriteableException('ModelAdmin has a broken beforeDelete method. Make sure you call parent::beforeDelete() on all instances of beforeDelete()', 1);
         }
 
-        $this->doDelete();
+        $this->doDelete($modelitem_id);
 
         $this->brokenAfterDelete = true;
         $this->afterDelete();
@@ -303,6 +345,7 @@ trait ModelWriteable
          *
          * I guess if a Model has SoftDeletes, we should SoftDelete it first. Then allow full deletion.
          */
+        $this->modelManager->model->delete();
     }
 
     /**
