@@ -37,7 +37,9 @@ class ManagedUser extends ManagedModel
     ];
 
     /**
-     * Validation Rules for onCreate, onEdit actions.
+     * Summary Fields for Model
+     *
+     * Defines which fields to show in the listing tables output.
      * 
      * @var array
      */
@@ -45,6 +47,7 @@ class ManagedUser extends ManagedModel
         'id' => 'ID',
         'name',
         'email',
+        'group.name' => 'Group',
         'created_at' => 'Created',
         'updated_at' => 'Updated',
     ];

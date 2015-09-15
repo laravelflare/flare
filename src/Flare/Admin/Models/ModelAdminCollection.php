@@ -40,7 +40,7 @@ class ModelAdminCollection extends Collection
             if (!$this->usableClass($class)) {
                 continue;
             }
-            $classCollection[] = $class;
+            $classCollection[] = new $class();
         }
 
         return $classCollection;

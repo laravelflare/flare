@@ -117,20 +117,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         
     }
 
-    public function modelManager()
-    {
-        if (!is_array($this->managedModels)) {
-            $modelManagerName = $this->managedModels;
-
-            return new $modelManagerName();
-        }
-        
-        $modelManagerName = $this->managedModels[0];
-
-        return new $modelManagerName();
-    }
-
-
     public function getRequestedModel()
     {
         if (!\Route::current()) {
@@ -146,13 +132,45 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         return;
     }
 
+    public function modelManager()
+    {
+        if (!is_array($this->managedModels)) {
+            $modelManagerName = $this->managedModels;
+
+            return new $modelManagerName();
+        }
+
+        if ($modelManagerName = $this->getRequestedModelManager()) {
+            return new $modelManagerName();
+        }
+
+        $modelManagerName = $this->managedModels[0];
+
+        return new $modelManagerName();
+    }
+
+    public function getRequestedModelManager()
+    {
+        if (!\Route::current()) {
+            return;
+        }   
+
+        $currentAction = \Route::current()->getAction();
+
+        if (isset($currentAction['modelManager'])) {
+            return $currentAction['modelManager'];
+        }
+
+        return;
+    }
+
     public function getManagedModels()
     {
         if (is_array($this->managedModels)) {
-            return $this->managedModels;
+            return collect($this->managedModels);
         }
 
-        return [$this->managedModels];
+        return collect($this->managedModels);
     }
 
     /**
@@ -195,8 +213,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
 
         foreach ($this->managedModels as $managedModel) {
             $managedModel = new $managedModel();
-            $modelUrl = strtolower(substr($managedModel->managedModel, strrpos($managedModel->managedModel, '\\') + 1));
-            Route::group(['prefix' => $modelUrl, 'as' => $modelUrl, 'model' => $managedModel->managedModel], function () {
+            Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
                 Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });

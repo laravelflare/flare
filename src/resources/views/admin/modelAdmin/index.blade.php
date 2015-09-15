@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', 'Manage '.$modelAdmin::PluralTitle())
+@section('page_title', 'Manage '.$modelAdmin->modelManager()->PluralTitle())
 
 @section('content')
 
@@ -10,18 +10,18 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">
-                        {{ $modelAdmin::PluralTitle() }}
+                        {{ $modelAdmin->modelManager()->PluralTitle() }}
                     </h3>
                 </div>
                 <div class="box-body no-padding">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="tight">ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
+                                <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
+                                    {{ $field }}
+                                </th>
+                                @endforeach
                                 <th></th>
                             </tr>
                         </thead>
@@ -59,7 +59,7 @@
                 <div class="box-footer clearfix">
                     <div class="pull-left">
                         <a href="{{ $modelAdmin::URL() }}/create" class="btn btn-success">
-                            Add {{ $modelAdmin::Title() }}
+                            Add {{ $modelAdmin->modelManager()->Title() }}
                         </a>
                     </div>
                     <ul class="pagination pagination-sm no-margin pull-right">

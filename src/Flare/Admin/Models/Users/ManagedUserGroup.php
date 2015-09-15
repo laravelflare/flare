@@ -40,5 +40,6 @@ class ManagedUserGroup extends ManagedModel
     protected $summary_fields = [
         'id' => 'ID',
         'name',
+        'users.count' => 'Total Users',
     ];
 }

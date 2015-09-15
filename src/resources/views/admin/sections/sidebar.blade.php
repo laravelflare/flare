@@ -36,41 +36,47 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @foreach ($modelAdmin->getManagedModels()->take(1) as $managedModel)
                     <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
                         <a href="{{ $modelAdmin::Url() }}">
                             <span>
-                                All Users
+                                All {{ $managedModel::PluralTitle() }}
                             </span>
                         </a>
                     </li>
                     <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/create') ? 'active' : '' }}">
                         <a href="{{ $modelAdmin::Url() }}/create">
                             <span>
-                                Create User
+                                Create {{ $managedModel::Title() }}
                             </span>
                         </a>
                     </li>
-                    <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/*') ? 'active' : '' }}">
-                        <a href="{{ $modelAdmin::Url() }}/usergroup">
-                            <i class="fa fa-users" style="width: 17px;"></i>
-                            <span>
-                                User Groups
-                            </span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/*') ? 'active' : '' }}">
-                                <a href="{{ $modelAdmin::Url() }}/usergroup">
-                                    All User Groups
-                                </a>
-                            </li>
-                            <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/usergroup/create') ? 'active' : '' }}">
-                                <a href="{{ $modelAdmin::Url() }}/usergroup/create">
-                                    Create User Group
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    @endforeach
+                    @if ($modelAdmin->getManagedModels()->count() > 1)
+                        @foreach ($modelAdmin->getManagedModels()->slice(1)->take(1) as $managedModel)
+                        <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/'.$managedModel::UrlPrefix().'/*') ? 'active' : '' }}">
+                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
+                                <i class="fa fa-users" style="width: 17px;"></i>
+                                <span>
+                                    {{ $managedModel::PluralTitle() }}
+                                </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/*') ? 'active' : '' }}">
+                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
+                                        All {{ $managedModel::PluralTitle() }}
+                                    </a>
+                                </li>
+                                <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/create') ? 'active' : '' }}">
+                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() . '/create' }}">
+                                        Create {{ $managedModel::Title() }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endforeach
+                    @endif
                 </ul>
             </li>
             @endforeach
