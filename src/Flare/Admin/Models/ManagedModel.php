@@ -220,20 +220,20 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
         if(($methodBreaker = strpos($key, '.'))!==false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
-                    return $model->$method()->$submethod();
-                } 
-
                 if(method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
                     return $model->$method->$submethod();
                 } 
 
-                if(isset($model->$method()->$submethod)) {
-                    return $model->$method()->$submethod;
-                }
+                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
+                    return $model->$method()->$submethod();
+                } 
 
                 if(isset($model->$method->$submethod)) {
                     return $model->$method->$submethod;
+                }
+
+                if(isset($model->$method()->$submethod)) {
+                    return $model->$method()->$submethod;
                 }
             } 
         }
@@ -261,7 +261,6 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     {
         $this->perPage = $perPage;
     }
-
 
     /**
      * Set a given attribute on the model.

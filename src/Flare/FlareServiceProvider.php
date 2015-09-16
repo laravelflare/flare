@@ -2,6 +2,7 @@
 
 namespace JacobBaileyLtd\Flare;
 
+use Blade;
 use Illuminate\Support\ServiceProvider;
 
 class FlareServiceProvider extends ServiceProvider
@@ -36,6 +37,8 @@ class FlareServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/flare'),
         ]);
+
+        $this->registerBladeOperators();
     }
 
     /**
@@ -47,5 +50,41 @@ class FlareServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/flare.php', 'flare'
         );
+    }
+
+    /**
+     * Register Blade Operators
+     */
+    public function registerBladeOperators()
+    { 
+        // Blade Operator @get() for returning DotNotation Variables
+        Blade::directive('get', function($expression) {
+            return "<?php echo $expression; ?>";
+        });
+
+        // I'd prefer the possibility of providing this default functionality:
+        // 
+        // <code>
+        //  @get($key) where $key = 'model.group.name'
+        // </code>
+        // 
+        // With this added extra level of flexibility for a clean notation:
+        // 
+        // <code>
+        //  @get($model, $key) where $key = 'group.name'
+        // </code>
+        // 
+        // Which allows:
+        // 
+        // <code>
+        // @get('model.group.name')
+        // </code>
+        // 
+        // And this, respectively:
+        // 
+        // <code>
+        //  @get($model, 'group.name')
+        // </code>
+        // 
     }
 }
