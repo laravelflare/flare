@@ -1,17 +1,15 @@
 {
-    "name": "jacobbaileyltd/flare",
-    "description": "Flare CMS",
+    "name": "laravelflare/flare",
+    "description": "Laravel Flare",
     "keywords": [
-        "Laravel",
-        "CMS"
+        "Laravel"
     ],
     "homepage": "https://github.com/JacobBaileyLtd/flare",
     "license": "",
     "authors": [
         {
-            "name": "Jacob Bailey Ltd",
-            "email": "tech.studio@jacobbailey.com",
-            "homepage": "https://github.com/JacobBaileyLtd"
+            "name": "Laravel Flare",
+            "homepage": "https://github.com/laravelflare"
         },
         {
             "name": "Aden Fraser",
@@ -23,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JacobBaileyLtd\\Flare\\": "src/Flare"
+            "Flare\\": "src/Flare"
         }
     }
 }
