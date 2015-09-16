@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Contracts\ModelAdmin;
+namespace Flare\Contracts\ModelAdmin;
 
 interface ModelWriteableContract
 {

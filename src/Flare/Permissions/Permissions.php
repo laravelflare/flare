@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Permissions;
+namespace Flare\Permissions;
 
 class Permissions
 {

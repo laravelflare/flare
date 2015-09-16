@@ -1,11 +1,11 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Http\Middleware;
+namespace Flare\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
-use JacobBaileyLtd\Flare\Permissions\Permissions;
-use JacobBaileyLtd\Flare\Exceptions\PermissionsException;
+use Flare\Permissions\Permissions;
+use Flare\Exceptions\PermissionsException;
 
 class CheckPermissions implements Middleware
 {

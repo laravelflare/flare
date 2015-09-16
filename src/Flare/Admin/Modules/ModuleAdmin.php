@@ -1,8 +1,7 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Modules;
+namespace Flare\Admin\Modules;
 
 abstract class ModuleAdmin extends Admin
 {
-
 }

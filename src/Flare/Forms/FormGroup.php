@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Forms;
+namespace Flare\Forms;
 
 class FormGroup
 {

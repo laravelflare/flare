@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits;
+namespace Flare\Traits;
 
 trait Versionable
 {

@@ -1,29 +1,29 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models;
+namespace Flare\Admin\Models;
 
 use Illuminate\Support\Str;
-use JacobBaileyLtd\Flare\Traits\Permissionable;
-use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
-use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelWriteable;
-use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelValidation;
-use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
-use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelValidationContract;
+use Flare\Traits\Permissionable;
+use Flare\Contracts\PermissionsContract;
+use Flare\Traits\ModelAdmin\ModelWriteable;
+use Flare\Traits\ModelAdmin\ModelValidation;
+use Flare\Traits\Attributes\AttributeAccess;
+use Flare\Contracts\ModelAdmin\ModelWriteableContract;
+use Flare\Contracts\ModelAdmin\ModelValidationContract;
 
 abstract class ManagedModel implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
     /**
-     * Managed Model Instance
+     * Managed Model Instance.
      * 
      * @var string
      */
     public $managedModel;
 
     /**
-     * Model Instance
+     * Model Instance.
      *
      * @var object
      */
@@ -44,7 +44,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     protected $perPage = 15;
 
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {
@@ -108,7 +108,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     }
 
     /**
-     * Returns Model Items, either all() or paginated() 
+     * Returns Model Items, either all() or paginated().
      * 
      * @return
      */
@@ -122,7 +122,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     }
 
     /**
-     * Formats and returns the Summary fields
+     * Formats and returns the Summary fields.
      * 
      * @return
      */
@@ -131,7 +131,6 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
         $summary_fields = [];
 
         foreach ($this->summary_fields as $field => $fieldTitle) {
-
             if (in_array($field, $this->model->getFillable())) {
                 if (!$field) {
                     $field = $fieldTitle;
@@ -141,24 +140,23 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
                 continue;
             }
 
-            if(($methodBreaker = strpos($field, '.'))!==false) {
+            if (($methodBreaker = strpos($field, '.')) !== false) {
                 $method = substr($field, 0, $methodBreaker);
                 if (method_exists($this->model, $method)) {
-                    if(method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
+                    if (method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
                         $this->model->$method()->$submethod();
 
                         $summary_fields[$field] = $fieldTitle;
                         continue;
-                    } 
-                } 
+                    }
+                }
             }
 
-            if(is_numeric($field)) {
+            if (is_numeric($field)) {
                 $field = $fieldTitle;
             }
 
             $summary_fields[$field] = $fieldTitle;
-
         }
 
         if (count($summary_fields)) {
@@ -181,61 +179,61 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
         return $model->getAttribute($key);
     }
 
-    public function hasRelatedKey($key, $model = false )
+    public function hasRelatedKey($key, $model = false)
     {
         if (!$model) {
             $model = $this->model;
         }
 
-        if(($methodBreaker = strpos($key, '.'))!==false) {
+        if (($methodBreaker = strpos($key, '.')) !== false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
-                    return true;
-                } 
-
-                if(method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
-                    return true;
-                } 
-
-                if(isset($model->$method()->$submethod)) {
+                if (method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
                     return true;
                 }
 
-                if(isset($model->$method->$submethod)) {
+                if (method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
                     return true;
                 }
-            } 
+
+                if (isset($model->$method()->$submethod)) {
+                    return true;
+                }
+
+                if (isset($model->$method->$submethod)) {
+                    return true;
+                }
+            }
         }
 
         return false;
     }
 
-    public function relatedKey($key, $model = false )
+    public function relatedKey($key, $model = false)
     {
         if (!$model) {
             $model = $this->model;
         }
 
-        if(($methodBreaker = strpos($key, '.'))!==false) {
+        if (($methodBreaker = strpos($key, '.')) !== false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                if(method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
+                if (method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
                     return $model->$method->$submethod();
-                } 
+                }
 
-                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
+                if (method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
                     return $model->$method()->$submethod();
-                } 
+                }
 
-                if(isset($model->$method->$submethod)) {
+                if (isset($model->$method->$submethod)) {
                     return $model->$method->$submethod;
                 }
 
-                if(isset($model->$method()->$submethod)) {
+                if (isset($model->$method()->$submethod)) {
                     return $model->$method()->$submethod;
                 }
-            } 
+            }
         }
 
         return false;
@@ -254,8 +252,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     /**
      * Set the number of models to return per page.
      *
-     * @param  int   $perPage
-     * @return void
+     * @param int $perPage
      */
     public function setPerPage($perPage)
     {
@@ -265,10 +262,8 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     /**
      * Set a given attribute on the model.
      *
-     * @param  string  $key
-     * @param  mixed   $value
-     * 
-     * @return void
+     * @param string $key
+     * @param mixed  $value
      */
     public function setAttribute($key, $value)
     {
@@ -278,7 +273,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
             return $this->{$method}($value);
         }
 
-        if ($this->isJsonCastable($key) && ! is_null($value)) {
+        if ($this->isJsonCastable($key) && !is_null($value)) {
             $value = json_encode($value);
         }
 
@@ -288,7 +283,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     /**
      * Determine if a set mutator exists for an attribute.
      *
-     * @param  string  $key
+     * @param string $key
      * 
      * @return bool
      */
@@ -298,7 +293,7 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
     }
 
     /**
-     * Handle dynamic method calls to the Managed Model
+     * Handle dynamic method calls to the Managed Model.
      *
      * @param string $method
      * @param array  $parameters

@@ -1,8 +1,8 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits\ModelAdmin;
+namespace Flare\Traits\ModelAdmin;
 
-use JacobBaileyLtd\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
+use Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelWriteable
 {
@@ -73,13 +73,13 @@ trait ModelWriteable
     }
 
     /**
-     * Finds an existing Model entry and sets it to the current modelManager model
+     * Finds an existing Model entry and sets it to the current modelManager model.
      * 
      * @return
      */
     public function find($modelitem_id)
     {
-        /**
+        /*
          * We should validate that a model is found etc/
          */
         $this->modelManager->model = $this->modelManager->model->find($modelitem_id);
@@ -125,17 +125,11 @@ trait ModelWriteable
         $this->modelManager->model->unguard();
 
         foreach (\Request::except('_token') as $key => $value) {
-
             if ($this->modelManager->hasSetMutator($key)) {
-
                 $this->modelManager->setAttribute($key, $value);
-
             } else {
-
                 $this->modelManager->model->setAttribute($key, $value);
-
             }
-
         }
 
         $this->save();
@@ -202,21 +196,15 @@ trait ModelWriteable
          * Pre=processing is required.
          */
         // Unguard the model so we can set and store non-fillable entries
-        
+
         $this->modelManager->model->unguard();
 
         foreach (\Request::except('_token') as $key => $value) {
-
             if ($this->modelManager->hasSetMutator($key)) {
-
                 $this->modelManager->setAttribute($key, $value);
-
             } else {
-
                 $this->modelManager->model->setAttribute($key, $value);
-
             }
-
         }
 
         $this->save();
@@ -276,14 +264,14 @@ trait ModelWriteable
      * @return
      */
     private function doSave()
-    {       
+    {
         /*
          *
          *  --- AMAZING STUFF IS GOING TO HAPPEN HERE ---
          * 
          */
-        
-        $this->modelManager->model->save();  
+
+        $this->modelManager->model->save();
 
         /*
          *

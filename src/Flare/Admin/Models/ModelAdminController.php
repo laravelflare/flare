@@ -1,13 +1,13 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models;
+namespace Flare\Admin\Models;
 
-use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
-use JacobBaileyLtd\Flare\Http\Requests\ModelAdminAddRequest;
-use JacobBaileyLtd\Flare\Http\Requests\ModelAdminEditRequest;
-use JacobBaileyLtd\Flare\Exceptions\PermissionsException as PermissionsException;
-use JacobBaileyLtd\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
-use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationException;
+use Flare\Http\Controllers\FlareController;
+use Flare\Http\Requests\ModelAdminAddRequest;
+use Flare\Http\Requests\ModelAdminEditRequest;
+use Flare\Exceptions\PermissionsException as PermissionsException;
+use Flare\Exceptions\ModelAdminWriteableException as WriteableException;
+use Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 class ModelAdminController extends FlareController
 {
@@ -92,11 +92,11 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        /**
+        /*
          * I don't like this, we should validate using the Request,
          * and check Permissions with Middleware, then try and create.
          */
-        
+
         try {
             $this->modelAdmin->canCreate();
         } catch (PermissionsException $exception) {
@@ -118,7 +118,7 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully created.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully created.', 'dismissable' => false]]);
     }
 
     /**
@@ -161,7 +161,7 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        /**
+        /*
          * I don't like this, we should validate using the Request,
          * and check Permissions with Middleware, then try and Edit.
          */
@@ -187,13 +187,13 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully updated.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully updated.', 'dismissable' => false]]);
     }
 
     /**
      * Delete Model Entry from ModelAdmin Delete Page.
      *
-     * @param  int $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return \Illuminate\Http\Response
      */
@@ -210,16 +210,16 @@ class ModelAdminController extends FlareController
     /**
      * Receive Model Entry Delete Post Data, validate it and return user.
      *
-     * @param  int $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return \Illuminate\Http\Response
      */
     public function postDelete($modelitem_id)
     {
-        /**
+        /*
          * I don't like this, we should check Permissions with Middleware, then try and delete.
          */
-        
+
         try {
             $this->modelAdmin->delete($modelitem_id);
         } catch (WriteableException $exception) {
@@ -227,7 +227,7 @@ class ModelAdminController extends FlareController
             var_dump($exception);
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [ ['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title() . ' was successfully removed.', 'dismissable' => false] ]);
+        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully removed.', 'dismissable' => false]]);
     }
 
     /**

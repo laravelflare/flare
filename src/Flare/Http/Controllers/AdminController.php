@@ -1,10 +1,10 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Http\Controllers;
+namespace Flare\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use JacobBaileyLtd\Flare\Admin\Models\ModelAdminCollection;
+use Flare\Admin\Models\ModelAdminCollection;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 /**
  * I kind of feel that this file should be
- * \JacobBaileyLtd\Flare\Admin\Http\Controllers
+ * \Flare\Admin\Http\Controllers
  * But really, we will only do that if we add a frontend
  * to the CMS rather than just a backend.
  */
@@ -27,7 +27,7 @@ class AdminController extends BaseController
     public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection)
     {
         $this->auth = $auth;
-        
+
         $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
 
         $this->middleware('checkpermissions', ['except' => ['getLogin']]);
@@ -46,9 +46,11 @@ class AdminController extends BaseController
     }
 
     /**
-     * Processes the login form
-     * @param  Request $request [description]
-     * @return [type]           [description]
+     * Processes the login form.
+     *
+     * @param Request $request [description]
+     *
+     * @return [type] [description]
      */
     public function postLogin(Request $request)
     {
@@ -58,8 +60,7 @@ class AdminController extends BaseController
 
         $credentials = $request->only('email', 'password');
 
-        if ($this->auth->attempt($credentials, $request->has('remember')))
-        {
+        if ($this->auth->attempt($credentials, $request->has('remember'))) {
             return redirect()->intended(url('admin'));
         }
 
@@ -71,7 +72,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * Log the user
+     * Log the user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -81,7 +82,6 @@ class AdminController extends BaseController
 
         return redirect('/');
     }
-
 
     /**
      * Show the Dashboard.

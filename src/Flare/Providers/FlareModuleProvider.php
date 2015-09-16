@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Providers;
+namespace Flare\Providers;
 
 interface FlareModuleProvider
 {

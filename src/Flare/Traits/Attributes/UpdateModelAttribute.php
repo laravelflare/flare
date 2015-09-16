@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits\Attributes;
+namespace Flare\Traits\Attributes;
 
 use Illuminate\Support\Str;
 

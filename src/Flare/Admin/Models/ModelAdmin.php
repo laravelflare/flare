@@ -1,19 +1,18 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models;
+namespace Flare\Admin\Models;
 
 use Route;
-use Request;
 use Illuminate\Support\Str;
-use JacobBaileyLtd\Flare\Admin\Admin;
-use JacobBaileyLtd\Flare\Traits\Permissionable;
-use JacobBaileyLtd\Flare\Contracts\PermissionsContract;
-use JacobBaileyLtd\Flare\Exceptions\ModelAdminException;
-use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelWriteable;
-use JacobBaileyLtd\Flare\Traits\ModelAdmin\ModelValidation;
-use JacobBaileyLtd\Flare\Traits\Attributes\AttributeAccess;
-use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use JacobBaileyLtd\Flare\Contracts\ModelAdmin\ModelValidationContract;
+use Flare\Admin\Admin;
+use Flare\Traits\Permissionable;
+use Flare\Contracts\PermissionsContract;
+use Flare\Exceptions\ModelAdminException;
+use Flare\Traits\ModelAdmin\ModelWriteable;
+use Flare\Traits\ModelAdmin\ModelValidation;
+use Flare\Traits\Attributes\AttributeAccess;
+use Flare\Contracts\ModelAdmin\ModelWriteableContract;
+use Flare\Contracts\ModelAdmin\ModelValidationContract;
 
 class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
@@ -32,14 +31,14 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     protected $managedModels = null;
 
     /**
-     * The current model to be managed
+     * The current model to be managed.
      * 
      * @var
      */
     protected $model;
 
     /**
-     * The current model managed
+     * The current model managed.
      *
      * @var
      */
@@ -93,14 +92,14 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
             return new $modelName();
         }
 
-        return new $this->modelManager->managedModel;
+        return new $this->modelManager->managedModel();
     }
 
     public function getRequestedModel()
     {
         if (!\Route::current()) {
             return;
-        }   
+        }
 
         $currentAction = \Route::current()->getAction();
 
@@ -132,7 +131,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     {
         if (!\Route::current()) {
             return;
-        }   
+        }
 
         $currentAction = \Route::current()->getAction();
 
@@ -167,14 +166,14 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix(), /*'before' => 'admin_auth'*/], function () {
+        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
             $this->registerSubRoutes();
 
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 
-            //      Route::controller('/', '\JacobBaileyLtd\Flare\Admin\?Controller');
+            //      Route::controller('/', '\Flare\Admin\?Controller');
             // Otherwise, use the default ModelAdminController
-            Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
+            Route::controller('/', '\Flare\Admin\Models\ModelAdminController');
         });
     }
 
@@ -193,7 +192,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         foreach ($this->managedModels as $managedModel) {
             $managedModel = new $managedModel();
             Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
-                Route::controller('/', '\JacobBaileyLtd\Flare\Admin\Models\ModelAdminController');
+                Route::controller('/', '\Flare\Admin\Models\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });
         }
@@ -274,7 +273,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Retrieves the Current ModelAdmin Route URL 
+     * Retrieves the Current ModelAdmin Route URL.
      *
      * @return string
      */
@@ -284,7 +283,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Retrieves the Current ModelAdmin Route URL 
+     * Retrieves the Current ModelAdmin Route URL.
      *
      * @return string
      */

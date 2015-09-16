@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits\Attributes;
+namespace Flare\Traits\Attributes;
 
 trait AttributeAccess
 {
@@ -18,7 +18,7 @@ trait AttributeAccess
     {
         return $this->mapping;
     }
-    
+
     protected function attributeFromMethod($method)
     {
         if (strlen(($attribute = substr(substr($method, 0, -9), 4))) > 0) {

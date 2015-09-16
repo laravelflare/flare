@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models;
+namespace Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
 

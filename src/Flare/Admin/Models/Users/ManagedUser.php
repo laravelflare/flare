@@ -1,14 +1,14 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models\Users;
+namespace Flare\Admin\Models\Users;
 
 use App\Models\User as User;
-use JacobBaileyLtd\Flare\Admin\Models\ManagedModel;
+use Flare\Admin\Models\ManagedModel;
 
 class ManagedUser extends ManagedModel
 {
     /**
-     * Managed Model Instance
+     * Managed Model Instance.
      * 
      * @var string
      */
@@ -37,7 +37,7 @@ class ManagedUser extends ManagedModel
     ];
 
     /**
-     * Summary Fields for Model
+     * Summary Fields for Model.
      *
      * Defines which fields to show in the listing tables output.
      * 
@@ -63,11 +63,9 @@ class ManagedUser extends ManagedModel
     protected $perPage = 10;
 
     /**
-     * When a new password is set, hash it
+     * When a new password is set, hash it.
      * 
      * @param string
-     *
-     * @return void
      */
     protected function setPasswordAttribute($value)
     {

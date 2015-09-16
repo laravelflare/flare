@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare;
+namespace Flare;
 
 use Blade;
 use Illuminate\Support\ServiceProvider;
@@ -24,8 +24,8 @@ class FlareServiceProvider extends ServiceProvider
         ]);
 
         // Middleware
-        $router->middleware('flareauthenticate', 'JacobBaileyLtd\Flare\Http\Middleware\FlareAuthenticate');
-        $router->middleware('checkpermissions', 'JacobBaileyLtd\Flare\Http\Middleware\CheckPermissions');
+        $router->middleware('flareauthenticate', 'Flare\Http\Middleware\FlareAuthenticate');
+        $router->middleware('checkpermissions', 'Flare\Http\Middleware\CheckPermissions');
 
         // Routes
         if (!$this->app->routesAreCached()) {
@@ -53,12 +53,12 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Blade Operators
+     * Register Blade Operators.
      */
     public function registerBladeOperators()
-    { 
+    {
         // Blade Operator @get() for returning DotNotation Variables
-        Blade::directive('get', function($expression) {
+        Blade::directive('get', function ($expression) {
             return "<?php echo $expression; ?>";
         });
 

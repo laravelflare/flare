@@ -1,11 +1,10 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Http\Requests;
+namespace Flare\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-abstract class AdminRequest extends FormRequest {
-
+abstract class AdminRequest extends FormRequest
+{
     // Add Auth Here
-
 }

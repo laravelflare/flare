@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Contracts;
+namespace Flare\Contracts;
 
 interface CachingContract
 {

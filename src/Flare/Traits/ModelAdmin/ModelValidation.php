@@ -1,9 +1,9 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits\ModelAdmin;
+namespace Flare\Traits\ModelAdmin;
 
 use Validator;
-use JacobBaileyLtd\Flare\Exceptions\ModelAdminValidationException as ValidationException;
+use Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 trait ModelValidation
 {

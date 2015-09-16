@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Exceptions;
+namespace Flare\Exceptions;
 
 class PermissionsException extends \Exception
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Traits;
+namespace Flare\Traits;
 
-use JacobBaileyLtd\Flare\Permissions\Permissions; // This should actually use a Permissions Implementation, so that the PermissionProvider class can be swapped out
+use Flare\Permissions\Permissions; // This should actually use a Permissions Implementation, so that the PermissionProvider class can be swapped out
 
 trait Permissionable
 {

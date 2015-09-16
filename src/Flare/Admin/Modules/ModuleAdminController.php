@@ -1,10 +1,10 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Modules;
+namespace Flare\Admin\Modules;
 
-use JacobBaileyLtd\Flare\Http\Controllers\FlareController;
+use Flare\Http\Controllers\FlareController;
 
-class ModelAdminController extends FlareController
+class ModuleAdminController extends FlareController
 {
     /**
      * __construct.

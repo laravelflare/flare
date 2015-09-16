@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Models\Attributes;
+namespace Flare\Models\Attributes;
 
 class UpdateAttribute extends BaseAttribute
 {

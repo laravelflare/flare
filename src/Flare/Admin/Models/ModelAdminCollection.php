@@ -1,10 +1,9 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models;
+namespace Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
-use Symfony\Component\Finder\Finder;
-use JacobBaileyLtd\Flare\Permissions\Permissions;
+use Flare\Permissions\Permissions;
 
 class ModelAdminCollection extends Collection
 {
@@ -63,8 +62,6 @@ class ModelAdminCollection extends Collection
      *
      * Loops through all of the ModelAdmin classes in the collection
      * and registers their ModelAdmin Routes
-     * 
-     * @return void
      */
     public function registerRoutes()
     {
@@ -79,12 +76,12 @@ class ModelAdminCollection extends Collection
      * 
      * @param string $class
      * 
-     * @return boolean
+     * @return bool
      */
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
-        if ($class == 'JacobBaileyLtd\Flare\Admin\Models\ModelAdmin') {
+        if ($class == 'Flare\Admin\Models\ModelAdmin') {
             return false;
         }
 
@@ -103,11 +100,11 @@ class ModelAdminCollection extends Collection
      * 
      * @param string $class
      * 
-     * @return boolean     
+     * @return bool
      */
     private function checkModelAdminPermissions($class)
     {
-        if (!is_subclass_of($class, \JacobBaileyLtd\Flare\Contracts\PermissionsContract::class)) {
+        if (!is_subclass_of($class, \Flare\Contracts\PermissionsContract::class)) {
             return true;
         }
 
@@ -120,7 +117,7 @@ class ModelAdminCollection extends Collection
      * 
      * @param  $class
      * 
-     * @return boolean     
+     * @return bool
      */
     private function checkUserHasModelAdminPermissions($class)
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin\Models\Users;
+namespace Flare\Admin\Models\Users;
 
 use App\Models\User as User;
-use JacobBaileyLtd\Flare\Admin\Models\ManagedModel;
+use Flare\Admin\Models\ManagedModel;
 
 class ManagedUserGroup extends ManagedModel
 {
     /**
-     * Managed Model Instance
+     * Managed Model Instance.
      * 
      * @var string
      */

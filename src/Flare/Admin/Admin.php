@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Admin;
+namespace Flare\Admin;
 
 abstract class Admin
 {
@@ -9,6 +9,5 @@ abstract class Admin
      */
     public function __construct()
     {
-
     }
 }

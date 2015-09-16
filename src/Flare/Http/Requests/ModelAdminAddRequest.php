@@ -1,11 +1,9 @@
 <?php
 
-namespace JacobBaileyLtd\Flare\Http\Requests;
+namespace Flare\Http\Requests;
 
-use JacobBaileyLtd\Flare\Http\Requests\AdminRequest;
-
-class ModelAdminAddRequest extends AdminRequest {
-
+class ModelAdminAddRequest extends AdminRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,5 +25,4 @@ class ModelAdminAddRequest extends AdminRequest {
 
         ];
     }
-
 }
