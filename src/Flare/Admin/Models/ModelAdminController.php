@@ -25,6 +25,18 @@ class ModelAdminController extends FlareController
      */
     protected $modelAdmin;
 
+    /**
+     * ManagedModel instance.
+     * 
+     * @var ManagedModel
+     */
+    protected $managedModel;
+
+    /**
+     * Model instance.
+     * 
+     * @var Model
+     */
     protected $model;
 
     /**
@@ -41,8 +53,8 @@ class ModelAdminController extends FlareController
 
         $this->modelAdminCollection = $modelAdminCollection;
         $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
-        //$this->managedModel = $this->modelAdmin->getModelAdminInstance(); This is getting a bit out of hand
-        $this->model = $this->modelAdmin->model();
+        $this->managedModel = $this->modelAdmin->modelManager();
+        $this->model = $this->managedModel->model;
     }
 
     /**

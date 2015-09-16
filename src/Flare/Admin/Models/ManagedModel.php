@@ -43,6 +43,9 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
      */
     protected $perPage = 15;
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         if (!isset($this->managedModel) || $this->managedModel === null) {
@@ -134,25 +137,27 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
                     $field = $fieldTitle;
                     $fieldTitle = Str::title($fieldTitle);
                 }
-
                 $summary_fields[$field] = $fieldTitle;
                 continue;
             }
 
             if(($methodBreaker = strpos($field, '.'))!==false) {
                 $method = substr($field, 0, $methodBreaker);
-
                 if (method_exists($this->model, $method)) {
-                    
                     if(method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
                         $this->model->$method()->$submethod();
 
                         $summary_fields[$field] = $fieldTitle;
+                        continue;
                     } 
-
                 } 
-                
             }
+
+            if(is_numeric($field)) {
+                $field = $fieldTitle;
+            }
+
+            $summary_fields[$field] = $fieldTitle;
 
         }
 
@@ -161,6 +166,79 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
         }
 
         return [$this->model->primaryKey];
+    }
+
+    public function getAttribute($key, $model = false)
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if ($this->hasRelatedKey($key, $model)) {
+            return $this->relatedKey($key, $model);
+        }
+
+        return $model->getAttribute($key);
+    }
+
+    public function hasRelatedKey($key, $model = false )
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if(($methodBreaker = strpos($key, '.'))!==false) {
+            $method = substr($key, 0, $methodBreaker);
+            if (method_exists($model, $method)) {
+                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
+                    return true;
+                } 
+
+                if(method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
+                    return true;
+                } 
+
+                if(isset($model->$method()->$submethod)) {
+                    return true;
+                }
+
+                if(isset($model->$method->$submethod)) {
+                    return true;
+                }
+            } 
+        }
+
+        return false;
+    }
+
+    public function relatedKey($key, $model = false )
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if(($methodBreaker = strpos($key, '.'))!==false) {
+            $method = substr($key, 0, $methodBreaker);
+            if (method_exists($model, $method)) {
+                if(method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
+                    return $model->$method()->$submethod();
+                } 
+
+                if(method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
+                    return $model->$method->$submethod();
+                } 
+
+                if(isset($model->$method()->$submethod)) {
+                    return $model->$method()->$submethod;
+                }
+
+                if(isset($model->$method->$submethod)) {
+                    return $model->$method->$submethod;
+                }
+            } 
+        }
+
+        return false;
     }
 
     /**

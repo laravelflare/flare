@@ -28,21 +28,11 @@
                         <tbody>
                         @foreach($modelAdmin->modelManager()->items() as $modelItem)    
                             <tr>
+                                @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
                                 <td>
-                                    {{ $modelItem->id }}.
+                                    {{ $modelAdmin->modelManager()->getAttribute($key, $modelItem) }}
                                 </td>
-                                <td>
-                                    {{ $modelItem->name }}
-                                </td>
-                                <td>
-                                    {{ $modelItem->email }}
-                                </td>
-                                <td>
-                                    {{ $modelItem->created_at }}
-                                </td>
-                                <td>
-                                    {{ $modelItem->updated_at }}
-                                </td>
+                                @endforeach
                                 <td style="width: 1%; white-space:nowrap">
                                     <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl() }}/edit/{{ $modelItem->id }}">
                                         <i class="fa fa-edit"></i>
