@@ -1,11 +1,11 @@
 <?php
 
-namespace Flare\Http\Middleware;
+namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
-use Flare\Permissions\Permissions;
-use Flare\Exceptions\PermissionsException;
+use LaravelFlare\Flare\Permissions\Permissions;
+use LaravelFlare\Flare\Exceptions\PermissionsException;
 
 class CheckPermissions implements Middleware
 {

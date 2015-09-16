@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Providers;
+namespace LaravelFlare\Flare\Providers;
 
 interface FlareModuleProvider
 {

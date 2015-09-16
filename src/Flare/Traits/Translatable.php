@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Traits;
+namespace LaravelFlare\Flare\Traits;
 
 trait Translatable
 {

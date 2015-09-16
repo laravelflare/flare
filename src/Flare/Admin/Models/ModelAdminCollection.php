@@ -1,9 +1,9 @@
 <?php
 
-namespace Flare\Admin\Models;
+namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
-use Flare\Permissions\Permissions;
+use LaravelFlare\Flare\Permissions\Permissions;
 
 class ModelAdminCollection extends Collection
 {
@@ -81,7 +81,7 @@ class ModelAdminCollection extends Collection
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
-        if ($class == 'Flare\Admin\Models\ModelAdmin') {
+        if ($class == 'LaravelFlare\Flare\Admin\Models\ModelAdmin') {
             return false;
         }
 
@@ -104,7 +104,7 @@ class ModelAdminCollection extends Collection
      */
     private function checkModelAdminPermissions($class)
     {
-        if (!is_subclass_of($class, \Flare\Contracts\PermissionsContract::class)) {
+        if (!is_subclass_of($class, \LaravelFlare\Flare\Contracts\PermissionsContract::class)) {
             return true;
         }
 

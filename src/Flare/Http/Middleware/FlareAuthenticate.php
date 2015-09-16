@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Http\Middleware;
+namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

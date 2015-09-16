@@ -1,15 +1,15 @@
 <?php
 
-namespace Flare\Admin\Models;
+namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
-use Flare\Traits\Permissionable;
-use Flare\Contracts\PermissionsContract;
-use Flare\Traits\ModelAdmin\ModelWriteable;
-use Flare\Traits\ModelAdmin\ModelValidation;
-use Flare\Traits\Attributes\AttributeAccess;
-use Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use Flare\Contracts\ModelAdmin\ModelValidationContract;
+use LaravelFlare\Flare\Traits\Permissionable;
+use LaravelFlare\Flare\Contracts\PermissionsContract;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
+use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableContract;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
 abstract class ManagedModel implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {

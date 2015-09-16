@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Contracts;
+namespace LaravelFlare\Flare\Contracts;
 
 interface VersionsContract
 {

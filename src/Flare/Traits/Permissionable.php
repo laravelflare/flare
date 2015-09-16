@@ -1,8 +1,8 @@
 <?php
 
-namespace Flare\Traits;
+namespace LaravelFlare\Flare\Traits;
 
-use Flare\Permissions\Permissions; // This should actually use a Permissions Implementation, so that the PermissionProvider class can be swapped out
+use LaravelFlare\Flare\Permissions\Permissions; // This should actually use a Permissions Implementation, so that the PermissionProvider class can be swapped out
 
 trait Permissionable
 {

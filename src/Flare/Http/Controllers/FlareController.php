@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Http\Controllers;
+namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

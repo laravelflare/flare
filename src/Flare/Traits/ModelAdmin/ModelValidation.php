@@ -1,9 +1,9 @@
 <?php
 
-namespace Flare\Traits\ModelAdmin;
+namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
 use Validator;
-use Flare\Exceptions\ModelAdminValidationException as ValidationException;
+use LaravelFlare\Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 trait ModelValidation
 {

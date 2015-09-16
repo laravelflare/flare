@@ -1,8 +1,8 @@
 <?php
 
-namespace Flare\Admin\Models\Users;
+namespace LaravelFlare\Flare\Admin\Models\Users;
 
-use Flare\Admin\Models\ModelAdmin;
+use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
 class UserAdmin extends ModelAdmin
 {
@@ -15,7 +15,7 @@ class UserAdmin extends ModelAdmin
      * Perhaps in the future we will allow App\Models\ManagedModel::class format aswell!
      */
     protected $managedModels = [
-        'Flare\Admin\Models\Users\ManagedUser',
-        'Flare\Admin\Models\Users\ManagedUserGroup',
+        'LaravelFlare\Flare\Admin\Models\Users\ManagedUser',
+        'LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup',
     ];
 }

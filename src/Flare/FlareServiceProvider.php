@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare;
+namespace LaravelFlare\Flare;
 
 use Blade;
 use Illuminate\Support\ServiceProvider;
@@ -24,8 +24,8 @@ class FlareServiceProvider extends ServiceProvider
         ]);
 
         // Middleware
-        $router->middleware('flareauthenticate', 'Flare\Http\Middleware\FlareAuthenticate');
-        $router->middleware('checkpermissions', 'Flare\Http\Middleware\CheckPermissions');
+        $router->middleware('flareauthenticate', 'LaravelFlare\Flare\Http\Middleware\FlareAuthenticate');
+        $router->middleware('checkpermissions', 'LaravelFlare\Flare\Http\Middleware\CheckPermissions');
 
         // Routes
         if (!$this->app->routesAreCached()) {
@@ -59,6 +59,8 @@ class FlareServiceProvider extends ServiceProvider
     {
         // Blade Operator @get() for returning DotNotation Variables
         Blade::directive('get', function ($expression) {
+
+
             return "<?php echo $expression; ?>";
         });
 

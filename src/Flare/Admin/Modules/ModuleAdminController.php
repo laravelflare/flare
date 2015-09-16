@@ -1,8 +1,8 @@
 <?php
 
-namespace Flare\Admin\Modules;
+namespace LaravelFlare\Flare\Admin\Modules;
 
-use Flare\Http\Controllers\FlareController;
+use LaravelFlare\Flare\Http\Controllers\FlareController;
 
 class ModuleAdminController extends FlareController
 {

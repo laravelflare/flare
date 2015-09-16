@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Permissions;
+namespace LaravelFlare\Flare\Permissions;
 
 class Permissions
 {

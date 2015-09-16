@@ -1,18 +1,18 @@
 <?php
 
-namespace Flare\Admin\Models;
+namespace LaravelFlare\Flare\Admin\Models;
 
 use Route;
 use Illuminate\Support\Str;
-use Flare\Admin\Admin;
-use Flare\Traits\Permissionable;
-use Flare\Contracts\PermissionsContract;
-use Flare\Exceptions\ModelAdminException;
-use Flare\Traits\ModelAdmin\ModelWriteable;
-use Flare\Traits\ModelAdmin\ModelValidation;
-use Flare\Traits\Attributes\AttributeAccess;
-use Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use Flare\Contracts\ModelAdmin\ModelValidationContract;
+use LaravelFlare\Flare\Admin\Admin;
+use LaravelFlare\Flare\Traits\Permissionable;
+use LaravelFlare\Flare\Contracts\PermissionsContract;
+use LaravelFlare\Flare\Exceptions\ModelAdminException;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
+use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableContract;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
 class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
@@ -171,9 +171,9 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
 
             // We chould check if the ModelAdminController file exists in the user's App
             // If it does... load it. 
-            //      Route::controller('/', '\Flare\Admin\?Controller');
+            //      Route::controller('/', '\LaravelFlare\Flare\Admin\?Controller');
             // Otherwise, use the default ModelAdminController
-            Route::controller('/', '\Flare\Admin\Models\ModelAdminController');
+            Route::controller('/', '\LaravelFlare\Flare\Admin\Models\ModelAdminController');
         });
     }
 
@@ -192,7 +192,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         foreach ($this->managedModels as $managedModel) {
             $managedModel = new $managedModel();
             Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
-                Route::controller('/', '\Flare\Admin\Models\ModelAdminController');
+                Route::controller('/', '\LaravelFlare\Flare\Admin\Models\ModelAdminController');
                 // If first $modelName, redirect (301) back to base ModelAdmin
             });
         }

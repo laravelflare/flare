@@ -1,13 +1,13 @@
 <?php
 
-namespace Flare\Admin\Models;
+namespace LaravelFlare\Flare\Admin\Models;
 
-use Flare\Http\Controllers\FlareController;
-use Flare\Http\Requests\ModelAdminAddRequest;
-use Flare\Http\Requests\ModelAdminEditRequest;
-use Flare\Exceptions\PermissionsException as PermissionsException;
-use Flare\Exceptions\ModelAdminWriteableException as WriteableException;
-use Flare\Exceptions\ModelAdminValidationException as ValidationException;
+use LaravelFlare\Flare\Http\Controllers\FlareController;
+use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
+use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
+use LaravelFlare\Flare\Exceptions\PermissionsException as PermissionsException;
+use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
+use LaravelFlare\Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 class ModelAdminController extends FlareController
 {

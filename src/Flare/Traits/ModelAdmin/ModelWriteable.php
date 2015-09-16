@@ -1,8 +1,8 @@
 <?php
 
-namespace Flare\Traits\ModelAdmin;
+namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-use Flare\Exceptions\ModelAdminWriteableException as WriteableException;
+use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelWriteable
 {

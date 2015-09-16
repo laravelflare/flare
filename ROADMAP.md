@@ -35,8 +35,3 @@ Artisan Commands for Rapid ModelAdmin, ManagedModel and ModuleAdmin generation.
 Event Hooks for ModelAdmin, ManagedModels and ModuleAdmin
 
 File System Manager
-
-
-
-
-Move ROADMAP to Trello

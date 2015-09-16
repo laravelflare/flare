@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Forms;
+namespace LaravelFlare\Flare\Forms;
 
 class FormGroup
 {

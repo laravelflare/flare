@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Admin\Modules;
+namespace LaravelFlare\Flare\Admin\Modules;
 
 abstract class ModuleAdmin extends Admin
 {

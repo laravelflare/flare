@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Admin\Models;
+namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
 

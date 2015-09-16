@@ -13,8 +13,6 @@
     <form action="" method="post">
         <div class="box-body">
             @foreach ($modelAdmin->modelManager()->getMapping() as $key => $field)
-            {{ var_dump($key) }}
-            {{ var_dump($field) }}
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group @if ($errors->has($key)) has-error @endif">

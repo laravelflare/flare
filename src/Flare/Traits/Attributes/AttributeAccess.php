@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Traits\Attributes;
+namespace LaravelFlare\Flare\Traits\Attributes;
 
 trait AttributeAccess
 {

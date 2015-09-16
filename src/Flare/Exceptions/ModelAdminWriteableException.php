@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Exceptions;
+namespace LaravelFlare\Flare\Exceptions;
 
 class ModelAdminWriteableException extends \Exception
 {

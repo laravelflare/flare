@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Contracts\ModelAdmin;
+namespace LaravelFlare\Flare\Contracts\ModelAdmin;
 
 interface ModelValidationContract
 {

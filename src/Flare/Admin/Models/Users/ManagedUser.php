@@ -1,9 +1,9 @@
 <?php
 
-namespace Flare\Admin\Models\Users;
+namespace LaravelFlare\Flare\Admin\Models\Users;
 
 use App\Models\User as User;
-use Flare\Admin\Models\ManagedModel;
+use LaravelFlare\Flare\Admin\Models\ManagedModel;
 
 class ManagedUser extends ManagedModel
 {

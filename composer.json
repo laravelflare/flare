@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Flare\\": "src/Flare"
+            "LaravelFlare\\Flare\\": "src/Flare"
         }
     }
 }

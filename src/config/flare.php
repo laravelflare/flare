@@ -15,8 +15,8 @@ return [
     */
 
     'modeladmins' => [
-        Flare\Admin\Models\ModelAdmin::class,
-        Flare\Admin\Models\Users\UserAdmin::class,
+        LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
+        LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
     ],
 
     /*

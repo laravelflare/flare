@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Http\Requests;
+namespace LaravelFlare\Flare\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

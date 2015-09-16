@@ -1,10 +1,10 @@
 <?php
 
-namespace Flare\Http\Controllers;
+namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Flare\Admin\Models\ModelAdminCollection;
+use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 /**
  * I kind of feel that this file should be
- * \Flare\Admin\Http\Controllers
+ * \LaravelFlare\Flare\Admin\Http\Controllers
  * But really, we will only do that if we add a frontend
  * to the CMS rather than just a backend.
  */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Traits\Attributes;
+namespace LaravelFlare\Flare\Traits\Attributes;
 
 use Illuminate\Support\Str;
 
@@ -57,9 +57,9 @@ trait EditModelAttribute
      */
     protected function defaultEditAttribute($method, $attribute = false)
     {
-        //Flare\Admin
+        //LaravelFlare\Flare\Admin
         //                  We have removed AttributeField, use EditAttribute
-        //return (string) new \Flare\Admin\AttributeField($this->attributeFromMethod($method), $this->attributeFromMethod($method));
+        //return (string) new \LaravelFlare\Flare\Admin\AttributeField($this->attributeFromMethod($method), $this->attributeFromMethod($method));
         // AttributeField as string
         // We will use __toString for this by defualt,
         // however, we can in theory return any string

@@ -1,6 +1,6 @@
 <?php
 
-namespace Flare\Admin;
+namespace LaravelFlare\Flare\Admin;
 
 abstract class Admin
 {
