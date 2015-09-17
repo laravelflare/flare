@@ -30,7 +30,9 @@
             @foreach($modelAdminCollection as $modelAdmin)
             <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
                 <a href="{{ $modelAdmin::Url() }}">
-                    <i class="fa fa-user"></i>
+                    @if ($modelAdmin->icon)
+                    <i class="fa fa-{{ $modelAdmin->icon }}"></i>
+                    @endif
                     <span>
                     {{ $modelAdmin::PluralTitle() }}
                     </span>
@@ -55,8 +57,10 @@
                     @if ($modelAdmin->getManagedModels()->count() > 1)
                         @foreach ($modelAdmin->getManagedModels()->slice(1)->take(1) as $managedModel)
                         <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/'.$managedModel::UrlPrefix().'/*') ? 'active' : '' }}">
-                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
-                                <i class="fa fa-users" style="width: 17px;"></i>
+                            <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
+                                @if ($managedModel->icon)
+                                <i class="fa fa-{{ $managedModel->icon }}" style="width: 17px;"></i>
+                                @endif
                                 <span>
                                     {{ $managedModel::PluralTitle() }}
                                 </span>

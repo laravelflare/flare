@@ -11,7 +11,7 @@ use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableContract;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
 
-abstract class ManagedModel implements PermissionsContract, ModelValidationContract, ModelWriteableContract
+abstract class ManagedModel extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
@@ -53,58 +53,6 @@ abstract class ManagedModel implements PermissionsContract, ModelValidationContr
         }
 
         $this->model = new $this->managedModel();
-    }
-
-    /**
-     * ShortName of a ModelAdmin Class.
-     *
-     * @return string
-     */
-    public static function ShortName()
-    {
-        return (new \ReflectionClass(new static()))->getShortName();
-    }
-
-    /**
-     * Title of a ModelAdmin Class.
-     *
-     * @return string
-     */
-    public static function Title()
-    {
-        if (!isset(static::$title) || !static::$title) {
-            return str_replace('Managed', '',  static::ShortName());
-        }
-
-        return static::$title;
-    }
-
-    /**
-     * Plural of the ModelAdmin Class Title.
-     *
-     * @return string
-     */
-    public static function PluralTitle()
-    {
-        if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' Managed', '',  static::Title()));
-        }
-
-        return static::$pluralTitle;
-    }
-
-    /**
-     * URL Prefix to a ModelAdmin Top Level Page.
-     *
-     * @return string
-     */
-    public static function UrlPrefix()
-    {
-        if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return strtolower(str_replace('Managed', '',  static::PluralTitle()));
-        }
-
-        return static::$urlPrefix;
     }
 
     /**

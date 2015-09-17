@@ -7,6 +7,15 @@ use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 class UserAdmin extends ModelAdmin
 {
     /**
+     * ModelAdmin Icon
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    public $icon = 'user';
+
+    /**
      * List of ManagedModels.
      *
      * Note: This must either be a single Namespaced String

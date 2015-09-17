@@ -15,6 +15,15 @@ class ManagedUser extends ManagedModel
     public $managedModel = 'App\Models\User';
 
     /**
+     * ManagedModel Icon
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    public $icon = '';
+
+    /**
      * Map User Attributes to their Attribute Types.
      * 
      * @var array

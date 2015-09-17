@@ -8,7 +8,7 @@
     <div class="col-lg-3 col-xs-6">
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>1</h3>
+          <h3>1</h3> @get('somethign')
           <p>User Registrations</p>
         </div>
         <div class="icon">

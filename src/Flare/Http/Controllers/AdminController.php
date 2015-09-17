@@ -54,9 +54,7 @@ class AdminController extends BaseController
      */
     public function postLogin(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email', 'password' => 'required',
-        ]);
+        $this->validate($request, ['email' => 'required|email', 'password' => 'required']);
 
         $credentials = $request->only('email', 'password');
 
@@ -90,10 +88,6 @@ class AdminController extends BaseController
      */
     public function getIndex()
     {
-        $data = [
-            'modelAdminCollection' => $this->modelAdminCollection,
-        ];
-
-        return view('flare::admin.dashboard', $data);
+        return view('flare::admin.dashboard', ['modelAdminCollection' => $this->modelAdminCollection]);
     }
 }

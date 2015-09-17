@@ -57,12 +57,25 @@ class FlareServiceProvider extends ServiceProvider
      */
     public function registerBladeOperators()
     {
+        // get blade compiler
+        /*$blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
+        $blade->extend(function($view, $compiler)
+        {
+             return preg_replace('/@get(/', '<?php var_dump($view); var_dump($compiler); ?>', $view);
+            var_dump($view);
+            echo '<br><br>';
+            var_dump($compiler);
+        });*/
+
+        //var_dump($blade); die();
+
         // Blade Operator @get() for returning DotNotation Variables
-        Blade::directive('get', function ($expression) {
+        //Blade::directive('get', function ($expression) {
 
 
-            return "<?php echo $expression; ?>";
-        });
+        /*    return "<?php echo $expression; ?>";
+        //});*/
 
         // I'd prefer the possibility of providing this default functionality:
         // 
