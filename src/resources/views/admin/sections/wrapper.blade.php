@@ -27,3 +27,5 @@
 </div>
 
 @include('flare::admin.sections.footer')
+
+@include('flare::admin.sections.foot')

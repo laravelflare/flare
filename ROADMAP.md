@@ -28,6 +28,8 @@ Split the core into subtrees
 
 
 ## Alpha
+Setup Bower for AdminLTE
+
 Permission Provider - The ability to define users of the Admin panels permissions in a granular (Admin -> ModelAdmin -> ManagedModel -> Attribute -> CRUD) fashion.
 
 Artisan Commands for Rapid ModelAdmin, ManagedModel and ModuleAdmin generation.

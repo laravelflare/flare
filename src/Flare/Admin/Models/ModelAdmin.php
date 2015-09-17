@@ -17,14 +17,13 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
     /**
-     * The Controller to be used by the Model Admin.
+     * Managed Model Icon.
      *
-     * This defaults to parent::getController()
-     * if it has been left undefined. 
-     * 
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
+    public static $icon;
 
     /**
      * List of managed {@link Model}s.
@@ -36,7 +35,17 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      * 
      * @var array|string
      */
-    protected $managedModels = null;
+    protected $managedModels = '';
+
+    /**
+     * The Controller to be used by the Model Admin.
+     *
+     * This defaults to parent::getController()
+     * if it has been left undefined. 
+     * 
+     * @var string
+     */
+    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * The current model manager.
@@ -51,6 +60,18 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      * @var Model
      */
     protected $model;
+
+    /**
+     * Class Prefix used for matching and removing term
+     * from user provided Admin sections
+     *
+     * Note: This is actually a suffix, we might change the terminology
+     * for this later although it would obviously be a breaking change.
+     * Change it up early or don't change it all!
+     *
+     * @var string
+     */
+    const CLASS_PREFIX = 'Admin';
 
     /**
      * __construct.

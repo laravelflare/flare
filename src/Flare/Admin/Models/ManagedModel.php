@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
+use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
 use LaravelFlare\Flare\Contracts\PermissionsContract;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
@@ -14,6 +15,15 @@ use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
 abstract class ManagedModel extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
+
+    /**
+     * Managed Model Icon.
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    public static $icon;
 
     /**
      * Managed Model Instance.
@@ -42,6 +52,14 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      * @var int
      */
     protected $perPage = 15;
+
+    /**
+     * Class Prefix used for matching and removing term
+     * from user provided Admin sections
+     *
+     * @var string
+     */
+    const CLASS_PREFIX = 'Managed';
 
     /**
      * __construct.

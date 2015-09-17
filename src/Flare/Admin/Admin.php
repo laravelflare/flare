@@ -2,8 +2,20 @@
 
 namespace LaravelFlare\Flare\Admin;
 
+use Illuminate\Support\Str;
+
 abstract class Admin
 {
+    
+    /**
+     * Admin Section Icon
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    public static $icon;
+
     /**
      * Title of Model Admin.
      *
@@ -26,29 +38,29 @@ abstract class Admin
     protected $urlPrefix = null;
 
     /**
-     * The Controller to be used by the Model Admin.
+     * The Controller to be used by the Model Admin
      *
      * This defaults to parent::getController()
      * if it has been left undefined. 
      * 
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Admin\Models\AdminController';
+    protected $controller = '\LaravelFlare\Flare\Http\Controllers\AdminController';
 
     /**
-     * Admin Section Icon.
-     *
-     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     * Class Prefix used for matching and removing term
+     * from user provided Admin sections
      *
      * @var string
      */
-    public $icon = 'user';
+    const CLASS_PREFIX = '';
 
     /**
      * __construct.
      */
     public function __construct()
     {
+
     }
 
     /**
@@ -66,10 +78,10 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
+        \Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
             $this->registerSubRoutes();
 
-            Route::controller('/', $this->getController());
+            \Route::controller('/', $this->getController());
         });
     }
 
@@ -87,16 +99,16 @@ abstract class Admin
 
         foreach ($this->managedModels as $managedModel) {
             $managedModel = new $managedModel();
-            Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
+            \Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
 
                 // We should provide parameters here for registering the subRoutes
-                Route::controller('/', $this->getController());
+                \Route::controller('/', $this->getController());
             });
         }
     }
 
     /**
-     * Returns the Controller Class for the current Admin section.
+     * Returns the Controller Class for the current Admin section
      * 
      * @return string
      */
@@ -123,7 +135,7 @@ abstract class Admin
     public static function Title()
     {
         if (!isset(static::$title) || !static::$title) {
-            return str_replace('Admin', '',  static::ShortName());
+            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '',  static::ShortName()))));
         }
 
         return static::$title;
@@ -137,7 +149,7 @@ abstract class Admin
     public static function PluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' Admin', '',  static::Title()));
+            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '',  static::Title()));
         }
 
         return static::$pluralTitle;
@@ -151,7 +163,7 @@ abstract class Admin
     public static function UrlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return strtolower(str_replace('Admin', '',  static::PluralTitle()));
+            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::PluralTitle())));
         }
 
         return static::$urlPrefix;

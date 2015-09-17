@@ -13,7 +13,7 @@ class UserAdmin extends ModelAdmin
      *
      * @var string
      */
-    public $icon = 'user';
+    public static $icon = 'user';
 
     /**
      * List of ManagedModels.

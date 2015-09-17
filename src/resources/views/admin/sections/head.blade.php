@@ -19,4 +19,4 @@
 
         {{-- @yield('enqueued-css')--}}
     </head>
-    <body class="hold-transition skin-red sidebar-mini fixed">
+    <body class="hold-transition skin-red sidebar-mini">

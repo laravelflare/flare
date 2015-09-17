@@ -21,7 +21,7 @@ class ManagedUserGroup extends ManagedModel
      *
      * @var string
      */
-    public $icon = '';
+    public static $icon = '';
 
     /**
      * Map User Group Attributes to their Attribute Types.
