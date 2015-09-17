@@ -21,7 +21,6 @@
                 </a>
             </div>
         </div>
-
-    </div><!-- /.row -->
+    </div>
 
 @stop
