@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 class UserAdmin extends ModelAdmin
 {
     /**
-     * ModelAdmin Icon
+     * ModelAdmin Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
      *

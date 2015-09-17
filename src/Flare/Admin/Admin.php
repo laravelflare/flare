@@ -26,7 +26,7 @@ abstract class Admin
     protected $urlPrefix = null;
 
     /**
-     * The Controller to be used by the Model Admin
+     * The Controller to be used by the Model Admin.
      *
      * This defaults to parent::getController()
      * if it has been left undefined. 
@@ -36,7 +36,7 @@ abstract class Admin
     protected $controller = '\LaravelFlare\Flare\Admin\Models\AdminController';
 
     /**
-     * Admin Section Icon
+     * Admin Section Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
      *
@@ -49,7 +49,6 @@ abstract class Admin
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -97,7 +96,7 @@ abstract class Admin
     }
 
     /**
-     * Returns the Controller Class for the current Admin section
+     * Returns the Controller Class for the current Admin section.
      * 
      * @return string
      */

@@ -2,8 +2,6 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
-use Route;
-use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
 use LaravelFlare\Flare\Contracts\PermissionsContract;
@@ -19,7 +17,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
     /**
-     * The Controller to be used by the Model Admin
+     * The Controller to be used by the Model Admin.
      *
      * This defaults to parent::getController()
      * if it has been left undefined. 
@@ -68,7 +66,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Returns a Model Instance
+     * Returns a Model Instance.
      *
      * Note: We should revisit this as really we shouldn't
      * be returning a new instance of the object on every
@@ -110,7 +108,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Returns a Model Manager Instance
+     * Returns a Model Manager Instance.
      *
      * Note: We should revisit this as really we shouldn't
      * be returning a new instance of the object on every
@@ -136,7 +134,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Returns the Requested Model Manager as a string
+     * Returns the Requested Model Manager as a string.
      * 
      * @return string|void
      */
@@ -156,9 +154,9 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     }
 
     /**
-     * Returns a collection of the Managed Models
+     * Returns a collection of the Managed Models.
      * 
-     * @return \Illuminate\Support\Collection  
+     * @return \Illuminate\Support\Collection
      */
     public function getManagedModels()
     {

@@ -15,7 +15,7 @@ class ManagedUserGroup extends ManagedModel
     public $managedModel = 'App\Models\UserGroup';
 
     /**
-     * ManagedModel Icon
+     * ManagedModel Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
      *
