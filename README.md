@@ -16,4 +16,5 @@ Flare is an open-source CRUD system, currently under development, built on top o
 
 
 
-Laravel is a trademark of Taylor Otwell. Flare is in no way associated or affiliated with Laravel or Taylor.
+Laravel is a trademark of Taylor Otwell.
+Flare is in no way associated or affiliated with Laravel or Taylor Otwell.

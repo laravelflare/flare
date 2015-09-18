@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
@@ -154,15 +155,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         if (($methodBreaker = strpos($key, '.')) !== false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                if (method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
-                    return true;
-                }
-
                 if (method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
-                    return true;
-                }
-
-                if (isset($model->$method()->$submethod)) {
                     return true;
                 }
 
@@ -188,16 +181,8 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
                     return $model->$method->$submethod();
                 }
 
-                if (method_exists($model->$method(), $submethod = str_replace($method.'.', '', $key))) {
-                    return $model->$method()->$submethod();
-                }
-
                 if (isset($model->$method->$submethod)) {
                     return $model->$method->$submethod;
-                }
-
-                if (isset($model->$method()->$submethod)) {
-                    return $model->$method()->$submethod;
                 }
             }
         }
