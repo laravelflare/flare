@@ -1,7 +1,7 @@
 ![Laravel Flare](https://raw.githubusercontent.com/laravelflare/flare/master/docs/logo.png)
 
 # Flare
-Flare is an open-source CRUD system, currently under development, built on top of the Laravel.
+Flare is an open-source CRUD system, currently under development, built on top of [Laravel](https://github.com/laravel/laravel).
 
 
 
