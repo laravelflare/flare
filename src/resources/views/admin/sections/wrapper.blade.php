@@ -5,6 +5,7 @@
         @include('flare::admin.sections.header')
 
         <div class="content-wrapper">
+            
                 @include('flare::admin.sections.includes.notifications-above-header')
 
                 <section class="content-header">
@@ -16,10 +17,10 @@
 
                 @include('flare::admin.sections.includes.notifications-below-header')
 
-                <!-- Main content -->
                 <section class="content">          
                     @yield('content')
                 </section>
+
         </div>
 
         @include('flare::admin.sections.sidebar')

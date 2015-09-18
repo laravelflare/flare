@@ -31,7 +31,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('/vendor/flare/user.jpg') }}" class="user-image" alt="User Image"/>
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
-                        <div class="clearfix"></div>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
