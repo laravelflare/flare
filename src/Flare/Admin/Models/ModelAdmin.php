@@ -85,6 +85,35 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         $this->modelManager = $this->modelManager();
         $this->model = $this->model();
     }
+    
+    /**
+     * Register subRoutes for ModelAdmin instances 
+     * which have more than one managedModel.
+     *
+     * @return
+     */
+    public function registerSubRoutes()
+    {
+        if (!is_array($this->managedModels)) {
+            return;
+        }
+
+        foreach ($this->managedModels as $managedModel) {
+            
+            $managedModel = new $managedModel();
+            $parameters = [
+                            'prefix' => $managedModel->UrlPrefix(),
+                            'as' => $managedModel->UrlPrefix(),
+                            'modelManager' => get_class($managedModel),
+                            'model' => $managedModel->managedModel
+                        ];
+
+            \Route::group($parameters, function () {
+                \Route::controller('/', $this->getController());
+            });
+            
+        }
+    }
 
     /**
      * Returns a Model Instance.

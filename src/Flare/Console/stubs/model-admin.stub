@@ -1,0 +1,29 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelFlare\Flare\Admin\Models\ModelAdmin;
+
+class DummyClass extends ModelAdmin
+{
+    /**
+     * ModelAdmin Icon.
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    public static $icon = '';
+
+    /**
+     * List of ManagedModels.
+     *
+     * Note: This must either be a single Namespaced String
+     * or an Array of Namespaced Strings
+     *
+     * Perhaps in the future we will allow App\Models\ManagedModel::class format aswell!
+     */
+    protected $managedModels = [
+
+    ];
+}

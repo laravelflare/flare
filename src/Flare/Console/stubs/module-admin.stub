@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelFlare\Flare\Admin\Modules\ModelAdmin;
+
+class DummyClass extends ModuleAdmin
+{
+    
+}

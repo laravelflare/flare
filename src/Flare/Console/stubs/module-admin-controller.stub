@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelFlare\Flare\Http\Controllers\FlareController;
+
+class DummyClass extends FlareController
+{
+    /**
+     * __construct.
+     */
+    public function __construct()
+    {
+        // Must call parent __construct otherwise 
+        // we need to redeclare checkpermissions
+        // middleware for authentication check
+        parent::__construct();
+    }
+}

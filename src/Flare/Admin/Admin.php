@@ -64,7 +64,7 @@ abstract class Admin
     }
 
     /**
-     * Register the routes for this Adin Section.
+     * Register the routes for this Admin Section.
      *
      * Default routes include, create:, read:, update:, delete:
      *
@@ -78,33 +78,20 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        \Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()/*'before' => 'admin_auth'*/], function () {
+        \Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()], function () {
             $this->registerSubRoutes();
-
             \Route::controller('/', $this->getController());
         });
     }
 
     /**
-     * Register subRoutes for ModelAdmin instances 
-     * which have more than one managedModel.
+     * Register subRoutes for this Admin Section
      *
      * @return
      */
     public function registerSubRoutes()
     {
-        if (!is_array($this->managedModels)) {
-            return;
-        }
-
-        foreach ($this->managedModels as $managedModel) {
-            $managedModel = new $managedModel();
-            \Route::group(['prefix' => $managedModel->UrlPrefix(), 'as' => $managedModel->UrlPrefix(), 'modelManager' => get_class($managedModel), 'model' => $managedModel->managedModel], function () {
-
-                // We should provide parameters here for registering the subRoutes
-                \Route::controller('/', $this->getController());
-            });
-        }
+        
     }
 
     /**

@@ -81,6 +81,7 @@ class ModelAdminCollection extends Collection
     private function usableClass($class)
     {
         // Should replace this with ReflectionClass::getShortName();
+        // new ReflectionClass($class)
         if ($class == 'LaravelFlare\Flare\Admin\Models\ModelAdmin') {
             return false;
         }
