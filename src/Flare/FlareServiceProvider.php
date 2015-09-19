@@ -38,6 +38,7 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/flare'),
         ]);
 
+
         $this->registerBladeOperators();
     }
 
@@ -50,6 +51,16 @@ class FlareServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/flare.php', 'flare'
         );
+        
+        $this->registerServiceProviders();
+    }
+
+    /**
+     * Register Service Providers
+     */
+    public function registerServiceProviders()
+    {
+        \App::register('LaravelFlare\Flare\Providers\ArtisanServiceProvider');
     }
 
     /**

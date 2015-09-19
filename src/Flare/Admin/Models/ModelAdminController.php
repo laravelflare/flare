@@ -65,9 +65,9 @@ class ModelAdminController extends FlareController
     public function getIndex()
     {
         return view('flare::admin.modelAdmin.index', [
-            'modelAdminCollection' => $this->modelAdminCollection,
-            'modelAdmin' => $this->modelAdmin,
             'model' => $this->model,
+            'modelAdmin' => $this->modelAdmin,
+            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -79,9 +79,9 @@ class ModelAdminController extends FlareController
     public function getCreate()
     {
         return view('flare::admin.modelAdmin.create', [
-            'modelAdminCollection' => $this->modelAdminCollection,
-            'modelAdmin' => $this->modelAdmin,
             'model' => $this->model,
+            'modelAdmin' => $this->modelAdmin,
+            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -129,9 +129,9 @@ class ModelAdminController extends FlareController
     public function getView()
     {
         return view('flare::admin.modelAdmin.view', [
-            'modelAdminCollection' => $this->modelAdminCollection,
-            'modelAdmin' => $this->modelAdmin,
             'model' => $this->model,
+            'modelAdmin' => $this->modelAdmin,
+            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -145,10 +145,10 @@ class ModelAdminController extends FlareController
     public function getEdit($modelitem_id)
     {
         return view('flare::admin.modelAdmin.edit', [
-            'modelAdminCollection' => $this->modelAdminCollection,
-            'modelAdmin' => $this->modelAdmin,
             'model' => $this->model,
+            'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
+            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -200,10 +200,10 @@ class ModelAdminController extends FlareController
     public function getDelete($modelitem_id)
     {
         return view('flare::admin.modelAdmin.delete', [
-            'modelAdminCollection' => $this->modelAdminCollection,
-            'modelAdmin' => $this->modelAdmin,
             'model' => $this->model,
+            'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
+            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 

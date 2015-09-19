@@ -1,8 +1,9 @@
 <?php
 
-namespace Illuminate\Foundation\Console;
+namespace LaravelFlare\Flare\Console\Commands\Generators;
 
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ModelAdminControllerMakeCommand extends GeneratorCommand
 {
@@ -28,6 +29,16 @@ class ModelAdminControllerMakeCommand extends GeneratorCommand
     protected $type = 'ModelAdminController';
 
     /**
+     * Execute the command.
+     *
+     * @return void
+     */
+    public function fire()
+    {
+        parent::fire();
+    }
+
+    /**
      * Get the stub file for the generator.
      *
      * @return string
@@ -47,15 +58,5 @@ class ModelAdminControllerMakeCommand extends GeneratorCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace.'\Admin\\Http\\Controllers';
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
     }
 }

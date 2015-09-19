@@ -26,9 +26,7 @@ class ModuleAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.module.index', [
-
-        ]);
+        return view('flare::admin.module.index', []);
     }
 
     /**

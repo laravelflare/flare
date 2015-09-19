@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 abstract class Admin
 {
-    
     /**
      * Admin Section Icon
      *
