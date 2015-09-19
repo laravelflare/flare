@@ -12,7 +12,7 @@ class ManagedUserGroup extends ManagedModel
      * 
      * @var string
      */
-    public $managedModel = 'App\Models\UserGroup';
+    public $managedModel = App\Models\UserGroup::class;
 
     /**
      * ManagedModel Icon.

@@ -14,7 +14,7 @@ class Permissions
      * 
      * @return
      */
-    public static function check($class)
+    public static function check()
     {
         return true;
     }

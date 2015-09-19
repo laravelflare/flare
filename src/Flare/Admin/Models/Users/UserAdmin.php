@@ -20,11 +20,9 @@ class UserAdmin extends ModelAdmin
      *
      * Note: This must either be a single Namespaced String
      * or an Array of Namespaced Strings
-     *
-     * Perhaps in the future we will allow App\Models\ManagedModel::class format aswell!
      */
     protected $managedModels = [
-        'LaravelFlare\Flare\Admin\Models\Users\ManagedUser',
-        'LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup',
+        LaravelFlare\Flare\Admin\Models\Users\ManagedUser::class,
+        LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup::class,
     ];
 }

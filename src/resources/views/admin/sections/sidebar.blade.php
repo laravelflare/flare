@@ -20,7 +20,7 @@
         </form>
         <ul class="sidebar-menu">
             <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                <a href="{{ url('admin') }}">
+                <a href="{{ Flare::adminUrl() }}">
                     <i class="fa fa-dashboard"></i>
                     <span>
                         Dashboard
@@ -46,8 +46,8 @@
                             </span>
                         </a>
                     </li>
-                    <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/create') ? 'active' : '' }}">
-                        <a href="{{ $modelAdmin::Url() }}/create">
+                    <li class="{{ Request::is( $modelAdmin::RelativeUrl('create') ) ? 'active' : '' }}">
+                        <a href="{{ $modelAdmin::Url('create') }}">
                             <span>
                                 Create {{ $managedModel::Title() }}
                             </span>
@@ -68,12 +68,12 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/*') ? 'active' : '' }}">
-                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
+                                    <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix()) }}">
                                         All {{ $managedModel::PluralTitle() }}
                                     </a>
                                 </li>
                                 <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/create') ? 'active' : '' }}">
-                                    <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() . '/create' }}">
+                                    <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix() . '/create')  }}">
                                         Create {{ $managedModel::Title() }}
                                     </a>
                                 </li>

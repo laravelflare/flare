@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare;
 
 use Blade;
+use LaravelFlare\Flare\Flare;
 use Illuminate\Support\ServiceProvider;
 
 class FlareServiceProvider extends ServiceProvider
@@ -38,7 +39,6 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/flare'),
         ]);
 
-
         $this->registerBladeOperators();
     }
 
@@ -53,6 +53,13 @@ class FlareServiceProvider extends ServiceProvider
         );
         
         $this->registerServiceProviders();
+
+        $this->app->singleton('flare', function ($app) {
+            return new Flare($app);
+        });
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
     }
 
     /**

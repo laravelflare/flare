@@ -16,28 +16,28 @@ abstract class Admin
     public static $icon;
 
     /**
-     * Title of Model Admin.
+     * Title of Admin Section.
      *
      * @var string
      */
     protected $title = null;
 
     /**
-     * Title of Model Admin.
+     * Plural Title of Admin Section.
      *
      * @var string
      */
     protected $pluralTitle = null;
 
     /**
-     * URL Prefix Model Admin.
+     * URL Prefix of Admin Section
      *
      * @var string
      */
     protected $urlPrefix = null;
 
     /**
-     * The Controller to be used by the Model Admin
+     * The Controller to be used by the Admin
      *
      * This defaults to parent::getController()
      * if it has been left undefined. 
@@ -104,7 +104,7 @@ abstract class Admin
     }
 
     /**
-     * ShortName of a ModelAdmin Class.
+     * ShortName of a Admin Section Class.
      *
      * @return string
      */
@@ -114,7 +114,7 @@ abstract class Admin
     }
 
     /**
-     * Title of a ModelAdmin Class.
+     * Title of a Admin Section Class.
      *
      * @return string
      */
@@ -128,7 +128,7 @@ abstract class Admin
     }
 
     /**
-     * Plural of the ModelAdmin Class Title.
+     * Plural of the Admin Section Class Title.
      *
      * @return string
      */
@@ -142,7 +142,7 @@ abstract class Admin
     }
 
     /**
-     * URL Prefix to a ModelAdmin Top Level Page.
+     * URL Prefix to a Admin Section Top Level Page.
      *
      * @return string
      */
@@ -156,49 +156,47 @@ abstract class Admin
     }
 
     /**
-     * URL to a ModelAdmin Top Level Page.
+     * URL to a Admin Top Level Page.
      *
      * @return string
      */
-    public static function Url()
+    public static function Url($path = '')
     {
-        // Update 'admin' to use Admin config variable
-        return url('admin/'.static::UrlPrefix());
+        return url(self::RelativeUrl($path));
     }
 
     /**
-     * Relative URL to a ModelAdmin Top Level Page.
+     * Relative URL to an Admin Top Level Page.
      *
      * @return string
      */
-    public static function RelativeUrl()
+    public static function RelativeUrl($path = '')
     {
-        // Update 'admin' to use Admin config variable
-        return 'admin/'.static::UrlPrefix();
+        return \Flare::relativeAdminUrl(static::UrlPrefix() . '/' . $path);
     }
 
     /**
-     * Retrieves the Current ModelAdmin Route URL.
+     * Retrieves the Current Admin Route URL.
      *
      * @return string
      */
-    public static function CurrentUrl()
+    public static function CurrentUrl($path = '')
     {
-        return url(static::RelativeCurrentUrl());
+        return url(static::RelativeCurrentUrl($path));
     }
 
     /**
-     * Retrieves the Current ModelAdmin Route URL.
+     * Retrieves the Current Admin Route URL.
      *
      * @return string
      */
-    public static function RelativeCurrentUrl()
+    public static function RelativeCurrentUrl($path)
     {
-        return \Route::current()->getPrefix();
+        return \Route::current()->getPrefix() . '/'. $path;
     }
 
     /**
-     * Handle dynamic static method calls into the ModelAdmin.
+     * Handle dynamic static method calls into the Admin.
      *
      * @param string $method
      * @param array  $parameters

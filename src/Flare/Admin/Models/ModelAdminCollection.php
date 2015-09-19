@@ -35,7 +35,7 @@ class ModelAdminCollection extends Collection
     {
         $classCollection = [];
 
-        foreach (config('flare.modeladmins') as $class) {
+        foreach (\Flare::config('modeladmins') as $class) {
             if (!$this->usableClass($class)) {
                 continue;
             }
@@ -123,6 +123,6 @@ class ModelAdminCollection extends Collection
     private function checkUserHasModelAdminPermissions($class)
     {
         // Replace this with actual Permission Implementation Check
-        return Permissions::check($class);
+        return Permissions::check();
     }
 }

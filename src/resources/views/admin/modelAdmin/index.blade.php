@@ -48,7 +48,7 @@
                 </div>
                 <div class="box-footer clearfix">
                     <div class="pull-left">
-                        <a href="{{ $modelAdmin::CurrentUrl() }}/create" class="btn btn-success">
+                        <a href="{{ $modelAdmin::CurrentUrl('create') }}" class="btn btn-success">
                             Add {{ $modelAdmin->modelManager()->Title() }}
                         </a>
                     </div>

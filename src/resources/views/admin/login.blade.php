@@ -42,14 +42,18 @@
 						<div class="col-md-6">
 							<div class="checkbox">
 								<label style="color: white;">
-									<input type="checkbox" name="remember"> Remember Me
+									<input type="checkbox" name="remember">
+									Remember Me
 								</label>
 							</div>
 						</div>
 						<div class="col-md-6">
-							<button type="submit" class="btn btn-default pull-right">Login</button>
-
-							{{--<a class="btn btn-link" href="{{ url('/admin/password') }}">Forgot Your Password?</a>--}}
+							<button type="submit" class="btn btn-default pull-right">
+								Login
+							</button>
+							{{--<a class="btn btn-link" href="{{ url('/admin/password') }}">
+								Forgot Your Password?
+							</a>--}}
 						</div>
 
 						<div class="clearfix"></div>

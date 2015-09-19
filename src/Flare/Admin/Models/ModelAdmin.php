@@ -45,7 +45,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      * 
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
+    protected $controller = \LaravelFlare\Flare\Admin\Models\ModelAdminController::class;
 
     /**
      * The current model manager.
@@ -99,7 +99,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         }
 
         foreach ($this->managedModels as $managedModel) {
-            
             $managedModel = new $managedModel();
             $parameters = [
                             'prefix' => $managedModel->UrlPrefix(),
@@ -111,7 +110,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
             \Route::group($parameters, function () {
                 \Route::controller('/', $this->getController());
             });
-            
         }
     }
 

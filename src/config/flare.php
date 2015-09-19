@@ -4,6 +4,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Admin URL
+    |--------------------------------------------------------------------------
+    |
+    | Admin URL Path without slashes.
+    |
+    */
+    'admin_url' => 'admin',
+
+    /*
+    |--------------------------------------------------------------------------
     | Administered Models
     |--------------------------------------------------------------------------
     |
@@ -13,7 +23,6 @@ return [
     | manually defined in the future with some crazy autoloading.
     |
     */
-
     'modeladmins' => [
         LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
         LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
