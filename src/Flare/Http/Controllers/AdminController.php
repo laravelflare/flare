@@ -33,6 +33,8 @@ class AdminController extends BaseController
         $this->middleware('checkpermissions', ['except' => ['getLogin']]);
 
         $this->modelAdminCollection = $modelAdminCollection;
+
+        view()->share('modelAdminCollection', $this->modelAdminCollection);
     }
 
     /**
@@ -89,5 +91,18 @@ class AdminController extends BaseController
     public function getIndex()
     {
         return view('flare::admin.dashboard', ['modelAdminCollection' => $this->modelAdminCollection]);
+    }
+
+    /**
+     * Method is called when the appropriate controller
+     * method is unable to be found or called.
+     * 
+     * @param array $parameters
+     * 
+     * @return
+     */
+    public function missingMethod($parameters = array())
+    {
+        return view('flare::admin.404', []);
     }
 }

@@ -9,4 +9,5 @@
                 <span class="text-red" style="padding-left: 10px; top: 1px; position: relative;">
                     Laravel <strong>Flare</strong>
                 </span>
+            </a>
         </footer>

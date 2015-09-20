@@ -22,6 +22,7 @@ class Flare
      */
     protected $configurationKeys = [
         'admin_url' => 'admin',
+        'admin_theme' => 'red',
         'modeladmins' => [],
         'modules' => [],
     ];
@@ -115,7 +116,7 @@ class Flare
             return (new $fieldType($attribute, $field))->renderAdd();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();  
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field))->renderAdd();  
     }
 
     /**
@@ -161,7 +162,7 @@ class Flare
             return (new $fieldType($attribute, $field, $model))->renderView();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderView();
     }
 
     /**

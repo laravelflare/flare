@@ -2,6 +2,6 @@
         <script src="{{ asset ('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset ('vendor/flare/dist/js/app.min.js') }}" type="text/javascript"></script>
 
-        {{-- @yield('enqueued-js') --}}
+        @yield('enqueued-js')
     </body>
 </html>

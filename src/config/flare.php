@@ -4,13 +4,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Admin URL
+    | Admin Configuration
     |--------------------------------------------------------------------------
     |
-    | Admin URL Path without slashes.
+    | 'admin_url': Admin URL Path without slashes.
+    | 'admin_theme': Choose an admin theme from the following colours:
+    |                'red', 'blue', 'green', 'yellow', 'black'.
+    |                Flare Default is 'red'.
     |
     */
     'admin_url' => 'admin',
+    'admin_theme' => 'red',
 
     /*
     |--------------------------------------------------------------------------

@@ -40,7 +40,7 @@ class ModelAdminController extends FlareController
     protected $model;
 
     /**
-     * __construct.
+     * __construct
      * 
      * @param ModelAdminCollection $modelAdminCollection
      */
@@ -49,9 +49,10 @@ class ModelAdminController extends FlareController
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct();
+        parent::__construct($modelAdminCollection);
 
-        $this->modelAdminCollection = $modelAdminCollection;
+        $this->middleware('checkmodelfound', ['only' => ['getView', 'edit', 'delete']]);
+
         $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
         $this->managedModel = $this->modelAdmin->modelManager();
         $this->model = $this->managedModel->model;
@@ -67,7 +68,6 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.index', [
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
-            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -81,7 +81,6 @@ class ModelAdminController extends FlareController
         return view('flare::admin.modelAdmin.create', [
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
-            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -132,7 +131,6 @@ class ModelAdminController extends FlareController
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
-            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -149,7 +147,6 @@ class ModelAdminController extends FlareController
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
-            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -204,7 +201,6 @@ class ModelAdminController extends FlareController
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
-            'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
 
@@ -229,18 +225,5 @@ class ModelAdminController extends FlareController
         }
 
         return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully removed.', 'dismissable' => false]]);
-    }
-
-    /**
-     * Method is called when the appropriate controller
-     * method is unable to be found or called.
-     * 
-     * @param array $parameters
-     * 
-     * @return
-     */
-    public function missingMethod($parameters = array())
-    {
-        parent::missingMethod();
     }
 }
