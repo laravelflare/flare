@@ -80,6 +80,91 @@ class Flare
     }
 
     /**
+     * Determines if an AttributeType class exists or not.
+     * 
+     * @param  string $type 
+     * 
+     * @return boolean       
+     */
+    public function attributeTypeExists($type)
+    {
+        if (class_exists('\LaravelFlare\Flare\Admin\Attributes\\'.$type.'Attribute')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns the Add Attribute Rendered View.
+     *
+     * Attributes should really be registered in an AttributeServiceProvider and/or
+     * the Flare Configuration file, so that they can be expanded on, overridden etc.
+     * 
+     * @param  string $attribute   
+     * @param  string $field 
+     * @param  string $model 
+     * 
+     * @return        
+     */
+    public function addAttribute($attribute, $field)
+    {
+        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+
+            return (new $fieldType($attribute, $field))->renderAdd();
+        }
+
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();  
+    }
+
+    /**
+     * Returns the Edit Attribute Rendered View.
+     * 
+     * Attributes should really be registered in an AttributeServiceProvider and/or
+     * the Flare Configuration file, so that they can be expanded on, overridden etc.
+     * 
+     * @param  string $attribute   
+     * @param  string $field 
+     * @param  string $model 
+     * 
+     * @return        
+     */
+    public function editAttribute($attribute, $field, $model)
+    {
+        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+
+            return (new $fieldType($attribute, $field, $model))->renderEdit();
+        }
+
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();
+    }
+
+    /**
+     * Returns the View Attribute Rendered View.
+     * 
+     * Attributes should really be registered in an AttributeServiceProvider and/or
+     * the Flare Configuration file, so that they can be expanded on, overridden etc.
+     * 
+     * @param  string $attribute   
+     * @param  string $field 
+     * @param  string $model 
+     * 
+     * @return        
+     */
+    public function viewAttribute($attribute, $field, $model)
+    {
+        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+
+            return (new $fieldType($attribute, $field, $model))->renderView();
+        }
+
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();
+    }
+
+    /**
      * Returns the current Flare Version
      * 
      * @return string

@@ -12,7 +12,7 @@ class ManagedUser extends ManagedModel
      * 
      * @var string
      */
-    public $managedModel = App\Models\User::class;
+    public $managedModel = \App\Models\User::class;
 
     /**
      * ManagedModel Icon.
@@ -29,9 +29,14 @@ class ManagedUser extends ManagedModel
      * @var array
      */
     protected $mapping = [
-        'name' => ['type' => 'text', 'length' => 32],
-        'email' => ['type' => 'email', 'length' => 255],
-        'password' => ['type' => 'password', 'length' => 32],
+        'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
+        'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
+        'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
+        'not_defined' => ['type' => 'something'],
+        'checkbox' => ['type' => 'checkbox'],
+        'date' => ['type' => 'date'],
+        'radio' => ['type' => 'radio'],
+        'textarea' => ['type' => 'textarea'],
     ];
 
     /**

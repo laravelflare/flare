@@ -22,7 +22,7 @@ class UserAdmin extends ModelAdmin
      * or an Array of Namespaced Strings
      */
     protected $managedModels = [
-        LaravelFlare\Flare\Admin\Models\Users\ManagedUser::class,
-        LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup::class,
+        \LaravelFlare\Flare\Admin\Models\Users\ManagedUser::class,
+        \LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup::class,
     ];
 }

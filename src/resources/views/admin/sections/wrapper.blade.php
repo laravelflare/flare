@@ -11,7 +11,9 @@
                 <section class="content-header">
                     <h1>
                         @yield('page_title')
-                        <small>{{ $page_description or null }}</small>
+                        <small>
+                            @yield('page_description', '')
+                        </small>
                     </h1>
                 </section>
 

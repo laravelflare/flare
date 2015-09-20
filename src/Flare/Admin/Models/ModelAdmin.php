@@ -45,7 +45,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      * 
      * @var string
      */
-    protected $controller = \LaravelFlare\Flare\Admin\Models\ModelAdminController::class;
+    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * The current model manager.

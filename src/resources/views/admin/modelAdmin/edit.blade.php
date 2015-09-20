@@ -12,18 +12,8 @@
     </div>
     <form action="" method="post">
         <div class="box-body">
-            @foreach ($modelAdmin->modelManager()->getMapping() as $key => $field)
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group @if ($errors->has($key)) has-error @endif">
-                        <label class="control-label" for="{{ $key }}">{{ $key }}</label>
-                        <input class="form-control" type="text" name="{{ $key }}" id="{{ $key }}" value="{{ old($key, $modelItem->$key) }}">
-                        @if ($errors->has($key))
-                            <span class="help-block">{{ $errors->first($key) }}</span>
-                        @endif
-                    </div>
-                </div>
-            </div>
+            @foreach ($modelAdmin->modelManager()->getMapping() as $attribute => $field)
+                {!! \Flare::editAttribute($attribute, $field, $modelItem) !!}
             @endforeach
         </div>
         <div class="box-footer">

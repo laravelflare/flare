@@ -34,10 +34,13 @@
                                 </td>
                                 @endforeach
                                 <td style="width: 1%; white-space:nowrap">
-                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl() }}/edit/{{ $modelItem->id }}">
+                                    <a class="btn btn-success btn-xs" href="{{ $modelAdmin::CurrentUrl('view/'.$modelItem->id) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl() }}/delete/{{ $modelItem->id }}">
+                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>

@@ -44,7 +44,7 @@ abstract class Admin
      * 
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Http\Controllers\AdminController';
+    protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
      * Class Prefix used for matching and removing term

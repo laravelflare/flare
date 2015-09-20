@@ -126,11 +126,12 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getView()
+    public function getView($modelitem_id)
     {
         return view('flare::admin.modelAdmin.view', [
             'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
+            'modelItem' => $this->model->find($modelitem_id),
             'modelAdminCollection' => $this->modelAdminCollection,
         ]);
     }
