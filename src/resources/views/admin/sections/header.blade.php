@@ -5,9 +5,8 @@
     <a href="{{ url('admin') }}" class="logo">
         <i class="fa fa-fire"></i>
         <span>
-            Laravel <b>Flare</b>
+            {!! Flare::config('site_title') !!}
         </span>
-
         <style>
             .logo i {
                 display: none;

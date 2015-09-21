@@ -21,6 +21,7 @@ class Flare
      * @var array
      */
     protected $configurationKeys = [
+        'site_title' => 'Laravel <b>Flare</b>',
         'admin_url' => 'admin',
         'admin_theme' => 'red',
         'modeladmins' => [],
