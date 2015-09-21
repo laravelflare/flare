@@ -22,8 +22,6 @@ Permission Provider - The ability to define users of the Admin panels permission
 
 Notifications - Ability to define flashdata and permanent, plus dismissable notifications, on certain or all areas of the Admin.
 
-Artisan Commands for Rapid ModelAdmin, ManagedModel and ModuleAdmin generation.
-
 Event Hooks for ModelAdmin, ManagedModels and ModuleAdmin
 
 File System Manager

@@ -1,5 +1,5 @@
 <strong>
     {{ $attributeType }}:
-<strong>
+</strong>
 {{ $model->$attribute }}
 <br>

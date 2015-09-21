@@ -23,6 +23,7 @@
                 Cancel
             </a>
             <button class="btn btn-danger" type="submit">
+                <i class="fa fa-trash"></i>
                 Delete {{ $modelAdmin::Title() }}
             </button>
         </div>

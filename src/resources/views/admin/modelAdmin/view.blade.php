@@ -22,9 +22,11 @@
                 Back
             </a>
             <a href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}" class="btn btn-primary">
+                <i class="fa fa-edit"></i>
                 Edit {{ $modelAdmin::Title() }}
             </a>
-            <a href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}" class="btn btn-danger">            
+            <a href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}" class="btn btn-danger">      
+                <i class="fa fa-trash"></i>      
                 Delete {{ $modelAdmin::Title() }}
             </a>
         </div>

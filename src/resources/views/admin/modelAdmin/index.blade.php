@@ -36,12 +36,15 @@
                                 <td style="width: 1%; white-space:nowrap">
                                     <a class="btn btn-success btn-xs" href="{{ $modelAdmin::CurrentUrl('view/'.$modelItem->id) }}">
                                         <i class="fa fa-eye"></i>
+                                        View
                                     </a>
                                     <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}">
                                         <i class="fa fa-edit"></i>
+                                        Edit
                                     </a>
                                     <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}">
                                         <i class="fa fa-trash"></i>
+                                        Delete
                                     </a>
                                 </td>
                             </tr>
@@ -52,6 +55,7 @@
                 <div class="box-footer clearfix">
                     <div class="pull-left">
                         <a href="{{ $modelAdmin::CurrentUrl('create') }}" class="btn btn-success">
+                            <i class="fa fa-{{ $modelAdmin::$icon }}"></i>
                             Add {{ $modelAdmin->modelManager()->Title() }}
                         </a>
                     </div>

@@ -21,7 +21,8 @@
             <a href="{{ $modelAdmin::CurrentUrl() }}" class="btn btn-default">
                 Cancel
             </a>
-            <button class="btn btn-success" type="submit">
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-edit"></i>
                 Update {{ $modelAdmin::Title() }}
             </button>
         </div>

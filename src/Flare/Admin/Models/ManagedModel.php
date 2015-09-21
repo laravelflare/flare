@@ -90,6 +90,8 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
     /**
      * Formats and returns the Summary fields.
+     *
+     * This is really gross, I'm removing it soon.
      * 
      * @return
      */
@@ -121,6 +123,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
             if (is_numeric($field)) {
                 $field = $fieldTitle;
+                $fieldTitle = Str::title($fieldTitle);
             }
 
             $summary_fields[$field] = $fieldTitle;
