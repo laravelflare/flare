@@ -12,6 +12,7 @@
                     <input type="checkbox"
                             value=""
                             name=""
+                            @if (isset($field['required'])) required="required" @endif
                             @if (true) @endif>
                     Name of Checkbox Value
                 </label>

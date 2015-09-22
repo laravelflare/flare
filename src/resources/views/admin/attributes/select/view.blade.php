@@ -1,8 +1,8 @@
 <dl class="dl-horizontal">
     <dt>
-        {{ $attributeType }}
+        {{ $attributeTitle }}
     </dt>
     <dd>
-        {{ $model->$attribute }}
+        {{ $modelManager->getAttribute($attribute, $model)  }}
     </dd>
 </dl>

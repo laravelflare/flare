@@ -16,7 +16,7 @@
                     @if (isset($field['pattern'])) pattern="{{ $field['pattern'] }}" @endif
                     @if (isset($field['required'])) required="required" @endif
                     @if (isset($field['placeholder'])) placeholder="{{ $field['placeholder'] }}" @endif
-                    value="{{ old($attribute, $model->$attribute) }}">
+                    value="{{ old($attribute, $modelManager->getAttribute($attribute, $model) ) }}">
             @if ($errors->has($attribute))
                 <span class="help-block">
                     {{ $errors->first($attribute) }}

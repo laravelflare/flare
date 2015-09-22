@@ -6,7 +6,8 @@
             </label>
             <textarea id="{{ $attribute }}"
                         class="form-control {{ $field['class'] or null }}"
-                        name="{{ $attribute }}">{{ old($attribute, $model->$attribute) }}</textarea>
+                        name="{{ $attribute }}"
+                        @if (isset($field['required'])) required="required" @endif>{{ old($attribute, $modelManager->getAttribute($attribute, $model) ) }}</textarea>
             @if ($errors->has($attribute))
                 <span class="help-block">
                     {{ $errors->first($attribute) }}

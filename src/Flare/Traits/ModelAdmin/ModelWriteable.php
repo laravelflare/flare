@@ -118,18 +118,29 @@ trait ModelWriteable
     private function doCreate()
     {
         /*
-         * Pre-processing is required.
+         * Pre=processing is required.
          */
-
         // Unguard the model so we can set and store non-fillable entries
+
         $this->modelManager->model->unguard();
 
+
         foreach (\Request::except('_token') as $key => $value) {
+
             if ($this->modelManager->hasSetMutator($key)) {
                 $this->modelManager->setAttribute($key, $value);
-            } else {
-                $this->modelManager->model->setAttribute($key, $value);
+                continue;
+            } 
+
+            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
+            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+                // This will need expanding on, as we only really account for BelongsTo relations with this code.
+                $this->modelManager->model->$key()->associate($value);
+                continue;
             }
+
+            $this->modelManager->model->setAttribute($key, $value);
+
         }
 
         $this->save();
@@ -199,12 +210,23 @@ trait ModelWriteable
 
         $this->modelManager->model->unguard();
 
+
         foreach (\Request::except('_token') as $key => $value) {
+
             if ($this->modelManager->hasSetMutator($key)) {
                 $this->modelManager->setAttribute($key, $value);
-            } else {
-                $this->modelManager->model->setAttribute($key, $value);
+                continue;
+            } 
+
+            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
+            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+                // This will need expanding on, as we only really account for BelongsTo relations with this code.
+                $this->modelManager->model->$key()->associate($value);
+                continue;
             }
+
+            $this->modelManager->model->setAttribute($key, $value);
+
         }
 
         $this->save();

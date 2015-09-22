@@ -5,10 +5,13 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
             
-            <select class="form-control" type="text" name="{{ $attribute }}" id="{{ $attribute }}" >
+            <select class="form-control"
+                    name="{{ $attribute }}"
+                    id="{{ $attribute }}"
+                    @if (isset($field['required'])) required="required" @endif>
                 <option></option>
-            @foreach ($field['options'] as $option)
-                <option>{{ $option }}</option>
+            @foreach ($field['options'] as $value => $option)
+                <option value="{{ $value }}">{{ $option }}</option>
             @endforeach
             </select>
             

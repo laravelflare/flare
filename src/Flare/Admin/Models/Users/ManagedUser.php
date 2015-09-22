@@ -33,11 +33,14 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
-        'group' => ['type' => 'select', 'options' => 'group'], // Options should either be an array or a string referencing a method on the ManagedModel class
-        'checkbox' => ['type' => 'checkbox'],
-        'date' => ['type' => 'date'],
-        'radio' => ['type' => 'radio'],
-        'textarea' => ['type' => 'textarea'],
+        'usergroup' => ['type' => 'select', 'options' => 'group', 'required' => 'required'], 
+                                            // Options should either be an array or a string referencing a method on the ManagedModel class
+                                            // Titles can definitely be improved on
+
+        // 'checkbox' => ['type' => 'checkbox'],
+        // 'date' => ['type' => 'date'],
+        // 'radio' => ['type' => 'radio'],
+        // 'textarea' => ['type' => 'textarea'],
     ];
 
     /**
@@ -62,7 +65,7 @@ class ManagedUser extends ManagedModel
         'id' => 'ID',
         'name',
         'email',
-        'group.name' => 'Group',
+        'usergroup.name' => 'Group', // This might be better as user_group, camelCased to the method name
         'created_at' => 'Created',
         'updated_at' => 'Updated',
     ];
@@ -84,7 +87,31 @@ class ManagedUser extends ManagedModel
      */
     protected function setPasswordAttribute($value)
     {
+        if ($value == '') {
+            return;
+        }
+        
         $this->model->setAttribute('password', bcrypt($value));
+    }
+
+    /**
+     * Don't output passwords
+     * 
+     * @param string
+     */
+    protected function getPasswordAttribute()
+    {
+        return;
+    }
+
+    /**
+     * Don't output passwords
+     * 
+     * @param string
+     */
+    protected function getUsergroupAttribute($model)
+    {
+        return $model->userGroup->name; // I dont like having to do this, I'd prefer some sweet dot notation.
     }
 
     /**

@@ -65,13 +65,17 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     /**
      * __construct.
      */
-    public function __construct()
+    public function __construct($id = false)
     {
         if (!isset($this->managedModel) || $this->managedModel === null) {
             throw new Exception('You have a ManagedModel which does not have a model assigned to it.', 1);
         }
 
         $this->model = new $this->managedModel();
+
+        if ($id && $this->model) {
+            $this->managedModel()->find($id) ?: new $this->managedModel();
+        }
     }
 
     /**
@@ -142,11 +146,29 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
             $model = $this->model;
         }
 
+        if ($this->hasGetAccessor($key)) {
+            $method = 'get'.Str::studly($key).'Attribute';
+
+            return $this->{$method}($model);
+        }
+
         if ($this->hasRelatedKey($key, $model)) {
             return $this->relatedKey($key, $model);
         }
 
         return $model->getAttribute($key);
+    }
+
+    /**
+     * Determine if a get accessor exists for an attribute.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function hasGetAccessor($key)
+    {
+        return method_exists($this, 'get'.Str::studly($key).'Attribute');
     }
 
     public function hasRelatedKey($key, $model = false)
@@ -158,13 +180,9 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         if (($methodBreaker = strpos($key, '.')) !== false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                if (method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
-                    return true;
-                }
-
-                if (isset($model->$method->$submethod)) {
-                    return true;
-                }
+                // If we get this far we assume the relatedKey to actually be a relation,
+                // in practice it might not be.
+                return true;
             }
         }
 
@@ -187,6 +205,8 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
                 if (isset($model->$method->$submethod)) {
                     return $model->$method->$submethod;
                 }
+
+                return $model->getRelationValue($method);
             }
         }
 
