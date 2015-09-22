@@ -13,7 +13,7 @@
     <form action="" method="post">
         <div class="box-body">
             @foreach ($modelAdmin->modelManager()->getMapping() as $attribute => $field)
-                {!! \Flare::addAttribute($attribute, $field) !!}
+                {!! \Flare::addAttribute($attribute, $field, false, $modelAdmin->modelManager()) !!}
             @endforeach
         </div>
         <div class="box-footer">

@@ -5,7 +5,12 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
             
-            
+            <select class="form-control" type="text" name="{{ $attribute }}" id="{{ $attribute }}" >
+                <option></option>
+            @foreach ($field['options'] as $option)
+                <option>{{ $option }}</option>
+            @endforeach
+            </select>
             
             @if ($errors->has($attribute))
                 <span class="help-block">

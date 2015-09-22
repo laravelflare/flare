@@ -33,7 +33,7 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
-        'group' => ['type' => 'select', 'options' => []],
+        'group' => ['type' => 'select', 'options' => 'group'], // Options should either be an array or a string referencing a method on the ManagedModel class
         'checkbox' => ['type' => 'checkbox'],
         'date' => ['type' => 'date'],
         'radio' => ['type' => 'radio'],
@@ -85,5 +85,16 @@ class ManagedUser extends ManagedModel
     protected function setPasswordAttribute($value)
     {
         $this->model->setAttribute('password', bcrypt($value));
+    }
+
+    /**
+     * Returns the available options for the Group Option
+     * 
+     * @return array
+     */
+    public function getGroupOptions()
+    {
+        return \App\Models\UserGroup::lists('name', 'id')->toArray(); // Example of Using Model Collection Lists :D
+        //return ['Admins', 'Moderators', 'Cool Kids']; // Example use of flat array
     }
 }

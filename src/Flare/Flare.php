@@ -105,19 +105,19 @@ class Flare
      * 
      * @param  string $attribute   
      * @param  string $field 
-     * @param  string $model 
+     * @param  string $modelManager 
      * 
      * @return        
      */
-    public function addAttribute($attribute, $field)
+    public function addAttribute($attribute, $field, $model = false, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
             $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
 
-            return (new $fieldType($attribute, $field))->renderAdd();
+            return (new $fieldType($attribute, $field, $model, $modelManager))->renderAdd();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field))->renderAdd();  
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, false, $modelManager))->renderAdd();  
     }
 
     /**
@@ -129,18 +129,19 @@ class Flare
      * @param  string $attribute   
      * @param  string $field 
      * @param  string $model 
+     * @param  string $modelManager
      * 
      * @return        
      */
-    public function editAttribute($attribute, $field, $model)
+    public function editAttribute($attribute, $field, $model, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
             $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
 
-            return (new $fieldType($attribute, $field, $model))->renderEdit();
+            return (new $fieldType($attribute, $field, $model, $modelManager))->renderEdit();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderEdit();
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager))->renderEdit();
     }
 
     /**
@@ -152,18 +153,19 @@ class Flare
      * @param  string $attribute   
      * @param  string $field 
      * @param  string $model 
+     * @param  string $modelManager
      * 
      * @return        
      */
-    public function viewAttribute($attribute, $field, $model)
+    public function viewAttribute($attribute, $field, $model, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
             $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
 
-            return (new $fieldType($attribute, $field, $model))->renderView();
+            return (new $fieldType($attribute, $field, $model, $modelManager))->renderView();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model))->renderView();
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager))->renderView();
     }
 
     /**
