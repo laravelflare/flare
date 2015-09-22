@@ -1,5 +1,8 @@
-<strong>
-    {{ $attributeType }}:
-</strong>
-{{ $model->$attribute }}
-<br>
+<dl class="dl-horizontal">
+    <dt>
+        {{ $attributeType }}
+    </dt>
+    <dd>
+        {{ $model->$attribute }}
+    </dd>
+</dl>

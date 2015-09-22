@@ -2,7 +2,8 @@
 
 namespace LaravelFlare\Flare\Admin\Models\Users;
 
-use App\Models\User as User;
+use App\Models\User;
+use App\Models\UserGroup;
 use LaravelFlare\Flare\Admin\Models\ManagedModel;
 
 class ManagedUser extends ManagedModel
@@ -32,7 +33,8 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
-        'checkbox' => ['type' => 'checkbox', ],
+        'group' => ['type' => 'select', 'options' => []],
+        'checkbox' => ['type' => 'checkbox'],
         'date' => ['type' => 'date'],
         'radio' => ['type' => 'radio'],
         'textarea' => ['type' => 'textarea'],
