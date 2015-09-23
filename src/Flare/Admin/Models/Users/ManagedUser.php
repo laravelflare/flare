@@ -33,7 +33,7 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
-        'usergroup' => ['type' => 'select', 'options' => 'group', 'required' => 'required'], 
+        'usergroup' => ['type' => 'radio', 'required' => 'required'], 
                                             // Options should either be an array or a string referencing a method on the ManagedModel class
                                             // Titles can definitely be improved on
 
@@ -139,7 +139,7 @@ class ManagedUser extends ManagedModel
      * 
      * @return array
      */
-    public function getGroupOptions()
+    public function getUsergroupOptions()
     {
         return \App\Models\UserGroup::lists('name', 'id')->toArray(); // Example of Using Model Collection Lists :D
         //return ['Admins', 'Moderators', 'Cool Kids']; // Example use of flat array

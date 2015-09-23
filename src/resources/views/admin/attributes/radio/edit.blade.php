@@ -7,15 +7,18 @@
 
             <div class="clearfix"></div>
             
+            @foreach ($field['options'] as $value => $option)
             <div class="radio col-sm-12 col-md-6 col-lg-4">
                 <label>
                     <input type="radio"
-                            value=""
-                            name=""
+                            value="{{ $value }}"
+                            name="{{ $attribute }}"
+                            @if (isset($field['required'])) required="required" @endif
                             @if (true) @endif>
-                    Name of Radio Value
+                    {{ $option }}
                 </label>
             </div>
+            @endforeach
             
             @if ($errors->has($attribute))
                 <span class="help-block">

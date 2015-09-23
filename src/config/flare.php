@@ -33,8 +33,8 @@ return [
     |
     */
     'modeladmins' => [
-        LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
-        LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
+        // Base ModelAdmin: LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
+        // Example ModelAdmin: LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
     ],
 
     /*
