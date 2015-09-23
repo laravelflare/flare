@@ -5,15 +5,23 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
             
-            <select class="form-control"
-                    name="{{ $attribute }}"
-                    id="{{ $attribute }}"
-                    @if (isset($field['required'])) required="required" @endif>
-                <option></option>
-            @foreach ($field['options'] as $value => $option)
-                <option value="{{ $value }}">{{ $option }}</option>
-            @endforeach
-            </select>
+            @if(count($field['options']) > 0)
+                <select class="form-control"
+                        name="{{ $attribute }}"
+                        id="{{ $attribute }}"
+                        @if (isset($field['required'])) required="required" @endif>
+                    <option></option>
+                @foreach ($field['options'] as $value => $option)
+                    <option value="{{ $value }}">{{ $option }}</option>
+                @endforeach
+                </select>
+            @else
+                <div class="callout callout-warning">
+                    <strong>
+                    No options available for {{ $attributeTitle }}!
+                    </strong>
+                </div>
+            @endif
             
             @if ($errors->has($attribute))
                 <span class="help-block">

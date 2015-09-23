@@ -7,19 +7,30 @@
 
             <div class="clearfix"></div>
             
-            <div class="checkbox col-sm-12 col-md-6 col-lg-4">
-                <label>
-                    <input type="checkbox"
-                            value=""
-                            name=""
-                            @if (isset($field['required'])) required="required" @endif
-                            @if (true) @endif>
-                    Name of Checkbox Value
-                </label>
-            </div>
+            @if(count($field['options']) > 0)
+                @foreach ($field['options'] as $value => $option)
+                <div class="checkbox col-sm-12 col-md-6 col-lg-4">
+                    <label>
+                        <input type="checkbox"
+                                value="{{ $value }}"
+                                name="{{ $attribute }}"
+                                @if (isset($field['required'])) required="required" @endif>
+                        {{ $option }}
+                    </label>
+                </div>
+                @endforeach
+            @else 
+                <div class="callout callout-warning">
+                    <strong>
+                    No options available for {{ $attributeTitle }}!
+                    </strong>
+                </div>
+            @endif
             
             @if ($errors->has($attribute))
-                <span class="help-block">{{ $errors->first($attribute) }}</span>
+                <span class="help-block">
+                    {{ $errors->first($attribute) }}
+                </span>
             @endif
         </div>
     </div>

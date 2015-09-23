@@ -23,7 +23,7 @@ class DummyClass extends ManagedModel
     public static $icon = '';
 
     /**
-     * Map User Attributes to their Attribute Types.
+     * Map Model Attributes to their Attribute Types.
      * 
      * @var array
      */

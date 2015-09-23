@@ -23,7 +23,7 @@
             </a>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-edit"></i>
-                Update {{ $modelAdmin::Title() }}
+                Update {{ $modelAdmin->modelManager()->Title() }}
             </button>
         </div>
     </form>

@@ -24,7 +24,7 @@
             </a>
             <button class="btn btn-danger" type="submit">
                 <i class="fa fa-trash"></i>
-                Delete {{ $modelAdmin::Title() }}
+                Delete {{ $modelAdmin->modelManager()->Title() }}
             </button>
         </div>
     </form>

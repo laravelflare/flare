@@ -22,7 +22,7 @@
                 Cancel
             </a>
             <button class="btn btn-success" type="submit">
-                Add {{ $modelAdmin::Title() }}
+                Add {{ $modelAdmin->modelManager()->Title() }}
             </button>
         </div>
     </form>

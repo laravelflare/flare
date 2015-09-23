@@ -23,11 +23,11 @@
             </a>
             <a href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}" class="btn btn-primary">
                 <i class="fa fa-edit"></i>
-                Edit {{ $modelAdmin::Title() }}
+                Edit {{ $modelAdmin->modelManager()->Title() }}
             </a>
             <a href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}" class="btn btn-danger">      
                 <i class="fa fa-trash"></i>      
-                Delete {{ $modelAdmin::Title() }}
+                Delete {{ $modelAdmin->modelManager()->Title() }}
             </a>
         </div>
     </form>
