@@ -31,8 +31,8 @@ class ManagedUser extends ManagedModel
      */
     protected $mapping = [
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
-        'email' => ['type' => 'email', 'length' => 255, 'requred' => 'required'],
-        'password' => ['type' => 'password', 'length' => 32, 'requred' => 'required'],
+        'email' => ['type' => 'email', 'length' => 255, 'required' => 'required'],
+        'password' => ['type' => 'password', 'length' => 32, 'required' => 'required'],
         'usergroup' => ['type' => 'radio', 'required' => 'required'], 
                                             // Options should either be an array or a string referencing a method on the ManagedModel class
                                             // Titles can definitely be improved on
