@@ -115,6 +115,26 @@ class ManagedUser extends ManagedModel
     }
 
     /**
+     * Format our created_at times nicely
+     * 
+     * @param string
+     */
+    protected function getCreatedAtAttribute($model)
+    {
+        return $model->created_at->diffForHumans(); // I dont like having to do this, I'd prefer some sweet dot notation.
+    }
+
+    /**
+     * Format our updated_at times nicely
+     * 
+     * @param string
+     */
+    protected function getUpdatedAtAttribute($model)
+    {
+        return $model->updated_at->diffForHumans(); // I dont like having to do this, I'd prefer some sweet dot notation.
+    }
+
+    /**
      * Returns the available options for the Group Option
      * 
      * @return array
