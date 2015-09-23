@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelFlare\Flare\Console\Commands\CreateUserCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ManagedModelMakeCommand;
@@ -24,6 +25,7 @@ class ArtisanServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        'CreateUser' => 'command.createuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
         'ManagedModelMake' => 'command.managedmodel.make',
@@ -45,6 +47,20 @@ class ArtisanServiceProvider extends ServiceProvider
         }
 
         $this->commands(array_values($this->commands));
+    }
+
+    /**
+     * Register the command
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerCreateUserCommand($command)
+    {
+        $this->app->singleton($command, function($app) {
+            return new CreateUserCommand($app['files']);
+        });
     }
 
     /**
