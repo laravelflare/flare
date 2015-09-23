@@ -26,29 +26,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($modelAdmin->modelManager()->items() as $modelItem)    
+                        @if ($modelAdmin->modelManager()->items()->count() > 0)    
+                            @foreach($modelAdmin->modelManager()->items() as $modelItem)    
+                                <tr>
+                                    @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
+                                    <td>
+                                        {{ $modelAdmin->modelManager()->getAttribute($key, $modelItem) }}
+                                    </td>
+                                    @endforeach
+                                    <td style="width: 1%; white-space:nowrap">
+                                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::CurrentUrl('view/'.$modelItem->id) }}">
+                                            <i class="fa fa-eye"></i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}">
+                                            <i class="fa fa-edit"></i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}">
+                                            <i class="fa fa-trash"></i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else 
                             <tr>
-                                @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
-                                <td>
-                                    {{ $modelAdmin->modelManager()->getAttribute($key, $modelItem) }}
-                                </td>
-                                @endforeach
-                                <td style="width: 1%; white-space:nowrap">
-                                    <a class="btn btn-success btn-xs" href="{{ $modelAdmin::CurrentUrl('view/'.$modelItem->id) }}">
-                                        <i class="fa fa-eye"></i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}">
-                                        <i class="fa fa-edit"></i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}">
-                                        <i class="fa fa-trash"></i>
-                                        Delete
-                                    </a>
+                                <td colspan="{{ $key+2 }}">
+                                    No {{ $modelAdmin->modelManager()->PluralTitle() }} Found
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

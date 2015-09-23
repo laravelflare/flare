@@ -30,8 +30,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      *
      * Note: This must either be a single Namespaced String
      * or an Array of Namespaced Strings
-     *
-     * Perhaps in the future we will allow App\Models\Model::class format aswell!
      * 
      * @var array|string
      */

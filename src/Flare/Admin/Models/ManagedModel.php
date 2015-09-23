@@ -137,7 +137,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
             return $summary_fields;
         }
 
-        return [$this->model->primaryKey];
+        return [$this->model->getKeyName() => $this->model->getKeyName()];
     }
 
     public function getAttribute($key, $model = false)
