@@ -52,7 +52,7 @@
                             @endforeach
                         @else 
                             <tr>
-                                <td colspan="{{ $key+2 }}">
+                                <td colspan="{{ count($modelAdmin->modelManager()->getSummaryFields())+2 }}">
                                     No {{ $modelAdmin->modelManager()->PluralTitle() }} Found
                                 </td>
                             </tr>

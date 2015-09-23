@@ -39,7 +39,7 @@
                     </li>
                     @endforeach
                     @if ($modelAdmin->getManagedModels()->count() > 1)
-                        @foreach ($modelAdmin->getManagedModels()->slice(1)->take(1) as $managedModel)
+                        @foreach ($modelAdmin->getManagedModels()->slice(1) as $managedModel)
                         <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/'.$managedModel::UrlPrefix().'/*') ? 'active' : '' }}">
                             <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
                                 @if ($managedModel::$icon)
