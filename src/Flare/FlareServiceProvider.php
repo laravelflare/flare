@@ -16,7 +16,6 @@ class FlareServiceProvider extends ServiceProvider
         // Assets
         $this->publishes([
             __DIR__.'/../public/' => public_path('vendor/flare'),
-            __DIR__.'/../../vendor/twbs/bootstrap/dist' => public_path('vendor/bootstrap'),
         ], 'public');
 
         // Config - I would prefer to call this something self-descriptive, such as 'admin.php'
