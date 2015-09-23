@@ -3,6 +3,12 @@
         {{ $attributeTitle }}
     </dt>
     <dd>
-        {{ $modelManager->getAttribute($attribute, $model)  }}
+        @if (is_string($modelManager->getAttribute($attribute, $model)))
+            {{ $modelManager->getAttribute($attribute, $model) }}
+        @else 
+            @foreach ($modelManager->getAttribute($attribute, $model) as $key => $value)
+            {{ $value }} <br>
+            @endforeach
+        @endif
     </dd>
 </dl>
