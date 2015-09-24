@@ -221,11 +221,14 @@ trait ModelWriteable
                 continue;
             } 
 
-            if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
-                $this->modelManager->model->$key()->associate($value);
-                continue;
-            } else if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
-                $this->modelManager->model->$key()->attach($value);
+            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
+            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+
+                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
+                    $this->modelManager->model->$key()->associate($value);
+                    continue;
+                } 
+
                 continue;
             }
 
