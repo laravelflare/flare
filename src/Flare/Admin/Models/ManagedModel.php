@@ -55,6 +55,22 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     protected $perPage = 15;
 
     /**
+     * Order By - Column/Attribute to OrderBy
+     *
+     * Primary Key of Model by default
+     * 
+     * @var string
+     */
+    protected $orderBy;
+
+    /**
+     * Sort By - Either Desc or Asc
+     * 
+     * @var string
+     */
+    protected $sortBy;
+
+    /**
      * Class Prefix used for matching and removing term
      * from user provided Admin sections
      *
@@ -80,16 +96,56 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
     /**
      * Returns Model Items, either all() or paginated().
+     *
+     * Ordered by Managed Model orderBy and sortBy methods
      * 
      * @return
      */
     public function items()
     {
         if ($this->perPage > 0) {
-            return $this->model->paginate($this->perPage);
+            return $this->model->orderBy(
+                                            $this->orderBy(),
+                                            $this->sortBy()
+                                        )->paginate($this->perPage);
         }
 
-        return $this->model->all();
+        return $this->model->orderBy(
+                                        $this->orderBy(),
+                                        $this->sortBy()
+                                    )->all();
+    }
+
+    /**
+     * Return Managed Model OrderBy.
+     *
+     * Primary key is default.
+     *
+     * @return string
+     */
+    protected function orderBy()
+    {
+        if ($this->orderBy) {
+            return $this->orderBy;
+        }
+        
+        return $this->model->getKeyName();
+    }
+
+    /**
+     * Return Managed Model SortBy (Asc or Desc).
+     *
+     * Descending is default.
+     * 
+     * @return string
+     */
+    protected function sortBy()
+    {
+        if ($this->sortBy == 'asc') {
+            return 'asc';
+        }
+
+        return 'desc';
     }
 
     /**

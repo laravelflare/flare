@@ -135,7 +135,7 @@ trait ModelWriteable
             if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
 
                 if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
-                    $this->modelManager->model->$key()->associate($value);
+                    $this->modelManager->model->$key()->sync($value);
                     continue;
                 } 
 
