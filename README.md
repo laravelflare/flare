@@ -10,7 +10,7 @@ Flare is an open-source CRUD system, currently under development, built on top o
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 - [License](LICENSE.md)
-- [Documentation](docs/DOCUMENTATION.md)
+- [Documentation](docs/0-DOCUMENTATION.md)
 - [Roadmap](ROADMAP.md)
 
 

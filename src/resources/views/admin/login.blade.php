@@ -8,7 +8,9 @@
 	<div class="container-fluid" style="padding-top: 120px">
 		<div class="row">
 			<div class="col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-				<h1 style="text-align: center; color: white; padding-bottom: 40px;">Laravel <b>Flare</b></h1>
+				<h1 style="text-align: center; color: white; padding-bottom: 40px;">
+		            {!! Flare::config('site_title') !!}
+		        </h1>
 
 				<div style="margin: 0 20px; padding: 40px 25px 35px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15)">
 					@if (count($errors) > 0)
