@@ -88,7 +88,7 @@ class Flare
      */
     public function attributeTypeExists($type)
     {
-        if (class_exists('\LaravelFlare\Flare\Admin\Attributes\\'.$type.'Attribute')) {
+        if (class_exists('\LaravelFlare\Flare\Admin\Attributes\\'.title_case($type).'Attribute')) {
             return true;
         }
 
