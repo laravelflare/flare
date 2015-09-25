@@ -147,7 +147,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
         return 'desc';
     }
-
+    
     /**
      * Formats and returns the Summary fields.
      *

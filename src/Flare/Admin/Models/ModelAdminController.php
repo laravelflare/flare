@@ -55,7 +55,6 @@ class ModelAdminController extends FlareController
 
         $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
         $this->managedModel = $this->modelAdmin->modelManager();
-        $this->model = $this->managedModel->model;
     }
 
     /**
@@ -65,10 +64,7 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.modelAdmin.index', [
-            'model' => $this->model,
-            'modelAdmin' => $this->modelAdmin,
-        ]);
+        return view('flare::admin.modelAdmin.index', [ 'modelAdmin' => $this->modelAdmin ]);
     }
 
     /**
@@ -78,10 +74,7 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
-        return view('flare::admin.modelAdmin.create', [
-            'model' => $this->model,
-            'modelAdmin' => $this->modelAdmin,
-        ]);
+        return view('flare::admin.modelAdmin.create', [ 'modelAdmin' => $this->modelAdmin ]);
     }
 
     /**
@@ -128,7 +121,6 @@ class ModelAdminController extends FlareController
     public function getView($modelitem_id)
     {
         return view('flare::admin.modelAdmin.view', [
-            'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
         ]);
@@ -144,7 +136,6 @@ class ModelAdminController extends FlareController
     public function getEdit($modelitem_id)
     {
         return view('flare::admin.modelAdmin.edit', [
-            'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
         ]);
@@ -198,7 +189,6 @@ class ModelAdminController extends FlareController
     public function getDelete($modelitem_id)
     {
         return view('flare::admin.modelAdmin.delete', [
-            'model' => $this->model,
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
         ]);
