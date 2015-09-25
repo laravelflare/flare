@@ -102,17 +102,20 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      */
     public function items()
     {
-        if ($this->perPage > 0) {
-            return $this->model->orderBy(
-                                            $this->orderBy(),
-                                            $this->sortBy()
-                                        )->paginate($this->perPage);
+        $model = $this->model;
+
+        if ($this->orderBy()) {
+            $model = $model->orderBy(
+                                $this->orderBy(),
+                                $this->sortBy()
+                            );
         }
 
-        return $this->model->orderBy(
-                                        $this->orderBy(),
-                                        $this->sortBy()
-                                    )->all();
+        if ($this->perPage > 0) {
+            return $model->paginate($this->perPage);
+        }
+
+        return $model->all();
     }
 
     /**
@@ -124,11 +127,13 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      */
     protected function orderBy()
     {
+        if (\Request::input('order')) {
+            return \Request::input('order');
+        }
+
         if ($this->orderBy) {
             return $this->orderBy;
         }
-
-        return $this->model->getKeyName();
     }
 
     /**
@@ -140,6 +145,10 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      */
     protected function sortBy()
     {
+        if (\Request::input('sort')) {
+            return \Request::input('sort');
+        }
+
         if ($this->sortBy == 'asc') {
             return 'asc';
         }

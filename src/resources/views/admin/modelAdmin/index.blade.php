@@ -19,7 +19,16 @@
                             <tr>
                                 @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
                                 <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
+                                    @if (strpos($key, '.') == 0 && !$modelAdmin->modelManager()->model->hasGetMutator($key))
+                                    <a href="{{ $modelAdmin::CurrentUrl('') }}?order={{ $key }}&sort={{ (Request::input('sort','asc') == 'asc' ? 'desc' : 'asc') }}">
+                                        {{ $field }}
+                                        @if (Request::input('order', 'id') == $key)
+                                        <i class="fa fa-caret-{{ (Request::input('sort','asc') == 'asc' ? 'up' : 'down') }}"></i>
+                                        @endif
+                                    </a>
+                                    @else 
                                     {{ $field }}
+                                    @endif
                                 </th>
                                 @endforeach
                                 <th></th>
