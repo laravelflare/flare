@@ -12,8 +12,6 @@ Forms - Rapid creation of CRUD for different attribute types using built in Form
 
 Split the core into subtrees
 
-Ability to Order Managed Models (default and custom)
-
 Ability to Search and/or Filter Managed Models (default and custom)
 
 Fix Active ManagedModel/ModelAdmin link in Sidebar Tree
