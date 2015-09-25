@@ -125,7 +125,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      *
      * @return string
      */
-    protected function orderBy()
+    public function orderBy()
     {
         if (\Request::input('order')) {
             return \Request::input('order');
@@ -143,7 +143,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      * 
      * @return string
      */
-    protected function sortBy()
+    public function sortBy()
     {
         if (\Request::input('sort')) {
             return \Request::input('sort');

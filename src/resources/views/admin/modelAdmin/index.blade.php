@@ -20,10 +20,10 @@
                                 @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
                                 <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
                                     @if (strpos($key, '.') == 0 && !$modelAdmin->modelManager()->model->hasGetMutator($key))
-                                    <a href="{{ $modelAdmin::CurrentUrl('') }}?order={{ $key }}&sort={{ (Request::input('sort','asc') == 'asc' ? 'desc' : 'asc') }}">
+                                    <a href="{{ $modelAdmin::CurrentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                                         {{ $field }}
                                         @if (Request::input('order', 'id') == $key)
-                                        <i class="fa fa-caret-{{ (Request::input('sort','asc') == 'asc' ? 'up' : 'down') }}"></i>
+                                        <i class="fa fa-caret-{{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
                                         @endif
                                     </a>
                                     @else 
@@ -79,7 +79,10 @@
 
                     @if ($modelAdmin->modelManager()->getPerPage())
                     <div class="pull-right" style="margin-top: -20px; margin-bottom: -20px;">
-                        {!! $modelAdmin->modelManager()->items()->render() !!}
+                        {!! $modelAdmin->modelManager()->items()->appends([
+                                                                            'sort' => $modelAdmin->modelManager()->sortBy() == 'asc' ? 'asc' : null,
+                                                                            'order' => $modelAdmin->modelManager()->orderBy(),
+                                                                        ])->render() !!}
                     </div>
                     @endif
                 </div>
