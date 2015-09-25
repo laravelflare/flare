@@ -8,7 +8,7 @@ use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 class CheckModelFound
 {
     /**
-     * Currently Requested Model
+     * Currently Requested Model.
      */
     protected $model;
 

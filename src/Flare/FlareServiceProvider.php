@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare;
 
 use Blade;
-use LaravelFlare\Flare\Flare;
 use Illuminate\Support\ServiceProvider;
 
 class FlareServiceProvider extends ServiceProvider
@@ -51,7 +50,7 @@ class FlareServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/flare.php', 'flare'
         );
-        
+
         $this->registerServiceProviders();
 
         $this->app->singleton('flare', function ($app) {
@@ -63,7 +62,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Service Providers
+     * Register Service Providers.
      */
     public function registerServiceProviders()
     {

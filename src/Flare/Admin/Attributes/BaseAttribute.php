@@ -5,7 +5,7 @@ namespace LaravelFlare\Flare\Admin\Attributes;
 class BaseAttribute
 {
     /**
-     * Attribute Type Constant
+     * Attribute Type Constant.
      */
     const ATTRIBUTE_TYPE = '';
 
@@ -17,36 +17,36 @@ class BaseAttribute
      *     
      * @var string
      */
-    public $viewpath ='flare::admin.attributes';
+    public $viewpath = 'flare::admin.attributes';
 
     /**
-     * Attribute
+     * Attribute.
      * 
      * @var string
      */
     protected $attribute;
 
     /**
-     * Field
+     * Field.
      * 
      * @var mixed
      */
     protected $field;
 
     /**
-     * Eloquent Model
+     * Eloquent Model.
      * 
      * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
     /**
-     * __construct
+     * __construct.
      * 
-     * @param string  $attribute    
-     * @param mixed   $field        
-     * @param boolean $model        
-     * @param boolean $modelManager 
+     * @param string $attribute
+     * @param mixed  $field
+     * @param bool   $model
+     * @param bool   $modelManager
      */
     public function __construct($attribute, $field, $model = false, $modelManager = false)
     {
@@ -59,7 +59,7 @@ class BaseAttribute
     }
 
     /**
-     * Renders the Add (Create) Field View
+     * Renders the Add (Create) Field View.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -69,7 +69,7 @@ class BaseAttribute
     }
 
     /**
-     * Renders the Edit (Update) Field View
+     * Renders the Edit (Update) Field View.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -79,7 +79,7 @@ class BaseAttribute
     }
 
     /**
-     * Renders the Viewable Field View
+     * Renders the Viewable Field View.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +89,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Attribute
+     * Accessor for Attribute.
      * 
      * @return string
      */
@@ -99,7 +99,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Field
+     * Accessor for Field.
      * 
      * @return mixed
      */
@@ -109,7 +109,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Model
+     * Accessor for Model.
      * 
      * @var \Illuminate\Database\Eloquent\Model
      */
@@ -119,7 +119,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Model
+     * Accessor for Model.
      * 
      * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
      */
@@ -129,29 +129,27 @@ class BaseAttribute
     }
 
     /**
-     * Acessor for Attribute Type converted to Title Case
+     * Acessor for Attribute Type converted to Title Case.
      * 
      * @return string
      */
     public function getAttributeType()
     {
-        return title_case( isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE );
+        return title_case(isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE);
     }
 
     /**
-     * Shares all of the accessible date to the Attribute View
-     * 
-     * @return void
+     * Shares all of the accessible date to the Attribute View.
      */
     protected function viewShare()
     {
         view()->share([
                         'field' => $this->getField(),
-                        'model' => $this->getModel(), 
-                        'attribute' => $this->getAttribute(), 
-                        'modelManager' => $this->getModelManager(), 
-                        'attributeType' => $this->getAttributeType(), 
-                        'attributeTitle' => title_case($this->getAttribute()), 
+                        'model' => $this->getModel(),
+                        'attribute' => $this->getAttribute(),
+                        'modelManager' => $this->getModelManager(),
+                        'attributeType' => $this->getAttributeType(),
+                        'attributeTitle' => title_case($this->getAttribute()),
                     ]);
     }
 }

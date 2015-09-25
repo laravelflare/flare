@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare\Console\Commands\Generators;
 
 use Illuminate\Console\GeneratorCommand;
-use Symfony\Component\Console\Input\InputArgument;
 
 class ModelAdminMakeCommand extends GeneratorCommand
 {
@@ -20,7 +19,7 @@ class ModelAdminMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $description = 'Creates a new Flare Model Admin class';
-   
+
     /**
      * The type of class being generated.
      *
@@ -30,8 +29,6 @@ class ModelAdminMakeCommand extends GeneratorCommand
 
     /**
      * Execute the command.
-     *
-     * @return void
      */
     public function fire()
     {
@@ -51,7 +48,7 @@ class ModelAdminMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param string $rootNamespace
      * 
      * @return string
      */

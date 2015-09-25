@@ -1,4 +1,6 @@
-<?php namespace LaravelFlare\Flare\Facades;
+<?php
+
+namespace LaravelFlare\Flare\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,5 +11,8 @@ class Flare extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'flare'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'flare';
+    }
 }

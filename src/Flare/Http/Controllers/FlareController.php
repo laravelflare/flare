@@ -19,7 +19,7 @@ abstract class FlareController extends BaseController
     protected $modelAdminCollection;
 
     /**
-     * __construct
+     * __construct.
      * 
      * @param ModelAdminCollection $modelAdminCollection
      */

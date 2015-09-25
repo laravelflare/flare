@@ -2,8 +2,7 @@
 
 namespace LaravelFlare\Flare;
 
-use LaravelFlare\Flare\Flare;
-use Illuminate\Support\ServiceProvider;
+
 
 class Flare
 {
@@ -29,11 +28,10 @@ class Flare
     ];
 
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -42,7 +40,7 @@ class Flare
      * defaults if, for whatever reason the config is
      * undefined.
      * 
-     * @param  string $key
+     * @param string $key
      * 
      * @return mixed
      */
@@ -59,7 +57,7 @@ class Flare
      * Returns URL to a path in the Admin Panel, using the 
      * Admin URL defined in the Flare Config.
      * 
-     * @param  string $path
+     * @param string $path
      * 
      * @return string
      */
@@ -72,21 +70,21 @@ class Flare
      * Returns URL to a path in the Admin Panel, using the 
      * Admin URL defined in the Flare Config.
      * 
-     * @param  string $path
+     * @param string $path
      * 
      * @return string
      */
     public function relativeAdminUrl($path = '')
     {
-        return \Flare::config('admin_url') . '/' . $path;
+        return \Flare::config('admin_url').'/'.$path;
     }
 
     /**
      * Determines if an AttributeType class exists or not.
      * 
-     * @param  string $type 
+     * @param string $type
      * 
-     * @return boolean       
+     * @return bool
      */
     public function attributeTypeExists($type)
     {
@@ -103,21 +101,21 @@ class Flare
      * Attributes should really be registered in an AttributeServiceProvider and/or
      * the Flare Configuration file, so that they can be expanded on, overridden etc.
      * 
-     * @param  string $attribute   
-     * @param  string $field 
-     * @param  string $modelManager 
+     * @param string $attribute
+     * @param string $field
+     * @param string $modelManager
      * 
      * @return        
      */
     public function addAttribute($attribute, $field, $model = false, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
 
             return (new $fieldType($attribute, $field, $model, $modelManager))->renderAdd();
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, false, $modelManager))->renderAdd();  
+        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, false, $modelManager))->renderAdd();
     }
 
     /**
@@ -126,17 +124,17 @@ class Flare
      * Attributes should really be registered in an AttributeServiceProvider and/or
      * the Flare Configuration file, so that they can be expanded on, overridden etc.
      * 
-     * @param  string $attribute   
-     * @param  string $field 
-     * @param  string $model 
-     * @param  string $modelManager
+     * @param string $attribute
+     * @param string $field
+     * @param string $model
+     * @param string $modelManager
      * 
      * @return        
      */
     public function editAttribute($attribute, $field, $model, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
 
             return (new $fieldType($attribute, $field, $model, $modelManager))->renderEdit();
         }
@@ -150,17 +148,17 @@ class Flare
      * Attributes should really be registered in an AttributeServiceProvider and/or
      * the Flare Configuration file, so that they can be expanded on, overridden etc.
      * 
-     * @param  string $attribute   
-     * @param  string $field 
-     * @param  string $model 
-     * @param  string $modelManager
+     * @param string $attribute
+     * @param string $field
+     * @param string $model
+     * @param string $modelManager
      * 
      * @return        
      */
     public function viewAttribute($attribute, $field, $model, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\' . $field['type'] . 'Attribute';
+            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
 
             return (new $fieldType($attribute, $field, $model, $modelManager))->renderView();
         }
@@ -169,7 +167,7 @@ class Flare
     }
 
     /**
-     * Returns the current Flare Version
+     * Returns the current Flare Version.
      * 
      * @return string
      */
@@ -177,5 +175,4 @@ class Flare
     {
         return self::VERSION;
     }
-
 }

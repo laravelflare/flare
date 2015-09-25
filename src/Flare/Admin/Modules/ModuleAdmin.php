@@ -6,7 +6,7 @@ abstract class ModuleAdmin extends Admin
 {
     /**
      * Class Prefix used for matching and removing term
-     * from user provided Admin sections
+     * from user provided Admin sections.
      *
      * @var string
      */

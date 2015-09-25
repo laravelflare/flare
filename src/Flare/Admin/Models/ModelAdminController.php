@@ -40,7 +40,7 @@ class ModelAdminController extends FlareController
     protected $model;
 
     /**
-     * __construct
+     * __construct.
      * 
      * @param ModelAdminCollection $modelAdminCollection
      */
@@ -55,6 +55,7 @@ class ModelAdminController extends FlareController
 
         $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
         $this->managedModel = $this->modelAdmin->modelManager();
+        $this->model = $this->managedModel->model;
     }
 
     /**
@@ -64,7 +65,7 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.modelAdmin.index', [ 'modelAdmin' => $this->modelAdmin ]);
+        return view('flare::admin.modelAdmin.index', ['modelAdmin' => $this->modelAdmin]);
     }
 
     /**
@@ -74,7 +75,7 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
-        return view('flare::admin.modelAdmin.create', [ 'modelAdmin' => $this->modelAdmin ]);
+        return view('flare::admin.modelAdmin.create', ['modelAdmin' => $this->modelAdmin]);
     }
 
     /**

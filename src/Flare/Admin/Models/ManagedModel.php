@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
@@ -55,7 +54,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     protected $perPage = 15;
 
     /**
-     * Order By - Column/Attribute to OrderBy
+     * Order By - Column/Attribute to OrderBy.
      *
      * Primary Key of Model by default
      * 
@@ -64,7 +63,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     protected $orderBy;
 
     /**
-     * Sort By - Either Desc or Asc
+     * Sort By - Either Desc or Asc.
      * 
      * @var string
      */
@@ -72,7 +71,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
     /**
      * Class Prefix used for matching and removing term
-     * from user provided Admin sections
+     * from user provided Admin sections.
      *
      * @var string
      */
@@ -128,7 +127,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         if ($this->orderBy) {
             return $this->orderBy;
         }
-        
+
         return $this->model->getKeyName();
     }
 
@@ -147,7 +146,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
         return 'desc';
     }
-    
+
     /**
      * Formats and returns the Summary fields.
      *

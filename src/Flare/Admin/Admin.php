@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 abstract class Admin
 {
     /**
-     * Admin Section Icon
+     * Admin Section Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
      *
@@ -30,14 +30,14 @@ abstract class Admin
     protected $pluralTitle = null;
 
     /**
-     * URL Prefix of Admin Section
+     * URL Prefix of Admin Section.
      *
      * @var string
      */
     protected $urlPrefix = null;
 
     /**
-     * The Controller to be used by the Admin
+     * The Controller to be used by the Admin.
      *
      * This defaults to parent::getController()
      * if it has been left undefined. 
@@ -48,7 +48,7 @@ abstract class Admin
 
     /**
      * Class Prefix used for matching and removing term
-     * from user provided Admin sections
+     * from user provided Admin sections.
      *
      * @var string
      */
@@ -59,7 +59,6 @@ abstract class Admin
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -84,17 +83,16 @@ abstract class Admin
     }
 
     /**
-     * Register subRoutes for this Admin Section
+     * Register subRoutes for this Admin Section.
      *
      * @return
      */
     public function registerSubRoutes()
     {
-        
     }
 
     /**
-     * Returns the Controller Class for the current Admin section
+     * Returns the Controller Class for the current Admin section.
      * 
      * @return string
      */
@@ -172,7 +170,7 @@ abstract class Admin
      */
     public static function RelativeUrl($path = '')
     {
-        return \Flare::relativeAdminUrl(static::UrlPrefix() . '/' . $path);
+        return \Flare::relativeAdminUrl(static::UrlPrefix().'/'.$path);
     }
 
     /**
@@ -192,7 +190,7 @@ abstract class Admin
      */
     public static function RelativeCurrentUrl($path)
     {
-        return \Route::current()->getPrefix() . '/'. $path;
+        return \Route::current()->getPrefix().'/'.$path;
     }
 
     /**

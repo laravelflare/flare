@@ -2,10 +2,8 @@
 
 namespace LaravelFlare\Flare\Admin\Attributes;
 
-use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
-
 class TextAttribute extends BaseAttribute
-{    
+{
     /**
      * View Path for this Attribute Type
      *     Defaults to flare::admin.attributes which outputs

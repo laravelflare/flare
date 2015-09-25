@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 class CreateUserCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -30,7 +29,7 @@ class CreateUserCommand extends Command
     }
 
     /**
-     * Run the command
+     * Run the command.
      */
     public function fire()
     {
@@ -38,7 +37,7 @@ class CreateUserCommand extends Command
 
         if ($name == '') {
             $name = 'admin';
-        }       
+        }
 
         $email = $this->ask('Please provide your email (defaults to tech.studio@jacobbailey.com)');
 

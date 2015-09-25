@@ -33,7 +33,7 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'required' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'required' => 'required'],
-        'usergroup' => ['type' => 'radio', 'required' => 'required'], 
+        'usergroup' => ['type' => 'radio', 'required' => 'required'],
                                             // Options should either be an array or a string referencing a method on the ManagedModel class
                                             // Titles can definitely be improved on
 
@@ -90,12 +90,12 @@ class ManagedUser extends ManagedModel
         if ($value == '') {
             return;
         }
-        
+
         $this->model->setAttribute('password', bcrypt($value));
     }
 
     /**
-     * Don't output passwords
+     * Don't output passwords.
      * 
      * @param string
      */
@@ -105,7 +105,7 @@ class ManagedUser extends ManagedModel
     }
 
     /**
-     * Don't output passwords
+     * Don't output passwords.
      * 
      * @param string
      */
@@ -115,7 +115,7 @@ class ManagedUser extends ManagedModel
     }
 
     /**
-     * Format our created_at times nicely
+     * Format our created_at times nicely.
      * 
      * @param string
      */
@@ -125,7 +125,7 @@ class ManagedUser extends ManagedModel
     }
 
     /**
-     * Format our updated_at times nicely
+     * Format our updated_at times nicely.
      * 
      * @param string
      */
@@ -135,7 +135,7 @@ class ManagedUser extends ManagedModel
     }
 
     /**
-     * Returns the available options for the Group Option
+     * Returns the available options for the Group Option.
      * 
      * @return array
      */

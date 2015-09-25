@@ -35,8 +35,6 @@ class ArtisanServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -50,7 +48,7 @@ class ArtisanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
@@ -58,13 +56,13 @@ class ArtisanServiceProvider extends ServiceProvider
      */
     protected function registerCreateUserCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new CreateUserCommand($app['files']);
         });
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
@@ -72,63 +70,63 @@ class ArtisanServiceProvider extends ServiceProvider
      */
     protected function registerModelAdminMakeCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new ModelAdminMakeCommand($app['files']);
         });
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
      * @return
-     */        
+     */
     protected function registerModuleAdminMakeCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new ModuleAdminMakeCommand($app['files']);
         });
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
      * @return
-     */        
+     */
     protected function registerManagedModelMakeCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new ManagedModelMakeCommand($app['files']);
         });
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
      * @return
-     */        
+     */
     protected function registerModelAdminControllerMakeCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new ModelAdminControllerMakeCommand($app['files']);
         });
     }
 
     /**
-     * Register the command
+     * Register the command.
      * 
      * @param $command
      * 
      * @return
-     */        
+     */
     protected function registerModuleAdminControllerMakeCommand($command)
     {
-        $this->app->singleton($command, function($app) {
+        $this->app->singleton($command, function ($app) {
             return new ModuleAdminControllerMakeCommand($app['files']);
         });
     }

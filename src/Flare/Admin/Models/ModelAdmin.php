@@ -61,7 +61,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
 
     /**
      * Class Prefix used for matching and removing term
-     * from user provided Admin sections
+     * from user provided Admin sections.
      *
      * Note: This is actually a suffix, we might change the terminology
      * for this later although it would obviously be a breaking change.
@@ -83,7 +83,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         $this->modelManager = $this->modelManager();
         $this->model = $this->model();
     }
-    
+
     /**
      * Register subRoutes for ModelAdmin instances 
      * which have more than one managedModel.
@@ -102,7 +102,7 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
                             'prefix' => $managedModel->UrlPrefix(),
                             'as' => $managedModel->UrlPrefix(),
                             'modelManager' => get_class($managedModel),
-                            'model' => $managedModel->managedModel
+                            'model' => $managedModel->managedModel,
                         ];
 
             \Route::group($parameters, function () {
