@@ -14,10 +14,10 @@
                 </h3>
                 <p>
                     We could not find the page you were looking for.
-                    Meanwhile, you may <a href="{{ Flare::adminUrl() }}">return to dashboard</a> or try using the search form.
+                    Please <a href="{{ Flare::adminUrl() }}">return to dashboard</a>.
                 </p>
-            </div><!-- /.error-content -->
-        </div><!-- /.error-page -->
+            </div>
+        </div>
     </section>
 
 @endsection

@@ -17,13 +17,14 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
     /**
-     * Managed Model Icon.
+     * The Controller to be used by the Model Admin.
      *
-     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
-     *
+     * This defaults to parent::getController()
+     * if it has been left undefined. 
+     * 
      * @var string
      */
-    public static $icon;
+    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * List of managed {@link Model}s.
@@ -34,16 +35,6 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
      * @var array|string
      */
     protected $managedModels = '';
-
-    /**
-     * The Controller to be used by the Model Admin.
-     *
-     * This defaults to parent::getController()
-     * if it has been left undefined. 
-     * 
-     * @var string
-     */
-    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * The current model manager.

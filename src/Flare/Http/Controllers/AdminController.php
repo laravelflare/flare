@@ -3,12 +3,13 @@
 namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Contracts\Auth\Guard;
+use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
+use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 
 /**
  * I kind of feel that this file should be
@@ -20,21 +21,40 @@ class AdminController extends BaseController
 {
     use AuthenticatesUsers, DispatchesJobs, ValidatesRequests;
 
+    /**
+     * Auth
+     * 
+     * @var Guard
+     */
     protected $auth;
 
+    /**
+     * ModelAdminCollection.
+     *
+     * @var ModelAdminCollection
+     */
     protected $modelAdminCollection;
 
-    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection)
+    /**
+     * ModuleAdminCollection.
+     *
+     * @var ModuleAdminCollection
+     */
+    protected $moduleAdminCollection;
+
+
+    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
     {
         $this->auth = $auth;
 
         $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
-
         $this->middleware('checkpermissions', ['except' => ['getLogin']]);
 
         $this->modelAdminCollection = $modelAdminCollection;
+        $this->moduleAdminCollection = $moduleAdminCollection;
 
         view()->share('modelAdminCollection', $this->modelAdminCollection);
+        view()->share('moduleAdminCollection', $this->moduleAdminCollection);
     }
 
     /**

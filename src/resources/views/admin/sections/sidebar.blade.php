@@ -40,7 +40,7 @@
                     @endforeach
                     @if ($modelAdmin->getManagedModels()->count() > 1)
                         @foreach ($modelAdmin->getManagedModels()->slice(1) as $managedModel)
-                        <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '/'.$managedModel::UrlPrefix().'/*') ? 'active' : '' }}">
+                        <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix()).'/*') ? 'active' : '' }}">
                             <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
                                 @if ($managedModel::$icon)
                                 <i class="fa fa-{{ $managedModel::$icon }}" style="width: 17px;"></i>
@@ -49,12 +49,12 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/*') ? 'active' : '' }}">
+                                <li class="{{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix())) ? 'active' : '' }}">
                                     <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix()) }}">
                                         All {{ $managedModel::PluralTitle() }}
                                     </a>
                                 </li>
-                                <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '/' . $managedModel::UrlPrefix() . '/create') ? 'active' : '' }}">
+                                <li class="{{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix()) . '/create') ? 'active' : '' }}">
                                     <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix() . '/create')  }}">
                                         Create {{ $managedModel::Title() }}
                                     </a>
@@ -64,6 +64,17 @@
                         @endforeach
                     @endif
                 </ul>
+            </li>
+            @endforeach
+
+            @foreach($moduleAdminCollection as $moduleAdmin)
+            <li class="treeview {{ Request::is( $moduleAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
+                <a href="{{ $moduleAdmin::Url() }}">
+                    @if ($moduleAdmin::$icon)
+                    <i class="fa fa-{{ $moduleAdmin::$icon }}"></i>
+                    @endif
+                    <span>{{ $moduleAdmin::PluralTitle() }}</span>
+                </a>
             </li>
             @endforeach
         </ul>

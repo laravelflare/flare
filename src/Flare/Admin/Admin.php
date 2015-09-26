@@ -47,6 +47,15 @@ abstract class Admin
     protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
+     * The Admin Default View
+     *
+     * By Default this is the 404 page
+     *
+     * @var string
+     */
+    protected $view = 'admin.404';
+
+    /**
      * Class Prefix used for matching and removing term
      * from user provided Admin sections.
      *
@@ -92,6 +101,26 @@ abstract class Admin
     }
 
     /**
+     * Returns the Requested Namespace as a string.
+     * 
+     * @return string|void
+     */
+    public function getRequestedNamespace()
+    {
+        if (!\Route::current()) {
+            return;
+        }
+
+        $currentAction = \Route::current()->getAction();
+
+        if (isset($currentAction['namespace'])) {
+            return $currentAction['namespace'];
+        }
+
+        return;
+    }
+
+    /**
      * Returns the Controller Class for the current Admin section.
      * 
      * @return string
@@ -99,6 +128,20 @@ abstract class Admin
     public function getController()
     {
         return $this->controller;
+    }
+
+    /**
+     * Returns the Module Admin View
+     * 
+     * @return string
+     */
+    public function getView()
+    {
+        if (view()->exists($this->view)) {
+            return $this->view;
+        }
+
+        return 'flare::'.$this->view;
     }
 
     /**
@@ -170,7 +213,7 @@ abstract class Admin
      */
     public static function RelativeUrl($path = '')
     {
-        return \Flare::relativeAdminUrl(static::UrlPrefix().'/'.$path);
+        return \Flare::relativeAdminUrl(static::UrlPrefix().($path ? '/'.$path : ''));
     }
 
     /**

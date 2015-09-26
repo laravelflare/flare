@@ -23,7 +23,7 @@ class Flare
         'site_title' => 'Laravel <b>Flare</b>',
         'admin_url' => 'admin',
         'admin_theme' => 'red',
-        'modeladmins' => [],
+        'models' => [],
         'modules' => [],
     ];
 
@@ -77,6 +77,19 @@ class Flare
     public function relativeAdminUrl($path = '')
     {
         return \Flare::config('admin_url').'/'.$path;
+    }
+
+    /**
+     * Returns URL to a path in the Flare Documentation.
+     * This is COMING SOON!
+     * 
+     * @param string $path
+     * 
+     * @return string
+     */
+    public function docsUrl($path = '')
+    {
+        return url('#'.$path);
     }
 
     /**

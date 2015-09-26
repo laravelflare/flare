@@ -3,7 +3,9 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Http\Controllers\FlareController;
+use LaravelFlare\Flare\Admin\Models\ModelAdminController;
 use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
+use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
 use LaravelFlare\Flare\Exceptions\PermissionsException as PermissionsException;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
@@ -44,16 +46,16 @@ class ModelAdminController extends FlareController
      * 
      * @param ModelAdminCollection $modelAdminCollection
      */
-    public function __construct(ModelAdminCollection $modelAdminCollection)
+    public function __construct(ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct($modelAdminCollection);
+        parent::__construct($modelAdminCollection, $moduleAdminCollection);
 
         $this->middleware('checkmodelfound', ['only' => ['getView', 'edit', 'delete']]);
 
-        $this->modelAdmin = $this->modelAdminCollection->getModelAdminInstance();
+        $this->modelAdmin = $this->modelAdminCollection->getAdminInstance();
         $this->managedModel = $this->modelAdmin->modelManager();
         $this->model = $this->managedModel->model;
     }
