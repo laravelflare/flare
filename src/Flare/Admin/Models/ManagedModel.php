@@ -5,6 +5,7 @@ namespace LaravelFlare\Flare\Admin\Models;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
+use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Contracts\PermissionsContract;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
@@ -204,6 +205,15 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         return [$this->model->getKeyName() => $this->model->getKeyName()];
     }
 
+    /**
+     * Gets an Attribute by the provided key
+     * on either the current model or a provided model instance.
+     * 
+     * @param  string  $key   
+     * @param  mixed   $model 
+     * 
+     * @return mixed        
+     */
     public function getAttribute($key, $model = false)
     {
         if (!$model) {
@@ -235,6 +245,14 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         return method_exists($this, 'get'.Str::studly($key).'Attribute');
     }
 
+    /**
+     * Determines if a key resolved a related Model
+     * 
+     * @param  string  $key   
+     * @param  mixed   $model 
+     * 
+     * @return boolean        
+     */
     public function hasRelatedKey($key, $model = false)
     {
         if (!$model) {
@@ -253,6 +271,15 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
         return false;
     }
 
+    /**
+     * Resolves a relation based on the key provided,
+     * either on the current model or a provided model instance
+     * 
+     * @param  string  $key   
+     * @param  mixed   $model 
+     * 
+     * @return mixed
+     */
     public function relatedKey($key, $model = false)
     {
         if (!$model) {
@@ -328,6 +355,17 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     public function hasSetMutator($key)
     {
         return method_exists($this, 'set'.Str::studly($key).'Attribute');
+    }
+
+    /**
+     * Returns a DefaultWidget instance based on the
+     * currently ManagedModel
+     * 
+     * @return LaravelFlare\Flare\Admin\Widgets\DefaultWidget
+     */
+    public function defaultWidget()
+    {
+        return new DefaultWidget($this);
     }
 
     /**
