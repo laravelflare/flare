@@ -48,6 +48,21 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     protected $summary_fields = [];
 
     /**
+     * Allows filtering of the query, for instance:
+     *
+     *      $query_filter = [
+     *                          'whereNotNull' => ['parent_id'],
+     *                          'where' => ['name', 'John'],
+     *                      ]
+     *
+     * Would result in an Eloquent query with the following scope:
+     *     Model::whereNotNull('parent_id')->where('name', 'John')->get();
+     * 
+     * @var array
+     */
+    protected $query_filter = [];
+
+    /**
      * The number of models to return for pagination.
      *
      * @var int
@@ -97,6 +112,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     /**
      * Returns Model Items, either all() or paginated().
      *
+     * Filtered by any defined query filters ($query_filter)
      * Ordered by Managed Model orderBy and sortBy methods
      * 
      * @return
@@ -104,6 +120,15 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     public function items()
     {
         $model = $this->model;
+
+        if (count($this->query_filter) > 0) {
+            foreach ($this->query_filter as $filter => $parameters) {
+                if (!is_array($parameters)) {
+                    $parameters = [$parameters];
+                }
+                $model = call_user_func_array([$this->model, $filter], $parameters);
+            }
+        }
 
         if ($this->orderBy()) {
             $model = $model->orderBy(

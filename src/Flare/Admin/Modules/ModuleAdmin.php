@@ -44,8 +44,8 @@ abstract class ModuleAdmin extends Admin
      */
     public function getView()
     {
-        if (view()->exists($this->view)) {
-            return $this->view;
+        if (view()->exists(static::$view)) {
+            return static::$view;
         }
 
         if (view()->exists('admin.'.static::UrlPrefix().'.index')) {
@@ -56,8 +56,8 @@ abstract class ModuleAdmin extends Admin
             return 'admin.'.static::UrlPrefix();
         }
 
-        if (view()->exists('flare::'.$this->view)) {
-            return 'flare::'.$this->view;
+        if (view()->exists('flare::'.self::$view)) {
+            return 'flare::'.self::$view;
         }
 
         return parent::getView();

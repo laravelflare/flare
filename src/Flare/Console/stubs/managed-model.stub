@@ -46,6 +46,13 @@ class DummyClass extends ManagedModel
     protected $summary_fields = [];
 
     /**
+     * Allows filtering of the query.
+     * 
+     * @var array
+     */
+    protected $query_filter = [];
+
+    /**
      * The number of models to return for pagination.
      *
      * If int greater than 0 then pagination is used, otherwise

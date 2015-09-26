@@ -8,10 +8,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header">
+                <div class="box-header with-border">
                     <h3 class="box-title">
                         {{ $modelAdmin->modelManager()->PluralTitle() }}
                     </h3>
+                    <div class="box-tools">
+                        <div style="width: 150px;" class="input-group">
+                            <input type="text" placeholder="Search" class="form-control input-sm pull-right" name="table_search">
+
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body no-padding">
                     <table class="table table-striped">

@@ -2,7 +2,7 @@
 The Roadmap aims to provide a list of future features and functionality that can be expected to appear in Flare. Think of it as a reverse [Changelog](CHANGELOG.md), where items closest to the current date are soon to be released, whereas items furthest from the future are proposed enhancements with less overall clarity which will be added to as we move toward them.
 
 ## Pre-Alpha
-ModuleAdmin Functionality
+ModuleAdmin Functionality - To test.
 
 Authentication - Password Recovery
 
@@ -12,7 +12,9 @@ Forms - Rapid creation of CRUD for different attribute types using built in Form
 
 Split the core into subtrees
 
-Ability to Search and/or Filter Managed Models (default and custom)
+Ability to Search Managed Models
+
+Add Managed Model Filter Options
 
 Fix Active ManagedModel/ModelAdmin link in Sidebar Tree
 
