@@ -35,7 +35,7 @@ abstract class WidgetAdmin extends Admin
      */
     public function render()
     {
-        return view($this->getView(), []); //$this->getViewData()
+        return view($this->getView(), $this->getViewData());
     }
 
     /**
@@ -46,7 +46,7 @@ abstract class WidgetAdmin extends Admin
     public function getView()
     {
         if (view()->exists(static::$view)) {
-            return $this->view;
+            return static::$view;
         }
 
         if (view()->exists('admin.widgets.'.static::SafeTitle().'.widget')) {
@@ -77,10 +77,10 @@ abstract class WidgetAdmin extends Admin
     public function getViewData()
     {
         if (is_callable('parent::getViewData')) {
-            $viewData = parent::getViewData();
+            return array_merge($this->viewData, parent::getViewData());
         }
 
-        return array_merge($this->viewData, $viewData);
+        return $this->viewData;
     }
 
     /**

@@ -64,7 +64,7 @@ class Flare
      */
     public function adminUrl($path = '')
     {
-        return url($this->relativeAdminUrl());
+        return url($this->relativeAdminUrl($path));
     }
 
     /**

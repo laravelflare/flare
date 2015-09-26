@@ -144,6 +144,11 @@ abstract class Admin
         return 'flare::'.static::$view;
     }
 
+    public function getViewData()
+    {
+        return [];
+    }
+
     /**
      * ShortName of a Admin Section Class.
      *
