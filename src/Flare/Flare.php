@@ -25,6 +25,7 @@ class Flare
         'admin_theme' => 'red',
         'models' => [],
         'modules' => [],
+        'widgets' => [],
     ];
 
     /**

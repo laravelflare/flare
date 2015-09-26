@@ -53,7 +53,7 @@ abstract class Admin
      *
      * @var string
      */
-    protected $view = 'admin.404';
+    protected static $view = 'admin.404';
 
     /**
      * Class Prefix used for matching and removing term
@@ -137,11 +137,11 @@ abstract class Admin
      */
     public function getView()
     {
-        if (view()->exists($this->view)) {
-            return $this->view;
+        if (view()->exists(static::$view)) {
+            return static::$view;
         }
 
-        return 'flare::'.$this->view;
+        return 'flare::'.static::$view;
     }
 
     /**

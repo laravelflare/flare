@@ -21,7 +21,7 @@ abstract class ModuleAdmin extends Admin
      *
      * @var string
      */
-    protected $view = 'admin.modules.index';
+    protected static $view = 'admin.modules.index';
 
     /**
      * Class Prefix used for matching and removing term

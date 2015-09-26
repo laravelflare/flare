@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
+use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
 
 /**
  * I kind of feel that this file should be
@@ -43,7 +44,7 @@ class AdminController extends BaseController
     protected $moduleAdminCollection;
 
 
-    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
+    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection, WidgetAdminCollection $widgetAdminCollection)
     {
         $this->auth = $auth;
 
@@ -52,9 +53,11 @@ class AdminController extends BaseController
 
         $this->modelAdminCollection = $modelAdminCollection;
         $this->moduleAdminCollection = $moduleAdminCollection;
+        $this->widgetAdminCollection = $widgetAdminCollection;
 
         view()->share('modelAdminCollection', $this->modelAdminCollection);
         view()->share('moduleAdminCollection', $this->moduleAdminCollection);
+        view()->share('widgetAdminCollection', $this->widgetAdminCollection);
     }
 
     /**

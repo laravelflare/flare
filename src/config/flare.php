@@ -32,7 +32,7 @@ return [
     | manually defined in the future with some crazy autoloading.
     |
     */
-    'modeladmins' => [
+    'models' => [
         // Base ModelAdmin: LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
         // Example ModelAdmin: LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
     ],
@@ -42,11 +42,23 @@ return [
     | Administration Modules
     |--------------------------------------------------------------------------
     |
-    | This array of Module Providers, coming soon
+    | This array of Admin Module Classes
     |
     */
    'modules' => [
+        // Base ModuleAdmin: LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
+   ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Administration Widgets
+    |--------------------------------------------------------------------------
+    |
+    | This array of Admin Widget Classes
+    |
+    */
+   'widgets' => [
+        // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
    ],
 
 ];
