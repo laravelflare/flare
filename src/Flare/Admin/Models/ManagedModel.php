@@ -100,10 +100,12 @@ abstract class ManagedModel extends Admin implements PermissionsInterface, Model
             throw new \Exception('You have a ManagedModel which does not have a model assigned to it.', 1);
         }
 
-        $this->model = new $this->managedModel();
+        $managedModel = $this->managedModel;
+
+        $this->model = new $managedModel();
 
         if ($id && $this->model) {
-            $this->managedModel()->find($id) ?: new $this->managedModel();
+            $this->model = $this->model->find($id);
         }
     }
 
