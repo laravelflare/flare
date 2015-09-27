@@ -17,7 +17,7 @@ abstract class ModuleAdmin extends Admin
     protected $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
 
     /**
-     * The Module Admin Default View
+     * The Module Admin Default View.
      *
      * @var string
      */
@@ -32,7 +32,7 @@ abstract class ModuleAdmin extends Admin
     const CLASS_PREFIX = 'Module';
 
     /**
-     * Returns the Module Admin View
+     * Returns the Module Admin View.
      *
      * Determines if a view exists by:
      * Looking for $this->view

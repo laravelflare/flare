@@ -47,7 +47,7 @@ abstract class Admin
     protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
-     * The Admin Default View
+     * The Admin Default View.
      *
      * By Default this is the 404 page
      *
@@ -131,7 +131,7 @@ abstract class Admin
     }
 
     /**
-     * Returns the Module Admin View
+     * Returns the Module Admin View.
      * 
      * @return string
      */

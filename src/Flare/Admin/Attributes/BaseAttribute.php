@@ -111,9 +111,7 @@ class BaseAttribute
     }
 
     /**
-     * Gets Field Options if they are defined
-     * 
-     * @return void
+     * Gets Field Options if they are defined.
      */
     public function getFieldOptions()
     {

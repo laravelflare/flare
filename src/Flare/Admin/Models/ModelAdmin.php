@@ -4,15 +4,15 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
-use LaravelFlare\Flare\Contracts\PermissionsContract;
+use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationInterface;
 
-class ModelAdmin extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
+class ModelAdmin extends Admin implements PermissionsInterface, ModelValidationInterface, ModelWriteableInterface
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 

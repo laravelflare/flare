@@ -23,7 +23,7 @@ class AdminController extends BaseController
     use AuthenticatesUsers, DispatchesJobs, ValidatesRequests;
 
     /**
-     * Auth
+     * Auth.
      * 
      * @var Guard
      */
@@ -42,7 +42,6 @@ class AdminController extends BaseController
      * @var ModuleAdminCollection
      */
     protected $moduleAdminCollection;
-
 
     public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection, WidgetAdminCollection $widgetAdminCollection)
     {

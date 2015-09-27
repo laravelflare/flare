@@ -35,7 +35,7 @@ abstract class FlareController extends BaseController
     {
         $this->middleware('flareauthenticate');
         $this->middleware('checkpermissions');
-        
+
         $this->modelAdminCollection = $modelAdminCollection;
         $this->moduleAdminCollection = $moduleAdminCollection;
 

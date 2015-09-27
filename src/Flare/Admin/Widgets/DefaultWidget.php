@@ -3,26 +3,25 @@
 namespace LaravelFlare\Flare\Admin\Widgets;
 
 use LaravelFlare\Flare\Admin\Models\ManagedModel;
-use LaravelFlare\Flare\Admin\Widgets\WidgetAdmin;
 
 class DefaultWidget extends WidgetAdmin
 {
     /**
-     * The Module Admin Default View
+     * The Module Admin Default View.
      *
      * @var string
      */
     protected static $view = 'flare::admin.widgets.default';
 
     /**
-     * Background colour options
+     * Background colour options.
      *
      * @var array
      */
     protected $bgColours = ['light-blue', 'aqua', 'green', 'yellow', 'red', 'navy', 'teal', 'purple', 'orange', 'maroon'];
 
     /**
-     * Counter
+     * Counter.
      *
      * Determines which $bgColour index to use next
      *
@@ -31,7 +30,7 @@ class DefaultWidget extends WidgetAdmin
     protected static $counter = 0;
 
     /**
-     * __construct
+     * __construct.
      *
      * @param ManagedModel $managedModel
      */
@@ -50,6 +49,6 @@ class DefaultWidget extends WidgetAdmin
         $this->viewData['modelTotal'] = $managedModel->model->count();
         $this->viewData['icon'] = $managedModel::$icon;
 
-        self::$counter++;
+        ++self::$counter;
     }
 }

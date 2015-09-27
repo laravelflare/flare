@@ -8,7 +8,7 @@ use LaravelFlare\Flare\Permissions\Permissions;
 class AdminCollection extends Collection
 {
     /**
-     * Admin Config Key
+     * Admin Config Key.
      *
      * Key which defined where in the Flare Admin Config to
      * load the ModelAdmin classes from.
@@ -18,7 +18,7 @@ class AdminCollection extends Collection
     const CLASS_PREFIX = '';
 
     /**
-     * Base Class
+     * Base Class.
      *
      * The Base Class for Model Admin's
      */
@@ -119,7 +119,7 @@ class AdminCollection extends Collection
      */
     private function checkAdminPermissions($class)
     {
-        if (!is_subclass_of($class, \LaravelFlare\Flare\Contracts\PermissionsContract::class)) {
+        if (!is_subclass_of($class, \LaravelFlare\Flare\Contracts\PermissionsInterface::class)) {
             return true;
         }
 

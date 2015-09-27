@@ -7,14 +7,14 @@ use LaravelFlare\Flare\Admin\Admin;
 abstract class WidgetAdmin extends Admin
 {
     /**
-     * The Module Admin Default View
+     * The Module Admin Default View.
      *
      * @var string
      */
     protected static $view = 'admin.widgets.widget';
 
     /**
-     * Default View Data
+     * Default View Data.
      *
      * @var array
      */
@@ -29,7 +29,7 @@ abstract class WidgetAdmin extends Admin
     const CLASS_PREFIX = 'Widget';
 
     /**
-     * Render the Widget
+     * Render the Widget.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +39,7 @@ abstract class WidgetAdmin extends Admin
     }
 
     /**
-     * Returns the Widget Admin View
+     * Returns the Widget Admin View.
      *
      * @return string
      */
@@ -70,7 +70,7 @@ abstract class WidgetAdmin extends Admin
 
     /**
      * Returns an Array of View Data that is constructed
-     * using the current View Data and any inherited View Data
+     * using the current View Data and any inherited View Data.
      * 
      * @return array
      */
@@ -84,7 +84,7 @@ abstract class WidgetAdmin extends Admin
     }
 
     /**
-     * Widget SafeTitle
+     * Widget SafeTitle.
      *
      * @return string
      */

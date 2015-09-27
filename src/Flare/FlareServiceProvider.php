@@ -73,6 +73,5 @@ class FlareServiceProvider extends ServiceProvider
      */
     public function registerBladeOperators()
     {
-        
     }
 }

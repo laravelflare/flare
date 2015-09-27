@@ -13,7 +13,7 @@ trait AttributeAccess
     protected $mapping = [];
 
     /**
-     * Gets the Managed Model Mapping
+     * Gets the Managed Model Mapping.
      * 
      * @return array
      */
@@ -23,11 +23,11 @@ trait AttributeAccess
     }
 
     /**
-     * Returns an Attribute from a Method
+     * Returns an Attribute from a Method.
      * 
-     * @param  string $method 
+     * @param string $method
      * 
-     * @return string          
+     * @return string
      */
     protected function attributeFromMethod($method)
     {

@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Admin\AdminCollection;
 class ModuleAdminCollection extends AdminCollection
 {
     /**
-     * Admin Config Key
+     * Admin Config Key.
      *
      * Key which defined where in the Flare Admin Config to
      * load the ModuleAdmin classes from.
@@ -17,7 +17,7 @@ class ModuleAdminCollection extends AdminCollection
     const ADMIN_KEY = 'modules';
 
     /**
-     * Base Class
+     * Base Class.
      *
      * The Base Class for Module Admin's
      */

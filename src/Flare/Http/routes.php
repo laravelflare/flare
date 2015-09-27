@@ -21,4 +21,3 @@ Route::group(['prefix' => \Flare::config('admin_url')], function () {
     // Admin Default Routes, make sure not to ovverride!
     Route::controller('/', '\LaravelFlare\Flare\Http\Controllers\AdminController');
 });
-

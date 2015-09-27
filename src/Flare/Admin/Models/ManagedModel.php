@@ -6,14 +6,14 @@ use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\Permissionable;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
-use LaravelFlare\Flare\Contracts\PermissionsContract;
+use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableContract;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationContract;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationInterface;
 
-abstract class ManagedModel extends Admin implements PermissionsContract, ModelValidationContract, ModelWriteableContract
+abstract class ManagedModel extends Admin implements PermissionsInterface, ModelValidationInterface, ModelWriteableInterface
 {
     use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
 
@@ -48,7 +48,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     protected $summary_fields = [];
 
     /**
-     * Allows filtering of the query, for instance:
+     * Allows filtering of the query, for instance:.
      *
      *      $query_filter = [
      *                          'whereNotNull' => ['parent_id'],
@@ -234,10 +234,10 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
      * Gets an Attribute by the provided key
      * on either the current model or a provided model instance.
      * 
-     * @param  string  $key   
-     * @param  mixed   $model 
+     * @param string $key
+     * @param mixed  $model
      * 
-     * @return mixed        
+     * @return mixed
      */
     public function getAttribute($key, $model = false)
     {
@@ -271,12 +271,12 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     }
 
     /**
-     * Determines if a key resolved a related Model
+     * Determines if a key resolved a related Model.
      * 
-     * @param  string  $key   
-     * @param  mixed   $model 
+     * @param string $key
+     * @param mixed  $model
      * 
-     * @return boolean        
+     * @return bool
      */
     public function hasRelatedKey($key, $model = false)
     {
@@ -298,10 +298,10 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
     /**
      * Resolves a relation based on the key provided,
-     * either on the current model or a provided model instance
+     * either on the current model or a provided model instance.
      * 
-     * @param  string  $key   
-     * @param  mixed   $model 
+     * @param string $key
+     * @param mixed  $model
      * 
      * @return mixed
      */
@@ -384,7 +384,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
 
     /**
      * Returns a DefaultWidget instance based on the
-     * currently ManagedModel
+     * currently ManagedModel.
      * 
      * @return LaravelFlare\Flare\Admin\Widgets\DefaultWidget
      */
