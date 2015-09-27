@@ -1,0 +1,40 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelFlare\Flare\Admin\Widgets\WidgetAdmin;
+
+class DummyClass extends WidgetAdmin
+{
+    /**
+     * The Module Admin Default View.
+     *
+     * @var string
+     */
+    protected static $view = 'flare::admin.widgets.default';
+
+    /**
+     * Default View Data.
+     *
+     * @var array
+     */
+    protected $viewData = [];
+    
+    /**
+     * __construct.
+     */
+    public function __construct()
+    {
+      
+    }
+
+    /**
+     * Render the Widget.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function render()
+    {
+        return view($this->getView(), $this->getViewData());
+    }
+}

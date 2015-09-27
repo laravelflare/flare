@@ -31,6 +31,7 @@ class ArtisanServiceProvider extends ServiceProvider
         'ManagedModelMake' => 'command.managedmodel.make',
         'ModelAdminControllerMake' => 'command.modeladmincontroller.make',
         'ModuleAdminControllerMake' => 'command.moduleadmincontroller.make',
+        'WidgetAdminMake' => 'command.widgetadmin.make',
     ];
 
     /**
@@ -128,6 +129,20 @@ class ArtisanServiceProvider extends ServiceProvider
     {
         $this->app->singleton($command, function($app) {
             return new ModuleAdminControllerMakeCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerWidgetAdminMakeCommand($command)
+    {
+        $this->app->singleton($command, function($app) {
+            return new WidgetAdminMakeCommand($app['files']);
         });
     }
 
