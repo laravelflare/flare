@@ -108,59 +108,6 @@ class Flare
     }
 
     /**
-     * Returns the Add Attribute Rendered View.
-     *
-     * Attributes should really be registered in an AttributeServiceProvider and/or
-     * the Flare Configuration file, so that they can be expanded on, overridden etc.
-     * 
-     * @param string $attribute
-     * @param string $field
-     * @param string $modelManager
-     * 
-     * @return \Illuminate\Http\Response        
-     */
-    public function addAttribute($attribute, $field, $model = null, $modelManager)
-    {
-        return $this->renderAttribute('add', $attribute, $field, $model, $modelManager);
-    }
-
-    /**
-     * Returns the Edit Attribute Rendered View.
-     * 
-     * Attributes should really be registered in an AttributeServiceProvider and/or
-     * the Flare Configuration file, so that they can be expanded on, overridden etc.
-     * 
-     * @param string $attribute
-     * @param string $field
-     * @param string $model
-     * @param string $modelManager
-     * 
-     * @return \Illuminate\Http\Response        
-     */
-    public function editAttribute($attribute, $field, $model, $modelManager)
-    {
-        return $this->renderAttribute('edit', $attribute, $field, $model, $modelManager);
-    }
-
-    /**
-     * Returns the View Attribute Rendered View.
-     * 
-     * Attributes should really be registered in an AttributeServiceProvider and/or
-     * the Flare Configuration file, so that they can be expanded on, overridden etc.
-     * 
-     * @param string $attribute
-     * @param string $field
-     * @param string $model
-     * @param string $modelManager
-     * 
-     * @return \Illuminate\Http\Response        
-     */
-    public function viewAttribute($attribute, $field, $model, $modelManager)
-    {
-        return $this->renderAttribute('view', $attribute, $field, $model, $modelManager);
-    }
-
-    /**
      * Render Attribute
      *
      * @param string $action
