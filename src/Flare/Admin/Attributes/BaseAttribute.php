@@ -52,8 +52,8 @@ class BaseAttribute
      * 
      * @param string $attribute
      * @param string $field
-     * @param \Illuminate\Database\Eloquent\Model  $model
-     * @param \LaravelFlare\Flare\Admin\Models\ManagedModel   $modelManager
+     * @param $model
+     * @param $modelManager
      */
     public function __construct($attribute, $field, $model = null, $modelManager = null)
     {
