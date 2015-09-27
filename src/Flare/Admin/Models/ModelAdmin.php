@@ -3,16 +3,14 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Traits\Permissionable;
-use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
 
-class ModelAdmin extends Admin implements PermissionsInterface, ModelWriteableInterface
+class ModelAdmin extends Admin implements ModelWriteableInterface
 {
-    use AttributeAccess, ModelWriteable, Permissionable;
+    use AttributeAccess, ModelWriteable;
 
     /**
      * The Controller to be used by the Model Admin.

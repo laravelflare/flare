@@ -4,16 +4,14 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Traits\Permissionable;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
-use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
 
-abstract class ManagedModel extends Admin implements PermissionsInterface, ModelWriteableInterface
+abstract class ManagedModel extends Admin implements ModelWriteableInterface
 {
-    use AttributeAccess, ModelWriteable, Permissionable;
+    use AttributeAccess, ModelWriteable;
 
     /**
      * Managed Model Icon.
@@ -360,7 +358,7 @@ abstract class ManagedModel extends Admin implements PermissionsInterface, Model
 
             return $this->{$method}($value);
         }
-        
+
         $this->model->attributes[$key] = $value;
     }
 
