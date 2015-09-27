@@ -53,7 +53,7 @@ class FlareServiceProvider extends ServiceProvider
         $this->registerServiceProviders();
 
         $this->app->singleton('flare', function($app) {
-            return new Flare($app);
+            return new Flare();
         });
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();

@@ -62,7 +62,7 @@ class Flare
      */
     public function adminurl($path = '')
     {
-        return url($this->relativeAdminurl($path));
+        return url($this->relativeAdminUrl($path));
     }
 
     /**
@@ -73,7 +73,7 @@ class Flare
      * 
      * @return string
      */
-    public function relativeAdminurl($path = '')
+    public function relativeAdminUrl($path = '')
     {
         return \Flare::config('admin_url').'/'.$path;
     }
@@ -119,7 +119,7 @@ class Flare
      * 
      * @return \Illuminate\Http\Response        
      */
-    public function addAttribute($attribute, $field, $model = false, $modelManager)
+    public function addAttribute($attribute, $field, $model = null, $modelManager)
     {
         return $this->renderAttribute('add', $attribute, $field, $model, $modelManager);
     }

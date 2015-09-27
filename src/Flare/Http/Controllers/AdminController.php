@@ -74,7 +74,7 @@ class AdminController extends BaseController
      *
      * @param Request $request [description]
      *
-     * @return [type] [description]
+     * @return \Illuminate\Http\Response
      */
     public function postLogin(Request $request)
     {

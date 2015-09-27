@@ -20,21 +20,21 @@ abstract class Admin
      *
      * @var string
      */
-    protected $title = null;
+    protected static $title = null;
 
     /**
      * Plural Title of Admin Section.
      *
      * @var string
      */
-    protected $pluralTitle = null;
+    protected static $pluralTitle = null;
 
     /**
      * URL Prefix of Admin Section.
      *
      * @var string
      */
-    protected $urlPrefix = null;
+    protected static $urlPrefix = null;
 
     /**
      * The Controller to be used by the Admin.
@@ -218,7 +218,7 @@ abstract class Admin
      */
     public static function relativeUrl($path = '')
     {
-        return \Flare::relativeAdminurl(static::urlPrefix().($path ? '/'.$path : ''));
+        return \Flare::relativeAdminUrl(static::urlPrefix().($path ? '/'.$path : ''));
     }
 
     /**
