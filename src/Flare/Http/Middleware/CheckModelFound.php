@@ -17,7 +17,7 @@ class CheckModelFound
      */
     public function __construct(ModelAdminCollection $modelAdminCollection)
     {
-        $this->model = $modelAdminCollection->getModelAdminInstance()->modelManager()->model;
+        $this->model = $modelAdminCollection->getAdminInstance()->modelManager()->model;
     }
 
     /**

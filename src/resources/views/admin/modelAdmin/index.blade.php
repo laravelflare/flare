@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', $modelAdmin->Title())
+@section('page_title', $modelAdmin->PluralTitle())
 
 @section('content')
 
@@ -10,11 +10,22 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        {{ $modelAdmin->modelManager()->PluralTitle() }}
+                        All {{ $modelAdmin->modelManager()->PluralTitle() }}
                     </h3>
                     <div class="box-tools">
-                        <div style="width: 150px;" class="input-group">
-                            <input type="text" placeholder="Search" class="form-control input-sm pull-right" name="table_search">
+                        <div style="width: 350px;" class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                                    10 Per Page <span class="fa fa-caret-down"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">25 Per Page</a></li>
+                                    <li><a href="#">50 Per Page</a></li>
+                                    <li><a href="#">100 Per Page</a></li>
+                                </ul>
+                            </div>
+
+                            <input type="text" placeholder="Search" class="form-control input-sm pull-right">
 
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
@@ -49,7 +60,7 @@
                                 <tr>
                                     @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
                                     <td>
-                                        {{ $modelAdmin->modelManager()->getAttribute($key, $modelItem) }}
+                                        {!! $modelAdmin->modelManager()->getAttribute($key, $modelItem) !!}
                                     </td>
                                     @endforeach
                                     <td style="width: 1%; white-space:nowrap">
