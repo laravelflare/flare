@@ -360,11 +360,7 @@ abstract class ManagedModel extends Admin implements PermissionsInterface, Model
 
             return $this->{$method}($value);
         }
-
-        if ($this->isJsonCastable($key) && !is_null($value)) {
-            $value = json_encode($value);
-        }
-
+        
         $this->model->attributes[$key] = $value;
     }
 
