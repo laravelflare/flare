@@ -45,7 +45,7 @@ class BaseAttribute
      * 
      * @param string $attribute
      * @param string $field
-     * @param mixed  $model
+     * @param false|mixed  $model
      * @param bool   $modelManager
      */
     public function __construct($attribute, $field, $model = false, $modelManager = false)

@@ -186,7 +186,7 @@ trait ModelWriteable
             throw new WriteableException('ModelAdmin has a broken beforeEdit method. Make sure you call parent::beforeEdit() on all instances of beforeEdit()', 1);
         }
 
-        $this->doEdit($modelitem_id);
+        $this->doEdit();
 
         $this->brokenAfterEdit = true;
         $this->afterEdit();
@@ -352,7 +352,7 @@ trait ModelWriteable
             throw new WriteableException('ModelAdmin has a broken beforeDelete method. Make sure you call parent::beforeDelete() on all instances of beforeDelete()', 1);
         }
 
-        $this->doDelete($modelitem_id);
+        $this->doDelete();
 
         $this->brokenAfterDelete = true;
         $this->afterDelete();

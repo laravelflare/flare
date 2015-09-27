@@ -45,7 +45,7 @@ return [
     | This array of Admin Module Classes
     |
     */
-   'modules' => [
+    'modules' => [
         // Base ModuleAdmin: LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
     ],
 
@@ -57,7 +57,7 @@ return [
     | This array of Admin Widget Classes
     |
     */
-   'widgets' => [
+    'widgets' => [
         // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 

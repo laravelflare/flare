@@ -117,7 +117,9 @@ class AdminCollection extends Collection
      */
     private function checkAdminPermissions($class)
     {
-        if (!is_subclass_of($class, \LaravelFlare\Flare\Contracts\PermissionsInterface::class)) {
+        $reflection = new \ReflectionClass(new $class());
+
+        if(!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\PermissionsInterface::class)) {
             return true;
         }
 
