@@ -60,7 +60,7 @@ class Flare
      * 
      * @return string
      */
-    public function adminurl($path = '')
+    public function adminUrl($path = '')
     {
         return url($this->relativeAdminUrl($path));
     }
@@ -86,7 +86,7 @@ class Flare
      * 
      * @return string
      */
-    public function docsurl($path = '')
+    public function docsUrl($path = '')
     {
         return url('#'.$path);
     }

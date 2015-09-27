@@ -12,7 +12,7 @@
 
         <ul class="sidebar-menu">
             <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                <a href="{{ Flare::adminurl() }}">
+                <a href="{{ Flare::adminUrl() }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
