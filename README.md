@@ -15,6 +15,9 @@ Flare is an open-source CRUD system, currently under development, built on top o
 
 
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f/mini.png)](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f)
+
+
 
 Laravel is a trademark of Taylor Otwell.
 
