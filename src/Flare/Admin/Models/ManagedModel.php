@@ -99,7 +99,7 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     public function __construct($id = false)
     {
         if (!isset($this->managedModel) || $this->managedModel === null) {
-            throw new Exception('You have a ManagedModel which does not have a model assigned to it.', 1);
+            throw new \Exception('You have a ManagedModel which does not have a model assigned to it.', 1);
         }
 
         $this->model = new $this->managedModel();
@@ -391,20 +391,5 @@ abstract class ManagedModel extends Admin implements PermissionsContract, ModelV
     public function defaultWidget()
     {
         return new DefaultWidget($this);
-    }
-
-    /**
-     * Handle dynamic method calls to the Managed Model.
-     *
-     * @param string $method
-     * @param array  $parameters
-     * 
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        /*if (starts_with($method, 'update') && ends_with($method, 'Attribute') && $this->hasView($key = substr(substr($method, 0, -9), 6))) {
-            return call_user_func_array(array($this, 'getUpdateAttribute'), array_merge([$key], $parameters));
-        }*/
     }
 }

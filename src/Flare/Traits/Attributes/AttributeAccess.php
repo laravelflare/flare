@@ -4,8 +4,6 @@ namespace LaravelFlare\Flare\Traits\Attributes;
 
 trait AttributeAccess
 {
-    use ViewModelAttribute, EditModelAttribute, UpdateModelAttribute;
-
     /**
      * Map Model Attributes to AttributeTypes with
      * additional parameters.

@@ -10,10 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*
-Route::get('/admin', function () {
-});
-*/
 
 // We should allow 'admin' to be determined as a config variable
 Route::group(['prefix' => \Flare::config('admin_url')], function () {

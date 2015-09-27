@@ -55,7 +55,7 @@ class CreateUserCommand extends Command
 
         if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password)])) {
             $this->info('All done!');
-            exit();
+            return;
         }
 
         $this->error('Something went wrong... Please try again.');

@@ -20,3 +20,4 @@
         {{-- @yield('enqueued-css')--}}
     </head>
     <body class="hold-transition skin-{{ Flare::config('admin_theme') }} sidebar-mini">
+        

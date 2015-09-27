@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Admin\AdminCollection;
-use LaravelFlare\Flare\Permissions\Permissions;
 
 class ModelAdminCollection extends AdminCollection
 {

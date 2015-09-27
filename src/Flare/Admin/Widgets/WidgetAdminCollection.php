@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare\Admin\Widgets;
 
 use LaravelFlare\Flare\Admin\AdminCollection;
-use LaravelFlare\Flare\Permissions\Permissions;
 
 class WidgetAdminCollection extends AdminCollection
 {

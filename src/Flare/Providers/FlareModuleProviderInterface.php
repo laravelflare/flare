@@ -2,6 +2,6 @@
 
 namespace LaravelFlare\Flare\Providers;
 
-interface FlareModuleProvider
+interface FlareModuleProviderInterface
 {
 }

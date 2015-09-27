@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare;
 
-use Blade;
 use Illuminate\Support\ServiceProvider;
 
 class FlareServiceProvider extends ServiceProvider
@@ -74,49 +73,6 @@ class FlareServiceProvider extends ServiceProvider
      */
     public function registerBladeOperators()
     {
-        // get blade compiler
-        /*$blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
-
-        $blade->extend(function($view, $compiler)
-        {
-             return preg_replace('/@get(/', '<?php var_dump($view); var_dump($compiler); ?>', $view);
-            var_dump($view);
-            echo '<br><br>';
-            var_dump($compiler);
-        });*/
-
-        //var_dump($blade); die();
-
-        // Blade Operator @get() for returning DotNotation Variables
-        //Blade::directive('get', function ($expression) {
-
-
-        /*    return "<?php echo $expression; ?>";
-        //});*/
-
-        // I'd prefer the possibility of providing this default functionality:
-        // 
-        // <code>
-        //  @get($key) where $key = 'model.group.name'
-        // </code>
-        // 
-        // With this added extra level of flexibility for a clean notation:
-        // 
-        // <code>
-        //  @get($model, $key) where $key = 'group.name'
-        // </code>
-        // 
-        // Which allows:
-        // 
-        // <code>
-        // @get('model.group.name')
-        // </code>
-        // 
-        // And this, respectively:
-        // 
-        // <code>
-        //  @get($model, 'group.name')
-        // </code>
-        // 
+        
     }
 }

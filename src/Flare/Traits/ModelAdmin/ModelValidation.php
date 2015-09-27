@@ -81,12 +81,6 @@ trait ModelValidation
     {
         $validator = Validator::make($this->input, $this->rules);
 
-        /*$validator->after(function($validator) {
-            if ($this->somethingElseIsInvalid()) {
-                $validator->errors()->add('field', 'Something is wrong with this field!');
-            }
-        });*/
-
         if ($validator->fails()) {
             throw new ValidationException($validator->errors()); //We need some nice Custom Validator Exception which can hold error messages for fields etc
         }

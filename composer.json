@@ -5,7 +5,7 @@
         "Laravel"
     ],
     "homepage": "https://github.com/JacobBaileyLtd/flare",
-    "license": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "Laravel Flare",

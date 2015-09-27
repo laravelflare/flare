@@ -33,7 +33,7 @@ class DefaultWidget extends WidgetAdmin
     /**
      * __construct
      */
-    public function __construct( $managedModel = false )
+    public function __construct(ManagedModel $managedModel)
     {
         if (!$managedModel) {
             return false;

@@ -3,13 +3,11 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Http\Controllers\FlareController;
-use LaravelFlare\Flare\Admin\Models\ModelAdminController;
 use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
 use LaravelFlare\Flare\Exceptions\PermissionsException as PermissionsException;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
-use LaravelFlare\Flare\Exceptions\ModelAdminValidationException as ValidationException;
 
 class ModelAdminController extends FlareController
 {
@@ -96,21 +94,12 @@ class ModelAdminController extends FlareController
             $this->modelAdmin->canCreate();
         } catch (PermissionsException $exception) {
             echo 'Permissions Exception: <br>';
-            var_export($exception);
         }
-
-        // try {
-        //     $this->modelAdmin->validate();
-        // } catch (ValidationException $exception) {
-        //     echo 'Validation Exception: <br>';
-        //     var_dump($exception);
-        // }
 
         try {
             $this->modelAdmin->create();
         } catch (WriteableException $exception) {
             echo 'Writeable Exception: <br>';
-            var_dump($exception);
         }
 
         return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully created.', 'dismissable' => false]]);
@@ -162,21 +151,12 @@ class ModelAdminController extends FlareController
             $this->modelAdmin->canEdit();
         } catch (PermissionsException $exception) {
             echo 'Permissions Exception: <br>';
-            var_export($exception);
         }
-
-        // try {
-        //     $this->modelAdmin->validate();
-        // } catch (ValidationException $exception) {
-        //     echo 'Validation Exception: <br>';
-        //     var_dump($exception);
-        // }
 
         try {
             $this->modelAdmin->edit($modelitem_id);
         } catch (WriteableException $exception) {
             echo 'Writeable Exception: <br>';
-            var_dump($exception);
         }
 
         return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully updated.', 'dismissable' => false]]);
@@ -214,7 +194,6 @@ class ModelAdminController extends FlareController
             $this->modelAdmin->delete($modelitem_id);
         } catch (WriteableException $exception) {
             echo 'Writeable Exception: <br>';
-            var_dump($exception);
         }
 
         return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully removed.', 'dismissable' => false]]);

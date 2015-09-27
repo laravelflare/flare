@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
 class FlareAuthenticate
@@ -32,7 +33,7 @@ class FlareAuthenticate
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
