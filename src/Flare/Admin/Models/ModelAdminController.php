@@ -84,11 +84,7 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        try {
-            $this->modelAdmin->create();
-        } catch (WriteableException $exception) {
-            echo 'Writeable Exception: <br>';
-        }
+        $this->modelAdmin->create();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully created.', 'dismissable' => false]]);
     }
@@ -130,11 +126,7 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        try {
-            $this->modelAdmin->edit($modelitem_id);
-        } catch (WriteableException $exception) {
-            echo 'Writeable Exception: <br>';
-        }
+        $this->modelAdmin->edit($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully updated.', 'dismissable' => false]]);
     }
@@ -163,11 +155,7 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        try {
-            $this->modelAdmin->delete($modelitem_id);
-        } catch (WriteableException $exception) {
-            echo 'Writeable Exception: <br>';
-        }
+        $this->modelAdmin->delete($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully removed.', 'dismissable' => false]]);
     }
