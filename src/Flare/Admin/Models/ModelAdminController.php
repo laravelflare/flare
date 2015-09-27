@@ -6,7 +6,6 @@ use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
-use LaravelFlare\Flare\Exceptions\PermissionsException as PermissionsException;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 class ModelAdminController extends FlareController
@@ -85,17 +84,6 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        /*
-         * I don't like this, we should validate using the Request,
-         * and check Permissions with Middleware, then try and create.
-         */
-
-        try {
-            $this->modelAdmin->canCreate();
-        } catch (PermissionsException $exception) {
-            echo 'Permissions Exception: <br>';
-        }
-
         try {
             $this->modelAdmin->create();
         } catch (WriteableException $exception) {
@@ -142,17 +130,6 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        /*
-         * I don't like this, we should validate using the Request,
-         * and check Permissions with Middleware, then try and Edit.
-         */
-
-        try {
-            $this->modelAdmin->canEdit();
-        } catch (PermissionsException $exception) {
-            echo 'Permissions Exception: <br>';
-        }
-
         try {
             $this->modelAdmin->edit($modelitem_id);
         } catch (WriteableException $exception) {
@@ -186,10 +163,6 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        /*
-         * I don't like this, we should check Permissions with Middleware, then try and delete.
-         */
-
         try {
             $this->modelAdmin->delete($modelitem_id);
         } catch (WriteableException $exception) {
