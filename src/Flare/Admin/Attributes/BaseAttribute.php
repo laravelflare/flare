@@ -36,14 +36,14 @@ class BaseAttribute
     /**
      * Eloquent Model.
      * 
-     * @var \Illuminate\Database\Eloquent\Model|bool
+     * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
     /**
      * Model Manager
      * 
-     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel|bool
+     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
      */
     protected $modelManager;
 
@@ -52,10 +52,10 @@ class BaseAttribute
      * 
      * @param string $attribute
      * @param string $field
-     * @param Model  $model
-     * @param ManagedModel   $modelManager
+     * @param \Illuminate\Database\Eloquent\Model  $model
+     * @param \LaravelFlare\Flare\Admin\Models\ManagedModel   $modelManager
      */
-    public function __construct($attribute, $field, $model = false, $modelManager = false)
+    public function __construct($attribute, $field, $model = null, $modelManager = null)
     {
         $this->attribute = $attribute;
         $this->field = $field;
