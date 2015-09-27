@@ -1,25 +1,27 @@
 <?php
 
-namespace LaravelFlare\Flare\Traits\ManagedModel;
+namespace App\Admin\Traits;
+
+use Illuminate\Database\Eloquent\Model;
 
 trait HumanTimestampAttributes
 {
     /**
-     * Format the created_at time in Human format.
+     * Format our created_at times nicely.
      * 
      * @param string
      */
-    protected function getCreatedAtAttribute($model)
+    protected function getCreatedAtAttribute(Model $model)
     {
         return $model->created_at->diffForHumans();
     }
 
     /**
-     * Format the updated_at time in Human format.
+     * Format our updated_at times nicely.
      * 
      * @param string
      */
-    protected function getUpdatedAtAttribute($model)
+    protected function getUpdatedAtAttribute(Model $model)
     {
         return $model->updated_at->diffForHumans();
     }

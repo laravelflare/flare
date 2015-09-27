@@ -2,8 +2,6 @@
 
 namespace LaravelFlare\Flare;
 
-
-
 class Flare
 {
     /**

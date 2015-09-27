@@ -32,6 +32,8 @@ class DefaultWidget extends WidgetAdmin
 
     /**
      * __construct
+     *
+     * @param ManagedModel $managedModel
      */
     public function __construct(ManagedModel $managedModel)
     {

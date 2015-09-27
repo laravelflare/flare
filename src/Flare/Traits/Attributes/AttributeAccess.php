@@ -12,11 +12,23 @@ trait AttributeAccess
      */
     protected $mapping = [];
 
+    /**
+     * Gets the Managed Model Mapping
+     * 
+     * @return array
+     */
     public function getMapping()
     {
         return $this->mapping;
     }
 
+    /**
+     * Returns an Attribute from a Method
+     * 
+     * @param  string $method 
+     * 
+     * @return string          
+     */
     protected function attributeFromMethod($method)
     {
         if (strlen(($attribute = substr(substr($method, 0, -9), 4))) > 0) {
@@ -24,16 +36,5 @@ trait AttributeAccess
         }
 
         return $method;
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return 
-     */
-    protected function attributeType($key)
-    {
-        // We might do a lookup for custom attribute types in a lookup array at some point
-        // but for now, ignore this method.
     }
 }
