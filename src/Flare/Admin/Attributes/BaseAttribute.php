@@ -52,8 +52,8 @@ class BaseAttribute
      * 
      * @param string $attribute
      * @param string $field
-     * @param false|string  $model
-     * @param bool   $modelManager
+     * @param Model  $model
+     * @param ManagedModel   $modelManager
      */
     public function __construct($attribute, $field, $model = false, $modelManager = false)
     {

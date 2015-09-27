@@ -75,6 +75,8 @@ trait ModelWriteable
     /**
      * Finds an existing Model entry and sets it to the current modelManager model.
      * 
+     * @param integer $modelitem_id
+     * 
      * @return
      */
     public function find($modelitem_id)
