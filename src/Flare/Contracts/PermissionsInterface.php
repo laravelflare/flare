@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Contracts;
 
-interface PermissionsContract
+interface PermissionsInterface
 {
     /**
      * Permission Provider.
