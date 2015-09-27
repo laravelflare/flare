@@ -36,14 +36,14 @@ class BaseAttribute
     /**
      * Eloquent Model.
      * 
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var \Illuminate\Database\Eloquent\Model|bool
      */
     protected $model;
 
     /**
      * Model Manager
      * 
-     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
+     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel|bool
      */
     protected $modelManager;
 

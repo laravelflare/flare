@@ -163,6 +163,7 @@ class Flare
     /**
      * Render Attribute
      *
+     * @param string $action
      * @param string $attribute
      * @param string $field
      * @param string $model
