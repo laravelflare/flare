@@ -117,17 +117,11 @@ class Flare
      * @param string $field
      * @param string $modelManager
      * 
-     * @return        
+     * @return \Illuminate\Http\Response        
      */
     public function addAttribute($attribute, $field, $model = false, $modelManager)
     {
-        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
-
-            return (new $fieldType($attribute, $field, $model, $modelManager))->renderAdd();
-        }
-
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, false, $modelManager))->renderAdd();
+        return $this->renderAttribute('add', $attribute, $field, $model, $modelManager);
     }
 
     /**
@@ -141,17 +135,11 @@ class Flare
      * @param string $model
      * @param string $modelManager
      * 
-     * @return        
+     * @return \Illuminate\Http\Response        
      */
     public function editAttribute($attribute, $field, $model, $modelManager)
     {
-        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
-
-            return (new $fieldType($attribute, $field, $model, $modelManager))->renderEdit();
-        }
-
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager))->renderEdit();
+        return $this->renderAttribute('edit', $attribute, $field, $model, $modelManager);
     }
 
     /**
@@ -165,17 +153,32 @@ class Flare
      * @param string $model
      * @param string $modelManager
      * 
-     * @return        
+     * @return \Illuminate\Http\Response        
      */
     public function viewAttribute($attribute, $field, $model, $modelManager)
+    {
+        return $this->renderAttribute('view', $attribute, $field, $model, $modelManager);
+    }
+
+    /**
+     * Render Attribute
+     *
+     * @param string $attribute
+     * @param string $field
+     * @param string $model
+     * @param string $modelManager
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function renderAttribute($action, $attribute, $field, $model, $modelManager)
     {
         if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
             $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
 
-            return (new $fieldType($attribute, $field, $model, $modelManager))->renderView();
+            return call_user_func_array([new $fieldType($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
         }
 
-        return (new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager))->renderView();
+        return call_user_func_array([new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
     }
 
     /**
