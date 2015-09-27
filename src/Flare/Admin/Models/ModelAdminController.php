@@ -6,7 +6,6 @@ use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
-use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 class ModelAdminController extends FlareController
 {
