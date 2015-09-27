@@ -285,8 +285,6 @@ abstract class ManagedModel extends Admin implements PermissionsInterface, Model
         if (($methodBreaker = strpos($key, '.')) !== false) {
             $method = substr($key, 0, $methodBreaker);
             if (method_exists($model, $method)) {
-                // If we get this far we assume the relatedKey to actually be a relation,
-                // in practice it might not be.
                 return true;
             }
         }
