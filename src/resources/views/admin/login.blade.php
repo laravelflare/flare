@@ -1,5 +1,5 @@
 @include('flare::admin.sections.head')
-
+	
 	<style>
 		body {
 			background: #d73925;
