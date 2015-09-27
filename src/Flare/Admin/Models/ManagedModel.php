@@ -8,14 +8,12 @@ use LaravelFlare\Flare\Traits\Permissionable;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidation;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidationInterface;
 
-abstract class ManagedModel extends Admin implements PermissionsInterface, ModelValidationInterface, ModelWriteableInterface
+abstract class ManagedModel extends Admin implements PermissionsInterface, ModelWriteableInterface
 {
-    use AttributeAccess, ModelValidation, ModelWriteable, Permissionable;
+    use AttributeAccess, ModelWriteable, Permissionable;
 
     /**
      * Managed Model Icon.

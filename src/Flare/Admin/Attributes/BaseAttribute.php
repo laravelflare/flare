@@ -41,11 +41,18 @@ class BaseAttribute
     protected $model;
 
     /**
+     * Model Manager
+     * 
+     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
+     */
+    protected $modelManager;
+
+    /**
      * __construct.
      * 
      * @param string $attribute
      * @param string $field
-     * @param false|mixed  $model
+     * @param false|string  $model
      * @param bool   $modelManager
      */
     public function __construct($attribute, $field, $model = false, $modelManager = false)

@@ -174,6 +174,8 @@ trait ModelWriteable
      *
      * Fires off beforeEdit(), doEdit() and afterEdit()
      * 
+     * @param integer $modelitem_id
+     * 
      * @return
      */
     public function edit($modelitem_id)
@@ -339,6 +341,8 @@ trait ModelWriteable
      * Delete Action.
      *
      * Fires off beforeDelete(), doDelete() and afterDelete()
+     * 
+     * @param integer $modelitem_id
      * 
      * @return
      */

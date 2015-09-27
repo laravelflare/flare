@@ -119,7 +119,7 @@ class AdminCollection extends Collection
     {
         $reflection = new \ReflectionClass(new $class());
 
-        if(!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\PermissionsInterface::class)) {
+        if (!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\PermissionsInterface::class)) {
             return true;
         }
 
