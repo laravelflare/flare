@@ -102,7 +102,7 @@ class ModelAdminController extends FlareController
             echo 'Writeable Exception: <br>';
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully created.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully created.', 'dismissable' => false]]);
     }
 
     /**
@@ -159,7 +159,7 @@ class ModelAdminController extends FlareController
             echo 'Writeable Exception: <br>';
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully updated.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully updated.', 'dismissable' => false]]);
     }
 
     /**
@@ -196,6 +196,6 @@ class ModelAdminController extends FlareController
             echo 'Writeable Exception: <br>';
         }
 
-        return redirect($this->modelAdmin->CurrentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->Title().' was successfully removed.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully removed.', 'dismissable' => false]]);
     }
 }

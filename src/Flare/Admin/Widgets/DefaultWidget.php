@@ -44,7 +44,7 @@ class DefaultWidget extends WidgetAdmin
         }
 
         $this->viewData['bgColour'] = $this->bgColours[self::$counter];
-        $this->viewData['pluralTitle'] = $managedModel::PluralTitle();
+        $this->viewData['pluralTitle'] = $managedModel::pluralTitle();
         $this->viewData['modelTotal'] = $managedModel->model->count();
         $this->viewData['icon'] = $managedModel::$icon;
 

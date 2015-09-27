@@ -18,7 +18,7 @@
                     Modules allow you more flexibility and control over Flare ModelAdmins, however, they do require a more involved set up process.
                     You will need to, at a minimum, create a Module template. <br><br>
 
-                    Read more about Modules in the <a href="{{ Flare::docsUrl('modules') }}">Flare Docs</a>.
+                    Read more about Modules in the <a href="{{ Flare::docsurl('modules') }}">Flare Docs</a>.
                 </p>
             </div>
         </div>

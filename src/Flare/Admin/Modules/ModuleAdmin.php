@@ -48,12 +48,12 @@ abstract class ModuleAdmin extends Admin
             return static::$view;
         }
 
-        if (view()->exists('admin.'.static::UrlPrefix().'.index')) {
-            return 'admin.'.static::UrlPrefix().'.index';
+        if (view()->exists('admin.'.static::urlPrefix().'.index')) {
+            return 'admin.'.static::urlPrefix().'.index';
         }
 
-        if (view()->exists('admin.'.static::UrlPrefix())) {
-            return 'admin.'.static::UrlPrefix();
+        if (view()->exists('admin.'.static::urlPrefix())) {
+            return 'admin.'.static::urlPrefix();
         }
 
         if (view()->exists('flare::'.self::$view)) {

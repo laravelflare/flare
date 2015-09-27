@@ -94,7 +94,7 @@ class AdminCollection extends Collection
      */
     private function usableClass($class)
     {
-        // Should replace this with ReflectionClass::getShortName();
+        // Should replace this with ReflectionClass::getshortName();
         // new ReflectionClass($class)
         if ($class == static::BASE_CLASS) {
             return false;

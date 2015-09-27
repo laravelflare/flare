@@ -76,7 +76,7 @@ abstract class Admin
      * Default routes include, create:, read:, update:, delete:
      *
      * Also attempts to load in ModelAdminController
-     * based on the ShortName of the class, for
+     * based on the shortName of the class, for
      * overloading and adding additional routes
      * 
      * @return
@@ -85,7 +85,7 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        \Route::group(['prefix' => static::UrlPrefix(), 'namespace' => get_called_class(), 'as' => static::UrlPrefix()], function () {
+        \Route::group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function () {
             $this->registerSubRoutes();
             \Route::controller('/', $this->getController());
         });
@@ -150,13 +150,13 @@ abstract class Admin
     }
 
     /**
-     * ShortName of a Admin Section Class.
+     * shortName of a Admin Section Class.
      *
      * @return string
      */
-    public static function ShortName()
+    public static function shortName()
     {
-        return (new \ReflectionClass(new static()))->getShortName();
+        return (new \ReflectionClass(new static()))->getshortName();
     }
 
     /**
@@ -164,10 +164,10 @@ abstract class Admin
      *
      * @return string
      */
-    public static function Title()
+    public static function title()
     {
         if (!isset(static::$title) || !static::$title) {
-            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '',  static::ShortName()))));
+            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '',  static::shortName()))));
         }
 
         return static::$title;
@@ -178,10 +178,10 @@ abstract class Admin
      *
      * @return string
      */
-    public static function PluralTitle()
+    public static function pluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '',  static::Title()));
+            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '',  static::title()));
         }
 
         return static::$pluralTitle;
@@ -192,10 +192,10 @@ abstract class Admin
      *
      * @return string
      */
-    public static function UrlPrefix()
+    public static function urlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::PluralTitle())));
+            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::pluralTitle())));
         }
 
         return static::$urlPrefix;
@@ -206,9 +206,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function Url($path = '')
+    public static function url($path = '')
     {
-        return url(self::RelativeUrl($path));
+        return url(self::relativeUrl($path));
     }
 
     /**
@@ -216,9 +216,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function RelativeUrl($path = '')
+    public static function relativeUrl($path = '')
     {
-        return \Flare::relativeAdminUrl(static::UrlPrefix().($path ? '/'.$path : ''));
+        return \Flare::relativeAdminurl(static::urlPrefix().($path ? '/'.$path : ''));
     }
 
     /**
@@ -226,9 +226,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function CurrentUrl($path = '')
+    public static function currentUrl($path = '')
     {
-        return url(static::RelativeCurrentUrl($path));
+        return url(static::relativeCurrentUrl($path));
     }
 
     /**
@@ -236,7 +236,7 @@ abstract class Admin
      *
      * @return string
      */
-    public static function RelativeCurrentUrl($path)
+    public static function relativeCurrentUrl($path)
     {
         return \Route::current()->getPrefix().'/'.$path;
     }

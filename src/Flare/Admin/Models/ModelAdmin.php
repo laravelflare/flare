@@ -90,8 +90,8 @@ class ModelAdmin extends Admin implements PermissionsContract, ModelValidationCo
         foreach ($this->managedModels as $managedModel) {
             $managedModel = new $managedModel();
             $parameters = [
-                            'prefix' => $managedModel->UrlPrefix(),
-                            'as' => $managedModel->UrlPrefix(),
+                            'prefix' => $managedModel->urlPrefix(),
+                            'as' => $managedModel->urlPrefix(),
                             'modelManager' => get_class($managedModel),
                             'model' => $managedModel->managedModel,
                         ];

@@ -12,51 +12,51 @@
 
         <ul class="sidebar-menu">
             <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                <a href="{{ Flare::adminUrl() }}">
+                <a href="{{ Flare::adminurl() }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             @foreach($modelAdminCollection as $modelAdmin)
-            <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
-                <a href="{{ $modelAdmin::Url() }}">
+            <li class="treeview {{ Request::is( $modelAdmin::relativeUrl() . '*' ) ? 'active' : '' }}">
+                <a href="{{ $modelAdmin::url() }}">
                     @if ($modelAdmin::$icon)
                     <i class="fa fa-{{ $modelAdmin::$icon }}"></i>
                     @endif
-                    <span>{{ $modelAdmin::PluralTitle() }}</span>
+                    <span>{{ $modelAdmin::pluralTitle() }}</span>
                 </a>
                 <ul class="treeview-menu">
                     @foreach ($modelAdmin->getManagedModels()->take(1) as $managedModel)
-                    <li class="{{ Request::is( $modelAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
-                        <a href="{{ $modelAdmin::Url() }}">
-                            All {{ $managedModel::PluralTitle() }}
+                    <li class="{{ Request::is( $modelAdmin::relativeUrl() . '*' ) ? 'active' : '' }}">
+                        <a href="{{ $modelAdmin::url() }}">
+                            All {{ $managedModel::pluralTitle() }}
                         </a>
                     </li>
-                    <li class="{{ Request::is( $modelAdmin::RelativeUrl('create') ) ? 'active' : '' }}">
-                        <a href="{{ $modelAdmin::Url('create') }}">
-                            Create {{ $managedModel::Title() }}
+                    <li class="{{ Request::is( $modelAdmin::relativeUrl('create') ) ? 'active' : '' }}">
+                        <a href="{{ $modelAdmin::url('create') }}">
+                            Create {{ $managedModel::title() }}
                         </a>
                     </li>
                     @endforeach
                     @if ($modelAdmin->getManagedModels()->count() > 1)
                         @foreach ($modelAdmin->getManagedModels()->slice(1) as $managedModel)
-                        <li class="treeview {{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix()).'/*') ? 'active' : '' }}">
-                            <a href="{{ $modelAdmin::Url() . '/' . $managedModel::UrlPrefix() }}">
+                        <li class="treeview {{ Request::is( $modelAdmin::relativeUrl($managedModel::urlPrefix()).'/*') ? 'active' : '' }}">
+                            <a href="{{ $modelAdmin::url() . '/' . $managedModel::urlPrefix() }}">
                                 @if ($managedModel::$icon)
                                 <i class="fa fa-{{ $managedModel::$icon }}" style="width: 17px;"></i>
                                 @endif
-                                {{ $managedModel::PluralTitle() }}
+                                {{ $managedModel::pluralTitle() }}
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="{{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix())) ? 'active' : '' }}">
-                                    <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix()) }}">
-                                        All {{ $managedModel::PluralTitle() }}
+                                <li class="{{ Request::is( $modelAdmin::relativeUrl($managedModel::urlPrefix())) ? 'active' : '' }}">
+                                    <a href="{{ $modelAdmin::url($managedModel::urlPrefix()) }}">
+                                        All {{ $managedModel::pluralTitle() }}
                                     </a>
                                 </li>
-                                <li class="{{ Request::is( $modelAdmin::RelativeUrl($managedModel::UrlPrefix()) . '/create') ? 'active' : '' }}">
-                                    <a href="{{ $modelAdmin::Url($managedModel::UrlPrefix() . '/create')  }}">
-                                        Create {{ $managedModel::Title() }}
+                                <li class="{{ Request::is( $modelAdmin::relativeUrl($managedModel::urlPrefix()) . '/create') ? 'active' : '' }}">
+                                    <a href="{{ $modelAdmin::url($managedModel::urlPrefix() . '/create')  }}">
+                                        Create {{ $managedModel::title() }}
                                     </a>
                                 </li>
                             </ul>
@@ -68,12 +68,12 @@
             @endforeach
 
             @foreach($moduleAdminCollection as $moduleAdmin)
-            <li class="treeview {{ Request::is( $moduleAdmin::RelativeUrl() . '*' ) ? 'active' : '' }}">
-                <a href="{{ $moduleAdmin::Url() }}">
+            <li class="treeview {{ Request::is( $moduleAdmin::relativeUrl() . '*' ) ? 'active' : '' }}">
+                <a href="{{ $moduleAdmin::url() }}">
                     @if ($moduleAdmin::$icon)
                     <i class="fa fa-{{ $moduleAdmin::$icon }}"></i>
                     @endif
-                    <span>{{ $moduleAdmin::PluralTitle() }}</span>
+                    <span>{{ $moduleAdmin::pluralTitle() }}</span>
                 </a>
             </li>
             @endforeach

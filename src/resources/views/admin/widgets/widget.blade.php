@@ -12,7 +12,7 @@
         <div class="icon">
             <i class="fa fa-warning"></i>
         </div>
-        <a class="small-box-footer" href="{{ Flare::docsUrl('widgets') }}">
+        <a class="small-box-footer" href="{{ Flare::docsurl('widgets') }}">
             Learn more about Widgets in the Flare Docs <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>

@@ -1,13 +1,13 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', $modelAdmin::Title())
+@section('page_title', $modelAdmin::title())
 
 @section('content')
 
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Edit {{ $modelAdmin->modelManager()->Title() }}
+            Edit {{ $modelAdmin->modelManager()->title() }}
         </h3>
     </div>
     <form action="" method="post">
@@ -18,12 +18,12 @@
         </div>
         <div class="box-footer">
             {!! csrf_field() !!}
-            <a href="{{ $modelAdmin::CurrentUrl() }}" class="btn btn-default">
+            <a href="{{ $modelAdmin::currentUrl() }}" class="btn btn-default">
                 Cancel
             </a>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-edit"></i>
-                Update {{ $modelAdmin->modelManager()->Title() }}
+                Update {{ $modelAdmin->modelManager()->title() }}
             </button>
         </div>
     </form>

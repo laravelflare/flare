@@ -14,7 +14,7 @@
                 </h3>
                 <p>
                     We could not find the page you were looking for.
-                    Please <a href="{{ Flare::adminUrl() }}">return to dashboard</a>.
+                    Please <a href="{{ Flare::adminurl() }}">return to dashboard</a>.
                 </p>
             </div>
         </div>

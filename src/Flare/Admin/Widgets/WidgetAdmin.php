@@ -49,16 +49,16 @@ abstract class WidgetAdmin extends Admin
             return static::$view;
         }
 
-        if (view()->exists('admin.widgets.'.static::SafeTitle().'.widget')) {
-            return 'admin.'.static::SafeTitle().'.index';
+        if (view()->exists('admin.widgets.'.static::safeTitle().'.widget')) {
+            return 'admin.'.static::safeTitle().'.index';
         }
 
-        if (view()->exists('admin.widgets.'.static::SafeTitle())) {
-            return 'admin.'.static::SafeTitle();
+        if (view()->exists('admin.widgets.'.static::safeTitle())) {
+            return 'admin.'.static::safeTitle();
         }
 
-        if (view()->exists('admin.'.static::SafeTitle())) {
-            return 'admin.'.static::SafeTitle();
+        if (view()->exists('admin.'.static::safeTitle())) {
+            return 'admin.'.static::safeTitle();
         }
 
         if (view()->exists('flare::'.self::$view)) {
@@ -88,8 +88,8 @@ abstract class WidgetAdmin extends Admin
      *
      * @return string
      */
-    public static function SafeTitle()
+    public static function safeTitle()
     {
-        return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::Title())));
+        return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::title())));
     }
 }

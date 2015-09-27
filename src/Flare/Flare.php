@@ -62,9 +62,9 @@ class Flare
      * 
      * @return string
      */
-    public function adminUrl($path = '')
+    public function adminurl($path = '')
     {
-        return url($this->relativeAdminUrl($path));
+        return url($this->relativeAdminurl($path));
     }
 
     /**
@@ -75,7 +75,7 @@ class Flare
      * 
      * @return string
      */
-    public function relativeAdminUrl($path = '')
+    public function relativeAdminurl($path = '')
     {
         return \Flare::config('admin_url').'/'.$path;
     }
@@ -88,7 +88,7 @@ class Flare
      * 
      * @return string
      */
-    public function docsUrl($path = '')
+    public function docsurl($path = '')
     {
         return url('#'.$path);
     }

@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', $modelAdmin->PluralTitle())
+@section('page_title', $modelAdmin->pluralTitle())
 
 @section('content')
 
@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        All {{ $modelAdmin->modelManager()->PluralTitle() }}
+                        All {{ $modelAdmin->modelManager()->pluralTitle() }}
                     </h3>
                     <div class="box-tools">
                         <div style="width: 350px;" class="input-group">
@@ -40,7 +40,7 @@
                                 @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
                                 <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
                                     @if (strpos($key, '.') == 0 && !$modelAdmin->modelManager()->model->hasGetMutator($key))
-                                    <a href="{{ $modelAdmin::CurrentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'desc' : 'asc') }}">
+                                    <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                                         {{ $field }}
                                         @if (Request::input('order', 'id') == $key)
                                         <i class="fa fa-caret-{{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
@@ -64,15 +64,15 @@
                                     </td>
                                     @endforeach
                                     <td style="width: 1%; white-space:nowrap">
-                                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::CurrentUrl('view/'.$modelItem->id) }}">
+                                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::currentUrl('view/'.$modelItem->id) }}">
                                             <i class="fa fa-eye"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::CurrentUrl('edit/'.$modelItem->id) }}">
+                                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->id) }}">
                                             <i class="fa fa-edit"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::CurrentUrl('delete/'.$modelItem->id) }}">
+                                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->id) }}">
                                             <i class="fa fa-trash"></i>
                                             Delete
                                         </a>
@@ -82,7 +82,7 @@
                         @else 
                             <tr>
                                 <td colspan="{{ count($modelAdmin->modelManager()->getSummaryFields())+2 }}">
-                                    No {{ $modelAdmin->modelManager()->PluralTitle() }} Found
+                                    No {{ $modelAdmin->modelManager()->pluralTitle() }} Found
                                 </td>
                             </tr>
                         @endif
@@ -91,9 +91,9 @@
                 </div>
                 <div class="box-footer clearfix">
                     <div class="pull-left">
-                        <a href="{{ $modelAdmin::CurrentUrl('create') }}" class="btn btn-success">
+                        <a href="{{ $modelAdmin::currentUrl('create') }}" class="btn btn-success">
                             <i class="fa fa-{{ $modelAdmin::$icon }}"></i>
-                            Add {{ $modelAdmin->modelManager()->Title() }}
+                            Add {{ $modelAdmin->modelManager()->title() }}
                         </a>
                     </div>
 

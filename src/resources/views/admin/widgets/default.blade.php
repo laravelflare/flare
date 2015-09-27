@@ -13,7 +13,7 @@
         <div class="icon">
             <i class="fa fa-{{ $icon }}"></i>
         </div>
-        <a class="small-box-footer" href="{{ Flare::adminUrl() }}">
+        <a class="small-box-footer" href="{{ Flare::adminurl() }}">
             View {{ $pluralTitle }} <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
