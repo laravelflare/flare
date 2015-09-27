@@ -18,9 +18,9 @@ use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
  * But really, we will only do that if we add a frontend
  * to the CMS rather than just a backend.
  */
-class AdminController extends BaseController
+class AdminController extends FlareController
 {
-    use AuthenticatesUsers, DispatchesJobs, ValidatesRequests;
+    use AuthenticatesUsers, DispatchesJobs;
 
     /**
      * Auth.
@@ -30,33 +30,20 @@ class AdminController extends BaseController
     protected $auth;
 
     /**
-     * ModelAdminCollection.
-     *
-     * @var ModelAdminCollection
+     * __construct
+     * 
+     * @param Guard                 $auth                  
+     * @param ModelAdminCollection  $modelAdminCollection  
+     * @param ModuleAdminCollection $moduleAdminCollection
      */
-    protected $modelAdminCollection;
-
-    /**
-     * ModuleAdminCollection.
-     *
-     * @var ModuleAdminCollection
-     */
-    protected $moduleAdminCollection;
-
-    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection, WidgetAdminCollection $widgetAdminCollection)
+    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
     {
+        parent::__construct($modelAdminCollection, $moduleAdminCollection);
+
         $this->auth = $auth;
 
         $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
         $this->middleware('checkpermissions', ['except' => ['getLogin']]);
-
-        $this->modelAdminCollection = $modelAdminCollection;
-        $this->moduleAdminCollection = $moduleAdminCollection;
-        $this->widgetAdminCollection = $widgetAdminCollection;
-
-        view()->share('modelAdminCollection', $this->modelAdminCollection);
-        view()->share('moduleAdminCollection', $this->moduleAdminCollection);
-        view()->share('widgetAdminCollection', $this->widgetAdminCollection);
     }
 
     /**
@@ -112,7 +99,7 @@ class AdminController extends BaseController
      */
     public function getIndex()
     {
-        return view('flare::admin.dashboard', ['modelAdminCollection' => $this->modelAdminCollection]);
+        return view('flare::admin.dashboard', ['widgetAdminCollection' => (new WidgetAdminCollection)]);
     }
 
     /**
