@@ -96,7 +96,7 @@ class ModelAdmin extends Admin implements PermissionsInterface, ModelValidationI
                             'model' => $managedModel->managedModel,
                         ];
 
-            \Route::group($parameters, function () {
+            \Route::group($parameters, function() {
                 \Route::controller('/', $this->getController());
             });
         }

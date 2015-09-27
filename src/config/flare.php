@@ -47,7 +47,7 @@ return [
     */
    'modules' => [
         // Base ModuleAdmin: LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
-   ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -59,6 +59,6 @@ return [
     */
    'widgets' => [
         // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
-   ],
+    ],
 
 ];

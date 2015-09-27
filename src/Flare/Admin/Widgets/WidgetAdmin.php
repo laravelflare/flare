@@ -90,6 +90,6 @@ abstract class WidgetAdmin extends Admin
      */
     public static function safeTitle()
     {
-        return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::title())));
+        return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '', static::title())));
     }
 }

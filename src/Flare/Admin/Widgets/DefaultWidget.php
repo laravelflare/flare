@@ -37,7 +37,7 @@ class DefaultWidget extends WidgetAdmin
     public function __construct(ManagedModel $managedModel)
     {
         if (!$managedModel) {
-            return false;
+            return;
         }
 
         if (self::$counter == 10) {

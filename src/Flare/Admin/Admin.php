@@ -85,7 +85,7 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        \Route::group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function () {
+        \Route::group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function() {
             $this->registerSubRoutes();
             \Route::controller('/', $this->getController());
         });
@@ -167,7 +167,7 @@ abstract class Admin
     public static function title()
     {
         if (!isset(static::$title) || !static::$title) {
-            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '',  static::shortName()))));
+            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '', static::shortName()))));
         }
 
         return static::$title;
@@ -181,7 +181,7 @@ abstract class Admin
     public static function pluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '',  static::title()));
+            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '', static::title()));
         }
 
         return static::$pluralTitle;
@@ -195,7 +195,7 @@ abstract class Admin
     public static function urlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '',  static::pluralTitle())));
+            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '', static::pluralTitle())));
         }
 
         return static::$urlPrefix;

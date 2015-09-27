@@ -44,8 +44,8 @@ class BaseAttribute
      * __construct.
      * 
      * @param string $attribute
-     * @param mixed  $field
-     * @param bool   $model
+     * @param string $field
+     * @param mixed  $model
      * @param bool   $modelManager
      */
     public function __construct($attribute, $field, $model = false, $modelManager = false)

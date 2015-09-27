@@ -52,7 +52,7 @@ class FlareServiceProvider extends ServiceProvider
 
         $this->registerServiceProviders();
 
-        $this->app->singleton('flare', function ($app) {
+        $this->app->singleton('flare', function($app) {
             return new Flare($app);
         });
 

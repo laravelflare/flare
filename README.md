@@ -3,7 +3,7 @@
 # Flare
 Flare is an open-source CRUD system, currently under development, built on top of [Laravel](https://github.com/laravel/laravel).
 
-
+[![Latest Stable Version](https://poser.pugx.org/laravelflare/flare/v/stable)](https://packagist.org/packages/laravelflare/flare) [![Total Downloads](https://poser.pugx.org/laravelflare/flare/downloads)](https://packagist.org/packages/laravelflare/flare) [![Latest Unstable Version](https://poser.pugx.org/laravelflare/flare/v/unstable)](https://packagist.org/packages/laravelflare/flare) [![License](https://poser.pugx.org/laravelflare/flare/license)](https://packagist.org/packages/laravelflare/flare) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f/mini.png)](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f)
 
 ## Resources
 
@@ -15,7 +15,10 @@ Flare is an open-source CRUD system, currently under development, built on top o
 
 
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f/mini.png)](https://insight.sensiolabs.com/projects/0185a16e-2ea8-48da-97f4-e205e67ff47f)
+
+
+
+
 
 
 

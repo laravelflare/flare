@@ -386,7 +386,7 @@ abstract class ManagedModel extends Admin implements PermissionsInterface, Model
      * Returns a DefaultWidget instance based on the
      * currently ManagedModel.
      * 
-     * @return LaravelFlare\Flare\Admin\Widgets\DefaultWidget
+     * @return DefaultWidget
      */
     public function defaultWidget()
     {

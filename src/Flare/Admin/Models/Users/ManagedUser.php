@@ -5,9 +5,12 @@ namespace LaravelFlare\Flare\Admin\Models\Users;
 use App\Models\User;
 use App\Models\UserGroup;
 use LaravelFlare\Flare\Admin\Models\ManagedModel;
+use LaravelFlare\Flare\Traits\ManagedModel\HumanTimestampAttributes;
 
 class ManagedUser extends ManagedModel
 {
+    use HumanTimestampAttributes;
+
     /**
      * Managed Model Instance.
      * 
@@ -34,13 +37,6 @@ class ManagedUser extends ManagedModel
         'email' => ['type' => 'email', 'length' => 255, 'required' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'required' => 'required'],
         'usergroup' => ['type' => 'radio', 'required' => 'required'],
-                                            // Options should either be an array or a string referencing a method on the ManagedModel class
-                                            // Titles can definitely be improved on
-
-        // 'checkbox' => ['type' => 'checkbox'],
-        // 'date' => ['type' => 'date'],
-        // 'radio' => ['type' => 'radio'],
-        // 'textarea' => ['type' => 'textarea'],
     ];
 
     /**
@@ -51,7 +47,7 @@ class ManagedUser extends ManagedModel
     protected $rules = [
         'name' => 'required|max:32',
         'email' => 'required|email',
-        'password' => 'required|min:8|max:32', // removed `confirmed` while we are looping through fillable
+        'password' => 'required|min:8|max:32',
     ];
 
     /**
@@ -65,7 +61,7 @@ class ManagedUser extends ManagedModel
         'id' => 'ID',
         'name',
         'email',
-        'usergroup.name' => 'Group', // This might be better as user_group, camelCased to the method name
+        'usergroup.name' => 'Group',
         'created_at' => 'Created',
         'updated_at' => 'Updated',
     ];
@@ -115,33 +111,12 @@ class ManagedUser extends ManagedModel
     }
 
     /**
-     * Format our created_at times nicely.
-     * 
-     * @param string
-     */
-    protected function getCreatedAtAttribute($model)
-    {
-        return $model->created_at->diffForHumans(); // I dont like having to do this, I'd prefer some sweet dot notation.
-    }
-
-    /**
-     * Format our updated_at times nicely.
-     * 
-     * @param string
-     */
-    protected function getUpdatedAtAttribute($model)
-    {
-        return $model->updated_at->diffForHumans(); // I dont like having to do this, I'd prefer some sweet dot notation.
-    }
-
-    /**
      * Returns the available options for the Group Option.
      * 
      * @return array
      */
     public function getUsergroupOptions()
     {
-        return \App\Models\UserGroup::lists('name', 'id')->toArray(); // Example of Using Model Collection Lists :D
-        //return ['Admins', 'Moderators', 'Cool Kids']; // Example use of flat array
+        return \App\Models\UserGroup::lists('name', 'id')->toArray();
     }
 }

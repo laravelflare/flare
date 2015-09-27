@@ -21,15 +21,5 @@ class ModuleAdminCollection extends AdminCollection
      *
      * The Base Class for Module Admin's
      */
-    const BASE_CLASS = 'LaravelFlare\Flare\Admin\Modules\ModelAdmin';
-
-    /**
-     * __construct.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->items = $this->getAdminClasses();
-    }
+    const BASE_CLASS = 'LaravelFlare\Flare\Admin\Modules\ModuleAdmin';
 }
