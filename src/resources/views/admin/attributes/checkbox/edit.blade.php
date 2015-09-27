@@ -13,7 +13,7 @@
                     <label>
                         <input type="checkbox"
                                 value="{{ $value }}"
-                                name="{{ $attribute }}"
+                                name="{{ $attribute }}[]"
                                 @if (isset($field['required'])) required="required" @endif>
                         {{ $option }}
                     </label>

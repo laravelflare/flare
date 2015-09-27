@@ -84,7 +84,7 @@ trait ModelWriteable
         /*
          * We should validate that a model is found etc/
          */
-        $this->modelManager->model = $this->modelManager->model->find($modelitem_id);
+        $this->modelManager->model = $this->modelManager->model->findOrFail($modelitem_id);
     }
 
     /**
@@ -119,32 +119,10 @@ trait ModelWriteable
      */
     private function doCreate()
     {
-        /*
-         * Pre=processing is required.
-         */
         // Unguard the model so we can set and store non-fillable entries
-
         $this->modelManager->model->unguard();
 
-        foreach (\Request::except('_token') as $key => $value) {
-            if ($this->modelManager->hasSetMutator($key)) {
-                $this->modelManager->setAttribute($key, $value);
-                continue;
-            }
-
-            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
-            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
-                    $this->modelManager->model->$key()->sync($value);
-                    continue;
-                }
-
-                continue;
-            }
-
-            $this->modelManager->model->setAttribute($key, $value);
-        }
-
+        // Save
         $this->save();
 
         // Reguard.
@@ -207,32 +185,10 @@ trait ModelWriteable
      */
     private function doEdit()
     {
-        /*
-         * Pre=processing is required.
-         */
         // Unguard the model so we can set and store non-fillable entries
-
         $this->modelManager->model->unguard();
 
-        foreach (\Request::except('_token') as $key => $value) {
-            if ($this->modelManager->hasSetMutator($key)) {
-                $this->modelManager->setAttribute($key, $value);
-                continue;
-            }
-
-            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
-            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
-                    $this->modelManager->model->$key()->associate($value);
-                    continue;
-                }
-
-                continue;
-            }
-
-            $this->modelManager->model->setAttribute($key, $value);
-        }
-
+        // Save
         $this->save();
 
         // Reguard.
@@ -291,19 +247,26 @@ trait ModelWriteable
      */
     private function doSave()
     {
-        /*
-         *
-         *  --- AMAZING STUFF IS GOING TO HAPPEN HERE ---
-         * 
-         */
+        foreach (\Request::except('_token') as $key => $value) {
+            if ($this->modelManager->hasSetMutator($key)) {
+                $this->modelManager->setAttribute($key, $value);
+                continue;
+            }
+
+            // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
+            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
+                    $this->modelManager->model->$key()->associate($value);
+                    continue;
+                }
+
+                continue;
+            }
+
+            $this->modelManager->model->setAttribute($key, $value);
+        }
 
         $this->modelManager->model->save();
-
-        /*
-         *
-         *  --- AND HERE TOO, HOPEFULLY! ---
-         * 
-         */
     }
 
     /**
@@ -322,10 +285,11 @@ trait ModelWriteable
 
                 // Updates BelongsToMany Relations
                 if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
-                    $this->modelManager->model->$key()->attach($value);
+                    $this->modelManager->model->$key()->sync($value);
                     continue;
                 }
             }
+
         }
     }
 
@@ -367,6 +331,11 @@ trait ModelWriteable
         }
     }
 
+    /**
+     * The actual delete action.
+     * 
+     * @return
+     */
     private function doDelete()
     {
         /*
