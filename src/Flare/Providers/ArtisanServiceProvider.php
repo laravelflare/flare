@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use LaravelFlare\Flare\Console\Commands\CreateUserCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
+use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ManagedModelMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminControllerMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminControllerMakeCommand;
