@@ -63,6 +63,22 @@ trait ModelWriteable
     protected $brokenAfterDelete = false;
 
     /**
+     * Relations to Update during Save and
+     * the appropriate method to fire the update with
+     * 
+     * @var array
+     */
+    protected $doSaveRelations = ['BelongsTo' => 'associate'];
+
+    /**
+     * Relations to Update after Save and
+     * the appropriate method to fire the update with.
+     * 
+     * @var array
+     */
+    protected $afterSaveRelations = ['BelongsToMany' => 'sync'];
+
+    /**
      * Method fired before the Create action is undertaken.
      * 
      * @return
@@ -255,11 +271,7 @@ trait ModelWriteable
 
             // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
             if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsTo')) {
-                    $this->modelManager->model->$key()->associate($value);
-                    continue;
-                }
-
+                $this->saveRelation('doSave', $key, $value);
                 continue;
             }
 
@@ -282,14 +294,32 @@ trait ModelWriteable
 
             // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
             if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-
-                // Updates BelongsToMany Relations
-                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\BelongsToMany')) {
-                    $this->modelManager->model->$key()->sync($value);
-                    continue;
-                }
+                $this->saveRelation('afterSave', $key, $value);
             }
 
+        }
+    }
+
+    /**
+     * Method fired to Save Relations
+     *
+     * @param string $action The current action (either doSave or afterSave)
+     * @param string $key
+     * @param string $value
+     * 
+     * @return
+     */
+    private function saveRelation($action, $key, $value)
+    {
+        // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
+        if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+
+            foreach ($this->{$action.'Relations'} as $relationship => $method) {
+                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
+                    $this->modelManager->model->$key()->$method($value);
+                    return;
+                }
+            }
         }
     }
 
