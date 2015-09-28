@@ -41,16 +41,21 @@ trait ModelWriteable
     /**
      * Trait Requires hasSetMutator method
      * 
-     * @return
-     */
-    abstract public function hasSetMutator();
-
-    /**
-     * Trait Requires setAttribute method
+     * @param  string $key
      * 
      * @return
      */
-    abstract public function setAttribute();
+    abstract public function hasSetMutator($key);
+
+    /**
+     * Trait Requires setAttribute method
+     *
+     * @param  string $key
+     * @param  string $value
+     * 
+     * @return
+     */
+    abstract public function setAttribute($key, $value);
 
     /**
      * Finds an existing Model entry and sets it to the current model.
@@ -158,7 +163,6 @@ trait ModelWriteable
             foreach ($this->{$action.'Relations'} as $relationship => $method) {
                 if (is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
                     $this->model->$key()->$method($value);
-
                     return;
                 }
             }

@@ -110,7 +110,7 @@ class AdminController extends FlareController
         $view = 'admin.dashboard';
 
         if (!view()->exists($view)) {
-            $view = 'flare::' . $view;
+            $view = 'flare::'.$view;
         }
 
         return view($view, ['widgetAdminCollection' => (new WidgetAdminCollection())]);
