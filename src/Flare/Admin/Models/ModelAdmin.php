@@ -109,11 +109,31 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
             return;
         }
 
-        if ($modelName = $this->getRequested('model')) {
+        if ($modelName = $this->getRequestedModel()) {
             return new $modelName();
         }
 
         return new $this->modelManager->managedModel();
+    }
+
+    /**
+     * Returns the Requested Model as a string.
+     * 
+     * @return string
+     */
+    public function getRequestedModel()
+    {
+        if (!\Route::current()) {
+            return;
+        }
+
+        $currentAction = \Route::current()->getAction();
+
+        if (isset($currentAction['model'])) {
+            return $currentAction['model'];
+        }
+
+        return;
     }
 
     /**
@@ -123,7 +143,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      */
     public function modelManager()
     {
-        if ($modelManagerName = $this->getRequested('modelManager')) {
+        if ($modelManagerName = $this->getRequestedModelManager()) {
             return new $modelManagerName();
         }
 
@@ -144,6 +164,26 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
         }
 
         return $this->managedModels[0];
+    }
+
+    /**
+     * Returns the Requested Model Manager as a string.
+     * 
+     * @return string|void
+     */
+    public function getRequestedModelManager()
+    {
+        if (!\Route::current()) {
+            return;
+        }
+
+        $currentAction = \Route::current()->getAction();
+
+        if (isset($currentAction['modelManager'])) {
+            return $currentAction['modelManager'];
+        }
+
+        return;
     }
 
     /**

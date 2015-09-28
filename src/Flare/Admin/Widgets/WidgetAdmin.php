@@ -45,24 +45,18 @@ abstract class WidgetAdmin extends Admin
      */
     public function getView()
     {
-        if (view()->exists(static::$view)) {
-            return static::$view;
-        }
+        $viewList = [
+                        static::$view,
+                        'admin.widgets.'.static::safeTitle().'.widget',
+                        'admin.widgets.'.static::safeTitle(),
+                        'admin.'.static::safeTitle(),
+                        'flare::'.self::$view,
+                    ];
 
-        if (view()->exists('admin.widgets.'.static::safeTitle().'.widget')) {
-            return 'admin.'.static::safeTitle().'.index';
-        }
-
-        if (view()->exists('admin.widgets.'.static::safeTitle())) {
-            return 'admin.'.static::safeTitle();
-        }
-
-        if (view()->exists('admin.'.static::safeTitle())) {
-            return 'admin.'.static::safeTitle();
-        }
-
-        if (view()->exists('flare::'.self::$view)) {
-            return 'flare::'.self::$view;
+        foreach ($viewList as $view) {
+            if (view()->exists($view)) {
+                return $view;
+            }
         }
 
         return parent::getView();

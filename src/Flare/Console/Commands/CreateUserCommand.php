@@ -21,6 +21,13 @@ class CreateUserCommand extends Command
     protected $description = 'Creates a new user';
 
     /**
+     * Array of data to create user with
+     * 
+     * @var array
+     */
+    protected $data = [];
+
+    /**
      * __construct.
      */
     public function __construct()
@@ -33,32 +40,60 @@ class CreateUserCommand extends Command
      */
     public function fire()
     {
-        $name = $this->ask('Please provide a username (defaults to admin)');
-
-        if ($name == '') {
-            $name = 'admin';
-        }
-
-        $email = $this->ask('Please provide your email (defaults to tech.studio@jacobbailey.com)');
-
-        if ($email == '') {
-            $email = 'tech.studio@jacobbailey.com';
-        }
-
-        $password = $this->ask('Please provide a password (defaults to password)');
-
-        if ($password == '') {
-            $password = 'password';
-        }
+        $this->askName();
+        $this->askEmail();
+        $this->askPassword();
 
         $authModel = config('auth.model');
 
-        if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password)])) {
+        if ((new $authModel())->create($this->data)) {
             $this->info('All done!');
 
             return;
         }
 
         $this->error('Something went wrong... Please try again.');
+    }
+
+    /**
+     * Ask the user to define a name
+     * 
+     * @return void
+     */
+    private function askName()
+    {
+        $this->data['name'] = $this->ask('Please provide a username');
+
+        if ($this->data['name'] == '') {
+            $this->data['name'] = 'admin';
+        }
+    }
+
+    /**
+     * Ask the user to define their email
+     * 
+     * @return void
+     */
+    private function askEmail()
+    {
+        $this->data['email'] = $this->ask('Please provide your email');
+
+        if ($this->data['email'] == '') {
+            $this->data['email'] = 'tech.studio@jacobbailey.com';
+        }
+    }
+
+    /**
+     * Ask the user to define a password
+     * 
+     * @return void
+     */
+    private function askPassword()
+    {
+        $this->data['password'] = $this->ask('Please provide a password');
+
+        if ($this->data['password'] == '') {
+            $this->data['password'] = 'password';
+        }
     }
 }

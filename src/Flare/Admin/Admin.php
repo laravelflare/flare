@@ -101,12 +101,11 @@ abstract class Admin
     }
 
     /**
-     * Returns the Requested Route Action as a
-     * string, namespace is returned by default.
+     * Returns the Requested Namespace as a string.
      * 
      * @return string|void
      */
-    public function getRequested($key = 'namespace')
+    public function getRequestedNamespace()
     {
         if (!\Route::current()) {
             return;
@@ -114,8 +113,8 @@ abstract class Admin
 
         $currentAction = \Route::current()->getAction();
 
-        if (isset($currentAction[$key])) {
-            return $currentAction[$key];
+        if (isset($currentAction['namespace'])) {
+            return $currentAction['namespace'];
         }
 
         return;
