@@ -40,7 +40,7 @@ class AdminController extends FlareController
 
         $this->auth = $auth;
 
-        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postEmail', 'getEmail', 'postEmail']]);
+        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin', 'getEmail', 'postEmail']]);
         $this->middleware('checkpermissions', ['except' => ['getLogin', 'postLogin', 'getEmail', 'postEmail']]);
     }
 
