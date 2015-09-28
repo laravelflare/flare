@@ -44,17 +44,20 @@ abstract class ModuleAdmin extends Admin
      */
     public function getView()
     {
-        $viewList = [
-                static::$view,
-                'admin.'.static::urlPrefix().'.index',
-                'admin.'.static::urlPrefix(),
-                'flare::'.self::$view,
-            ];
+        if (view()->exists(static::$view)) {
+            return static::$view;
+        }
 
-        foreach ($viewList as $view) {
-            if (view()->exists($view)) {
-                return $view;
-            }
+        if (view()->exists('admin.'.static::urlPrefix().'.index')) {
+            return 'admin.'.static::urlPrefix().'.index';
+        }
+
+        if (view()->exists('admin.'.static::urlPrefix())) {
+            return 'admin.'.static::urlPrefix();
+        }
+
+        if (view()->exists('flare::'.self::$view)) {
+            return 'flare::'.self::$view;
         }
 
         return parent::getView();
