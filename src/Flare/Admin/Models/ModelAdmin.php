@@ -88,7 +88,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                             'model' => $managedModel->managedModel,
                         ];
 
-            \Route::group($parameters, function() {
+            \Route::group($parameters, function () {
                 \Route::controller('/', $this->getController());
             });
         }

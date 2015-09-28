@@ -39,19 +39,19 @@ trait ModelWriteable
     protected $afterSaveRelations = ['BelongsToMany' => 'sync'];
 
     /**
-     * Trait Requires hasSetMutator method
+     * Trait Requires hasSetMutator method.
      * 
-     * @param  string $key
+     * @param string $key
      * 
      * @return
      */
     abstract public function hasSetMutator($key);
 
     /**
-     * Trait Requires setAttribute method
+     * Trait Requires setAttribute method.
      *
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
      * 
      * @return
      */
@@ -163,6 +163,7 @@ trait ModelWriteable
             foreach ($this->{$action.'Relations'} as $relationship => $method) {
                 if (is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
                     $this->model->$key()->$method($value);
+
                     return;
                 }
             }
