@@ -7,34 +7,6 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelWriteable
 {
     /**
-     * Used by beforeCreate() to ensure child classes call parent::beforeCreate().
-     * 
-     * @var bool
-     */
-    protected $brokenBeforeCreate = false;
-
-    /**
-     * Used by afterCreate() to ensure child classes call parent::afterCreate().
-     * 
-     * @var bool
-     */
-    protected $brokenAfterCreate = false;
-
-    /**
-     * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
-     * 
-     * @var bool
-     */
-    protected $brokenBeforeEdit = false;
-
-    /**
-     * Used by afterEdit() to ensure child classes call parent::afterEdit().
-     * 
-     * @var bool
-     */
-    protected $brokenAfterEdit = false;
-
-    /**
      * Used by beforeSave() to ensure child classes call parent::beforeSave().
      * 
      * @var bool
@@ -47,20 +19,6 @@ trait ModelWriteable
      * @var bool
      */
     protected $brokenAfterSave = false;
-
-    /**
-     * Used by beforeDelete() to ensure child classes call parent::beforeDelete().
-     * 
-     * @var bool
-     */
-    protected $brokenBeforeDelete = false;
-
-    /**
-     * Used by afterDelete() to ensure child classes call parent::afterDelete().
-     * 
-     * @var bool
-     */
-    protected $brokenAfterDelete = false;
 
     /**
      * Relations to Update during Save and
@@ -79,146 +37,15 @@ trait ModelWriteable
     protected $afterSaveRelations = ['BelongsToMany' => 'sync'];
 
     /**
-     * Method fired before the Create action is undertaken.
-     * 
-     * @return
-     */
-    protected function beforeCreate()
-    {
-        $this->brokenBeforeCreate = false;
-    }
-
-    /**
      * Finds an existing Model entry and sets it to the current modelManager model.
      * 
      * @param integer $modelitem_id
      * 
      * @return
      */
-    public function find($modelitem_id)
+    protected function find($modelitem_id)
     {
-        /*
-         * We should validate that a model is found etc/
-         */
         $this->modelManager->model = $this->modelManager->model->findOrFail($modelitem_id);
-    }
-
-    /**
-     * Create Action.
-     *
-     * Fires off beforeCreate(), doCreate() and afterCreate()
-     * 
-     * @return
-     */
-    public function create()
-    {
-        $this->brokenBeforeCreate = true;
-        $this->beforeCreate();
-        if ($this->brokenBeforeCreate) {
-            throw new WriteableException('ModelAdmin has a broken beforeCreate method. Make sure you call parent::beforeCreate() on all instances of beforeCreate()', 1);
-        }
-
-        $this->doCreate();
-
-        $this->brokenAfterCreate = true;
-        $this->afterCreate();
-        if ($this->brokenAfterCreate) {
-            throw new WriteableException('ModelAdmin has a broken afterCreate method. Make sure you call parent::afterCreate() on all instances of afterCreate()', 1);
-        }
-    }
-
-    /**
-     * The actual Create action, which does all of hte pre-processing
-     * required before we are able to perform the save() function.
-     * 
-     * @return
-     */
-    private function doCreate()
-    {
-        // Unguard the model so we can set and store non-fillable entries
-        $this->modelManager->model->unguard();
-
-        // Save
-        $this->save();
-
-        // Reguard.
-        $this->modelManager->model->reguard();
-    }
-
-    /**
-     * Method fired after the Create action is complete.
-     * 
-     * @return
-     */
-    protected function afterCreate()
-    {
-        $this->brokenAfterCreate = false;
-    }
-
-    /**
-     * Method fired before the Edit action is undertaken.
-     * 
-     * @return
-     */
-    protected function beforeEdit()
-    {
-        $this->brokenBeforeEdit = false;
-    }
-
-    /**
-     * Edit Action.
-     *
-     * Fires off beforeEdit(), doEdit() and afterEdit()
-     * 
-     * @param integer $modelitem_id
-     * 
-     * @return
-     */
-    public function edit($modelitem_id)
-    {
-        $this->find($modelitem_id);
-
-        $this->brokenBeforeEdit = true;
-        $this->beforeEdit();
-        if ($this->brokenBeforeEdit) {
-            throw new WriteableException('ModelAdmin has a broken beforeEdit method. Make sure you call parent::beforeEdit() on all instances of beforeEdit()', 1);
-        }
-
-        $this->doEdit();
-
-        $this->brokenAfterEdit = true;
-        $this->afterEdit();
-        if ($this->brokenAfterEdit) {
-            throw new WriteableException('ModelAdmin has a broken afterEdit method. Make sure you call parent::afterEdit() on all instances of afterEdit()', 1);
-        }
-    }
-
-    /**
-     * The actual Edit action, which does all of the pre-processing
-     * required before we are able to perform the save() function.
-     * 
-     * @return
-     */
-    private function doEdit()
-    {
-        // Unguard the model so we can set and store non-fillable entries
-        $this->modelManager->model->unguard();
-
-        // Save
-        $this->save();
-
-        // Reguard.
-        $this->modelManager->model->reguard();
-    }
-
-    /**
-     * Method fired after the Edit action is complete.
-     * 
-     * @return
-     */
-    protected function afterEdit()
-    {
-        $this->brokenAfterEdit = false;
     }
 
     /**
@@ -321,68 +148,5 @@ trait ModelWriteable
                 }
             }
         }
-    }
-
-    /**
-     * Method fired before the Delete action is undertaken.
-     * 
-     * @return
-     */
-    protected function beforeDelete()
-    {
-        $this->brokenBeforeDelete = false;
-    }
-
-    /**
-     * Delete Action.
-     *
-     * Fires off beforeDelete(), doDelete() and afterDelete()
-     * 
-     * @param integer $modelitem_id
-     * 
-     * @return
-     */
-    public function delete($modelitem_id)
-    {
-        $this->find($modelitem_id);
-
-        $this->brokenBeforeDelete = true;
-        $this->beforeDelete();
-        if ($this->brokenBeforeDelete) {
-            throw new WriteableException('ModelAdmin has a broken beforeDelete method. Make sure you call parent::beforeDelete() on all instances of beforeDelete()', 1);
-        }
-
-        $this->doDelete();
-
-        $this->brokenAfterDelete = true;
-        $this->afterDelete();
-        if ($this->brokenAfterDelete) {
-            throw new WriteableException('ModelAdmin has a broken afterDelete method. Make sure you call parent::afterDelete() on all instances of afterDelete()', 1);
-        }
-    }
-
-    /**
-     * The actual delete action.
-     * 
-     * @return
-     */
-    private function doDelete()
-    {
-        /*
-         * Delete the Model entry, or SoftDelete it.
-         *
-         * I guess if a Model has SoftDeletes, we should SoftDelete it first. Then allow full deletion.
-         */
-        $this->modelManager->model->delete();
-    }
-
-    /**
-     * Method fired after the Delete action is complete.
-     * 
-     * @return
-     */
-    protected function afterDelete()
-    {
-        $this->brokenAfterDelete = false;
     }
 }
