@@ -5,10 +5,10 @@ namespace LaravelFlare\Flare\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
+use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
 /**
  * I kind of feel that this file should be
@@ -18,7 +18,7 @@ use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
  */
 class AdminController extends FlareController
 {
-    use AuthenticatesUsers, DispatchesJobs;
+    use AuthenticatesAndResetsPasswords, DispatchesJobs;
 
     /**
      * Auth.
@@ -40,8 +40,8 @@ class AdminController extends FlareController
 
         $this->auth = $auth;
 
-        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin']]);
-        $this->middleware('checkpermissions', ['except' => ['getLogin']]);
+        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postEmail', 'getEmail', 'postEmail']]);
+        $this->middleware('checkpermissions', ['except' => ['getLogin', 'postLogin', 'getEmail', 'postEmail']]);
     }
 
     /**
@@ -88,6 +88,16 @@ class AdminController extends FlareController
         $this->auth->logout();
 
         return redirect('/');
+    }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getEmail()
+    {
+        return view('flare::admin.password');
     }
 
     /**
