@@ -147,7 +147,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      * be returning a new instance of the object on every
      * request.
      * 
-     * @return \LaravelFlare\Flare\Admin\ManagedModel
+     * @return \LaravelFlare\Flare\Admin\Models\ManagedModel
      */
     public function modelManager()
     {
