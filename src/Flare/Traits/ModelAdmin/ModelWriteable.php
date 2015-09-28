@@ -6,6 +6,8 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 
 trait ModelWriteable
 {
+    use ModelCreatable, ModelEditable, ModelDeleteable;
+    
     /**
      * Used by beforeSave() to ensure child classes call parent::beforeSave().
      * 

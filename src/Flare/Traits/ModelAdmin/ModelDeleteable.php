@@ -74,11 +74,6 @@ trait ModelDeleteable
      */
     private function doDelete()
     {
-        /*
-         * Delete the Model entry, or SoftDelete it.
-         *
-         * I guess if a Model has SoftDeletes, we should SoftDelete it first. Then allow full deletion.
-         */
         $this->modelManager->model->delete();
     }
 
