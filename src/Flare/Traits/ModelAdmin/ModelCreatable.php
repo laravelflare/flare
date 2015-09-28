@@ -21,6 +21,13 @@ trait ModelCreatable
     protected $brokenAfterCreate = false;
 
     /**
+     * Trait Requires Model Method (which returns the current Model)
+     * 
+     * @return
+     */
+    abstract protected function model();
+
+    /**
      * Trait Requires Save Method (usually provided by ModelWriteable)
      * 
      * @return

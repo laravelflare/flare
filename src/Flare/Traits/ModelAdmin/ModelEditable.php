@@ -21,6 +21,13 @@ trait ModelEditable
     protected $brokenAfterEdit = false;
 
     /**
+     * Trait Requires Model Method (which returns the current Model)
+     * 
+     * @return
+     */
+    abstract protected function model();
+    
+    /**
      * Trait Requires Find Method (usually provided by ModelWriteable)
      *
      * @param integer $modelitem_id
@@ -83,7 +90,7 @@ trait ModelEditable
     private function doEdit()
     {
         // Unguard the model so we can set and store non-fillable entries
-        $this->model->unguard();
+        $this->model()->unguard();
 
         // Save 
         if (is_callable(array("self", "save"))) {
@@ -93,7 +100,7 @@ trait ModelEditable
         }
 
         // Reguard.
-        $this->model->reguard();
+        $this->model()->reguard();
     }
 
     /**
