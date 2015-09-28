@@ -16,7 +16,7 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/../public/' => public_path('vendor/flare'),
         ], 'public');
 
-        // Config - I would prefer to call this something self-descriptive, such as 'admin.php'
+        // Config
         $this->publishes([
             __DIR__.'/../config/flare.php' => config_path('flare.php'),
         ]);
