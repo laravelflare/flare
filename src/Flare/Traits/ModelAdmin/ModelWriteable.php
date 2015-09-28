@@ -24,7 +24,7 @@ trait ModelWriteable
 
     /**
      * Relations to Update during Save and
-     * the appropriate method to fire the update with
+     * the appropriate method to fire the update with.
      * 
      * @var array
      */
@@ -41,7 +41,7 @@ trait ModelWriteable
     /**
      * Finds an existing Model entry and sets it to the current model.
      * 
-     * @param integer $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return
      */
@@ -125,12 +125,11 @@ trait ModelWriteable
             if (method_exists($this->model, $key) && is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
                 $this->saveRelation('afterSave', $key, $value);
             }
-
         }
     }
 
     /**
-     * Method fired to Save Relations
+     * Method fired to Save Relations.
      *
      * @param string $action The current action (either doSave or afterSave)
      * @param string $key
@@ -142,10 +141,10 @@ trait ModelWriteable
     {
         // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
         if (method_exists($this->model, $key) && is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
-
             foreach ($this->{$action.'Relations'} as $relationship => $method) {
                 if (is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
                     $this->model->$key()->$method($value);
+
                     return;
                 }
             }

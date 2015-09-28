@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
 use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
@@ -30,10 +28,10 @@ class AdminController extends FlareController
     protected $auth;
 
     /**
-     * __construct
+     * __construct.
      * 
-     * @param Guard                 $auth                  
-     * @param ModelAdminCollection  $modelAdminCollection  
+     * @param Guard                 $auth
+     * @param ModelAdminCollection  $modelAdminCollection
      * @param ModuleAdminCollection $moduleAdminCollection
      */
     public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
@@ -99,7 +97,7 @@ class AdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.dashboard', ['widgetAdminCollection' => (new WidgetAdminCollection)]);
+        return view('flare::admin.dashboard', ['widgetAdminCollection' => (new WidgetAdminCollection())]);
     }
 
     /**

@@ -115,7 +115,6 @@ trait ModelQueryable
         return 'desc';
     }
 
-
     /**
      * Get the number of models to return per page.
      *

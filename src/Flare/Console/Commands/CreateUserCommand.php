@@ -21,7 +21,7 @@ class CreateUserCommand extends Command
     protected $description = 'Creates a new user';
 
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {

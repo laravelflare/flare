@@ -130,7 +130,7 @@ class AdminCollection extends Collection
      * Checks if the current user has access to a given 
      * Admin class and returns a boolean.
      * 
-     * @param  string $class
+     * @param string $class
      * 
      * @return bool
      */

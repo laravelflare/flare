@@ -21,14 +21,14 @@ trait ModelDeleteable
     protected $brokenAfterDelete = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelWriteable)
+     * Trait Requires Find Method (usually provided by ModelWriteable).
      *
-     * @param integer $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return
      */
     abstract protected function find($modelitem_id);
-    
+
     /**
      * Method fired before the Delete action is undertaken.
      * 
@@ -44,7 +44,7 @@ trait ModelDeleteable
      *
      * Fires off beforeDelete(), doDelete() and afterDelete()
      * 
-     * @param integer $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return
      */

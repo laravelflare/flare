@@ -21,23 +21,23 @@ trait ModelEditable
     protected $brokenAfterEdit = false;
 
     /**
-     * Trait Requires Model Method (which returns the current Model)
+     * Trait Requires Model Method (which returns the current Model).
      * 
      * @return
      */
     abstract protected function model();
-    
+
     /**
-     * Trait Requires Find Method (usually provided by ModelWriteable)
+     * Trait Requires Find Method (usually provided by ModelWriteable).
      *
-     * @param integer $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return
      */
     abstract protected function find($modelitem_id);
 
     /**
-     * Trait Requires Save Method (usually provided by ModelWriteable)
+     * Trait Requires Save Method (usually provided by ModelWriteable).
      * 
      * @return
      */
@@ -58,7 +58,7 @@ trait ModelEditable
      *
      * Fires off beforeEdit(), doEdit() and afterEdit()
      * 
-     * @param integer $modelitem_id
+     * @param int $modelitem_id
      * 
      * @return
      */
@@ -93,7 +93,7 @@ trait ModelEditable
         $this->model()->unguard();
 
         // Save 
-        if (is_callable(array("self", "save"))) {
+        if (is_callable(array('self', 'save'))) {
             $this->save();
         } else {
             throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);

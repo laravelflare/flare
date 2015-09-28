@@ -21,14 +21,14 @@ trait ModelCreatable
     protected $brokenAfterCreate = false;
 
     /**
-     * Trait Requires Model Method (which returns the current Model)
+     * Trait Requires Model Method (which returns the current Model).
      * 
      * @return
      */
     abstract protected function model();
 
     /**
-     * Trait Requires Save Method (usually provided by ModelWriteable)
+     * Trait Requires Save Method (usually provided by ModelWriteable).
      * 
      * @return
      */
@@ -80,7 +80,7 @@ trait ModelCreatable
         $this->model()->unguard();
 
         // Save
-        if (is_callable(array("self", "save"))) {
+        if (is_callable(array('self', 'save'))) {
             $this->save();
         } else {
             throw new WriteableException('For a Model to be Creatable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);

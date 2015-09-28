@@ -41,7 +41,7 @@ class BaseAttribute
     protected $model;
 
     /**
-     * Model Manager
+     * Model Manager.
      * 
      * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
      */
