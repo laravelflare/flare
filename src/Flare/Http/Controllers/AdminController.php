@@ -107,7 +107,13 @@ class AdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.dashboard', ['widgetAdminCollection' => (new WidgetAdminCollection())]);
+        $view = 'admin.dashboard';
+
+        if (!view()->exists($view)) {
+            $view = 'flare::' . $view;
+        }
+
+        return view($view, ['widgetAdminCollection' => (new WidgetAdminCollection())]);
     }
 
     /**
