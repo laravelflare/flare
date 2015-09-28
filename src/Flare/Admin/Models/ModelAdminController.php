@@ -83,7 +83,7 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        $this->modelAdmin->create();
+        $this->managedModel->create();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully created.', 'dismissable' => false]]);
     }
@@ -125,7 +125,7 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        $this->modelAdmin->edit($modelitem_id);
+        $this->managedModel->edit($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully updated.', 'dismissable' => false]]);
     }
@@ -154,7 +154,7 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        $this->modelAdmin->delete($modelitem_id);
+        $this->managedModel->delete($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully removed.', 'dismissable' => false]]);
     }

@@ -93,8 +93,8 @@ trait ModelWriteable
     private function doSave()
     {
         foreach (\Request::except('_token') as $key => $value) {
-            if ($this->modelManager->hasSetMutator($key)) {
-                $this->modelManager->setAttribute($key, $value);
+            if ($this->hasSetMutator($key)) {
+                $this->setAttribute($key, $value);
                 continue;
             }
 
