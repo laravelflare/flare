@@ -53,13 +53,16 @@
 							<button type="submit" class="btn btn-default pull-right">
 								Login
 							</button>
-							{{--<a class="btn btn-link" href="{{ url('/admin/password') }}">
-								Forgot Your Password?
-							</a>--}}
 						</div>
 
 						<div class="clearfix"></div>
 					</form>
+				</div>
+
+				<div class="col-lg-12" style="padding-top: 30px;text-align: center;">
+                    <a style="color: white; border-bottom: 1px dotted;" href="{{ url('/admin/email') }}">
+						Forgot Your Password?
+					</a>
 				</div>
 			</div>
 		</div>

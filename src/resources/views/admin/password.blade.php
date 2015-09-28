@@ -26,7 +26,7 @@
                     </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/email') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group" style="padding-left: 15px; padding-right: 15px;">
@@ -46,6 +46,12 @@
 
                         <div class="clearfix"></div>
                     </form>
+                </div>
+
+                <div class="col-lg-12" style="padding-top: 30px;text-align: center;">
+                    <a style="color: white; border-bottom: 1px dotted;" href="{{ url('/admin/login') }}">
+                        Login
+                    </a>
                 </div>
             </div>
         </div>
