@@ -10,8 +10,6 @@ use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
 
 class ModelAdmin extends Admin implements ModelWriteableInterface
 {
-    use AttributeAccess, ModelWriteable;
-
     /**
      * The Controller to be used by the Model Admin.
      *

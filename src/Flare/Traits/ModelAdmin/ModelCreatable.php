@@ -21,13 +21,6 @@ trait ModelCreatable
     protected $brokenAfterCreate = false;
 
     /**
-     * Trait Requires Model Method (which returns the current Model).
-     * 
-     * @return
-     */
-    abstract protected function model();
-
-    /**
      * Trait Requires Save Method (usually provided by ModelWriteable).
      * 
      * @return
@@ -77,7 +70,7 @@ trait ModelCreatable
     private function doCreate()
     {
         // Unguard the model so we can set and store non-fillable entries
-        $this->model()->unguard();
+        $this->model->unguard();
 
         // Save
         if (is_callable(array('self', 'save'))) {
@@ -87,7 +80,7 @@ trait ModelCreatable
         }
 
         // Reguard.
-        $this->model()->reguard();
+        $this->model->reguard();
     }
 
     /**
