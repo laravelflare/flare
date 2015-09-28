@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use LaravelFlare\Flare\Admin\Modules\ModelAdmin;
+use LaravelFlare\Flare\Admin\Modules\ModuleAdmin;
 
 class DummyClass extends ModuleAdmin
 {
