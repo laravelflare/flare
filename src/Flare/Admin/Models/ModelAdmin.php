@@ -142,28 +142,32 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
 
     /**
      * Returns a Model Manager Instance.
-     *
-     * Note: We should revisit this as really we shouldn't
-     * be returning a new instance of the object on every
-     * request.
      * 
      * @return \LaravelFlare\Flare\Admin\Models\ManagedModel
      */
     public function modelManager()
     {
-        if (!is_array($this->managedModels)) {
-            $modelManagerName = $this->managedModels;
-
-            return new $modelManagerName();
-        }
-
         if ($modelManagerName = $this->getRequestedModelManager()) {
             return new $modelManagerName();
         }
 
-        $modelManagerName = $this->managedModels[0];
+        $modelManagerName = $this->defaultManagedModel();
 
         return new $modelManagerName();
+    }
+
+    /**
+     * Returns the default Managed Model
+     *
+     * @return string
+     */
+    protected function defaultManagedModel()
+    {
+        if (!is_array($this->managedModels)) {
+            return $this->managedModels;
+        }
+
+        return $this->managedModels[0];
     }
 
     /**
