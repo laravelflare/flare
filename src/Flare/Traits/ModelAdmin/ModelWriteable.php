@@ -39,6 +39,20 @@ trait ModelWriteable
     protected $afterSaveRelations = ['BelongsToMany' => 'sync'];
 
     /**
+     * Trait Requires hasSetMutator method
+     * 
+     * @return
+     */
+    abstract public function hasSetMutator();
+
+    /**
+     * Trait Requires setAttribute method
+     * 
+     * @return
+     */
+    abstract public function setAttribute();
+
+    /**
      * Finds an existing Model entry and sets it to the current model.
      * 
      * @param int $modelitem_id
