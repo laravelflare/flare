@@ -17,7 +17,11 @@ class CheckModelFound
      */
     public function __construct(ModelAdminCollection $modelAdminCollection)
     {
-        $this->model = $modelAdminCollection->getAdminInstance()->modelManager()->model;
+        if ($modelAdminCollection->getAdminInstance() instanceof \LaravelFlare\Flare\Admin\Models\ModelAdmin) {
+            $this->model = $modelAdminCollection->getAdminInstance()->modelManager()->model;
+        } else {
+            return;
+        }
     }
 
     /**
