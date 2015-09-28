@@ -70,7 +70,7 @@ trait ModelCreatable
     private function doCreate()
     {
         // Unguard the model so we can set and store non-fillable entries
-        $this->modelManager->model->unguard();
+        $this->model()->unguard();
 
         // Save
         if (is_callable(array("self", "save"))) {
@@ -79,9 +79,8 @@ trait ModelCreatable
             throw new WriteableException('For a Model to be Creatable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
         }
 
-
         // Reguard.
-        $this->modelManager->model->reguard();
+        $this->model()->reguard();
     }
 
     /**

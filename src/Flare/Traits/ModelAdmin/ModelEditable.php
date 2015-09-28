@@ -83,7 +83,7 @@ trait ModelEditable
     private function doEdit()
     {
         // Unguard the model so we can set and store non-fillable entries
-        $this->modelManager->model->unguard();
+        $this->model->unguard();
 
         // Save 
         if (is_callable(array("self", "save"))) {
@@ -93,7 +93,7 @@ trait ModelEditable
         }
 
         // Reguard.
-        $this->modelManager->model->reguard();
+        $this->model->reguard();
     }
 
     /**

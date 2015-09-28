@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelWriteable
 {
     use ModelCreatable, ModelEditable, ModelDeleteable;
-    
+
     /**
      * Used by beforeSave() to ensure child classes call parent::beforeSave().
      * 
@@ -39,7 +39,7 @@ trait ModelWriteable
     protected $afterSaveRelations = ['BelongsToMany' => 'sync'];
 
     /**
-     * Finds an existing Model entry and sets it to the current modelManager model.
+     * Finds an existing Model entry and sets it to the current model.
      * 
      * @param integer $modelitem_id
      * 
@@ -47,7 +47,7 @@ trait ModelWriteable
      */
     protected function find($modelitem_id)
     {
-        $this->modelManager->model = $this->modelManager->model->findOrFail($modelitem_id);
+        $this->model = $this->model->findOrFail($modelitem_id);
     }
 
     /**
@@ -99,15 +99,15 @@ trait ModelWriteable
             }
 
             // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
-            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+            if (method_exists($this->model, $key) && is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
                 $this->saveRelation('doSave', $key, $value);
                 continue;
             }
 
-            $this->modelManager->model->setAttribute($key, $value);
+            $this->model->setAttribute($key, $value);
         }
 
-        $this->modelManager->model->save();
+        $this->model->save();
     }
 
     /**
@@ -122,7 +122,7 @@ trait ModelWriteable
         foreach (\Request::except('_token') as $key => $value) {
 
             // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
-            if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+            if (method_exists($this->model, $key) && is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
                 $this->saveRelation('afterSave', $key, $value);
             }
 
@@ -141,11 +141,11 @@ trait ModelWriteable
     private function saveRelation($action, $key, $value)
     {
         // Could swap this out for model -> getAttribute, then check if we have an attribute or a relation... getRelationValue() is helpful
-        if (method_exists($this->modelManager->model, $key) && is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
+        if (method_exists($this->model, $key) && is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\Relation')) {
 
             foreach ($this->{$action.'Relations'} as $relationship => $method) {
-                if (is_a(call_user_func_array([$this->modelManager->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
-                    $this->modelManager->model->$key()->$method($value);
+                if (is_a(call_user_func_array([$this->model, $key], []), 'Illuminate\Database\Eloquent\Relations\\'.$relationship)) {
+                    $this->model->$key()->$method($value);
                     return;
                 }
             }

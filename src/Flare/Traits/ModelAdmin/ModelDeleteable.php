@@ -74,7 +74,7 @@ trait ModelDeleteable
      */
     private function doDelete()
     {
-        $this->modelManager->model->delete();
+        $this->model->delete();
     }
 
     /**
