@@ -56,6 +56,13 @@ abstract class Admin
     protected static $view = 'admin.404';
 
     /**
+     * Array of View Data to Render
+     * 
+     * @var array
+     */
+    protected $viewData = [];
+
+    /**
      * Class Prefix used for matching and removing term
      * from user provided Admin sections.
      *
@@ -147,7 +154,7 @@ abstract class Admin
 
     public function getViewData()
     {
-        return [];
+        return $this->viewData;
     }
 
     /**
