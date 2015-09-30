@@ -4,11 +4,16 @@ namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
-use LaravelFlare\Flare\Permissions\Permissions;
+use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Exceptions\PermissionsException;
 
 class CheckPermissions implements Middleware
 {
+    public function __construct(PermissionsInterface $permissions)
+    {
+        $this->permissions = $permissions;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -19,7 +24,7 @@ class CheckPermissions implements Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Permissions::check()) {
+        if (!$this->permissions->check()) {
             throw new PermissionsException('Permission denied!');
         }
 

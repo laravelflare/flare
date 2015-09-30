@@ -24,6 +24,7 @@ class Flare
         'models' => [],
         'modules' => [],
         'widgets' => [],
+        'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
     ];
 
     /**

@@ -2,7 +2,9 @@
 
 namespace LaravelFlare\Flare\Permissions;
 
-class Permissions
+use LaravelFlare\Flare\Contracts\PermissionsInterface;
+
+class Permissions implements PermissionsInterface
 {
     public function __construct()
     {

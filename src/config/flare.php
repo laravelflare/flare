@@ -61,4 +61,6 @@ return [
         // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 
+    'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
+
 ];
