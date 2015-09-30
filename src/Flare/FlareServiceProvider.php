@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class FlareServiceProvider extends ServiceProvider
@@ -56,7 +57,7 @@ class FlareServiceProvider extends ServiceProvider
             return new Flare();
         });
 
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader = AliasLoader::getInstance();
         $loader->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
     }
 

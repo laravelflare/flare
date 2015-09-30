@@ -4,7 +4,7 @@ The Roadmap aims to provide a list of future features and functionality that can
 ## Pre-Alpha
 ManagedModel Form Validation
 
-Forms - Rapid creation of CRUD for different attribute types using built in Form Fields.
+Forms - Rapid creation of CRUD for different attribute types using built in Form Fields (Datepicker, WYSIWYG and File Upload remaining)
 
 Ability to Search Managed Models
 
@@ -22,6 +22,8 @@ Split the core into subtrees
 ## Alpha
 Setup Bower for AdminLTE
 
+Event Hooks for ModelAdmin, ManagedModels and ModuleAdmin
+
 Modules - Implement Modules which are fully customizable sections of the Admin.
 
 Widgets through WidgetAdmin which are output on Dashboard and can be output on Modules etc.
@@ -30,6 +32,12 @@ Permission Provider - The ability to define users of the Admin panels permission
 
 Notifications - Ability to define flashdata and permanent, plus dismissable notifications, on certain or all areas of the Admin.
 
-Event Hooks for ModelAdmin, ManagedModels and ModuleAdmin
-
 File System Manager
+
+
+
+
+## Future Enhancements & Modules
+Invoicable & Payments Modules
+
+Audit Log / Trail Module
