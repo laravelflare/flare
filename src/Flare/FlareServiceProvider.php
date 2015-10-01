@@ -27,6 +27,7 @@ class FlareServiceProvider extends ServiceProvider
         $router->middleware('checkmodelfound', 'LaravelFlare\Flare\Http\Middleware\CheckModelFound');
         $router->middleware('checkpermissions', 'LaravelFlare\Flare\Http\Middleware\CheckPermissions');
 
+        // Binds the Permissions interface to the defined Permissions class
         $this->app->bind('LaravelFlare\Flare\Contracts\PermissionsInterface', \Flare::config('permissions'));
 
         // Routes

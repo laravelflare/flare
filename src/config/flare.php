@@ -61,6 +61,14 @@ return [
         // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Permissions
+    |--------------------------------------------------------------------------
+    |
+    | Class to bind to the PermissionsInterface
+    |
+    */
     'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
 
 ];
