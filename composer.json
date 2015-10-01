@@ -2,9 +2,9 @@
     "name": "laravelflare/flare",
     "description": "Laravel Flare",
     "keywords": [
-        "Laravel"
+        "Laravel", "Flare"
     ],
-    "homepage": "https://github.com/JacobBaileyLtd/flare",
+    "homepage": "https://github.com/laravelflare/flare",
     "license": "MIT",
     "authors": [
         {
