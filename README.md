@@ -27,7 +27,7 @@ If you would prefer to install Flare on a new Laravel (5.1 LTS) Project:
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 - [License](LICENSE.md)
-- [Documentation](docs/0-DOCUMENTATION.md)
+- [Documentation](https://github.com/laravelflare/docs)
 - [Roadmap](ROADMAP.md)
 
 
