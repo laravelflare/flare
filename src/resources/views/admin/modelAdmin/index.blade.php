@@ -64,15 +64,15 @@
                                     </td>
                                     @endforeach
                                     <td style="width: 1%; white-space:nowrap">
-                                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::currentUrl('view/'.$modelItem->id) }}">
+                                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::currentUrl('view/'.$modelItem->getKey()) }}">
                                             <i class="fa fa-eye"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->id) }}">
+                                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->getKey()) }}">
                                             <i class="fa fa-edit"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->id) }}">
+                                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}">
                                             <i class="fa fa-trash"></i>
                                             Delete
                                         </a>

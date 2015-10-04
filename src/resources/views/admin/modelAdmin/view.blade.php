@@ -21,11 +21,11 @@
             <a href="{{ $modelAdmin::currentUrl() }}" class="btn btn-default">
                 Back
             </a>
-            <a href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->id) }}" class="btn btn-primary">
+            <a href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->getKey()) }}" class="btn btn-primary">
                 <i class="fa fa-edit"></i>
                 Edit {{ $modelAdmin->modelManager()->title() }}
             </a>
-            <a href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->id) }}" class="btn btn-danger">      
+            <a href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}" class="btn btn-danger">      
                 <i class="fa fa-trash"></i>      
                 Delete {{ $modelAdmin->modelManager()->title() }}
             </a>
