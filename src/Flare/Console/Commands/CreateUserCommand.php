@@ -40,60 +40,18 @@ class CreateUserCommand extends Command
      */
     public function fire()
     {
-        $this->askName();
-        $this->askEmail();
-        $this->askPassword();
+        $name = $this->ask('Please provide a username (defaults to admin)', 'admin');
+        $email = $this->ask('Please provide your email (defaults to email@example.com)', 'email@example.com');
+        $password = $this->ask('Please provide a password (defaults to password)', 'password');
 
         $authModel = config('auth.model');
 
-        if ((new $authModel())->create($this->data)) {
+        if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password)])) {
             $this->info('All done!');
 
             return;
         }
 
         $this->error('Something went wrong... Please try again.');
-    }
-
-    /**
-     * Ask the user to define a name
-     * 
-     * @return void
-     */
-    private function askName()
-    {
-        $this->data['name'] = $this->ask('Please provide a username');
-
-        if ($this->data['name'] == '') {
-            $this->data['name'] = 'admin';
-        }
-    }
-
-    /**
-     * Ask the user to define their email
-     * 
-     * @return void
-     */
-    private function askEmail()
-    {
-        $this->data['email'] = $this->ask('Please provide your email');
-
-        if ($this->data['email'] == '') {
-            $this->data['email'] = 'tech.studio@jacobbailey.com';
-        }
-    }
-
-    /**
-     * Ask the user to define a password
-     * 
-     * @return void
-     */
-    private function askPassword()
-    {
-        $this->data['password'] = $this->ask('Please provide a password');
-
-        if ($this->data['password'] == '') {
-            $this->data['password'] = 'password';
-        }
     }
 }
