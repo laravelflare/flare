@@ -3,7 +3,7 @@
 namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelFlare\Flare\Console\Commands\CreateUserCommand;
+use LaravelFlare\Flare\Console\Commands\MakeUserCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
@@ -26,7 +26,7 @@ class ArtisanServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'CreateUser' => 'command.createuser',
+        'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
         'ManagedModelMake' => 'command.managedmodel.make',

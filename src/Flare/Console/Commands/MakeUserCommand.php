@@ -4,7 +4,7 @@ namespace LaravelFlare\Flare\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class CreateUserCommand extends Command
+class MakeUserCommand extends Command
 {
     /**
      * The console command name.
@@ -19,13 +19,6 @@ class CreateUserCommand extends Command
      * @var string
      */
     protected $description = 'Creates a new user';
-
-    /**
-     * Array of data to create user with
-     * 
-     * @var array
-     */
-    protected $data = [];
 
     /**
      * __construct.
