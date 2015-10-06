@@ -31,7 +31,6 @@ class ArtisanServiceProvider extends ServiceProvider
         'FlareInstall' => 'command.flareinstall',
         'FlareScaffold' => 'command.flarescaffold',
         'MakeUser' => 'command.makeuser',
-        'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
         'ManagedModelMake' => 'command.managedmodel.make',
