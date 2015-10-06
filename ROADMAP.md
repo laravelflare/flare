@@ -20,8 +20,6 @@ Split the core into subtrees
 
 
 ## Alpha 
-Setup Bower for AdminLTE
-
 Event Hooks for ModelAdmin, ManagedModels and ModuleAdmin
 
 Modules - Implement Modules which are fully customizable sections of the Admin.
