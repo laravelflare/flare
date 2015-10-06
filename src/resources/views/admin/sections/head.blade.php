@@ -4,13 +4,13 @@
         <meta charset="UTF-8">
         <title>@yield('page_title', 'Flare')</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-        <link href="{{ asset('vendor/flare/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('vendor/flare/dist/css/skins/skin-'.Flare::config('admin_theme').'.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('vendor/flare/dist/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/flare/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/flare/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/flare/css/skins/skin-'.Flare::config('admin_theme').'.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/flare/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

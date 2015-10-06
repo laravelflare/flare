@@ -14,7 +14,10 @@ class FlareServiceProvider extends ServiceProvider
     {
         // Assets
         $this->publishes([
-            __DIR__.'/../public/' => public_path('vendor/flare'),
+            __DIR__.'/../public/flare' => public_path('vendor/flare'),
+            __DIR__.'/../public/AdminLTE/bootstrap' => public_path('vendor/flare/bootstrap'),
+            __DIR__.'/../public/AdminLTE/dist' => public_path('vendor/flare'),
+            __DIR__.'/../public/AdminLTE/plugins' => public_path('vendor/flare/plugins'),
         ], 'public');
 
         // Config
