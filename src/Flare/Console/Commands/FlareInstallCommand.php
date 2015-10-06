@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
 
 class FlareInstallCommand extends Command
 {

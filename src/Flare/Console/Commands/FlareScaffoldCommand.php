@@ -3,8 +3,6 @@
 namespace LaravelFlare\Flare\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Process\Process;
 use LaravelFlare\Flare\Scaffolding\Scaffolder;
 
 class FlareScaffoldCommand extends Command
