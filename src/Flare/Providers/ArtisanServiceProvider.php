@@ -4,6 +4,8 @@ namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelFlare\Flare\Console\Commands\MakeUserCommand;
+use LaravelFlare\Flare\Console\Commands\FlareInstallCommand;
+use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
@@ -26,6 +28,9 @@ class ArtisanServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        'FlareInstall' => 'command.flareinstall',
+        'FlareScaffold' => 'command.flarescaffold',
+        'MakeUser' => 'command.makeuser',
         'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
@@ -56,10 +61,38 @@ class ArtisanServiceProvider extends ServiceProvider
      * 
      * @return
      */
-    protected function registerCreateUserCommand($command)
+    protected function registerFlareInstallCommand($command)
     {
         $this->app->singleton($command, function ($app) {
-            return new CreateUserCommand($app['files']);
+            return new FlareInstallCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerFlareScaffoldCommand($command)
+    {
+        $this->app->singleton($command, function ($app) {
+            return new FlareScaffoldCommand($app['files']);
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerMakeUserCommand($command)
+    {
+        $this->app->singleton($command, function ($app) {
+            return new MakeUserCommand($app['files']);
         });
     }
 
