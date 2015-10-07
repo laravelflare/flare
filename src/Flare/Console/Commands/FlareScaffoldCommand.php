@@ -3,7 +3,7 @@
 namespace LaravelFlare\Flare\Console\Commands;
 
 use Illuminate\Console\Command;
-use LaravelFlare\Flare\Scaffolding\Scaffolder;
+use LaravelFlare\Flare\Scaffolding\ScaffoldManager;
 
 class FlareScaffoldCommand extends Command
 {
@@ -24,18 +24,18 @@ class FlareScaffoldCommand extends Command
     protected $description = 'Flare Scaffolding rapidly creates Models, Migrations, ModelAdmins (Admin based Model Managers) into your application';
 
     /**
-     * Scaffolder Instance
+     * ScaffoldManager Instance
      * 
-     * @var \LaravelFlare\Flare\Scaffolding\Scaffolder
+     * @var \LaravelFlare\Flare\Scaffolding\ScaffoldManager
      */
     protected $scaffold;
 
     /**
-     * @param \LaravelFlare\Flare\Scaffolding\Scaffolder $scaffold
+     * @param \LaravelFlare\Flare\Scaffolding\ScaffoldManager $scaffold
      * 
      * __construct.
      */
-    public function __construct(Scaffolder $scaffold)
+    public function __construct(ScaffoldManager $scaffold)
     {
         $this->scaffold = $scaffold;
 
