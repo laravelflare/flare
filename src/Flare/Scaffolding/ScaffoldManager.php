@@ -9,7 +9,7 @@ use LaravelFlare\Flare\Scaffolding\DatabaseScaffolder;
 use LaravelFlare\Flare\Scaffolding\MigrationScaffolder;
 
 class ScaffoldManager
-{ 
+{
     /**
      * Model Scaffolder
      * 
