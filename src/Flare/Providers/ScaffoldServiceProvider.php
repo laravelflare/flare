@@ -25,27 +25,27 @@ class ScaffoldServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('ModelScaffolder', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\ModelScaffolder();
+            return new \LaravelFlare\Flare\Scaffolding\ModelScaffolder();
         });
 
         $this->app->bind('MigrationScaffolder', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\MigrationScaffolder();
+            return new \LaravelFlare\Flare\Scaffolding\MigrationScaffolder();
         });
 
         $this->app->bind('AdminScaffolder', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\AdminScaffolder();
+            return new \LaravelFlare\Flare\Scaffolding\AdminScaffolder();
         });
 
         $this->app->bind('DatabaseScaffolder', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\DatabaseScaffolder();
+            return new \LaravelFlare\Flare\Scaffolding\DatabaseScaffolder();
         });
 
         $this->app->bind('ScaffoldTester', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\ScaffoldTester();
+            return new \LaravelFlare\Flare\Scaffolding\ScaffoldTester();
         });
 
         $this->app->bind('ScaffoldManager', function ($app) {
-            return new LaravelFlare\Flare\Scaffolding\ScaffoldManager(
+            return new \LaravelFlare\Flare\Scaffolding\ScaffoldManager(
                                                                         $app['ModelScaffolder'],
                                                                         $app['MigrationScaffolder'],
                                                                         $app['AdminScaffolder'],
