@@ -46,6 +46,8 @@ class CreateUserCommand extends Command
 
         $authModel = config('auth.model');
 
+        $this->data['password'] = bcrypt($this->data['password']);
+
         if ((new $authModel())->create($this->data)) {
             $this->info('All done!');
 
