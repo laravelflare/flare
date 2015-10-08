@@ -63,7 +63,7 @@ class ArtisanServiceProvider extends ServiceProvider
     protected function registerFlareInstallCommand($command)
     {
         $this->app->singleton($command, function ($app) {
-            return new FlareInstallCommand($app['files']);
+            return new FlareInstallCommand();
         });
     }
 
@@ -77,7 +77,7 @@ class ArtisanServiceProvider extends ServiceProvider
     protected function registerFlareScaffoldCommand($command)
     {
         $this->app->singleton($command, function ($app) {
-            return new FlareScaffoldCommand($app['files']);
+            return new FlareScaffoldCommand($app['ScaffoldManager']);
         });
     }
 
