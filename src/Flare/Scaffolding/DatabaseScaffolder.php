@@ -2,12 +2,24 @@
 
 namespace LaravelFlare\Flare\Scaffolding;
 
-class DatabaseScaffolder
+use Illuminate\Console\Command;
+
+class DatabaseScaffolder extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'flare:scaffold:database';
 
-    public function __construct()
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
     {
-
+       
     }
-
 }

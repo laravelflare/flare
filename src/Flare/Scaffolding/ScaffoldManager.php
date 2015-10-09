@@ -2,65 +2,14 @@
 
 namespace LaravelFlare\Flare\Scaffolding;
 
-use LaravelFlare\Flare\Scaffolding\ScaffoldTester;
-use LaravelFlare\Flare\Scaffolding\AdminScaffolder;
-use LaravelFlare\Flare\Scaffolding\ModelScaffolder;
-use LaravelFlare\Flare\Scaffolding\DatabaseScaffolder;
-use LaravelFlare\Flare\Scaffolding\MigrationScaffolder;
-
 class ScaffoldManager
 {
     /**
-     * Model Scaffolder
-     * 
-     * @var \LaravelFlare\Flare\Scaffolding\ModelScaffolder
-     */
-    protected $models; 
-
-    /**
-     * Model Scaffolder
-     * 
-     * @var \LaravelFlare\Flare\Scaffolding\MigrationScaffolder
-     */
-    protected $migrations; 
-
-    /**
-     * Model Scaffolder
-     * 
-     * @var \LaravelFlare\Flare\Scaffolding\AdminScaffolder
-     */
-    protected $admin; 
-
-    /**
-     * Model Scaffolder
-     * 
-     * @var \LaravelFlare\Flare\Scaffolding\DatabaseScaffolder
-     */
-    protected $database; 
-
-    /**
-     * Model Scaffolder
-     * 
-     * @var \LaravelFlare\Flare\Scaffolding\ScaffoldTester
-     */
-    protected $tests;
-
-    /**
      * __construct
-     * 
-     * @param ModelScaffolder     $models    
-     * @param MigrationScaffolder $migrations
-     * @param AdminScaffolder     $admin     
-     * @param DatabaseScaffolder  $database  
-     * @param ScaffoldTester      $tests     
      */
-    public function __construct(ModelScaffolder $models, MigrationScaffolder $migrations, AdminScaffolder $admin, DatabaseScaffolder $database, ScaffoldTester $tests)
+    public function __construct()
     {
-        $this->models = $models;
-        $this->migrations = $migrations;
-        $this->admin = $admin;
-        $this->database = $database;
-        $this->tests = $tests;
+
     }
 
     /**
@@ -70,7 +19,7 @@ class ScaffoldManager
      */
     public function newModels()
     {
-
+        passthru('php artisan flare:scaffold:models');
     }
 
     /**
@@ -80,7 +29,7 @@ class ScaffoldManager
      */
     public function existingModels()
     {
-
+        passthru('php artisan flare:scaffold:models --update');
     }
 
     /**
@@ -90,7 +39,7 @@ class ScaffoldManager
      */
     public function migrations()
     {
-
+        passthru('php artisan flare:scaffold:migrations');
     }
 
     /**
@@ -100,7 +49,7 @@ class ScaffoldManager
      */
     public function modelAdmins()
     {
-
+        passthru('php artisan flare:scaffold:admin');
     }
 
     /**
@@ -110,7 +59,7 @@ class ScaffoldManager
      */
     public function seeders()
     {
-
+        passthru('php artisan flare:scaffold:database');
     }
 
     /**
@@ -120,6 +69,6 @@ class ScaffoldManager
      */
     public function tests()
     {
-
+        passthru('php artisan flare:scaffold:test');
     }
 }

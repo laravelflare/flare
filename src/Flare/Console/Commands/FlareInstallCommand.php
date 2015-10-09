@@ -36,7 +36,7 @@ class FlareInstallCommand extends Command
             ]
         );
 
-        if ($this->confirm('Would you like to run the Flare Scaffolder?', 'yes')) {
+        if ($this->confirm('Would you like to run the Flare Scaffolder? [y|N]', 'y')) {
             passthru('php artisan flare:scaffold');
         }
     }

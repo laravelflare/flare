@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 use LaravelFlare\Flare\Scaffolding\ScaffoldTester;
 use LaravelFlare\Flare\Scaffolding\ModelScaffolder;
 use LaravelFlare\Flare\Scaffolding\AdminScaffolder;
@@ -19,39 +20,120 @@ class ScaffoldServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
+     /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [
+        'FlareScaffoldCommand' => 'command.flare.scaffold',
+        'AdminScaffolder' => 'command.flare.scaffold.admin',
+        'DatabaseScaffolder' => 'command.flare.scaffold.database',
+        'MigrationScaffolder' => 'command.flare.scaffold.migrations',
+        'ModelScaffolder' => 'command.flare.scaffold.models',
+        'ScaffoldTester' => 'command.flare.scaffold.test',
+    ];
+
     /**
      * Register the service provider.
      */
     public function register()
     {
-        $this->app->bind('ModelScaffolder', function ($app) {
-            return new ModelScaffolder();
+        $this->app->bind('ScaffoldManager', function () {
+            return new ScaffoldManager();
         });
 
-        $this->app->bind('MigrationScaffolder', function ($app) {
-            return new MigrationScaffolder();
-        });
+        foreach ($this->commands as $command => $name) {
+            $method = "register{$command}";
 
-        $this->app->bind('AdminScaffolder', function ($app) {
-            return new AdminScaffolder();
-        });
+            call_user_func_array([$this, $method], [$name]);
+        }
 
-        $this->app->bind('DatabaseScaffolder', function ($app) {
-            return new DatabaseScaffolder();
-        });
+        $this->commands(array_values($this->commands));
+    }
 
-        $this->app->bind('ScaffoldTester', function ($app) {
-            return new ScaffoldTester();
-        });
-
-        $this->app->bind('ScaffoldManager', function ($app) {
-            return new ScaffoldManager(
-                                                                        $app['ModelScaffolder'],
-                                                                        $app['MigrationScaffolder'],
-                                                                        $app['AdminScaffolder'],
-                                                                        $app['DatabaseScaffolder'],
-                                                                        $app['ScaffoldTester']
-                                                                    );
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerFlareScaffoldCommand($command)
+    {
+        $this->app->singleton($command, function ($app) {
+            return new FlareScaffoldCommand($app['ScaffoldManager']);
         });
     }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerAdminScaffolder($command)
+    {
+        $this->app->singleton($command, function () {
+            return new AdminScaffolder();
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerDatabaseScaffolder($command)
+    {
+        $this->app->singleton($command, function () {
+            return new DatabaseScaffolder();
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerMigrationScaffolder($command)
+    {
+        $this->app->singleton($command, function () {
+            return new MigrationScaffolder();
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerModelScaffolder($command)
+    {
+        $this->app->singleton($command, function () {
+            return new ModelScaffolder();
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerScaffoldTester($command)
+    {
+        $this->app->singleton($command, function () {
+            return new ScaffoldTester();
+        });
+    }
+
 }
