@@ -25,6 +25,7 @@ class Flare
         'modules' => [],
         'widgets' => [],
         'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
+        'core_notifications' => true,
     ];
 
     /**

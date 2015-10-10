@@ -1,3 +1,4 @@
+@if (Flare::config('core_notifications'))
 <section class="content-header notifications">
     <div class="row">
         <div class="col-md-12">
@@ -11,6 +12,7 @@
         </div>
     </div>
 </section>
+@endif
 
 @if (Session::has('notifications_above_header'))
     <section class="content-header notifications">

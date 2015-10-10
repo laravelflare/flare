@@ -71,4 +71,14 @@ return [
     */
     'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Flare Core Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration which is not Application specific, you probably don't 
+    | need to change anything here!
+    |
+    */
+    'core_notifications' => true,
 ];
