@@ -4,6 +4,7 @@ namespace LaravelFlare\Flare\Admin\Modules;
 
 use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
+use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 
 class ModuleAdminController extends FlareController
 {
