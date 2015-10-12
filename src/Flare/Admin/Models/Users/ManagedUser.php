@@ -25,7 +25,7 @@ class ManagedUser extends ManagedModel
      *
      * @var string
      */
-    public static $icon = '';
+    public static $icon = 'fa-user';
 
     /**
      * Map User Attributes to their Attribute Types.
@@ -36,7 +36,6 @@ class ManagedUser extends ManagedModel
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'required' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'required' => 'required'],
-        'usergroup' => ['type' => 'radio', 'required' => 'required'],
     ];
 
     /**
@@ -61,7 +60,6 @@ class ManagedUser extends ManagedModel
         'id' => 'ID',
         'name',
         'email',
-        'usergroup.name' => 'Group',
         'created_at' => 'Created',
         'updated_at' => 'Updated',
     ];
@@ -98,25 +96,5 @@ class ManagedUser extends ManagedModel
     protected function getPasswordAttribute()
     {
         return;
-    }
-
-    /**
-     * Don't output passwords.
-     * 
-     * @param string
-     */
-    protected function getUsergroupAttribute($model)
-    {
-        return $model->userGroup->name; // I dont like having to do this, I'd prefer some sweet dot notation.
-    }
-
-    /**
-     * Returns the available options for the Group Option.
-     * 
-     * @return array
-     */
-    public function getUsergroupOptions()
-    {
-        return \App\Models\UserGroup::lists('name', 'id')->toArray();
     }
 }
