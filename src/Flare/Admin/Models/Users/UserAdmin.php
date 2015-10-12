@@ -23,6 +23,5 @@ class UserAdmin extends ModelAdmin
      */
     protected $managedModels = [
         \LaravelFlare\Flare\Admin\Models\Users\ManagedUser::class,
-        \LaravelFlare\Flare\Admin\Models\Users\ManagedUserGroup::class,
     ];
 }
