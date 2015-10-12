@@ -42,6 +42,7 @@ class ModelScaffolder extends Command
                             'defineVisible',
                             'enableTimestamps',
                             'enableSoftDeletes',
+                            'defineDateFormat',
                             'confirmModelData',
                         ];
 
@@ -307,6 +308,19 @@ class ModelScaffolder extends Command
         }
 
         $this->addModelData('softdeletes', false);
+    } 
+
+    /**
+     * Determine if the user wishes to define a 
+     * custom date format
+     * 
+     * @return void
+     */
+    protected function defineVisible()
+    {
+        if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
+            
+        }
     } 
 
     /**

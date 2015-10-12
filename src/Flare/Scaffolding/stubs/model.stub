@@ -3,8 +3,8 @@
 namespace DummyNamespace;
 
 use Illuminate\Database\Eloquent\Model;
-
+{{softDeletesUse}}
 class DummyClass extends Model
 {
-    //
+    {{softDeletesTrait}}{{table}}{{fillable}}{{hidden}}{{visible}}{{timestamps}}{{softDeletesDate}}{{dateFormat}}
 }
