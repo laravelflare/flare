@@ -25,7 +25,7 @@ class ManagedUser extends ManagedModel
      *
      * @var string
      */
-    public static $icon = 'fa-user';
+    public static $icon = 'user';
 
     /**
      * Map User Attributes to their Attribute Types.
