@@ -316,7 +316,7 @@ class ModelScaffolder extends Command
      * 
      * @return void
      */
-    protected function defineVisible()
+    protected function defineDateFormat()
     {
         if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
             $this->addModelData('dateFormat', false); // Temp
