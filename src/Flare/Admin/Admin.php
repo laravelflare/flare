@@ -132,7 +132,7 @@ abstract class Admin
      */
     public static function registerRoute($controller, $parameters = [])
     {
-        \Route::group($parameters, function () {
+        \Route::group($parameters, function ($controller) {
             \Route::controller('/', $controller);
         });
     }
