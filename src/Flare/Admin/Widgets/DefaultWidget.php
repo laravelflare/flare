@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Widgets;
 
-use LaravelFlare\Flare\Admin\Models\ManagedModel;
+use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
 class DefaultWidget extends WidgetAdmin
 {
@@ -32,11 +32,11 @@ class DefaultWidget extends WidgetAdmin
     /**
      * __construct.
      *
-     * @param ManagedModel $managedModel
+     * @param ModelAdmin $modelAdmin
      */
-    public function __construct(ManagedModel $managedModel)
+    public function __construct(ModelAdmin $modelAdmin)
     {
-        if (!$managedModel) {
+        if (!$modelAdmin) {
             return;
         }
 
@@ -44,10 +44,13 @@ class DefaultWidget extends WidgetAdmin
             self::$counter = 0;
         }
 
+        /**
+         * Remove this from the __construct, it breaks migrations.
+         */
         $this->viewData['bgColour'] = $this->bgColours[self::$counter];
-        $this->viewData['pluralTitle'] = $managedModel::pluralTitle();
-        $this->viewData['modelTotal'] = $managedModel->model->count();
-        $this->viewData['icon'] = $managedModel::$icon;
+        $this->viewData['pluralTitle'] = $modelAdmin::pluralTitle();
+        $this->viewData['modelTotal'] = $modelAdmin->model()->count();
+        $this->viewData['icon'] = $modelAdmin::$icon;
 
         ++self::$counter;
     }
