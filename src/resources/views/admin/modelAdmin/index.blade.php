@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        All {{ $modelAdmin->modelManager()->pluralTitle() }}
+                        All {{ $modelAdmin->pluralTitle() }}
                     </h3>
                     <div class="box-tools">
                         <div style="width: 350px;" class="input-group">
@@ -37,13 +37,13 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
+                                @foreach ($modelAdmin->getSummaryFields() as $key => $field)
                                 <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
-                                    @if (strpos($key, '.') == 0 && !$modelAdmin->modelManager()->model->hasGetMutator($key))
-                                    <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'desc' : 'asc') }}">
+                                    @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key))
+                                    <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                                         {{ $field }}
                                         @if (Request::input('order', 'id') == $key)
-                                        <i class="fa fa-caret-{{ ($modelAdmin->modelManager()->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
+                                        <i class="fa fa-caret-{{ ($modelAdmin->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
                                         @endif
                                     </a>
                                     @else 
@@ -55,12 +55,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if ($modelAdmin->modelManager()->items()->count() > 0)    
-                            @foreach($modelAdmin->modelManager()->items() as $modelItem)    
+                        @if ($modelAdmin->items()->count() > 0)    
+                            @foreach($modelAdmin->items() as $modelItem)    
                                 <tr>
-                                    @foreach ($modelAdmin->modelManager()->getSummaryFields() as $key => $field)
+                                    @foreach ($modelAdmin->getSummaryFields() as $key => $field)
                                     <td>
-                                        {!! $modelAdmin->modelManager()->getAttribute($key, $modelItem) !!}
+                                        {!! $modelAdmin->getAttribute($key, $modelItem) !!}
                                     </td>
                                     @endforeach
                                     <td style="width: 1%; white-space:nowrap">
@@ -81,8 +81,8 @@
                             @endforeach
                         @else 
                             <tr>
-                                <td colspan="{{ count($modelAdmin->modelManager()->getSummaryFields())+2 }}">
-                                    No {{ $modelAdmin->modelManager()->pluralTitle() }} Found
+                                <td colspan="{{ count($modelAdmin->getSummaryFields())+2 }}">
+                                    No {{ $modelAdmin->pluralTitle() }} Found
                                 </td>
                             </tr>
                         @endif
@@ -92,16 +92,16 @@
                 <div class="box-footer clearfix">
                     <div class="pull-left">
                         <a href="{{ $modelAdmin::currentUrl('create') }}" class="btn btn-success">
-                            <i class="fa fa-{{ $modelAdmin::$icon }}"></i>
-                            Add {{ $modelAdmin->modelManager()->title() }}
+                            <i class="fa fa-{{ $modelAdmin::getIcon() }}"></i>
+                            Add {{ $modelAdmin->title() }}
                         </a>
                     </div>
 
-                    @if ($modelAdmin->modelManager()->getPerPage())
+                    @if ($modelAdmin->getPerPage())
                     <div class="pull-right" style="margin-top: -20px; margin-bottom: -20px;">
-                        {!! $modelAdmin->modelManager()->items()->appends([
-                                                                            'sort' => $modelAdmin->modelManager()->sortBy() == 'asc' ? 'asc' : null,
-                                                                            'order' => $modelAdmin->modelManager()->orderBy(),
+                        {!! $modelAdmin->items()->appends([
+                                                                            'sort' => $modelAdmin->sortBy() == 'asc' ? 'asc' : null,
+                                                                            'order' => $modelAdmin->orderBy(),
                                                                         ])->render() !!}
                     </div>
                     @endif

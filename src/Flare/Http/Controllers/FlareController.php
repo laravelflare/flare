@@ -3,44 +3,34 @@
 namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use LaravelFlare\Flare\Admin\AdminCollection;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
-use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 
 abstract class FlareController extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
 
     /**
-     * ModelAdminCollection.
+     * AdminCollection.
      *
-     * @var ModelAdminCollection
+     * @var AdminCollection
      */
-    protected $modelAdminCollection;
-
-    /**
-     * ModuleAdminCollection.
-     *
-     * @var ModuleAdminCollection
-     */
-    protected $moduleAdminCollection;
+    protected $adminCollection;
 
     /**
      * __construct.
      * 
-     * @param ModelAdminCollection $modelAdminCollection
+     * @param AdminCollection $adminCollection
      */
-    public function __construct(ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
+    public function __construct(AdminCollection $adminCollection)
     {
         $this->middleware('flareauthenticate');
         $this->middleware('checkpermissions');
 
-        $this->modelAdminCollection = $modelAdminCollection;
-        $this->moduleAdminCollection = $moduleAdminCollection;
+        $this->adminCollection = $adminCollection;
 
-        view()->share('modelAdminCollection', $this->modelAdminCollection);
-        view()->share('moduleAdminCollection', $this->moduleAdminCollection);
+        view()->share('adminCollection', $this->adminCollection);
     }
 
     /**

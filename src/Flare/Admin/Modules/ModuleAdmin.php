@@ -17,27 +17,11 @@ abstract class ModuleAdmin extends Admin
     protected $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
 
     /**
-     * An array of subclasses of Admin
-     * which allows hierachy in a Module
-     * 
-     * @var array
-     */
-    protected $subAdmin = [];
-
-    /**
      * The Module Admin Default View.
      *
      * @var string
      */
     protected static $view = 'admin.modules.index';
-
-    /**
-     * Class Prefix used for matching and removing term
-     * from user provided Admin sections.
-     *
-     * @var string
-     */
-    const CLASS_PREFIX = 'Module';
 
     /**
      * Returns the Module Admin View.

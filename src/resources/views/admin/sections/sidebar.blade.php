@@ -23,12 +23,9 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            @foreach($modelAdminCollection as $modelAdmin)
-                @include('flare::admin.sections.sidebar.modelAdmin', ['adminItem' => $modelAdmin])
-            @endforeach
 
-            @foreach($moduleAdminCollection as $moduleAdmin)
-                @include('flare::admin.sections.sidebar.moduleAdmin', ['adminItem' => $moduleAdmin])
+            @foreach($adminCollection as $adminItem)
+                @include('flare::admin.sections.sidebar.adminItem', ['adminItem' => $adminItem])
             @endforeach
         </ul>
     </section>

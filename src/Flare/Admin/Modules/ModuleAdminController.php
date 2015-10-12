@@ -2,25 +2,24 @@
 
 namespace LaravelFlare\Flare\Admin\Modules;
 
+use LaravelFlare\Flare\Admin\AdminCollection;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
-use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
-use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 
 class ModuleAdminController extends FlareController
 {
     /**
      * __construct.
      * 
-     * @param ModelAdminCollection $modelAdminCollection
+     * @param AdminCollection $adminCollection
      */
-    public function __construct(ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
+    public function __construct(AdminCollection $adminCollection)
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct($modelAdminCollection, $moduleAdminCollection);
+        parent::__construct($adminCollection);
 
-        $this->moduleAdmin = $this->moduleAdminCollection->getAdminInstance();
+        $this->admin = $this->adminCollection->getAdminInstance();
     }
 
     /**
@@ -28,10 +27,10 @@ class ModuleAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
-    {
-        return view($this->moduleAdmin->getView(), $this->moduleAdmin->getViewData());
-    }
+    // public function getIndex()
+    // {
+    //     //return view($this->->getView(), $this->moduleAdmin->getViewData());
+    // }
 
     /**
      * Method is called when the appropriate controller

@@ -5,17 +5,10 @@ namespace LaravelFlare\Flare\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use LaravelFlare\Flare\Admin\Models\ModelAdminCollection;
-use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
+use LaravelFlare\Flare\Admin\AdminCollection;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
 use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
-/**
- * I kind of feel that this file should be
- * \LaravelFlare\Flare\Admin\Http\Controllers
- * But really, we will only do that if we add a frontend
- * to the CMS rather than just a backend.
- */
 class AdminController extends FlareController
 {
     use AuthenticatesAndResetsPasswords, DispatchesJobs;
@@ -30,13 +23,12 @@ class AdminController extends FlareController
     /**
      * __construct.
      * 
-     * @param Guard                 $auth
-     * @param ModelAdminCollection  $modelAdminCollection
-     * @param ModuleAdminCollection $moduleAdminCollection
+     * @param Guard            $auth
+     * @param AdminCollection  $adminCollection
      */
-    public function __construct(Guard $auth, ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
+    public function __construct(Guard $auth, AdminCollection $adminCollection)
     {
-        parent::__construct($modelAdminCollection, $moduleAdminCollection);
+        parent::__construct($adminCollection);
 
         $this->auth = $auth;
 
@@ -57,7 +49,7 @@ class AdminController extends FlareController
     /**
      * Processes the login form.
      *
-     * @param Request $request [description]
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -122,7 +114,7 @@ class AdminController extends FlareController
      * 
      * @param array $parameters
      * 
-     * @return
+     * @return \Illuminate\Http\Response
      */
     public function missingMethod($parameters = array())
     {

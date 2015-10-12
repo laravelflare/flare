@@ -26,7 +26,7 @@ abstract class WidgetAdmin extends Admin
      *
      * @var string
      */
-    const CLASS_PREFIX = 'Widget';
+    const CLASS_SUFFIX = 'Widget';
 
     /**
      * Render the Widget.
@@ -90,6 +90,6 @@ abstract class WidgetAdmin extends Admin
      */
     public static function safeTitle()
     {
-        return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '', static::title())));
+        return str_replace(' ', '', strtolower(str_replace(static::CLASS_SUFFIX, '', static::title())));
     }
 }

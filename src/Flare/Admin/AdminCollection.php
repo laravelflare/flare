@@ -8,21 +8,21 @@ use LaravelFlare\Flare\Permissions\Permissions;
 class AdminCollection extends Collection
 {
     /**
-     * Admin Config Key.
-     *
-     * Key which defined where in the Flare Admin Config to
-     * load the ModelAdmin classes from.
-     *
-     * @var string
-     */
-    const CLASS_PREFIX = '';
-
-    /**
      * Base Class.
      *
      * The Base Class for Model Admin's
      */
     const BASE_CLASS = 'LaravelFlare\Flare\Admin\Admin';
+
+    /**
+     * Admin Config Key.
+     *
+     * Key which defined where in the Flare Admin Config to
+     * load the Admin classes from.
+     *
+     * @var string
+     */
+    const ADMIN_KEY = 'admin';
 
     /**
      * __construct.

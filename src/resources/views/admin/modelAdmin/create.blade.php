@@ -7,13 +7,13 @@
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Create {{ $modelAdmin->modelManager()->title() }}
+            Create {{ $modelAdmin->title() }}
         </h3>
     </div>
     <form action="" method="post">
         <div class="box-body">
-            @foreach ($modelAdmin->modelManager()->getMapping() as $attribute => $field)
-                {!! \Flare::renderAttribute('add', $attribute, $field, false, $modelAdmin->modelManager()) !!}
+            @foreach ($modelAdmin->getMapping() as $attribute => $field)
+                {!! \Flare::renderAttribute('add', $attribute, $field, false, $modelAdmin) !!}
             @endforeach
         </div>
         <div class="box-footer">
@@ -22,7 +22,7 @@
                 Cancel
             </a>
             <button class="btn btn-success" type="submit">
-                Add {{ $modelAdmin->modelManager()->title() }}
+                Add {{ $modelAdmin->title() }}
             </button>
         </div>
     </form>

@@ -1,7 +1,7 @@
 <li class="treeview {{ Request::is( $adminItem::relativeUrl() . '*' ) ? 'active' : '' }}">
     <a href="{{ $adminItem::url() }}">
-        @if ($adminItem::$icon)
-        <i class="fa fa-{{ $adminItem::$icon }}"></i>
+        @if ($adminItem::getIcon())
+        <i class="fa fa-{{ $adminItem::getIcon() }}"></i>
         @endif
         <span>{{ $adminItem::pluralTitle() }}</span>
     </a>
@@ -22,8 +22,8 @@
             @foreach ($adminItem->getManagedModels()->slice(1) as $managedModel)
             <li class="treeview {{ Request::is( $adminItem::relativeUrl($managedModel::urlPrefix()).'/*') ? 'active' : '' }}">
                 <a href="{{ $adminItem::url() . '/' . $managedModel::urlPrefix() }}">
-                    @if ($managedModel::$icon)
-                    <i class="fa fa-{{ $managedModel::$icon }}" style="width: 17px;"></i>
+                    @if ($managedModel::getIcon())
+                    <i class="fa fa-{{ $managedModel::getIcon() }}" style="width: 17px;"></i>
                     @endif
                     {{ $managedModel::pluralTitle() }}
                     <i class="fa fa-angle-left pull-right"></i>

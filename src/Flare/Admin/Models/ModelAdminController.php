@@ -2,33 +2,19 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use LaravelFlare\Flare\Admin\AdminCollection;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
-use LaravelFlare\Flare\Admin\Modules\ModuleAdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
 
 class ModelAdminController extends FlareController
 {
-    /**
-     * ModelAdminCollection.
-     *
-     * @var ModelAdminCollection
-     */
-    protected $modelAdminCollection;
-
     /**
      * ModelAdmin instance which has been resolved.
      * 
      * @var ModelAdmin
      */
     protected $modelAdmin;
-
-    /**
-     * ManagedModel instance.
-     * 
-     * @var ManagedModel
-     */
-    protected $managedModel;
 
     /**
      * Model instance.
@@ -40,20 +26,19 @@ class ModelAdminController extends FlareController
     /**
      * __construct.
      * 
-     * @param ModelAdminCollection $modelAdminCollection
+     * @param AdminCollection $adminCollection
      */
-    public function __construct(ModelAdminCollection $modelAdminCollection, ModuleAdminCollection $moduleAdminCollection)
+    public function __construct(AdminCollection $adminCollection)
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct($modelAdminCollection, $moduleAdminCollection);
+        parent::__construct($adminCollection);
 
         $this->middleware('checkmodelfound', ['only' => ['getView', 'edit', 'delete']]);
 
-        $this->modelAdmin = $this->modelAdminCollection->getAdminInstance();
-        $this->managedModel = $this->modelAdmin->modelManager();
-        $this->model = $this->managedModel->model;
+        $this->modelAdmin = $this->adminCollection->getAdminInstance();
+        $this->model = $this->modelAdmin->model();
     }
 
     /**
@@ -83,9 +68,9 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelAdminAddRequest $request)
     {
-        $this->managedModel->create();
+        $this->modelAdmin->create();
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully created.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully created.', 'dismissable' => false]]);
     }
 
     /**
@@ -125,9 +110,9 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
     {
-        $this->managedModel->edit($modelitem_id);
+        $this->modelAdmin->edit($modelitem_id);
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully updated.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully updated.', 'dismissable' => false]]);
     }
 
     /**
@@ -154,8 +139,8 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
-        $this->managedModel->delete($modelitem_id);
+        $this->modelAdmin->delete($modelitem_id);
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->modelManager()->title().' was successfully removed.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully removed.', 'dismissable' => false]]);
     }
 }

@@ -7,13 +7,13 @@
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Create {{ $modelAdmin->modelManager()->title() }}
+            Create {{ $modelAdmin->title() }}
         </h3>
     </div>
     <form action="" method="post">
         <div class="box-body">
-            @foreach ($modelAdmin->modelManager()->getMapping() as $attribute => $field)
-                {!! \Flare::renderAttribute('view', $attribute, $field, $modelItem, $modelAdmin->modelManager()) !!}
+            @foreach ($modelAdmin->getMapping() as $attribute => $field)
+                {!! \Flare::renderAttribute('view', $attribute, $field, $modelItem, $modelAdmin) !!}
             @endforeach
         </div>
         <div class="box-footer">
@@ -23,11 +23,11 @@
             </a>
             <a href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->getKey()) }}" class="btn btn-primary">
                 <i class="fa fa-edit"></i>
-                Edit {{ $modelAdmin->modelManager()->title() }}
+                Edit {{ $modelAdmin->title() }}
             </a>
             <a href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}" class="btn btn-danger">      
                 <i class="fa fa-trash"></i>      
-                Delete {{ $modelAdmin->modelManager()->title() }}
+                Delete {{ $modelAdmin->title() }}
             </a>
         </div>
     </form>

@@ -5,4 +5,5 @@
         @endif
         <span>{{ $adminItem::pluralTitle() }}</span>
     </a>
+  
 </li>

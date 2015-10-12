@@ -7,13 +7,13 @@
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Edit {{ $modelAdmin->modelManager()->title() }}
+            Edit {{ $modelAdmin->title() }}
         </h3>
     </div>
     <form action="" method="post">
         <div class="box-body">
-            @foreach ($modelAdmin->modelManager()->getMapping() as $attribute => $field)
-                {!! \Flare::renderAttribute('edit', $attribute, $field, $modelItem, $modelAdmin->modelManager()) !!}
+            @foreach ($modelAdmin->getMapping() as $attribute => $field)
+                {!! \Flare::renderAttribute('edit', $attribute, $field, $modelItem, $modelAdmin) !!}
             @endforeach
         </div>
         <div class="box-footer">
@@ -23,7 +23,7 @@
             </a>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-edit"></i>
-                Update {{ $modelAdmin->modelManager()->title() }}
+                Update {{ $modelAdmin->title() }}
             </button>
         </div>
     </form>

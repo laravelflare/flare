@@ -2,12 +2,35 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
+use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
 
 class ModelAdmin extends Admin implements ModelWriteableInterface
 {
+    use AttributeAccess, ModelWriteable, ModelQueryable;
+
+    /**
+     * Class of Model to Manage
+     * 
+     * @var string
+     */
+    protected static $managedModel;
+
+    /**
+     * ModelAdmin Icon.
+     *
+     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     *
+     * @var string
+     */
+    protected static $icon = 'user';
+
     /**
      * The Controller to be used by the Model Admin.
      *
@@ -19,21 +42,20 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
-     * List of managed {@link Model}s.
-     *
-     * Note: This must either be a single Namespaced String
-     * or an Array of Namespaced Strings
+     * Validation Rules for onCreate, onEdit actions.
      * 
-     * @var array|string
+     * @var array
      */
-    protected $managedModels = '';
+    protected $rules = [];
 
     /**
-     * The current model manager.
+     * Summary Fields for Model.
      *
-     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
+     * Defines which fields to show in the listing tables output.
+     * 
+     * @var array
      */
-    protected $modelManager;
+    protected $summary_fields = [];
 
     /**
      * The current model to be managed.
@@ -43,55 +65,15 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected $model;
 
     /**
-     * Class Prefix used for matching and removing term
-     * from user provided Admin sections.
-     *
-     * Note: This is actually a suffix, we might change the terminology
-     * for this later although it would obviously be a breaking change.
-     * Change it up early or don't change it all!
-     *
-     * @var string
-     */
-    const CLASS_PREFIX = 'Admin';
-
-    /**
      * __construct.
      */
     public function __construct()
     {
-        if (!isset($this->managedModels) || $this->managedModels === null) {
+        if (!isset(static::$managedModel) || static::$managedModel === null) {
             throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
         }
 
-        $this->modelManager = $this->modelManager();
         $this->model = $this->model();
-    }
-
-    /**
-     * Register subRoutes for ModelAdmin instances 
-     * which have more than one managedModel.
-     *
-     * @return
-     */
-    public function registerSubRoutes()
-    {
-        if (!is_array($this->managedModels)) {
-            return;
-        }
-
-        foreach ($this->managedModels as $managedModel) {
-            $managedModel = new $managedModel();
-            $parameters = [
-                            'prefix' => $managedModel->urlPrefix(),
-                            'as' => $managedModel->urlPrefix(),
-                            'modelManager' => get_class($managedModel),
-                            'model' => $managedModel->managedModel,
-                        ];
-
-            \Route::group($parameters, function () {
-                \Route::controller('/', $this->getController());
-            });
-        }
     }
 
     /**
@@ -105,58 +87,210 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      */
     public function model()
     {
-        if (!$this->modelManager) {
-            return;
-        }
-
-        if ($modelName = $this->getRequested('model')) {
-            return new $modelName();
-        }
-
-        return new $this->modelManager->managedModel();
+        return new static::$managedModel();
     }
 
     /**
-     * Returns a Model Manager Instance.
-     * 
-     * @return \LaravelFlare\Flare\Admin\Models\ManagedModel
-     */
-    public function modelManager()
-    {
-        if ($modelManagerName = $this->getRequested('modelManager')) {
-            return new $modelManagerName();
-        }
-
-        $modelManagerName = $this->defaultManagedModel();
-
-        return new $modelManagerName();
-    }
-
-    /**
-     * Returns the default Managed Model.
+     * Register an individual route
      *
-     * @return string
+     * @return
      */
-    protected function defaultManagedModel()
+    public static function registerRoute($adminItem)
     {
-        if (!is_array($this->managedModels)) {
-            return $this->managedModels;
-        }
+        $adminItem = new $adminItem();
+        $parameters = [
+                        'prefix' => $adminItem->urlPrefix(),
+                        'as' => $adminItem->urlPrefix(),
+                        'model' => $managedModel->managedModel,
+                    ];
 
-        return $this->managedModels[0];
+        \Route::group($parameters, function () {
+            \Route::controller('/', $this->getController());
+        });
     }
 
     /**
-     * Returns a collection of the Managed Models.
+     * Formats and returns the Summary fields.
+     *
+     * This is really gross, I'm removing it soon.
      * 
-     * @return \Illuminate\Support\Collection
+     * @return
      */
-    public function getManagedModels()
+    public function getSummaryFields()
     {
-        if (is_array($this->managedModels)) {
-            return collect($this->managedModels);
+        $summary_fields = [];
+
+        foreach ($this->summary_fields as $field => $fieldTitle) {
+            if (in_array($field, $this->model->getFillable())) {
+                if (!$field) {
+                    $field = $fieldTitle;
+                    $fieldTitle = Str::title($fieldTitle);
+                }
+                $summary_fields[$field] = $fieldTitle;
+                continue;
+            }
+
+            if (($methodBreaker = strpos($field, '.')) !== false) {
+                $method = substr($field, 0, $methodBreaker);
+                if (method_exists($this->model, $method)) {
+                    if (method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
+                        $this->model->$method()->$submethod();
+
+                        $summary_fields[$field] = $fieldTitle;
+                        continue;
+                    }
+                }
+            }
+
+            if (is_numeric($field)) {
+                $field = $fieldTitle;
+                $fieldTitle = Str::title($fieldTitle);
+            }
+
+            $summary_fields[$field] = $fieldTitle;
         }
 
-        return collect([$this->managedModels]);
+        if (count($summary_fields)) {
+            return $summary_fields;
+        }
+
+        return [$this->model->getKeyName() => $this->model->getKeyName()];
+    }
+
+    /**
+     * Gets an Attribute by the provided key
+     * on either the current model or a provided model instance.
+     * 
+     * @param string $key
+     * @param mixed  $model
+     * 
+     * @return mixed
+     */
+    public function getAttribute($key, $model = false)
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if ($this->hasGetAccessor($key)) {
+            $method = 'get'.Str::studly($key).'Attribute';
+
+            return $this->{$method}($model);
+        }
+
+        if ($this->hasRelatedKey($key, $model)) {
+            return $this->relatedKey($key, $model);
+        }
+
+        return $model->getAttribute($key);
+    }
+
+    /**
+     * Determine if a get accessor exists for an attribute.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function hasGetAccessor($key)
+    {
+        return method_exists($this, 'get'.Str::studly($key).'Attribute');
+    }
+
+    /**
+     * Determines if a key resolved a related Model.
+     * 
+     * @param string $key
+     * @param mixed  $model
+     * 
+     * @return bool
+     */
+    public function hasRelatedKey($key, $model = false)
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if (($methodBreaker = strpos($key, '.')) !== false) {
+            $method = substr($key, 0, $methodBreaker);
+            if (method_exists($model, $method)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Resolves a relation based on the key provided,
+     * either on the current model or a provided model instance.
+     * 
+     * @param string $key
+     * @param mixed  $model
+     * 
+     * @return mixed
+     */
+    public function relatedKey($key, $model = false)
+    {
+        if (!$model) {
+            $model = $this->model;
+        }
+
+        if (($methodBreaker = strpos($key, '.')) !== false) {
+            $method = substr($key, 0, $methodBreaker);
+            if (method_exists($model, $method)) {
+                if (method_exists($model->$method, $submethod = str_replace($method.'.', '', $key))) {
+                    return $model->$method->$submethod();
+                }
+
+                if (isset($model->$method->$submethod)) {
+                    return $model->$method->$submethod;
+                }
+
+                return $model->getRelationValue($method);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Set a given attribute on the model.
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function setAttribute($key, $value)
+    {
+        if ($this->hasSetMutator($key)) {
+            $method = 'set'.Str::studly($key).'Attribute';
+
+            return $this->{$method}($value);
+        }
+
+        $this->model->attributes[$key] = $value;
+    }
+
+    /**
+     * Determine if a set mutator exists for an attribute.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function hasSetMutator($key)
+    {
+        return method_exists($this, 'set'.Str::studly($key).'Attribute');
+    }
+
+    /**
+     * Returns a DefaultWidget instance based on the
+     * currently ManagedModel.
+     * 
+     * @return DefaultWidget
+     */
+    public function defaultWidget()
+    {
+        return new DefaultWidget($this);
     }
 }

@@ -21,6 +21,7 @@ class Flare
         'site_title' => 'Laravel <b>Flare</b>',
         'admin_url' => 'admin',
         'admin_theme' => 'red',
+        'admin' => [],
         'models' => [],
         'modules' => [],
         'widgets' => [],

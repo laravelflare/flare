@@ -13,7 +13,7 @@ abstract class Admin
      *
      * @var string
      */
-    public static $icon;
+    protected static $icon;
 
     /**
      * Title of Admin Section.
@@ -47,6 +47,14 @@ abstract class Admin
     protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
+     * An array of subclasses of Admin
+     * which allows hierachy in a Module
+     * 
+     * @var array
+     */
+    protected $subAdmin = [];
+
+    /**
      * The Admin Default View.
      *
      * By Default this is the 404 page
@@ -63,12 +71,12 @@ abstract class Admin
     protected $viewData = [];
 
     /**
-     * Class Prefix used for matching and removing term
+     * Class Suffix used for matching and removing term
      * from user provided Admin sections.
      *
      * @var string
      */
-    const CLASS_PREFIX = '';
+    const CLASS_SUFFIX = 'Admin';
 
     /**
      * __construct.
@@ -99,12 +107,37 @@ abstract class Admin
     }
 
     /**
-     * Register subRoutes for this Admin Section.
+     * Register subRoutes for Defined Admin instances.
      *
      * @return
      */
     public function registerSubRoutes()
     {
+        if (!is_array($this->subAdmin)) {
+            return;
+        }
+
+        foreach ($this->subAdmin as $adminItem) {
+            static::registerRoute($adminItem);
+        }
+    }
+
+    /**
+     * Register an individual route
+     *
+     * @return
+     */
+    public static function registerRoute($adminItem)
+    {
+        $adminItem = new $adminItem();
+        $parameters = [
+                        'prefix' => $adminItem->urlPrefix(),
+                        'as' => $adminItem->urlPrefix(),
+                    ];
+
+        \Route::group($parameters, function () {
+            \Route::controller('/', $this->getController());
+        });
     }
 
     /**
@@ -152,6 +185,11 @@ abstract class Admin
         return 'flare::'.static::$view;
     }
 
+    /**
+     * Returns the View Data
+     * 
+     * @return array
+     */
     public function getViewData()
     {
         return $this->viewData;
@@ -168,6 +206,16 @@ abstract class Admin
     }
 
     /**
+     * Icon of a Admin Section Class.
+     *
+     * @return string
+     */
+    public static function getIcon()
+    {
+        return static::$icon;
+    }
+
+    /**
      * Title of a Admin Section Class.
      *
      * @return string
@@ -175,7 +223,7 @@ abstract class Admin
     public static function title()
     {
         if (!isset(static::$title) || !static::$title) {
-            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_PREFIX, '', static::shortName()))));
+            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_SUFFIX, '', static::shortName()))));
         }
 
         return static::$title;
@@ -189,7 +237,7 @@ abstract class Admin
     public static function pluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '', static::title()));
+            return Str::plural(str_replace(' '.static::CLASS_SUFFIX, '', static::title()));
         }
 
         return static::$pluralTitle;
@@ -203,7 +251,7 @@ abstract class Admin
     public static function urlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '', static::pluralTitle())));
+            return str_replace(' ', '', strtolower(str_replace(static::CLASS_SUFFIX, '', static::pluralTitle())));
         }
 
         return static::$urlPrefix;
