@@ -77,7 +77,7 @@ class Flare
      */
     public function relativeAdminUrl($path = '')
     {
-        return \Flare::config('admin_url').'/'.$path;
+        return rtrim(\Flare::config('admin_url').'/'.$path, '/');
     }
 
     /**
