@@ -27,10 +27,10 @@ class ModuleAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    // public function getIndex()
-    // {
-    //     //return view($this->->getView(), $this->moduleAdmin->getViewData());
-    // }
+    public function getIndex()
+    {
+        return view($this->getView(), $this->admin->getViewData());
+    }
 
     /**
      * Method is called when the appropriate controller
