@@ -90,24 +90,17 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
         return new static::$managedModel();
     }
 
-    /**
-     * Register subRoutes for Defined Admin instances.
-     *
-     * @return
-     */
-    public function registerSubRoutes()
-    {
-        if (!is_array($this->subAdmin)) {
-            return;
-        }
 
-        foreach ($this->subAdmin as $adminItem) {
-            static::registerRoute($adminItem->getController(), [
-                                                                    'prefix' => $adminItem->urlPrefix(),
-                                                                    'as' => $adminItem->urlPrefix(),
-                                                                    'model' => $this->managedModel,
-                                                                ]);
-        }
+    /**
+     * Returns the Route Paramets 
+     * 
+     * @return array
+     */
+    public function routeParameters()
+    {
+        return array_merge(parent::routeParameters(), [
+                                                    'model' => $this->managedModel
+                                                ]);
     }
 
     /**

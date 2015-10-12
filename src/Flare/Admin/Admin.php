@@ -118,10 +118,7 @@ abstract class Admin
         }
 
         foreach ($this->subAdmin as $adminItem) {
-            static::registerRoute($adminItem->getController(), [
-                                                                    'prefix' => $adminItem->urlPrefix(),
-                                                                    'as' => $adminItem->urlPrefix(),
-                                                                ]);
+            static::registerRoute($adminItem->getController(), $adminItem->routeParameters());
         }
     }
 
@@ -138,6 +135,19 @@ abstract class Admin
         \Route::group($parameters, function () {
             \Route::controller('/', $controller);
         });
+    }
+
+    /**
+     * Returns the Route Paramets 
+     * 
+     * @return array
+     */
+    public function routeParameters()
+    {
+        return [
+            'prefix' => $this->urlPrefix(),
+            'as' => $this->urlPrefix(),
+        ];
     }
 
     /**
