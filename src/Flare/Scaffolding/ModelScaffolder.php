@@ -147,7 +147,7 @@ class ModelScaffolder extends Command
      * namespace for this Model and if they do, have them
      * name it.
      * 
-     * @return [type] [description]
+     * @return void
      */
     protected function defineNamespace()
     {
@@ -245,7 +245,7 @@ class ModelScaffolder extends Command
     protected function moreHidden()
     {
         if($hidden = $this->ask('What hidden attribute would you like to add?', false)) {
-            $this->modelData['hidden'][] = $fillable;
+            $this->modelData['hidden'][] = $hidden;
             
             $this->defineHidden();
         }
@@ -274,7 +274,7 @@ class ModelScaffolder extends Command
     protected function moreVisible()
     {
         if($visible = $this->ask('What visible attribute would you like to add?', false)) {
-            $this->modelData['visible'][] = $fillable;
+            $this->modelData['visible'][] = $visible;
 
             $this->defineVisible();
         }
@@ -319,7 +319,7 @@ class ModelScaffolder extends Command
     protected function defineVisible()
     {
         if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
-            
+            $this->addModelData('dateFormat', false); // Temp
         }
     } 
 
@@ -366,7 +366,7 @@ class ModelScaffolder extends Command
     {
         if (!$this->confirm('Are you done creating Models?', false)) {
             if ($goBack) {
-                call_user_method_array([$this, $goBack], []);
+                call_user_func_array([$this, $goBack], []);
                 return;
             } 
 
