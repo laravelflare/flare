@@ -44,7 +44,7 @@ abstract class Admin
      * 
      * @var string
      */
-    protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
+    protected static $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
      * An array of subclasses of Admin
@@ -102,7 +102,7 @@ abstract class Admin
         // such as (create, edit, view, delete etc) 
         \Route::group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function() {
             $this->registerSubRoutes();
-            \Route::controller('/', $this->getController());
+            \Route::controller('/', static::getController());
         });
     }
 
@@ -136,7 +136,7 @@ abstract class Admin
                     ];
 
         \Route::group($parameters, function () {
-            \Route::controller('/', $this->getController());
+            \Route::controller('/', $adminItem->getController());
         });
     }
 
@@ -166,9 +166,9 @@ abstract class Admin
      * 
      * @return string
      */
-    public function getController()
+    public static function getController()
     {
-        return $this->controller;
+        return static::$controller;
     }
 
     /**

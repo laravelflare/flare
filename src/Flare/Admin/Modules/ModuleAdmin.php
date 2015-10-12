@@ -14,7 +14,7 @@ abstract class ModuleAdmin extends Admin
      * 
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
+    protected static $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
 
     /**
      * The Module Admin Default View.

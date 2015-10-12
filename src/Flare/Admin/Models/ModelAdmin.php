@@ -39,7 +39,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      * 
      * @var string
      */
-    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
+    protected static $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * Validation Rules for onCreate, onEdit actions.
@@ -105,7 +105,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                     ];
 
         \Route::group($parameters, function () {
-            \Route::controller('/', $this->getController());
+            \Route::controller('/', static::getController());
         });
     }
 
