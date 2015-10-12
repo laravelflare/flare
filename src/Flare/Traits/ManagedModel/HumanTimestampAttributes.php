@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Traits;
+namespace LaravelFlare\Flare\Traits\ManagedModel;
 
 use Illuminate\Database\Eloquent\Model;
 
