@@ -118,25 +118,25 @@ abstract class Admin
         }
 
         foreach ($this->subAdmin as $adminItem) {
-            static::registerRoute($adminItem);
+            static::registerRoute($adminItem->getController(), [
+                                                                    'prefix' => $adminItem->urlPrefix(),
+                                                                    'as' => $adminItem->urlPrefix(),
+                                                                ]);
         }
     }
 
     /**
      * Register an individual route
      *
+     * @param string $controller
+     * @param array  $parameters
+     *
      * @return
      */
-    public static function registerRoute($adminItem)
+    public static function registerRoute($controller, $parameters = [])
     {
-        $adminItem = new $adminItem();
-        $parameters = [
-                        'prefix' => $adminItem->urlPrefix(),
-                        'as' => $adminItem->urlPrefix(),
-                    ];
-
         \Route::group($parameters, function () {
-            \Route::controller('/', $adminItem->getController());
+            \Route::controller('/', $controller);
         });
     }
 
