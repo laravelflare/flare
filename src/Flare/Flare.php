@@ -9,7 +9,7 @@ class Flare
      *
      * @var string
      */
-    const VERSION = 'alpha';
+    const VERSION = '0.2.x-dev';
 
     /**
      * Array of expected configuration keys
