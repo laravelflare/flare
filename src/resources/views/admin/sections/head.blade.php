@@ -19,6 +19,6 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        {{-- @yield('enqueued-css')--}}
+        @yield('enqueued-css')
     </head>
     <body class="hold-transition skin-{{ Flare::config('admin_theme') }} sidebar-mini">
