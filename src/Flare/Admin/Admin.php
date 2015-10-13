@@ -206,6 +206,16 @@ abstract class Admin
     }
 
     /**
+     * Menu Items
+     * 
+     * @return array
+     */
+    public function menuItems()
+    {
+        return [];
+    }
+
+    /**
      * shortName of a Admin Section Class.
      *
      * @return string
