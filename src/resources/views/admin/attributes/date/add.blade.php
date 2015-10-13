@@ -4,6 +4,18 @@
             <label class="control-label" for="{{ $attribute }}">
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
+
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text"
+                        id="{{ $attribute }}"
+                        data-mask="" 
+                        data-inputmask="'alias': '{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}'"
+                        class="form-control focus.inputmask"
+                        value="">
+            </div>
             
             @if ($errors->has($attribute))
                 <span class="help-block">
@@ -13,3 +25,11 @@
         </div>
     </div>
 </div>
+
+@section('enqueued-js')
+    <script>
+    $(function () {
+        $("#{{ $attribute }}").inputmask("{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}", {"placeholder": "{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}"});
+    });
+    </script>
+@endsection
