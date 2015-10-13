@@ -50,7 +50,7 @@ class DefaultWidget extends WidgetAdmin
         $this->viewData['bgColour'] = $this->bgColours[self::$counter];
         $this->viewData['pluralTitle'] = $modelAdmin::pluralTitle();
         $this->viewData['modelTotal'] = $modelAdmin->model()->count();
-        $this->viewData['icon'] = $modelAdmin::$icon;
+        $this->viewData['icon'] = $modelAdmin::getIcon();
 
         ++self::$counter;
     }
