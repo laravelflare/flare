@@ -12,8 +12,8 @@
                 <div class="checkbox col-sm-12 col-md-6 col-lg-4">
                     <label>
                         <input type="checkbox"
-                                value="{{ $value }}"
-                                name="{{ $attribute }}[]"
+                                value="{{ ($value === 0 && count($field['options']) === 1) ? 1 : $value }}"
+                                name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
                                 @if (isset($field['required'])) required="required" @endif>
                         {{ $option }}
                     </label>
