@@ -5,29 +5,29 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
 
-            <div class="clearfix"></div>
-            
-            @if(count($field['options']) > 0)
-                @foreach ($field['options'] as $value => $option)
-                <div class="radio col-sm-12 col-md-6 col-lg-4">
-                    <label>
-                        <input type="radio"
-                                value="{{ $value }}"
-                                name="{{ $attribute }}"
-                                @if (isset($field['required'])) required="required" @endif
-                                @if (true) @endif>
-                        {{ $option }}
-                    </label>
-                </div>
-                @endforeach
-            @else
-                <div class="callout callout-warning">
-                    <strong>
-                    No options available for {{ $attributeTitle }}!
-                    </strong>
-                </div>
-            @endif
-            
+            <div class="col-sm-12">   
+                @if(count($field['options']) > 0)
+                    @foreach ($field['options'] as $value => $option)
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <p>
+                            <input type="radio"
+                                    value="{{ $value }}"
+                                    name="{{ $attribute }}"
+                                    @if (isset($field['required'])) required="required" @endif
+                                >
+                            {{ $option }}
+                        </p>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="callout callout-warning">
+                        <strong>
+                        No options available for {{ $attributeTitle }}!
+                        </strong>
+                    </div>
+                @endif
+            </div>
+
             @if ($errors->has($attribute))
                 <span class="help-block">
                     {{ $errors->first($attribute) }}

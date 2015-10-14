@@ -5,27 +5,34 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
 
-            <div class="clearfix"></div>
-            
-            @if(count($field['options']) > 0)
-                @foreach ($field['options'] as $value => $option)
-                <div class="checkbox col-sm-12 col-md-6 col-lg-4">
-                    <label>
-                        <input type="checkbox"
-                                value="{{ ($value === 0 && count($field['options']) === 1) ? 1 : $value }}"
-                                name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
-                                @if (isset($field['required'])) required="required" @endif>
-                        {{ $option }}
-                    </label>
-                </div>
-                @endforeach
-            @else 
-                <div class="callout callout-warning">
-                    <strong>
-                    No options available for {{ $attributeTitle }}!
-                    </strong>
-                </div>
-            @endif
+            <div class="col-sm-12">            
+                @if(count($field['options']) > 0)
+                    @foreach ($field['options'] as $value => $option)
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <p>
+                            <input type="checkbox"
+                                    value="{{ ($value === 0 && count($field['options']) === 1) ? 1 : $value }}"
+                                    name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
+                                    @if (isset($field['required'])) required="required" @endif
+                                    @if (
+                                            (is_string($modelManager->getAttribute($attribute, $model)) && $modelManager->getAttribute($attribute, $model) == $value)
+                                        ||
+                                            (is_array($modelManager->getAttribute($attribute, $model)) && array_key_exists($value, $modelManager->getAttribute($attribute, $model)))
+                                        )
+                                        checked="checked" @endif
+                                    >
+                            {{ $option }}
+                        </p>
+                    </div>
+                    @endforeach
+                @else 
+                    <div class="callout callout-warning">
+                        <strong>
+                        No options available for {{ $attributeTitle }}!
+                        </strong>
+                    </div>
+                @endif
+            </div>
             
             @if ($errors->has($attribute))
                 <span class="help-block">
