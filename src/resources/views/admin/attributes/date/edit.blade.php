@@ -33,4 +33,4 @@
         $("#{{ $attribute }}").inputmask("{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}", {"placeholder": "{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}"});
     });
     </script>
-@endsection
+@append
