@@ -152,6 +152,11 @@ abstract class Admin
         return 'flare::'.static::$view;
     }
 
+    /**
+     * Returns the defined ViewData
+     * 
+     * @return array
+     */
     public function getViewData()
     {
         return $this->viewData;
