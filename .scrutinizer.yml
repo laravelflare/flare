@@ -2,3 +2,5 @@ filter:
     paths:
         - src/config/*
         - src/Flare/*
+    excluded_paths:
+        - tests/*
