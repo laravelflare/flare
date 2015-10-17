@@ -45,7 +45,7 @@ class AdminCollection extends Collection
     {
         $classCollection = [];
 
-        if (!static::ADMIN_KEY) {
+        if (!defined('static::ADMIN_KEY')) {
             return $classCollection;
         }
 
