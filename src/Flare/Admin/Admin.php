@@ -20,21 +20,21 @@ abstract class Admin
      *
      * @var string
      */
-    protected static $title = null;
+    protected static $title;
 
     /**
      * Plural Title of Admin Section.
      *
      * @var string
      */
-    protected static $pluralTitle = null;
+    protected static $pluralTitle;
 
     /**
      * URL Prefix of Admin Section.
      *
      * @var string
      */
-    protected static $urlPrefix = null;
+    protected static $urlPrefix;
 
     /**
      * The Controller to be used by the Admin.

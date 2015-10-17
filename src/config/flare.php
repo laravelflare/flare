@@ -33,8 +33,8 @@ return [
     |
     */
     'models' => [
-        // Base ModelAdmin: LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
-        // Example ModelAdmin: LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
+        // Base ModelAdmin: \LaravelFlare\Flare\Admin\Models\ModelAdmin::class,
+        // Example ModelAdmin: \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
     ],
 
     /*
@@ -46,7 +46,7 @@ return [
     |
     */
     'modules' => [
-        // Base ModuleAdmin: LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
+        // Base ModuleAdmin: \LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
     ],
 
     /*
@@ -58,7 +58,7 @@ return [
     |
     */
     'widgets' => [
-        // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
+        // Base WidgetAdmin: \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 
     /*
