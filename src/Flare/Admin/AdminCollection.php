@@ -66,6 +66,10 @@ class AdminCollection extends Collection
      */
     public function getAdminInstance()
     {
+        if (!\Route::current()) {
+            return;
+        }
+
         $className = \Route::current()->getAction()['namespace'];
 
         return new $className();

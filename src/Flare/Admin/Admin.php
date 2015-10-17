@@ -251,7 +251,7 @@ abstract class Admin
      */
     public static function relativeCurrentUrl($path)
     {
-        return \Route::current()->getPrefix().'/'.$path;
+        return \Route::current() ? \Route::current()->getPrefix().'/'.$path : false;
     }
 
     /**
