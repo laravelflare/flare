@@ -19,6 +19,11 @@
     ],
     "require": {
     },
+    "require-dev": {
+        "mockery/mockery": "~0.9.1",
+        "phpunit/phpunit": "~4.0",
+        "orchestra/testbench": "~3.1"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.2-dev"
@@ -27,6 +32,11 @@
     "autoload": {
         "psr-4": {
             "LaravelFlare\\Flare\\": "src/Flare"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelFlare\\Flare\\Tests\\": "tests/"
         }
     }
 }

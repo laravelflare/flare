@@ -24,13 +24,14 @@ return [
     |--------------------------------------------------------------------------
     |
     | This array of Admin classes allows you to define all of your
-    | Flare administeration sections which will be made available in the Flare
+    | Flare administration sections which will be made available in the Flare
     | admin panel. Hopefully we will replace the need for these to be
     | manually defined in the future with some crazy autoloading.
     |
     */
     'admin' => [
-        //
+        // Example ModelAdmin: \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
+        // Base ModuleAdmin: \LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
     ],
 
     /*
@@ -42,7 +43,7 @@ return [
     |
     */
     'widgets' => [
-        // Base WidgetAdmin: LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
+        // Base WidgetAdmin: \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 
     /*

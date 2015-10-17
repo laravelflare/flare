@@ -20,21 +20,21 @@ abstract class Admin
      *
      * @var string
      */
-    protected static $title = null;
+    protected static $title;
 
     /**
      * Plural Title of Admin Section.
      *
      * @var string
      */
-    protected static $pluralTitle = null;
+    protected static $pluralTitle;
 
     /**
      * URL Prefix of Admin Section.
      *
      * @var string
      */
-    protected static $urlPrefix = null;
+    protected static $urlPrefix;
 
     /**
      * The Controller to be used by the Admin.
@@ -257,7 +257,7 @@ abstract class Admin
     public static function pluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' '.static::CLASS_SUFFIX, '', static::title()));
+            return Str::plural(static::title());
         }
 
         return static::$pluralTitle;
@@ -271,7 +271,7 @@ abstract class Admin
     public static function urlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_replace(' ', '', strtolower(str_replace(static::CLASS_SUFFIX, '', static::pluralTitle())));
+            return str_slug(static::pluralTitle());
         }
 
         return static::$urlPrefix;
@@ -314,7 +314,7 @@ abstract class Admin
      */
     public static function relativeCurrentUrl($path)
     {
-        return \Route::current()->getPrefix().'/'.$path;
+        return \Route::current() ? \Route::current()->getPrefix().'/'.$path : false;
     }
 
     /**
