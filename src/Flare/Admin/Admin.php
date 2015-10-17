@@ -194,7 +194,7 @@ abstract class Admin
     public static function pluralTitle()
     {
         if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(str_replace(' '.static::CLASS_PREFIX, '', static::title()));
+            return Str::plural(static::title());
         }
 
         return static::$pluralTitle;
@@ -208,7 +208,7 @@ abstract class Admin
     public static function urlPrefix()
     {
         if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_replace(' ', '', strtolower(str_replace(static::CLASS_PREFIX, '', static::pluralTitle())));
+            return str_slug(static::pluralTitle());
         }
 
         return static::$urlPrefix;
