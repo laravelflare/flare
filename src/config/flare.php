@@ -2,19 +2,21 @@
 
 return [
 
-    'site_title' => 'Laravel <b>Flare</b>',
-
     /*
     |--------------------------------------------------------------------------
     | Admin Configuration
     |--------------------------------------------------------------------------
+    | 
+    | 'admin_title' : The Title of your Admin Panel. Usually your sitename.
     |
-    | 'admin_url': Admin URL Path without slashes.
-    | 'admin_theme': Choose an admin theme from the following colours:
-    |                'red', 'blue', 'green', 'yellow', 'black'.
-    |                Flare Default is 'red'.
+    | 'admin_url'   : Admin URL Path without slashes.
+    |
+    | 'admin_theme' : Choose an admin theme from the following colours:
+    |                 'red', 'blue', 'green', 'yellow', 'black'.
+    |                 Flare Default is 'red'.
     |
     */
+    'admin_title' => 'Laravel <b>Flare</b>',
     'admin_url' => 'admin',
     'admin_theme' => 'red',
 

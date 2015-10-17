@@ -18,7 +18,7 @@ class Flare
      * @var array
      */
     protected $configurationKeys = [
-        'site_title' => 'Laravel <b>Flare</b>',
+        'admin_title' => 'Laravel <b>Flare</b>',
         'admin_url' => 'admin',
         'admin_theme' => 'red',
         'admin' => [],
@@ -53,6 +53,27 @@ class Flare
         }
 
         return config($key);
+    }
+
+    /**
+     * Returns the defined Admin Title
+     * 
+     * @return string
+     */
+    public function adminTitle()
+    {
+        return \Flare::config('admin_title');
+    }
+
+    /**
+     * Returns the defined Admin Title, converted
+     * to a safer format (for <title> tags etc.)
+     * 
+     * @return string
+     */
+    public function safeAdminTitle()
+    {
+        return strip_tags(\Flare::config('admin_title'));
     }
 
     /**
