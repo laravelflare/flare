@@ -8,6 +8,13 @@ use LaravelFlare\Flare\Http\Controllers\FlareController;
 class ModuleAdminController extends FlareController
 {
     /**
+     * Admin Instance
+     * 
+     * @var 
+     */
+    protected $admin;
+
+    /**
      * __construct.
      * 
      * @param AdminCollection $adminCollection

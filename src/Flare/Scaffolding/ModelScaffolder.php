@@ -97,7 +97,7 @@ class ModelScaffolder extends Command
     {
         $className = $this->defineClassname();
 
-        if (!$className) {
+        if (!strlen($className)) {
             return;
         }
 

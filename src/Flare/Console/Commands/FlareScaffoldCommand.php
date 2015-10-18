@@ -87,7 +87,7 @@ class FlareScaffoldCommand extends Command
      */
     private function scaffold()
     {
-        if ($this->confirm('Would you like to create any new models for your application?', 'y')) {
+        if ($this->confirm('Would you like to create any new models for your application?', true)) {
             $this->scaffold->newModels();
         }
 
@@ -108,7 +108,7 @@ class FlareScaffoldCommand extends Command
      */
     private function update()
     {
-        if ($this->confirm('Would you like to update any models in your application?', 'y')) {
+        if ($this->confirm('Would you like to update any models in your application?', true)) {
             $this->scaffold->existingModels();
         }
 
@@ -127,7 +127,7 @@ class FlareScaffoldCommand extends Command
      */
     private function migrations()
     {
-        if ($this->confirm('Would you like to create any migrations for your application?', 'y')) {
+        if ($this->confirm('Would you like to create any migrations for your application?', true)) {
             $this->scaffold->migrations();
         }
     }
@@ -140,7 +140,7 @@ class FlareScaffoldCommand extends Command
      */
     private function admin()
     {
-        if ($this->confirm('Would you like to create any model admin functionality for your application?', 'y')) {
+        if ($this->confirm('Would you like to create any model admin functionality for your application?', true)) {
             $this->scaffold->modelAdmins();
         }
     }
@@ -153,7 +153,7 @@ class FlareScaffoldCommand extends Command
      */
     private function seed()
     {
-        if ($this->confirm('Would you like to create any fake data seeders for your application?', 'y')) {
+        if ($this->confirm('Would you like to create any fake data seeders for your application?', true)) {
             $this->scaffold->seeders();
         }
     }
@@ -170,7 +170,7 @@ class FlareScaffoldCommand extends Command
      */
     private function tests()
     {
-        if ($this->confirm('Would you like to run the model admin test suite against your models?', 'y')) {
+        if ($this->confirm('Would you like to run the model admin test suite against your models?', true)) {
             $this->scaffold->tests();
         }
     }
