@@ -6,8 +6,10 @@ interface PermissionsInterface
 {
     /**
      * Permissions check
+     *
+     * @param string $class
      * 
      * @return 
      */
-    public static function check();
+    public static function check($class);
 }

@@ -133,12 +133,13 @@ class AdminCollection extends Collection
     /**
      * Checks if the current user has access to a given 
      * Admin class and returns a boolean.
+     *
+     * @param string $class
      * 
      * @return bool
      */
-    private function checkUserHasAdminPermissions()
+    private function checkUserHasAdminPermissions($class)
     {
-        // Replace this with actual Permission Implementation Check
-        return Permissions::check();
+        return Permissions::check($class);
     }
 }
