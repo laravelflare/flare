@@ -62,7 +62,7 @@ class ArtisanServiceProvider extends ServiceProvider
      */
     protected function registerFlareInstallCommand($command)
     {
-        $this->app->singleton($command, function ($app) {
+        $this->app->singleton($command, function () {
             return new FlareInstallCommand();
         });
     }
