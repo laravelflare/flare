@@ -165,7 +165,7 @@ class ModelScaffolder extends Command
      */
     protected function defineClassname()
     {
-        if ($className = $this->ask('Please provide a class name for your new Model?', false)) {
+        if ($className = $this->ask('Please provide a class name for your new Model?')) {
             return $className;
         } 
     }
@@ -182,7 +182,7 @@ class ModelScaffolder extends Command
         $tablename = str_replace('\\', '', Str::snake(Str::plural($this->modelData['classname'])));
 
         if ($this->confirm('Would you like to define a table for this model?')) {
-            $tablename = $this->ask('Please provide a the table name for your Model?', false);
+            $tablename = $this->ask('Please provide a the table name for your Model?');
         }
 
         if ($tablename && $this->confirm('The table name of `'.$tablename.'`, is this correct?')) {
@@ -215,7 +215,7 @@ class ModelScaffolder extends Command
      */
     protected function moreFillable()
     {
-        if($fillable = $this->ask('What fillable attribute would you like to add?', false)) {
+        if($fillable = $this->ask('What fillable attribute would you like to add?')) {
             $this->modelData['fillable'][] = $fillable;
 
             $this->moreFillable();
@@ -244,7 +244,7 @@ class ModelScaffolder extends Command
      */
     protected function moreHidden()
     {
-        if($hidden = $this->ask('What hidden attribute would you like to add?', false)) {
+        if($hidden = $this->ask('What hidden attribute would you like to add?')) {
             $this->modelData['hidden'][] = $hidden;
             
             $this->defineHidden();
@@ -273,7 +273,7 @@ class ModelScaffolder extends Command
      */
     protected function moreVisible()
     {
-        if($visible = $this->ask('What visible attribute would you like to add?', false)) {
+        if($visible = $this->ask('What visible attribute would you like to add?')) {
             $this->modelData['visible'][] = $visible;
 
             $this->defineVisible();
@@ -292,7 +292,7 @@ class ModelScaffolder extends Command
             return;
         }
 
-        $this->addModelData('timestamps', false);
+        $this->addModelData('timestamps');
     } 
 
     /**
@@ -307,7 +307,7 @@ class ModelScaffolder extends Command
             return;
         }
 
-        $this->addModelData('softdeletes', false);
+        $this->addModelData('softdeletes');
     } 
 
     /**
@@ -319,7 +319,7 @@ class ModelScaffolder extends Command
     protected function defineDateFormat()
     {
         if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
-            $this->addModelData('dateFormat', false); // Temp
+            $this->addModelData('dateFormat'); // Temp
         }
     } 
 
@@ -347,7 +347,7 @@ class ModelScaffolder extends Command
     protected function confirmModelData()
     {
         $this->info(var_export($this->modelData, true));
-        if($this->confirm('Please confirm the Model Data output above is correct.', false)) {
+        if($this->confirm('Please confirm the Model Data output above is correct.')) {
             $this->save();
         }
 
@@ -364,7 +364,7 @@ class ModelScaffolder extends Command
      */
     protected function confirmDone($goBack = false)
     {
-        if (!$this->confirm('Are you done creating Models?', false)) {
+        if (!$this->confirm('Are you done creating Models?')) {
             if ($goBack) {
                 call_user_func_array([$this, $goBack], []);
                 return;
