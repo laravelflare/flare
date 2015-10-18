@@ -91,7 +91,7 @@ class ArtisanServiceProvider extends ServiceProvider
     protected function registerMakeUserCommand($command)
     {
         $this->app->singleton($command, function ($app) {
-            return new MakeUserCommand($app['files']);
+            return new MakeUserCommand();
         });
     }
 
