@@ -13,10 +13,12 @@ class Permissions implements PermissionsInterface
     /**
      * Checks if the currently Authenticated User
      * has access to a given ModelAdmin etc.
+     *
+     * @param string $class
      * 
      * @return
      */
-    public static function check()
+    public static function check($class)
     {
         return true;
     }

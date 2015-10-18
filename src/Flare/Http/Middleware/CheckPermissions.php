@@ -3,11 +3,10 @@
 namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Routing\Middleware;
 use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Exceptions\PermissionsException;
 
-class CheckPermissions implements Middleware
+class CheckPermissions
 {
     /**
      * Create a new Permissions Instance
