@@ -10,11 +10,16 @@ use LaravelFlare\Flare\Exceptions\PermissionsException;
 class CheckPermissions implements Middleware
 {
     /**
-     * __construct
-     *
      * Create a new Permissions Instance
      * 
-     * @param PermissionsInterface $permissions
+     * @var \LaravelFlare\Flare\Contracts\PermissionsInterface
+     */
+    protected $permissions;
+
+    /**
+     * __construct
+     * 
+     * @param PermissionsInterface $permissions 
      */
     public function __construct(PermissionsInterface $permissions)
     {
