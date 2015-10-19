@@ -50,7 +50,7 @@ abstract class WidgetAdmin extends Admin
         }
 
         if (view()->exists('admin.widgets.' . static::safeTitle() . '.widget')) {
-            return 'admin.'.static::safeTitle().'.widget';
+            return 'admin.widgets.'.static::safeTitle().'.widget';
         }
 
         if (view()->exists('admin.widgets.' . static::safeTitle())) {
@@ -64,8 +64,6 @@ abstract class WidgetAdmin extends Admin
         if (view()->exists('flare::' . self::$view)) {
             return 'flare::' . self::$view;
         }
-
-        return parent::getView();
     }
 
     /**
