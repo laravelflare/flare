@@ -3,12 +3,20 @@
         {{ $attributeTitle }}
     </dt>
     <dd>
-        @if ($modelManager->getAttribute($attribute, $model))
-            @if (is_scalar($modelManager->getAttribute($attribute, $model)))
-                {{ $modelManager->getAttribute($attribute, $model) }}
+        @if ($modelManager->getAttributeFromArray($attribute, $model))
+            @if (is_scalar($modelManager->getAttributeFromArray($attribute, $model)))
+                @if (array_key_exists($modelManager->getAttributeFromArray($attribute, $model), $field['options']))
+                    {{ $field['options'][$modelManager->getAttributeFromArray($attribute, $model)] }}
+                @else
+                    {{ $modelManager->getAttributeFromArray($attribute, $model) }}
+                @endif
             @else 
-                @foreach ($modelManager->getAttribute($attribute, $model) as $key => $value)
-                {{ $value }} <br>
+                @foreach ($modelManager->getAttributeFromArray($attribute, $model) as $key => $value)
+                    @if (array_key_exists($modelManager->getAttributeFromArray($attribute, $model), $field['options']))
+                        {{ $field['options'][$modelManager->getAttributeFromArray($attribute, $model)] }} <br>
+                    @else
+                        {{ $value }} <br>
+                    @endif
                 @endforeach
             @endif
         @endif
