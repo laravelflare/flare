@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
+use LaravelFlare\Flare\Admin\AdminCollection;
 use LaravelFlare\Flare\Contracts\PermissionsInterface;
 use LaravelFlare\Flare\Exceptions\PermissionsException;
 
@@ -34,7 +35,11 @@ class CheckPermissions
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->permissions->check()) {
+        if ($class = AdminCollection::getAdminInstance()) {
+            $class = get_class($class);
+        }
+
+        if (!$this->permissions->check($class)) {
             throw new PermissionsException('Permission denied!');
         }
 

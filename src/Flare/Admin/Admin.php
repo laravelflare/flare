@@ -113,7 +113,7 @@ abstract class Admin
      * 
      * @return string|void
      */
-    public function getRequested($key = 'namespace')
+    public static function getRequested($key = 'namespace')
     {
         if (!\Route::current()) {
             return;
