@@ -3,12 +3,16 @@ The Roadmap aims to provide a list of future features and functionality that can
 
 
 ## Pre-Alpha - 0.1.x
-Forms - Rapid creation of CRUD for different attribute types using built in Form Fields (Datepicker, WYSIWYG and File Upload remaining)
-
 Ability to define the Auth User Method which returns the profile picture
 
 
 ## Alpha - 0.2.x-dev
+Timepicker Attribute
+
+Datepicker Attribute
+
+File Upload Attribute and Functionaliy
+
 Allow Ancestry of Admin Sections 
 
 ManagedModel Form Validation
