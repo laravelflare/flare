@@ -7,7 +7,7 @@
 
             
             <div class="col-sm-12">  
-                @if(count($field['options']) > 0)
+                @if(isset($field['options']) && count($field['options']) > 0)
                     @foreach ($field['options'] as $value => $option)
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <p>

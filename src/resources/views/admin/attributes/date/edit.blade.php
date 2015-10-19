@@ -15,7 +15,7 @@
                         data-mask="" 
                         data-inputmask="'alias': '{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}'"
                         class="form-control focus.inputmask"
-                        value="{{ old($attribute, $modelManager->getAttribute($attribute, $model) ) }}">
+                        value="{{ old($attribute, $modelManager->getAttributeFromArray($attribute, $model) ) }}">
             </div>
 
             @if ($errors->has($attribute))

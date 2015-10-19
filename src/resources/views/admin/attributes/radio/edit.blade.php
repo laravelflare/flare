@@ -6,7 +6,7 @@
             </label>
             
             <div class="col-sm-12">   
-                @if(count($field['options']) > 0)
+                @if(isset($field['options']) && count($field['options']) > 0)
                     @foreach ($field['options'] as $value => $option)
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <p>
@@ -15,9 +15,9 @@
                                     name="{{ $attribute }}"
                                     @if (isset($field['required'])) required="required" @endif
                                     @if (
-                                            (is_string($modelManager->getAttribute($attribute, $model)) && $modelManager->getAttribute($attribute, $model) == $value)
+                                            (is_string($modelManager->getAttributeFromArray($attribute, $model)) && $modelManager->getAttributeFromArray($attribute, $model) == $value)
                                         ||
-                                            (is_array($modelManager->getAttribute($attribute, $model)) && array_key_exists($value, $modelManager->getAttribute($attribute, $model)))
+                                            (is_array($modelManager->getAttributeFromArray($attribute, $model)) && array_key_exists($value, $modelManager->getAttributeFromArray($attribute, $model)))
                                         )
                                         checked="checked" @endif
                                     >
