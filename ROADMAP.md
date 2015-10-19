@@ -1,14 +1,13 @@
 # Roadmap
 The Roadmap aims to provide a list of future features and functionality that can be expected to appear in Flare. Think of it as a reverse [Changelog](CHANGELOG.md), where items closest to the current date are soon to be released, whereas items furthest from the future are proposed enhancements with less overall clarity which will be added to as we move toward them.
 
-
-## Pre-Alpha - 0.1.x
-Forms - Rapid creation of CRUD for different attribute types using built in Form Fields (Datepicker, WYSIWYG and File Upload remaining)
-
-Ability to define the Auth User Method which returns the profile picture
-
-
 ## Alpha - 0.2.x-dev
+Timepicker Attribute
+
+Datepicker Attribute
+
+File Upload Attribute and Functionaliy
+
 Allow Ancestry of Admin Sections 
 
 ManagedModel Form Validation
