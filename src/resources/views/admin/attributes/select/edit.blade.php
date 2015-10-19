@@ -5,14 +5,16 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
             
-            @if(count($field['options']) > 0)
+            @if(isset($field['options']) && count($field['options']) > 0)
                 <select class="form-control"
                         name="{{ $attribute }}"
                         id="{{ $attribute }}"
                         @if (isset($field['required'])) required="required" @endif>
                     <option></option>
                 @foreach ($field['options'] as $value => $option)
-                    <option value="{{ $value }}">{{ $option }}</option>
+                    <option value="{{ $value }}"
+                                    @if ($modelManager->getAttributeFromArray($attribute, $model) == $value) selected="selected" @endif
+                                >{{ $option }}</option>
                 @endforeach
                 </select>
             @else

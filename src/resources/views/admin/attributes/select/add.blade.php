@@ -5,7 +5,7 @@
                 {{ $attributeTitle }} @if (isset($field['required'])) * @endif
             </label>
             
-            @if(count($field['options']) > 0)
+            @if(isset($field['options']) && count($field['options']) > 0)
                 <select class="form-control"
                         name="{{ $attribute }}"
                         id="{{ $attribute }}"
