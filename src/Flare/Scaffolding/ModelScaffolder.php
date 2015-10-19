@@ -263,7 +263,7 @@ class ModelScaffolder extends Command
             return;
         }
 
-        $this->addModelData('timestamps');
+        $this->addModelData('timestamps', false);
     }
 
     /**
@@ -277,7 +277,7 @@ class ModelScaffolder extends Command
             return;
         }
 
-        $this->addModelData('softdeletes');
+        $this->addModelData('softdeletes', false);
     }
 
     /**
@@ -287,21 +287,11 @@ class ModelScaffolder extends Command
     protected function defineDateFormat()
     {
         if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
-            $this->addModelData('dateFormat'); // Temp
+            $this->addModelData('dateFormat', true);
         }
-    }
 
-    /**
-     * Add Model Information to ModelData array.
-     * 
-     * @param string $key
-     * @param mixed  $value
-     */
-    protected function addModelData($key, $value)
-    {
-        $this->modelData[$key] = $value;
+        $this->addModelData('dateFormat', false);
     }
-
     /**
      * Confirms the Model Data is correct and if it is,
      * saves the file. If it is not, the revise() method
@@ -315,7 +305,7 @@ class ModelScaffolder extends Command
             $this->save();
         }
 
-        $this->revise($this->modelData['classname']);
+        $this->revise($this->modelData['classname'], true);
     }
 
     /**
@@ -329,15 +319,39 @@ class ModelScaffolder extends Command
     protected function confirmDone($goBack = false)
     {
         if (!$this->confirm('Are you done creating Models?')) {
-            if ($goBack) {
-                call_user_func_array([$this, $goBack], []);
-
-                return;
-            }
-
-            return false;
+            return $this->goBack($goBack);
         }
 
         return true;
+    }
+
+    /**
+     * Go Back by calling the goBack method
+     * or return false.
+     * 
+     * @param  string $goBack 
+     * 
+     * @return mixed
+     */
+    protected function goBack($goBack)
+    {
+        if ($goBack) {
+            call_user_func_array([$this, $goBack], []);
+
+            return;
+        }
+
+        return false;
+    }
+
+    /**
+     * Add Model Information to ModelData array.
+     * 
+     * @param string $key
+     * @param mixed  $value
+     */
+    protected function addModelData($key, $value)
+    {
+        $this->modelData[$key] = $value;
     }
 }
