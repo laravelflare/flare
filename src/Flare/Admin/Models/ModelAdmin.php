@@ -181,7 +181,8 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
 
     /**
      * Returns a raw Attribute from the Models
-     * array of Attributes
+     * array of Attributes if it exists, otherwise,
+     * falls back to getAttribute.
      * 
      * @param  string  $key  
      * @param  boolean $model 
@@ -197,6 +198,8 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
         if (array_key_exists($key, $attributes = $model->getAttributes())) {
             return $attributes[$key];
         }
+
+        return $this->getAttribute($key, $model);
     }
 
     /**
