@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Admin;
 
 use Illuminate\Support\Collection;
+use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Permissions\Permissions;
 
 class AdminCollection extends Collection
@@ -64,15 +65,13 @@ class AdminCollection extends Collection
      * 
      * @return Admin
      */
-    public function getAdminInstance()
+    public static function getAdminInstance()
     {
-        if (!\Route::current()) {
+        if (!$requested = Admin::getRequested()) {
             return;
         }
 
-        $className = \Route::current()->getAction()['namespace'];
-
-        return new $className();
+        return new $requested();
     }
 
     /**
