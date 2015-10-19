@@ -164,7 +164,7 @@ class BaseAttribute
      */
     public function getAttributeType()
     {
-        return title_case(isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE);
+        return str_replace('_', ' ', title_case(isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE));
     }
 
     /**
