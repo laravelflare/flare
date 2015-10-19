@@ -70,7 +70,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     public function __construct()
     {
         if (!isset(static::$managedModel) || static::$managedModel === null) {
-            throw new ModelAdminException('You have a ModelAdmin which does not have any managed models assigned to it. ModelAdmins must include at least one model to manage.', 1);
+            throw new ModelAdminException('You have a ModelAdmin which does not have a model assigned to it. ModelAdmins must include a model to manage.', 1);
         }
 
         $this->model = $this->model();
