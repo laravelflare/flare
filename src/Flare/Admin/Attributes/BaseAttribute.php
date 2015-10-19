@@ -164,7 +164,17 @@ class BaseAttribute
      */
     public function getAttributeType()
     {
-        return str_replace('_', ' ', title_case(isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE));
+        return title_case(isset($this->getField()['type']) ? $this->getField()['type'] : self::ATTRIBUTE_TYPE);
+    }
+
+    /**
+     * Acessor for Attribute Title converted to Title Case with Spaces.
+     * 
+     * @return string
+     */
+    public function getAttributeTitle()
+    {
+        return str_replace('_', ' ', title_case($this->getAttribute()));
     }
 
     /**
@@ -178,7 +188,7 @@ class BaseAttribute
                         'attribute' => $this->getAttribute(),
                         'modelManager' => $this->getModelManager(),
                         'attributeType' => $this->getAttributeType(),
-                        'attributeTitle' => title_case($this->getAttribute()),
+                        'attributeTitle' => $this->getAttributeTitle(),
                     ]);
     }
 }
