@@ -36,7 +36,7 @@ class ModuleAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view($this->getView(), $this->admin->getViewData());
+        return view($this->admin->getView(), $this->admin->getViewData());
     }
 
     /**
