@@ -16,7 +16,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     use AttributeAccess, ModelWriteable, ModelQueryable;
 
     /**
-     * Class of Model to Manage
+     * Class of Model to Manage.
      * 
      * @var string
      */
@@ -90,16 +90,15 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
         return new static::$managedModel();
     }
 
-
     /**
-     * Returns the Route Paramets 
+     * Returns the Route Paramets.
      * 
      * @return array
      */
     public function routeParameters()
     {
         return array_merge(parent::routeParameters(), [
-                                                    'model' => $this->managedModel
+                                                    'model' => $this->managedModel,
                                                 ]);
     }
 
@@ -184,8 +183,8 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      * array of Attributes if it exists, otherwise,
      * falls back to getAttribute.
      * 
-     * @param  string  $key  
-     * @param  boolean $model 
+     * @param string $key
+     * @param bool   $model
      * 
      * @return mixed
      */

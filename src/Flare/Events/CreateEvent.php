@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare\Events;
 
-use LaravelFlare\Flare\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 class CreateEvent extends Event
@@ -21,6 +20,5 @@ class CreateEvent extends Event
      */
     public function __construct()
     {
-
     }
 }

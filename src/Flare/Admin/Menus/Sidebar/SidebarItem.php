@@ -14,7 +14,7 @@ class SidebarItem extends MenuItem
     protected static $view = 'admin.menus.sidebar.item';
 
     /**
-     * The Menu Item Location
+     * The Menu Item Location.
      *
      * @var string
      */

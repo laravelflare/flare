@@ -6,5 +6,4 @@ use LaravelFlare\Flare\Admin\Menus\MenuAdmin;
 
 class SidebarAdmin extends MenuAdmin
 {
-
 }

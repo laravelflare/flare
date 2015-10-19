@@ -20,7 +20,7 @@ class ScaffoldServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
-     /**
+    /**
      * The commands to be registered.
      *
      * @var array
@@ -135,5 +135,4 @@ class ScaffoldServiceProvider extends ServiceProvider
             return new ScaffoldTester();
         });
     }
-
 }

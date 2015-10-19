@@ -5,17 +5,14 @@ namespace LaravelFlare\Flare\Scaffolding;
 class ScaffoldManager
 {
     /**
-     * __construct
+     * __construct.
      */
     public function __construct()
     {
-
     }
 
     /**
-     * Scaffold New Models
-     * 
-     * @return void
+     * Scaffold New Models.
      */
     public function newModels()
     {
@@ -23,9 +20,7 @@ class ScaffoldManager
     }
 
     /**
-     * Scaffold Existing Models
-     * 
-     * @return void
+     * Scaffold Existing Models.
      */
     public function existingModels()
     {
@@ -33,9 +28,7 @@ class ScaffoldManager
     }
 
     /**
-     * Scaffold Migrations
-     * 
-     * @return void
+     * Scaffold Migrations.
      */
     public function migrations()
     {
@@ -43,9 +36,7 @@ class ScaffoldManager
     }
 
     /**
-     * Scaffold Model Admin
-     * 
-     * @return void
+     * Scaffold Model Admin.
      */
     public function modelAdmins()
     {
@@ -53,9 +44,7 @@ class ScaffoldManager
     }
 
     /**
-     * Scaffold Database Seeders
-     * 
-     * @return void
+     * Scaffold Database Seeders.
      */
     public function seeders()
     {
@@ -63,9 +52,7 @@ class ScaffoldManager
     }
 
     /**
-     * Run Scaffolding Test Suite
-     * 
-     * @return void
+     * Run Scaffolding Test Suite.
      */
     public function tests()
     {

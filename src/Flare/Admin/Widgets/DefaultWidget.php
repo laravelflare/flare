@@ -44,7 +44,7 @@ class DefaultWidget extends WidgetAdmin
             self::$counter = 0;
         }
 
-        /**
+        /*
          * Remove this from the __construct, it breaks migrations.
          */
         $this->viewData['bgColour'] = $this->bgColours[self::$counter];

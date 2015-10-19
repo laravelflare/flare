@@ -24,7 +24,7 @@ class FlareScaffoldCommand extends Command
     protected $description = 'Flare Scaffolding rapidly creates Models, Migrations, ModelAdmins (Admin based Model Managers) into your application';
 
     /**
-     * ScaffoldManager Instance
+     * ScaffoldManager Instance.
      * 
      * @var \LaravelFlare\Flare\Scaffolding\ScaffoldManager
      */
@@ -62,14 +62,16 @@ class FlareScaffoldCommand extends Command
 
         if ($this->option('admin')) {
             $this->admin();
+
             return;
         }
 
         if ($this->option('update')) {
             $this->update();
+
             return;
         }
-        
+
         $this->scaffold();
     }
 
@@ -82,8 +84,6 @@ class FlareScaffoldCommand extends Command
      *
      * Finally, the scaffolder tests method is run (which asks
      * the user if they wish to run teh scaffolder tests or not).
-     * 
-     * @return void
      */
     private function scaffold()
     {
@@ -92,7 +92,7 @@ class FlareScaffoldCommand extends Command
         }
 
         $this->update();
-        
+
         $this->tests();
     }
 
@@ -103,8 +103,6 @@ class FlareScaffoldCommand extends Command
      * After this is complete the migrations scaffolder is fired, 
      * followed by the model admin scaffolder and finally the 
      * database seeder scaffolder.
-     * 
-     * @return void
      */
     private function update()
     {
@@ -122,8 +120,6 @@ class FlareScaffoldCommand extends Command
     /**
      * Asks the user if they wish to create any migrations and if they do,
      * fires off the migration scaffolder functionality.
-     * 
-     * @return void
      */
     private function migrations()
     {
@@ -135,8 +131,6 @@ class FlareScaffoldCommand extends Command
     /**
      * Asks the user if they wish to create any model admin classes and
      * if they do fires off the model admin scaffolder functionality.
-     * 
-     * @return void
      */
     private function admin()
     {
@@ -148,8 +142,6 @@ class FlareScaffoldCommand extends Command
     /**
      * Asks the user if they wish to create any database seeders 
      * and if they do, fire off the database seed scaffolder.
-     * 
-     * @return void
      */
     private function seed()
     {
@@ -165,8 +157,6 @@ class FlareScaffoldCommand extends Command
      *
      * The test suite consists of testing that Model Attributes 
      * match their migration and Model Admin field types.
-     * 
-     * @return void
      */
     private function tests()
     {

@@ -20,6 +20,5 @@ class DatabaseScaffolder extends Command
      */
     public function handle()
     {
-       
     }
 }

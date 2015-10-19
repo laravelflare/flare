@@ -20,6 +20,5 @@ class MigrationScaffolder extends Command
      */
     public function handle()
     {
-       
     }
 }

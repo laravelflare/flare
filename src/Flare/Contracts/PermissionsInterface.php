@@ -5,7 +5,7 @@ namespace LaravelFlare\Flare\Contracts;
 interface PermissionsInterface
 {
     /**
-     * Permissions check
+     * Permissions check.
      *
      * @param string $class
      * 

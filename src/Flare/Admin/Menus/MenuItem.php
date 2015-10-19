@@ -14,12 +14,12 @@ abstract class MenuItem extends Admin
     protected static $view = 'admin.menus.item';
 
     /**
-     * The Menu Item Location
+     * The Menu Item Location.
      *
      * @var string
      */
     protected static $location;
-    
+
     /**
      * Returns the Menu Item View.
      *
@@ -31,16 +31,16 @@ abstract class MenuItem extends Admin
             return static::$view;
         }
 
-        if (view()->exists('admin.menus.' . static::location() . '.widget')) {
+        if (view()->exists('admin.menus.'.static::location().'.widget')) {
             return 'admin.'.static::safeTitle().'.widget';
         }
 
-        if (view()->exists('admin.menus.' . static::safeTitle())) {
-            return 'admin.menus.' . static::safeTitle();
+        if (view()->exists('admin.menus.'.static::safeTitle())) {
+            return 'admin.menus.'.static::safeTitle();
         }
 
-        if (view()->exists('flare::' . self::$view)) {
-            return 'flare::' . self::$view;
+        if (view()->exists('flare::'.self::$view)) {
+            return 'flare::'.self::$view;
         }
     }
 

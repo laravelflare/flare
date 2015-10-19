@@ -20,6 +20,5 @@ class AdminScaffolder extends Command
      */
     public function handle()
     {
-       
     }
 }

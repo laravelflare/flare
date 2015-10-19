@@ -20,6 +20,5 @@ class ScaffoldTester extends Command
      */
     public function handle()
     {
-       
     }
 }

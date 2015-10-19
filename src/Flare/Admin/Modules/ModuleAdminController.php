@@ -8,7 +8,7 @@ use LaravelFlare\Flare\Http\Controllers\FlareController;
 class ModuleAdminController extends FlareController
 {
     /**
-     * Admin Instance
+     * Admin Instance.
      * 
      * @var 
      */

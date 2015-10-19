@@ -17,12 +17,12 @@ class ModelScaffolder extends Command
     /**
      * Are we updating an existing model?
      * 
-     * @var boolean
+     * @var bool
      */
     protected $updating = false;
 
     /**
-     * Model Namespace 
+     * Model Namespace.
      * 
      * @var string
      */
@@ -47,7 +47,7 @@ class ModelScaffolder extends Command
                         ];
 
     /**
-     * Array of Model Data
+     * Array of Model Data.
      * 
      * @var array
      */
@@ -59,9 +59,9 @@ class ModelScaffolder extends Command
      * @return mixed
      */
     public function handle()
-    {    
+    {
         $this->reset();
-        
+
         $this->defineNamespace();
 
         if ($updateModel = $this->option('update')) {
@@ -69,7 +69,7 @@ class ModelScaffolder extends Command
         } else {
             $this->create();
         }
-        
+
         if ($this->confirmDone()) {
             return;
         }
@@ -78,9 +78,7 @@ class ModelScaffolder extends Command
     }
 
     /**
-     * Resets the Model Data for a new Model
-     * 
-     * @return void
+     * Resets the Model Data for a new Model.
      */
     protected function reset()
     {
@@ -89,9 +87,7 @@ class ModelScaffolder extends Command
     }
 
     /**
-     * Create Model from ClassName
-     *
-     * @return void
+     * Create Model from ClassName.
      */
     protected function create()
     {
@@ -101,7 +97,7 @@ class ModelScaffolder extends Command
             return;
         }
 
-        $this->info('Adding Model: ' . $className);
+        $this->info('Adding Model: '.$className);
 
         $this->addModelData('classname', $className);
 
@@ -111,53 +107,42 @@ class ModelScaffolder extends Command
     }
 
     /**
-     * Revise the current Model being Scaffolded
-     * 
-     * @return void
+     * Revise the current Model being Scaffolded.
      */
     protected function revise()
     {
-
     }
 
     /**
-     * Update an existing Model
+     * Update an existing Model.
      *
      * @param mixed $updateModel
-     * 
-     * @return void
      */
     protected function update($updateModel)
     {
-
     }
 
     /**
-     * Save the Model Data to the Model File
-     *
-     * @return void
+     * Save the Model Data to the Model File.
      */
     protected function save()
     {
-
     }
 
     /**
      * Determine if the user wisehs to define a custom
      * namespace for this Model and if they do, have them
      * name it.
-     * 
-     * @return void
      */
     protected function defineNamespace()
     {
-        $this->info('Models will be added to the ' . $this->namespace . ' Namespace.');
+        $this->info('Models will be added to the '.$this->namespace.' Namespace.');
 
         $this->namespace = $this->ask('If this is incorrect please provide your namespace:', $this->namespace);
     }
 
     /**
-     * Determine the Model ClassName
+     * Determine the Model ClassName.
      *
      * If no className provided, ask the user if they are done.
      * 
@@ -167,15 +152,13 @@ class ModelScaffolder extends Command
     {
         if ($className = $this->ask('Please provide a class name for your new Model?')) {
             return $className;
-        } 
+        }
     }
 
     /**
      * Determine if the user wishes to define a custom
      * table for this Model and if they do, have 
      * them name it.
-     *
-     * @return void
      */
     protected function defineTable()
     {
@@ -187,35 +170,32 @@ class ModelScaffolder extends Command
 
         if ($tablename && $this->confirm('The table name of `'.$tablename.'`, is this correct?')) {
             $this->addModelData('table', $tablename);
+
             return;
         }
 
         $this->defineTable();
-    } 
+    }
 
     /**
      * Determine if the user wishes to define fillable
      * fields for this Model and if they do, have
      * them define them.
-     * 
-     * @return void
      */
     protected function defineFillable()
     {
         if ($this->confirm('Would you like to define fillable attributes for this model?')) {
             $this->moreFillable();
         }
-    } 
+    }
 
     /**
      * Provide the user with the opportunity to add
-     * some aditional fillable attributes
-     * 
-     * @return void
+     * some aditional fillable attributes.
      */
     protected function moreFillable()
     {
-        if($fillable = $this->ask('What fillable attribute would you like to add?')) {
+        if ($fillable = $this->ask('What fillable attribute would you like to add?')) {
             $this->modelData['fillable'][] = $fillable;
 
             $this->moreFillable();
@@ -226,27 +206,23 @@ class ModelScaffolder extends Command
      * Determine if the user wishes to define hidden
      * fields for this Model and if they do, have 
      * them define them.
-     * 
-     * @return void
      */
     protected function defineHidden()
     {
         if ($this->confirm('Would you like to define hidden attributes for this model?')) {
             $this->moreHidden();
         }
-    } 
+    }
 
     /**
      * Provide the user with the opportunity to add
-     * some aditional hidden attributes
-     * 
-     * @return void
+     * some aditional hidden attributes.
      */
     protected function moreHidden()
     {
-        if($hidden = $this->ask('What hidden attribute would you like to add?')) {
+        if ($hidden = $this->ask('What hidden attribute would you like to add?')) {
             $this->modelData['hidden'][] = $hidden;
-            
+
             $this->defineHidden();
         }
     }
@@ -255,81 +231,71 @@ class ModelScaffolder extends Command
      * Determine if the user wishes to define visible
      * fields for this Model and if they do, have 
      * them define them.
-     * 
-     * @return void
      */
     protected function defineVisible()
     {
         if ($this->confirm('Would you like to define visible attributes for this model?')) {
             $this->moreVisible();
         }
-    } 
+    }
 
     /**
      * Provide the user with the opportunity to add
-     * some aditional visible attributes
-     * 
-     * @return void
+     * some aditional visible attributes.
      */
     protected function moreVisible()
     {
-        if($visible = $this->ask('What visible attribute would you like to add?')) {
+        if ($visible = $this->ask('What visible attribute would you like to add?')) {
             $this->modelData['visible'][] = $visible;
 
             $this->defineVisible();
         }
     }
-    
+
     /**
      * Ask the user if they would like to enable Timestamps.
-     * 
-     * @return void
      */
     protected function enableTimestamps()
     {
         if ($this->confirm('Would you like to enabletimestamps on this model?', true)) {
             $this->addModelData('timestamps', true);
+
             return;
         }
 
         $this->addModelData('timestamps');
-    } 
+    }
 
     /**
      * Ask the user if they would like to enable Soft Deletes.
-     * 
-     * @return void
      */
     protected function enableSoftDeletes()
     {
         if ($this->confirm('Would you like to enable soft deletes?', true)) {
             $this->addModelData('softdeletes', true);
+
             return;
         }
 
         $this->addModelData('softdeletes');
-    } 
+    }
 
     /**
      * Determine if the user wishes to define a 
-     * custom date format
-     * 
-     * @return void
+     * custom date format.
      */
     protected function defineDateFormat()
     {
         if ($this->confirm('Would you like to define a custom date storage format for this model?')) {
             $this->addModelData('dateFormat'); // Temp
         }
-    } 
+    }
 
     /**
-     * Add Model Information to ModelData array
+     * Add Model Information to ModelData array.
      * 
-     * @param string $key  
-     * @param mixed $value
-     *
-     * @return void
+     * @param string $key
+     * @param mixed  $value
      */
     protected function addModelData($key, $value)
     {
@@ -341,13 +307,11 @@ class ModelScaffolder extends Command
      * saves the file. If it is not, the revise() method
      * will be called (allowing the user to revise their
      * Model Data).
-     * 
-     * @return void
      */
     protected function confirmModelData()
     {
         $this->info(var_export($this->modelData, true));
-        if($this->confirm('Please confirm the Model Data output above is correct.')) {
+        if ($this->confirm('Please confirm the Model Data output above is correct.')) {
             $this->save();
         }
 
@@ -367,8 +331,9 @@ class ModelScaffolder extends Command
         if (!$this->confirm('Are you done creating Models?')) {
             if ($goBack) {
                 call_user_func_array([$this, $goBack], []);
+
                 return;
-            } 
+            }
 
             return false;
         }

@@ -10,16 +10,16 @@ use LaravelFlare\Flare\Exceptions\PermissionsException;
 class CheckPermissions
 {
     /**
-     * Create a new Permissions Instance
+     * Create a new Permissions Instance.
      * 
      * @var \LaravelFlare\Flare\Contracts\PermissionsInterface
      */
     protected $permissions;
 
     /**
-     * __construct
+     * __construct.
      * 
-     * @param PermissionsInterface $permissions 
+     * @param PermissionsInterface $permissions
      */
     public function __construct(PermissionsInterface $permissions)
     {

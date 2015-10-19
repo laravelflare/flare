@@ -56,7 +56,7 @@ class Flare
     }
 
     /**
-     * Returns the defined Admin Title
+     * Returns the defined Admin Title.
      * 
      * @return string
      */
@@ -67,7 +67,7 @@ class Flare
 
     /**
      * Returns the defined Admin Title, converted
-     * to a safer format (for <title> tags etc.)
+     * to a safer format (for <title> tags etc.).
      * 
      * @return string
      */

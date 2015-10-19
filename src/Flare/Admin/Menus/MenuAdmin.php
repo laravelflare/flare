@@ -6,5 +6,4 @@ use LaravelFlare\Flare\Admin\Admin;
 
 abstract class MenuAdmin extends Admin
 {
-    
 }
