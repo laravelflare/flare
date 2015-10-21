@@ -82,18 +82,12 @@ trait ModelEditable
      */
     private function doEdit()
     {
-        // Unguard the model so we can set and store non-fillable entries
-        $this->model->unguard();
-
-        // Save 
         if (is_callable(array('self', 'save'))) {
             $this->save();
-        } else {
-            throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
-        }
+            return;
+        } 
 
-        // Reguard.
-        $this->model->reguard();
+        throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
     }
 
     /**
