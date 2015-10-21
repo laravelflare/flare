@@ -9,11 +9,12 @@ use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQueryable;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidatable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
 
 class ModelAdmin extends Admin implements ModelWriteableInterface
 {
-    use AttributeAccess, ModelWriteable, ModelQueryable;
+    use AttributeAccess, ModelWriteable, ModelQueryable, ModelValidatable;
 
     /**
      * Class of Model to Manage.
