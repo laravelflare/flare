@@ -8,8 +8,9 @@ interface PermissionsInterface
      * Permissions check.
      *
      * @param string $class
+     * @param string $action
      * 
      * @return 
      */
-    public static function check($class);
+    public static function check($class, $action = 'view');
 }

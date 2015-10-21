@@ -43,6 +43,16 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected static $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
+     * The Policy used for the Model Authorization logic.
+     *
+     * This class should implement the ModelPolicyInterface which
+     * includes authorization checks for the create, view, edit and delete actions.
+     * 
+     * @var string
+     */
+    protected static $policy = '\LaravelFlare\Flare\Permissions\ModelPolicy';
+
+    /**
      * Validation Rules for onCreate, onEdit actions.
      * 
      * @var array

@@ -138,6 +138,6 @@ class AdminCollection extends Collection
      */
     private function checkUserHasAdminPermissions($class)
     {
-        return Permissions::check($class);
+        return Permissions::check($class, 'view');
     }
 }

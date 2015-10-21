@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Http\Requests;
 
-class ModelAdminAddRequest extends AdminRequest
+class ModelViewRequest extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,17 +12,5 @@ class ModelAdminAddRequest extends AdminRequest
     public function authorize()
     {
         return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-
-        ];
     }
 }

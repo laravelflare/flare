@@ -3,9 +3,9 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Http\Requests\ModelEditRequest;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
-use LaravelFlare\Flare\Http\Requests\ModelAdminAddRequest;
-use LaravelFlare\Flare\Http\Requests\ModelAdminEditRequest;
+use LaravelFlare\Flare\Http\Requests\ModelCreateRequest;
 
 class ModelAdminController extends FlareController
 {
@@ -66,7 +66,7 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postCreate(ModelAdminAddRequest $request)
+    public function postCreate(ModelCreateRequest $request)
     {
         $this->modelAdmin->create();
 
@@ -108,7 +108,7 @@ class ModelAdminController extends FlareController
      * 
      * @return \Illuminate\Http\Response
      */
-    public function postEdit(ModelAdminEditRequest $request, $modelitem_id)
+    public function postEdit(ModelEditRequest $request, $modelitem_id)
     {
         $this->modelAdmin->edit($modelitem_id);
 

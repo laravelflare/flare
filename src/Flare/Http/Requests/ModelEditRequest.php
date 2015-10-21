@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Http\Requests;
 
-class ModelAdminEditRequest extends AdminRequest
+class ModelEditRequest extends AdminRequest
 {
     /**
      * Determine if the user is authorized to make this request.

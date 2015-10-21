@@ -6,20 +6,21 @@ use LaravelFlare\Flare\Contracts\PermissionsInterface;
 
 class Permissions implements PermissionsInterface
 {
-    public function __construct()
-    {
-    }
-
     /**
      * Checks if the currently Authenticated User
-     * has access to a given ModelAdmin etc.
+     * has access to a given action.
      *
      * @param string $class
+     * @param string $action
      * 
      * @return
      */
-    public static function check($class)
+    public static function check($class, $action = 'view')
     {
-        return true;
+        if (\Auth::user()->can($action, $class)) {
+            return true;
+        }
+
+        return false;
     }
 }
