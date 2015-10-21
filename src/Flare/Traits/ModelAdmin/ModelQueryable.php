@@ -84,7 +84,7 @@ trait ModelQueryable
      *
      * @return string
      */
-    public function orderBy()
+    protected function orderBy()
     {
         if (\Request::input('order')) {
             return \Request::input('order');
@@ -102,7 +102,7 @@ trait ModelQueryable
      * 
      * @return string
      */
-    public function sortBy()
+    protected function sortBy()
     {
         if (\Request::input('sort')) {
             return \Request::input('sort');
