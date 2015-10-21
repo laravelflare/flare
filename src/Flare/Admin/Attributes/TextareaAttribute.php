@@ -12,5 +12,5 @@ class TextareaAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.textarea';
+    protected $viewpath = 'flare::admin.attributes.textarea';
 }

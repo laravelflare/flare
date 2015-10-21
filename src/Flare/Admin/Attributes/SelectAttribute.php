@@ -12,5 +12,5 @@ class SelectAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.select';
+    protected $viewpath = 'flare::admin.attributes.select';
 }

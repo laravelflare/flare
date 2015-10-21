@@ -12,5 +12,5 @@ class WysiwygAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.wysiwyg';
+    protected $viewpath = 'flare::admin.attributes.wysiwyg';
 }

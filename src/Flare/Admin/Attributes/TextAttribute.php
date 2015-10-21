@@ -12,5 +12,5 @@ class TextAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.text';
+    protected $viewpath = 'flare::admin.attributes.text';
 }

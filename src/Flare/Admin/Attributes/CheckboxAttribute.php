@@ -12,5 +12,5 @@ class CheckboxAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.checkbox';
+    protected $viewpath = 'flare::admin.attributes.checkbox';
 }

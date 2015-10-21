@@ -12,5 +12,5 @@ class RadioAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.radio';
+    protected $viewpath = 'flare::admin.attributes.radio';
 }

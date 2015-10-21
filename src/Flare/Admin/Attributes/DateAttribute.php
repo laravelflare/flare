@@ -12,5 +12,5 @@ class DateAttribute extends BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes.date';
+    protected $viewpath = 'flare::admin.attributes.date';
 }

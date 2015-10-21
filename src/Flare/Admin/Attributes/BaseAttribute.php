@@ -17,7 +17,7 @@ class BaseAttribute
      *     
      * @var string
      */
-    public $viewpath = 'flare::admin.attributes';
+    protected $viewpath = 'flare::admin.attributes';
 
     /**
      * Attribute.
@@ -96,7 +96,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Attribute.
+     * Getter for Attribute.
      * 
      * @return string
      */
@@ -106,7 +106,7 @@ class BaseAttribute
     }
 
     /**
-     * Accessor for Field.
+     * Getter for Field.
      * 
      * @return mixed
      */
