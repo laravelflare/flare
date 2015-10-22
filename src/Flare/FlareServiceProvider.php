@@ -80,7 +80,7 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Register Blade Operators.
      */
-    public function registerBladeOperators()
+    protected function registerBladeOperators()
     {
     }
 }

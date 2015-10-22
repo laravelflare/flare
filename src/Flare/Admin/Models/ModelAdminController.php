@@ -4,8 +4,8 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use LaravelFlare\Flare\Admin\AdminCollection;
 use LaravelFlare\Flare\Http\Requests\ModelEditRequest;
-use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Http\Requests\ModelCreateRequest;
+use LaravelFlare\Flare\Http\Controllers\FlareController;
 
 class ModelAdminController extends FlareController
 {
