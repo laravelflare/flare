@@ -70,8 +70,9 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Register Service Providers.
      */
-    public function registerServiceProviders()
+    protected function registerServiceProviders()
     {
+        \App::register('LaravelFlare\Flare\Providers\AuthServiceProvider');
         \App::register('LaravelFlare\Flare\Providers\ArtisanServiceProvider');
         \App::register('LaravelFlare\Flare\Providers\ScaffoldServiceProvider');
     }
