@@ -13,7 +13,7 @@
                         name="{{ $attribute }}"
                         id="{{ $attribute }}"
                         data-mask="" 
-                        data-inputmask="'alias': '{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}'"
+                        data-inputmask="'alias': '{{ (isset($field['inputmask']) ? $field['inputmask'] : '') }}'"
                         class="form-control focus.inputmask"
                         value="">
             </div>
@@ -30,7 +30,7 @@
 @section('enqueued-js')
     <script>
     $(function () {
-        $("#{{ $attribute }}").inputmask("{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}", {"placeholder": "{{ (isset($field['inputmask']) ? $field['inputmask'] : 'yyyy/mm/dd') }}"});
+        $("#{{ $attribute }}").inputmask("{{ (isset($field['inputmask']) ? $field['inputmask'] : '') }}", {"placeholder": "{{ (isset($field['inputmask']) ? $field['inputmask'] : '') }}"});
     });
     </script>
 @append
