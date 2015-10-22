@@ -84,8 +84,9 @@ trait ModelEditable
     {
         if (is_callable(array('self', 'save'))) {
             $this->save();
+
             return;
-        } 
+        }
 
         throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
     }

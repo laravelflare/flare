@@ -23,7 +23,7 @@ class AdminController extends FlareController
     /**
      * __construct.
      * 
-     * @param Guard           $auth
+     * @param Guard        $auth
      * @param AdminManager $adminManager
      */
     public function __construct(Guard $auth, AdminManager $adminManager)

@@ -329,7 +329,7 @@ class ModelScaffolder extends Command
      * Go Back by calling the goBack method
      * or return false.
      * 
-     * @param  string $goBack 
+     * @param string $goBack
      * 
      * @return mixed
      */

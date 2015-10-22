@@ -10,7 +10,7 @@ class ModelAdminPolicy implements ModelAdminPolicyInterface
      * Determine if the given Model can be created by the user.
      *
      * @param  $user
-     * @param  \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
+     * @param \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
      * 
      * @return bool
      */
@@ -23,7 +23,7 @@ class ModelAdminPolicy implements ModelAdminPolicyInterface
      * Determine if the given Model can be viewed by the user.
      *
      * @param  $user
-     * @param  \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
+     * @param \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
      * 
      * @return bool
      */
@@ -36,7 +36,7 @@ class ModelAdminPolicy implements ModelAdminPolicyInterface
      * Determine if the given Model can be updated by the user.
      *
      * @param  $user
-     * @param  \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
+     * @param \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
      * 
      * @return bool
      */
@@ -49,7 +49,7 @@ class ModelAdminPolicy implements ModelAdminPolicyInterface
      * Determine if the given Model can be deleted by the user.
      *
      * @param  $user
-     * @param  \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
+     * @param \LaravelFlare\Flare\Admin\Models\ModelAdmin $modelAdmin
      * 
      * @return bool
      */

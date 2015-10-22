@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 class EditEvent extends Event
 {
     use SerializesModels;
-    
+
     /**
      * Model.
      * 

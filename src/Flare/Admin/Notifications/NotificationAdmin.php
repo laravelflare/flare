@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Admin\Admin;
 abstract class NotificationAdmin extends Admin
 {
     /**
-     * Type of Notification which can be one of the following:
+     * Type of Notification which can be one of the following:.
      *
      * Notification Type: `info`, `success`, `warning`, `danger`
      *
@@ -49,7 +49,7 @@ abstract class NotificationAdmin extends Admin
      * This will include a dismissable cross in the top right corner of
      * the notification box and allow users to dismiss the notification.
      * 
-     * @var boolean
+     * @var bool
      */
     protected $dismissable;
 
@@ -60,7 +60,7 @@ abstract class NotificationAdmin extends Admin
      * If persists is set to true then the notification will continue to appear until
      * the user dismisses it.
      * 
-     * @var boolean
+     * @var bool
      */
     protected $persists;
 

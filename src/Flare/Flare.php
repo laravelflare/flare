@@ -119,7 +119,7 @@ class Flare
     }
 
     /**
-     * Returns an array of all of the Available Attribute Types
+     * Returns an array of all of the Available Attribute Types.
      * 
      * @return array
      */
@@ -129,7 +129,7 @@ class Flare
 
         foreach (\Flare::config('attributes') as $attributeFullClassname) {
             $availableAttributes = array_add(
-                                            $availableAttributes, 
+                                            $availableAttributes,
                                             $attributeFullClassname,
                                             trim(
                                                 substr(
@@ -152,7 +152,7 @@ class Flare
     protected function attributeTypeExists($type)
     {
         $fullClassname = array_search(title_case($type), $this->availableAttributes);
-        
+
         if (!$fullClassname || !class_exists($fullClassname)) {
             return false;
         }
@@ -187,16 +187,16 @@ class Flare
     }
 
     /**
-     * Resolves the Class of an Attribute and returns it as a string
+     * Resolves the Class of an Attribute and returns it as a string.
      * 
-     * @param  string $type 
+     * @param string $type
      * 
-     * @return string      
+     * @return string
      */
     protected function resolveAttributeClass($type)
     {
         $fullClassname = array_search(title_case($type), $this->availableAttributes);
-        
+
         if (!$fullClassname || !class_exists($fullClassname)) {
             return false;
         }

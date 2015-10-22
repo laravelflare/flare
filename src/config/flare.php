@@ -49,7 +49,7 @@ return [
     |
     | Note: These classnames should be unique regardless of Namespace.
     |
-    */   
+    */
    'attributes' => [
         \LaravelFlare\Flare\Admin\Attributes\CheckboxAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\DateAttribute::class,
