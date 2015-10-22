@@ -3,7 +3,7 @@
 namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -12,25 +12,25 @@ abstract class FlareController extends BaseController
     use DispatchesJobs, ValidatesRequests;
 
     /**
-     * AdminCollection.
+     * AdminManager.
      *
-     * @var AdminCollection
+     * @var AdminManager
      */
-    protected $adminCollection;
+    protected $adminManager;
 
     /**
      * __construct.
      * 
-     * @param AdminCollection $adminCollection
+     * @param AdminManager $adminManager
      */
-    public function __construct(AdminCollection $adminCollection)
+    public function __construct(AdminManager $adminManager)
     {
         $this->middleware('flareauthenticate');
         $this->middleware('checkpermissions');
 
-        $this->adminCollection = $adminCollection;
+        $this->adminManager = $adminManager;
 
-        view()->share('adminCollection', $this->adminCollection);
+        view()->share('adminManager', $this->adminManager);
     }
 
     /**

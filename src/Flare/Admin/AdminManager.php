@@ -5,7 +5,7 @@ namespace LaravelFlare\Flare\Admin;
 use Illuminate\Support\Collection;
 use LaravelFlare\Flare\Permissions\Permissions;
 
-class AdminCollection extends Collection
+class AdminManager extends Collection
 {
     /**
      * Base Class.

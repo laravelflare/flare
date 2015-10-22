@@ -2,15 +2,15 @@
 
 use LaravelFlare\Flare\Tests\BaseTest;
 use Illuminate\Database\Eloquent\Model;
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 use LaravelFlare\Flare\Admin\Models\ManagedModel;
 
-class AdminCollectionTest extends BaseTest
+class AdminManagerTest extends BaseTest
 {
     public function test_get_admin_classes_returns_empty_array_when_admin_key_not_set()
     {
-        $collection = new AdminCollection();
+        $collection = new AdminManager();
         $this->assertEquals($collection->getAdminClasses(), []);
     }
 
@@ -39,7 +39,7 @@ class AdminCollectionTest extends BaseTest
     }
 }
 
-class ThisSampleCollection extends AdminCollection
+class ThisSampleCollection extends AdminManager
 {
     const ADMIN_KEY = 'models';
 }

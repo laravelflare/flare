@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Http\Requests\ModelEditRequest;
 use LaravelFlare\Flare\Http\Requests\ModelCreateRequest;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
@@ -26,18 +26,18 @@ class ModelAdminController extends FlareController
     /**
      * __construct.
      * 
-     * @param AdminCollection $adminCollection
+     * @param AdminManager $adminManager
      */
-    public function __construct(AdminCollection $adminCollection)
+    public function __construct(AdminManager $adminManager)
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct($adminCollection);
+        parent::__construct($adminManager);
 
         $this->middleware('checkmodelfound', ['only' => ['getView', 'edit', 'delete']]);
 
-        $this->modelAdmin = $this->adminCollection->getAdminInstance();
+        $this->modelAdmin = $this->adminManager->getAdminInstance();
         $this->model = $this->modelAdmin->model();
     }
 

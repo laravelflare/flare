@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Modules;
 
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
 
 class ModuleAdminController extends FlareController
@@ -17,16 +17,16 @@ class ModuleAdminController extends FlareController
     /**
      * __construct.
      * 
-     * @param AdminCollection $adminCollection
+     * @param AdminManager $adminManager
      */
-    public function __construct(AdminCollection $adminCollection)
+    public function __construct(AdminManager $adminManager)
     {
         // Must call parent __construct otherwise 
         // we need to redeclare checkpermissions
         // middleware for authentication check
-        parent::__construct($adminCollection);
+        parent::__construct($adminManager);
 
-        $this->admin = $this->adminCollection->getAdminInstance();
+        $this->admin = $this->adminManager->getAdminInstance();
     }
 
     /**

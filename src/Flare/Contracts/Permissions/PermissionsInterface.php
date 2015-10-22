@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Contracts;
+namespace LaravelFlare\Flare\Contracts\Permissions;
 
 interface PermissionsInterface
 {

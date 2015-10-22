@@ -3,7 +3,7 @@
 namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 
 class CheckModelFound
 {
@@ -15,10 +15,10 @@ class CheckModelFound
     /**
      * Create a new filter instance.
      */
-    public function __construct(AdminCollection $adminCollection)
+    public function __construct(AdminManager $adminManager)
     {
-        if ($adminCollection->getAdminInstance() instanceof \LaravelFlare\Flare\Admin\Models\ModelAdmin) {
-            $this->model = $adminCollection->getAdminInstance()->model();
+        if ($adminManager->getAdminInstance() instanceof \LaravelFlare\Flare\Admin\Models\ModelAdmin) {
+            $this->model = $adminManager->getAdminInstance()->model();
         } else {
             return;
         }

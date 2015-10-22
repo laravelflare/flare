@@ -24,7 +24,7 @@
                 </a>
             </li>
 
-            @foreach($adminCollection as $adminItem)
+            @foreach($adminManager as $adminItem)
                 @include('flare::admin.sections.sidebar.adminItem', ['adminItem' => $adminItem])
             @endforeach
         </ul>

@@ -9,11 +9,11 @@ class DeleteEvent extends Event
     use SerializesModels;
 
     /**
-     * Post.
+     * Model.
      * 
-     * @var Post
+     * @var Model
      */
-    public $post;
+    public $model;
 
     /**
      * Create a new event instance.

@@ -4,10 +4,10 @@ namespace LaravelFlare\Flare\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class EditEvent extends Event
+class ViewEvent extends Event
 {
     use SerializesModels;
-    
+
     /**
      * Model.
      * 

@@ -2,9 +2,9 @@
 
 namespace LaravelFlare\Flare\Admin\Widgets;
 
-use LaravelFlare\Flare\Admin\AdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
 
-class WidgetAdminCollection extends AdminCollection
+class WidgetAdminManager extends AdminManager
 {
     /**
      * Admin Config Key.

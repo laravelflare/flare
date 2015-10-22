@@ -5,8 +5,8 @@ namespace LaravelFlare\Flare\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use LaravelFlare\Flare\Admin\AdminCollection;
-use LaravelFlare\Flare\Admin\Widgets\WidgetAdminCollection;
+use LaravelFlare\Flare\Admin\AdminManager;
+use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
 class AdminController extends FlareController
@@ -24,11 +24,11 @@ class AdminController extends FlareController
      * __construct.
      * 
      * @param Guard           $auth
-     * @param AdminCollection $adminCollection
+     * @param AdminManager $adminManager
      */
-    public function __construct(Guard $auth, AdminCollection $adminCollection)
+    public function __construct(Guard $auth, AdminManager $adminManager)
     {
-        parent::__construct($adminCollection);
+        parent::__construct($adminManager);
 
         $this->auth = $auth;
 
@@ -105,7 +105,7 @@ class AdminController extends FlareController
             $view = 'flare::'.$view;
         }
 
-        return view($view, ['widgetAdminCollection' => (new WidgetAdminCollection())]);
+        return view($view, ['widgetAdminManager' => (new WidgetAdminManager())]);
     }
 
     /**
