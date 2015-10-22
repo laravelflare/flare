@@ -2,6 +2,8 @@
 
 namespace LaravelFlare\Flare;
 
+use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
+
 class Flare
 {
     /**
@@ -22,6 +24,7 @@ class Flare
         'admin_url' => 'admin',
         'admin_theme' => 'red',
         'admin' => [],
+        'attributes' => [],
         'models' => [],
         'modules' => [],
         'widgets' => [],
@@ -116,19 +119,45 @@ class Flare
     }
 
     /**
+     * Returns an array of all of the Available Attribute Types
+     * 
+     * @return array
+     */
+    protected function availableAttributes()
+    {
+        $availableAttributes = [];
+
+        foreach (\Flare::config('attributes') as $attributeFullClassname) {
+            $availableAttributes = array_add(
+                                            $availableAttributes, 
+                                            $attributeFullClassname,
+                                            trim(
+                                                substr(
+                                                        $attributeFullClassname, strrpos($attributeFullClassname, '/') + 1
+                                                    )
+                                                )
+                                        );
+        }
+
+        return $availableAttributes;
+    }
+
+    /**
      * Determines if an AttributeType class exists or not.
      * 
      * @param string $type
      * 
      * @return bool
      */
-    public function attributeTypeExists($type)
+    protected function attributeTypeExists($type)
     {
-        if (class_exists('\LaravelFlare\Flare\Admin\Attributes\\'.title_case($type).'Attribute')) {
-            return true;
+        $fullClassname = array_search(title_case($type), $this->availableAttributes);
+        
+        if (!$fullClassname || !class_exists($fullClassname)) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -144,13 +173,35 @@ class Flare
      */
     public function renderAttribute($action, $attribute, $field, $model, $modelManager)
     {
-        if (isset($field['type']) && $this->attributeTypeExists($field['type'])) {
-            $fieldType = '\LaravelFlare\Flare\Admin\Attributes\\'.$field['type'].'Attribute';
+        if (!isset($field['type'])) {
+            throw new Exception('Attribute Field Type cannot be empty or undefined.');
+        }
+
+        if ($this->attributeTypeExists($field['type'])) {
+            $fieldType = $this->resolveAttributeClass($field['type']);
 
             return call_user_func_array([new $fieldType($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
         }
 
-        return call_user_func_array([new \LaravelFlare\Flare\Admin\Attributes\BaseAttribute($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
+        return call_user_func_array([new BaseAttribute($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
+    }
+
+    /**
+     * Resolves the Class of an Attribute and returns it as a string
+     * 
+     * @param  string $type 
+     * 
+     * @return string      
+     */
+    protected function resolveAttributeClass($type)
+    {
+        $fullClassname = array_search(title_case($type), $this->availableAttributes);
+        
+        if (!$fullClassname || !class_exists($fullClassname)) {
+            return false;
+        }
+
+        return $fullClassname;
     }
 
     /**

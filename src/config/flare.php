@@ -38,6 +38,35 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Administration Attributes
+    |--------------------------------------------------------------------------
+    |
+    | This array of Attribute classes allows you to define all of the
+    | available Attribute types which will usuable in your ModelAdmin sections.
+    |
+    | You can add your own custom attributes here, replace or even remove
+    | some of the defaults.
+    |
+    | Note: These classnames should be unique regardless of Namespace.
+    |
+    */   
+   'attributes' => [
+        \LaravelFlare\Flare\Admin\Attributes\CheckboxAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\DateAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\DateTimeAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\EmailAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\PasswordAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\RadioAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\SelectAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\TextareaAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\TextAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\TextMaskAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\TimeAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\WysiwygAttribute::class,
+   ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Administration Widgets
     |--------------------------------------------------------------------------
     |
