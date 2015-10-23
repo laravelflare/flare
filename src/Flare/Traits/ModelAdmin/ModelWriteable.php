@@ -61,16 +61,13 @@ trait ModelWriteable
     abstract public function setAttribute($key, $value);
 
     /**
-     * Finds an existing Model entry and sets it to the current model.
-     * 
+     * Trait Requires Find Method (usually provided by ModelQueryable).
+     *
      * @param int $modelitem_id
      * 
      * @return
      */
-    protected function find($modelitem_id)
-    {
-        $this->model = $this->model->findOrFail($modelitem_id);
-    }
+    abstract protected function find($modelitem_id);
 
     /**
      * Method fired before the Save action is undertaken.

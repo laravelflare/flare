@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use LaravelFlare\Flare\Events\ViewEvent;
 use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Http\Requests\ModelEditRequest;
 use LaravelFlare\Flare\Http\Requests\ModelCreateRequest;
@@ -80,11 +81,13 @@ class ModelAdminController extends FlareController
      */
     public function getView($modelitem_id)
     {
+        $this->modelAdmin->find($modelitem_id);
+
         event(new ViewEvent($this->modelAdmin));
 
         return view('flare::admin.modelAdmin.view', [
             'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->model->find($modelitem_id),
+            'modelItem' => $this->modelAdmin->model,
         ]);
     }
 
@@ -97,9 +100,11 @@ class ModelAdminController extends FlareController
      */
     public function getEdit($modelitem_id)
     {
+        $this->modelAdmin->find($modelitem_id);
+
         return view('flare::admin.modelAdmin.edit', [
             'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->model->find($modelitem_id),
+            'modelItem' => $this->modelAdmin->model,
         ]);
     }
 
@@ -126,9 +131,11 @@ class ModelAdminController extends FlareController
      */
     public function getDelete($modelitem_id)
     {
+        $this->modelAdmin->find($modelitem_id);
+
         return view('flare::admin.modelAdmin.delete', [
             'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->model->find($modelitem_id),
+            'modelItem' => $this->modelAdmin->model,
         ]);
     }
 

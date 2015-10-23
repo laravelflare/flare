@@ -24,7 +24,7 @@ trait ModelCreatable
     protected $brokenAfterCreate = false;
 
     /**
-     * Trait Requires Save Method (usually provided by ModelWriteable).
+     * Trait Requires Save Method (usually provided by ModelQueryable).
      * 
      * @return
      */

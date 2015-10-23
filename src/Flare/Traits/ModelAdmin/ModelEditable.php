@@ -24,7 +24,7 @@ trait ModelEditable
     protected $brokenAfterEdit = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelWriteable).
+     * Trait Requires Find Method (usually provided by ModelQueryable).
      *
      * @param int $modelitem_id
      * 

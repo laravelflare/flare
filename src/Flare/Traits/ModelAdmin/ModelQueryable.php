@@ -43,6 +43,18 @@ trait ModelQueryable
     protected $sortBy;
 
     /**
+     * Finds an existing Model entry and sets it to the current model.
+     * 
+     * @param int $modelitem_id
+     * 
+     * @return
+     */
+    protected function find($modelitem_id)
+    {
+        $this->model = $this->model->findOrFail($modelitem_id);
+    }
+
+    /**
      * Returns Model Items, either all() or paginated().
      *
      * Filtered by any defined query filters ($query_filter)
