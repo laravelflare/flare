@@ -80,6 +80,8 @@ class ModelAdminController extends FlareController
      */
     public function getView($modelitem_id)
     {
+        event(new ViewEvent($this->modelAdmin));
+
         return view('flare::admin.modelAdmin.view', [
             'modelAdmin' => $this->modelAdmin,
             'modelItem' => $this->model->find($modelitem_id),
