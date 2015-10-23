@@ -3,22 +3,9 @@
 namespace LaravelFlare\Flare\Events;
 
 use Illuminate\Queue\SerializesModels;
+use LaravelFlare\Flare\Events\ModelAdminEvent;
 
-class DeleteEvent extends Event
+class DeleteEvent extends ModelAdminEvent
 {
-    use SerializesModels;
 
-    /**
-     * Model.
-     * 
-     * @var Model
-     */
-    public $model;
-
-    /**
-     * Create a new event instance.
-     */
-    public function __construct()
-    {
-    }
 }

@@ -2,6 +2,9 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
+use LaravelFlare\Flare\Events\SaveEvent;
+use LaravelFlare\Flare\Events\AfterSaveEvent;
+use LaravelFlare\Flare\Events\BeforeSaveEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelWriteable
@@ -77,6 +80,8 @@ trait ModelWriteable
     protected function beforeSave()
     {
         $this->brokenBeforeSave = false;
+
+        event(new BeforeSaveEvent($this));
     }
 
     /**
@@ -131,6 +136,8 @@ trait ModelWriteable
         }
 
         $this->model->save();
+
+        event(new SaveEvent($this));
     }
 
     /**
@@ -149,6 +156,8 @@ trait ModelWriteable
                 $this->saveRelation('afterSave', $key, $value);
             }
         }
+
+        event(new AfterSaveEvent($this));
     }
 
     /**

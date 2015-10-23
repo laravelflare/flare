@@ -2,6 +2,9 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
+use LaravelFlare\Flare\Events\CreateEvent;
+use LaravelFlare\Flare\Events\AfterCreateEvent;
+use LaravelFlare\Flare\Events\BeforeCreateEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelCreatable
@@ -35,6 +38,8 @@ trait ModelCreatable
     protected function beforeCreate()
     {
         $this->brokenBeforeCreate = false;
+
+        event(new BeforeCreateEvent($this));
     }
 
     /**
@@ -72,6 +77,8 @@ trait ModelCreatable
         if (is_callable(array('self', 'save'))) {
             $this->save();
 
+            event(new CreateEvent($this));
+
             return;
         }
 
@@ -86,5 +93,7 @@ trait ModelCreatable
     protected function afterCreate()
     {
         $this->brokenAfterCreate = false;
+
+        event(new AfterCreateEvent($this));
     }
 }

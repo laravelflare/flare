@@ -2,6 +2,9 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
+use LaravelFlare\Flare\Events\EditEvent;
+use LaravelFlare\Flare\Events\AfterEditEvent;
+use LaravelFlare\Flare\Events\BeforeEditEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelEditable
@@ -44,6 +47,8 @@ trait ModelEditable
     protected function beforeEdit()
     {
         $this->brokenBeforeEdit = false;
+
+        event(new BeforeEditEvent($this));
     }
 
     /**
@@ -84,6 +89,8 @@ trait ModelEditable
     {
         if (is_callable(array('self', 'save'))) {
             $this->save();
+        
+            event(new EditEvent($this));
 
             return;
         }
@@ -99,5 +106,7 @@ trait ModelEditable
     protected function afterEdit()
     {
         $this->brokenAfterEdit = false;
+
+        event(new AfterEditEvent($this));
     }
 }

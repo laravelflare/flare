@@ -2,6 +2,9 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
+use LaravelFlare\Flare\Events\DeleteEvent;
+use LaravelFlare\Flare\Events\AfterDeleteEvent;
+use LaravelFlare\Flare\Events\BeforeDeleteEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelDeleteable
@@ -37,6 +40,8 @@ trait ModelDeleteable
     protected function beforeDelete()
     {
         $this->brokenBeforeDelete = false;
+
+        event(new BeforeDeleteEvent($this));
     }
 
     /**
@@ -75,6 +80,8 @@ trait ModelDeleteable
     private function doDelete()
     {
         $this->model->delete();
+
+        event(new DeleteEvent($this));
     }
 
     /**
@@ -85,5 +92,7 @@ trait ModelDeleteable
     protected function afterDelete()
     {
         $this->brokenAfterDelete = false;
+
+        event(new AfterDeleteEvent($this));
     }
 }
