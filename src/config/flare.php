@@ -32,7 +32,7 @@ return [
     |
     */
     'admin' => [
-        // Example ModelAdmin: \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
+        // Example of ModelAdmin: \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
         // Base ModuleAdmin: \LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
     ],
 
@@ -74,7 +74,7 @@ return [
     |
     */
     'widgets' => [
-        // Base WidgetAdmin: \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
+        // Example of Base WidgetAdmin: \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     ],
 
     /*
@@ -86,6 +86,18 @@ return [
     |
     */
     'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Policies
+    |--------------------------------------------------------------------------
+    |
+    | Custom Policy Registration
+    |
+    */
+    'policies' => [
+        // Example of Custom Policy: \LaravelFlare\Flare\Admin\Models\ModelAdmin::class => \LaravelFlare\Flare\Permissions\ModelAdminPolicy::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
