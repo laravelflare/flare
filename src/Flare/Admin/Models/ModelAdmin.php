@@ -190,29 +190,6 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     }
 
     /**
-     * Returns a raw Attribute from the Models
-     * array of Attributes if it exists, otherwise,
-     * falls back to getAttribute.
-     * 
-     * @param string $key
-     * @param bool   $model
-     * 
-     * @return mixed
-     */
-    public function getAttributeFromArray($key, $model = false)
-    {
-        if (!$model) {
-            $model = $this->model;
-        }
-
-        if (array_key_exists($key, $attributes = $model->getAttributes())) {
-            return $attributes[$key];
-        }
-
-        return $this->getAttribute($key, $model);
-    }
-
-    /**
      * Determine if a get accessor exists for an attribute.
      *
      * @param string $key

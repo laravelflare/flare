@@ -15,7 +15,7 @@
                         data-mask="" 
                         data-inputmask="'alias': '{{ (isset($field['inputmask']) ? $field['inputmask'] : '') }}'"
                         class="form-control focus.inputmask"
-                        value="{{ old($attribute, $modelManager->getAttributeFromArray($attribute, $model) ) }}">
+                        value="{{ old($attribute, $model->getOriginal($attribute) ) }}">
             </div>
 
             @if ($errors->has($attribute))

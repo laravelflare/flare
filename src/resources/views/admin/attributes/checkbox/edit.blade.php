@@ -15,9 +15,9 @@
                                     name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
                                     @if (isset($field['required'])) required="required" @endif
                                     @if (
-                                            (is_scalar($modelManager->getAttributeFromArray($attribute, $model)) && $modelManager->getAttributeFromArray($attribute, $model) == $value)
+                                            (is_scalar($model->getOriginal($attribute)) && $model->getOriginal($attribute) == $value)
                                         ||
-                                            (is_array($modelManager->getAttributeFromArray($attribute, $model)) && array_key_exists($value, $modelManager->getAttributeFromArray($attribute, $model)))
+                                            (is_array($model->getOriginal($attribute)) && array_key_exists($value, $model->getOriginal($attribute)))
                                         )
                                         checked="checked" @endif
                                     >

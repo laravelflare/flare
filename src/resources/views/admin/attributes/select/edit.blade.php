@@ -13,7 +13,7 @@
                     <option></option>
                 @foreach ($field['options'] as $value => $option)
                     <option value="{{ $value }}"
-                                    @if ($modelManager->getAttributeFromArray($attribute, $model) == $value) selected="selected" @endif
+                                    @if ($model->getOriginal($attribute) == $value) selected="selected" @endif
                                 >{{ $option }}</option>
                 @endforeach
                 </select>
