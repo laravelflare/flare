@@ -25,6 +25,9 @@ Permission Provider - The ability to define users of the Admin panels permission
 
 Notifications - Ability to define flashdata and permanent, plus dismissable notifications, on certain or all areas of the Admin.
 
+Dispatch events rather than use global method
+
+Move ModelAdmin writeable tasks to Command Bus
 
 
 
