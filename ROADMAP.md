@@ -29,6 +29,12 @@ Dispatch events rather than use global method
 
 Move ModelAdmin writeable tasks to Command Bus
 
+Soft Delete Implementation 
+
+ModelItem Clone Functionality
+
+Tabbed Sections to ModelItem Admin ?
+
 
 
 ## Future Enhancements
