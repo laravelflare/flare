@@ -33,7 +33,11 @@ Soft Delete Implementation
 
 ModelItem Clone Functionality
 
-Tabbed Sections to ModelItem Admin ?
+Tabbed Sections to ModelItem Admin
+
+Attribute Help Text
+
+Attribute Toggle Text
 
 
 
