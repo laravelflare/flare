@@ -153,6 +153,8 @@ abstract class Admin
     /**
      * Returns the Requested Route Action as a
      * string, namespace is returned by default.
+     *
+     * @param string $key
      * 
      * @return string|void
      */
@@ -280,6 +282,8 @@ abstract class Admin
     /**
      * URL to a Admin Top Level Page.
      *
+     * @param string $path
+     *
      * @return string
      */
     public static function url($path = '')
@@ -289,6 +293,8 @@ abstract class Admin
 
     /**
      * Relative URL to an Admin Top Level Page.
+     *
+     * @param string $path
      *
      * @return string
      */
@@ -300,6 +306,8 @@ abstract class Admin
     /**
      * Retrieves the Current Admin Route URL.
      *
+     * @param string $path
+     *
      * @return string
      */
     public static function currentUrl($path = '')
@@ -309,6 +317,8 @@ abstract class Admin
 
     /**
      * Retrieves the Current Admin Route URL.
+     *
+     * @param string $path
      *
      * @return string
      */
