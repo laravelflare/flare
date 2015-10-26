@@ -65,7 +65,7 @@ class ModelAdminController extends FlareController
     /**
      * Receive new Model Entry Post Data, validate it and return user.
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreate(ModelCreateRequest $request)
     {
@@ -113,7 +113,7 @@ class ModelAdminController extends FlareController
      * 
      * @param int $modelitem_id
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postEdit(ModelEditRequest $request, $modelitem_id)
     {
@@ -144,7 +144,7 @@ class ModelAdminController extends FlareController
      *
      * @param int $modelitem_id
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postDelete($modelitem_id)
     {
