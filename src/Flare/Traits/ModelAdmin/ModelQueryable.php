@@ -49,7 +49,7 @@ trait ModelQueryable
      * 
      * @return
      */
-    protected function find($modelitem_id)
+    public function find($modelitem_id)
     {
         $this->model = $this->model->findOrFail($modelitem_id);
     }
