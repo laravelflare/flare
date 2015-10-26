@@ -3,11 +3,13 @@ The Roadmap aims to provide a list of future features and functionality that can
 
 
 ## Alpha - 0.2.x-dev
+Implement Module Provider Functionality
+
 Timepicker Attribute
 
 Datepicker Attribute
 
-File Upload Attribute and Functionaliy
+File Upload Attribute and Functionality
 
 Allow Ancestry of Admin Sections 
 
