@@ -4,8 +4,9 @@ namespace LaravelFlare\Flare\Events;
 
 use LaravelFlare\Flare\Events\Event;
 use Illuminate\Queue\SerializesModels;
+use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
-class ModelAdminEvent extends Event
+abstract class ModelAdminEvent extends Event
 {
     /**
      * Model Admin Instance
