@@ -3,13 +3,13 @@
 namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 use LaravelFlare\Flare\Scaffolding\ScaffoldTester;
 use LaravelFlare\Flare\Scaffolding\ModelScaffolder;
 use LaravelFlare\Flare\Scaffolding\AdminScaffolder;
 use LaravelFlare\Flare\Scaffolding\ScaffoldManager;
 use LaravelFlare\Flare\Scaffolding\DatabaseScaffolder;
 use LaravelFlare\Flare\Scaffolding\MigrationScaffolder;
+use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 
 class ScaffoldServiceProvider extends ServiceProvider
 {
