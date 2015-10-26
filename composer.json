@@ -17,6 +17,9 @@
             "homepage": "https://github.com/AdenFraser"
         }
     ],
+    "require": {
+        "laravel/laravel": "5.1.*"
+    },
     "require-dev": {
         "mockery/mockery": "~0.9.1",
         "phpunit/phpunit": "~4.0",
