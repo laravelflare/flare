@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare;
 
+use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -10,7 +11,7 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Perform post-registration booting of services.
      */
-    public function boot(\Illuminate\Routing\Router $router)
+    public function boot(Router $router)
     {
         // Assets
         $this->publishes([
