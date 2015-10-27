@@ -43,5 +43,5 @@
     "suggest": {
         "laravelflare/cms": "The base component for adding CMS functionality to Flare.",
         "laravelflare/pages": "Provides a Pages module for the Flare CMS",
-    },
+    }
 }
