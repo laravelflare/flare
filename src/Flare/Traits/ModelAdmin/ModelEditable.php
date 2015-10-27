@@ -89,7 +89,7 @@ trait ModelEditable
     {
         if (is_callable(array('self', 'save'))) {
             $this->save();
-        
+
             event(new EditEvent($this));
 
             return;

@@ -73,7 +73,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      * 
      * @var Model
      */
-    protected $model;
+    public $model;
 
     /**
      * __construct.
