@@ -2,14 +2,13 @@
 
 namespace LaravelFlare\Flare\Events;
 
-use LaravelFlare\Flare\Events\Event;
-use Illuminate\Queue\SerializesModels;
+
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
 abstract class ModelAdminEvent extends Event
 {
     /**
-     * Model Admin Instance
+     * Model Admin Instance.
      * 
      * @var \LaravelFlare\Flare\Admin\Models\ModelAdmin
      */
