@@ -5,6 +5,8 @@ The Roadmap aims to provide a list of future features and functionality that can
 ## Alpha - 0.2.x-dev
 Implement Module Provider Functionality
 
+Add remaining relationship types to ModelQueryable
+
 Timepicker Attribute
 
 Datepicker Attribute
