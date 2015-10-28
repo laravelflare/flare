@@ -6,15 +6,18 @@ use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelQueryable;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidatable;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\AttributesAccessable;
 
-class ModelAdmin extends Admin implements ModelWriteableInterface
+class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable
 {
-    use AttributeAccess, ModelWriteable, ModelQueryable, ModelValidatable;
+    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidatable;
 
     /**
      * Class of Model to Manage.
@@ -33,6 +36,22 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected static $icon = 'user';
 
     /**
+     * Validation Rules for onCreate, onEdit actions.
+     * 
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
+     * Columns for Model.
+     *
+     * Defines which fields to show in the listing tables output.
+     * 
+     * @var array
+     */
+    protected $columns = [];
+
+    /**
      * The Controller to be used by the Model Admin.
      *
      * This defaults to parent::getController()
@@ -45,28 +64,12 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     /**
      * The Policy used for the Model Authorization logic.
      *
-     * This class should implement the ModelAdminPolicyInterface which
+     * This class should implement the ModelAdminPoliceable which
      * includes authorization checks for the create, view, edit and delete actions.
      * 
      * @var string
      */
     protected static $policy = '\LaravelFlare\Flare\Permissions\ModelAdminPolicy';
-
-    /**
-     * Validation Rules for onCreate, onEdit actions.
-     * 
-     * @var array
-     */
-    protected $rules = [];
-
-    /**
-     * Summary Fields for Model.
-     *
-     * Defines which fields to show in the listing tables output.
-     * 
-     * @var array
-     */
-    protected $summary_fields = [];
 
     /**
      * The current model to be managed.
@@ -114,23 +117,23 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     }
 
     /**
-     * Formats and returns the Summary fields.
+     * Formats and returns the Columns.
      *
      * This is really gross, I'm removing it soon.
      * 
      * @return
      */
-    public function getSummaryFields()
+    public function getColumns()
     {
-        $summary_fields = [];
+        $columns = [];
 
-        foreach ($this->summary_fields as $field => $fieldTitle) {
+        foreach ($this->columns as $field => $fieldTitle) {
             if (in_array($field, $this->model->getFillable())) {
                 if (!$field) {
                     $field = $fieldTitle;
                     $fieldTitle = Str::title($fieldTitle);
                 }
-                $summary_fields[$field] = $fieldTitle;
+                $columns[$field] = $fieldTitle;
                 continue;
             }
 
@@ -140,7 +143,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                     if (method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
                         $this->model->$method()->$submethod();
 
-                        $summary_fields[$field] = $fieldTitle;
+                        $columns[$field] = $fieldTitle;
                         continue;
                     }
                 }
@@ -151,11 +154,11 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                 $fieldTitle = Str::title($fieldTitle);
             }
 
-            $summary_fields[$field] = $fieldTitle;
+            $columns[$field] = $fieldTitle;
         }
 
-        if (count($summary_fields)) {
-            return $summary_fields;
+        if (count($columns)) {
+            return $columns;
         }
 
         return [$this->model->getKeyName() => $this->model->getKeyName()];

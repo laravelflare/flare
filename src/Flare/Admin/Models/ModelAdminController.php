@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
-use LaravelFlare\Flare\Events\ViewEvent;
+use LaravelFlare\Flare\Events\ModelView;
 use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Http\Requests\ModelEditRequest;
 use LaravelFlare\Flare\Http\Requests\ModelCreateRequest;
@@ -83,7 +83,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id);
 
-        event(new ViewEvent($this->modelAdmin));
+        event(new ModelView($this->modelAdmin));
 
         return view('flare::admin.modelAdmin.view', [
             'modelAdmin' => $this->modelAdmin,

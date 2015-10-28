@@ -43,7 +43,7 @@ class BaseAttribute
     /**
      * Model Manager.
      * 
-     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
+     * @var \LaravelFlare\Flare\Admin\Models\ModelAdmin
      */
     protected $modelManager;
 
@@ -150,7 +150,7 @@ class BaseAttribute
     /**
      * Accessor for Model.
      * 
-     * @var \LaravelFlare\Flare\Admin\Models\ManagedModel
+     * @var \LaravelFlare\Flare\Admin\Models\ModelAdmin
      */
     public function getModelManager()
     {

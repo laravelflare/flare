@@ -2,6 +2,6 @@
 
 namespace LaravelFlare\Flare\Events;
 
-class CreateEvent extends ModelAdminEvent
+class BeforeEdit extends ModelAdminEvent
 {
 }

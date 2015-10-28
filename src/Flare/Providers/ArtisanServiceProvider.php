@@ -9,7 +9,6 @@ use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\ManagedModelMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminControllerMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminControllerMakeCommand;
 
@@ -33,7 +32,6 @@ class ArtisanServiceProvider extends ServiceProvider
         'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
-        'ManagedModelMake' => 'command.managedmodel.make',
         'ModelAdminControllerMake' => 'command.modeladmincontroller.make',
         'ModuleAdminControllerMake' => 'command.moduleadmincontroller.make',
         'WidgetAdminMake' => 'command.widgetadmin.make',
@@ -120,20 +118,6 @@ class ArtisanServiceProvider extends ServiceProvider
     {
         $this->app->singleton($command, function ($app) {
             return new ModuleAdminMakeCommand($app['files']);
-        });
-    }
-
-    /**
-     * Register the command.
-     * 
-     * @param $command
-     * 
-     * @return
-     */
-    protected function registerManagedModelMakeCommand($command)
-    {
-        $this->app->singleton($command, function ($app) {
-            return new ManagedModelMakeCommand($app['files']);
         });
     }
 

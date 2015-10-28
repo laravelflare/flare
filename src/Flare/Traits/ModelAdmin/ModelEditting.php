@@ -2,12 +2,12 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-use LaravelFlare\Flare\Events\EditEvent;
-use LaravelFlare\Flare\Events\AfterEditEvent;
-use LaravelFlare\Flare\Events\BeforeEditEvent;
+use LaravelFlare\Flare\Events\ModelEdit;
+use LaravelFlare\Flare\Events\AfterEdit;
+use LaravelFlare\Flare\Events\BeforeEdit;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelEditable
+trait ModelEditting
 {
     /**
      * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
@@ -24,7 +24,7 @@ trait ModelEditable
     protected $brokenAfterEdit = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 
@@ -33,7 +33,7 @@ trait ModelEditable
     abstract protected function find($modelitem_id);
 
     /**
-     * Trait Requires Save Method (usually provided by ModelWriteable).
+     * Trait Requires Save Method (usually provided by ModelWriting).
      * 
      * @return
      */
@@ -48,7 +48,7 @@ trait ModelEditable
     {
         $this->brokenBeforeEdit = false;
 
-        event(new BeforeEditEvent($this));
+        event(new BeforeEdit($this));
     }
 
     /**
@@ -90,12 +90,12 @@ trait ModelEditable
         if (is_callable(array('self', 'save'))) {
             $this->save();
 
-            event(new EditEvent($this));
+            event(new ModelEdit($this));
 
             return;
         }
 
-        throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
+        throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriting trait', 1);
     }
 
     /**
@@ -107,6 +107,6 @@ trait ModelEditable
     {
         $this->brokenAfterEdit = false;
 
-        event(new AfterEditEvent($this));
+        event(new AfterEdit($this));
     }
 }

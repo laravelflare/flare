@@ -2,9 +2,9 @@
 
 namespace LaravelFlare\Flare\Permissions;
 
-use LaravelFlare\Flare\Contracts\PermissionsInterface;
+use LaravelFlare\Flare\Contracts\Permissionable;
 
-class Permissions implements PermissionsInterface
+class Permissions implements Permissionable
 {
     /**
      * Checks if the currently Authenticated User

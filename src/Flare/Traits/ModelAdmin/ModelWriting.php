@@ -2,14 +2,14 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-use LaravelFlare\Flare\Events\SaveEvent;
-use LaravelFlare\Flare\Events\AfterSaveEvent;
-use LaravelFlare\Flare\Events\BeforeSaveEvent;
+use LaravelFlare\Flare\Events\ModelSave;
+use LaravelFlare\Flare\Events\AfterSave;
+use LaravelFlare\Flare\Events\BeforeSave;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelWriteable
+trait ModelWriting
 {
-    use ModelCreatable, ModelEditable, ModelDeleteable;
+    use ModelCreating, ModelEditting, ModelDeleting;
 
     /**
      * Used by beforeSave() to ensure child classes call parent::beforeSave().
@@ -61,7 +61,7 @@ trait ModelWriteable
     abstract public function setAttribute($key, $value);
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 
@@ -78,7 +78,7 @@ trait ModelWriteable
     {
         $this->brokenBeforeSave = false;
 
-        event(new BeforeSaveEvent($this));
+        event(new BeforeSave($this));
     }
 
     /**
@@ -113,7 +113,7 @@ trait ModelWriteable
      */
     private function doSave()
     {
-        foreach (\Request::only(array_keys($this->mapping)) as $key => $value) {
+        foreach (\Request::only(array_keys($this->fields)) as $key => $value) {
             if (!\Schema::hasColumn($this->model->getTable(), $key)) {
                 continue;
             }
@@ -134,7 +134,7 @@ trait ModelWriteable
 
         $this->model->save();
 
-        event(new SaveEvent($this));
+        event(new ModelSave($this));
     }
 
     /**
@@ -154,7 +154,7 @@ trait ModelWriteable
             }
         }
 
-        event(new AfterSaveEvent($this));
+        event(new AfterSave($this));
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-use LaravelFlare\Flare\Events\DeleteEvent;
-use LaravelFlare\Flare\Events\AfterDeleteEvent;
-use LaravelFlare\Flare\Events\BeforeDeleteEvent;
+use LaravelFlare\Flare\Events\ModelDelete;
+use LaravelFlare\Flare\Events\AfterDelete;
+use LaravelFlare\Flare\Events\BeforeDelete;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelDeleteable
+trait ModelDeleting
 {
     /**
      * Used by beforeDelete() to ensure child classes call parent::beforeDelete().
@@ -24,7 +24,7 @@ trait ModelDeleteable
     protected $brokenAfterDelete = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 
@@ -41,7 +41,7 @@ trait ModelDeleteable
     {
         $this->brokenBeforeDelete = false;
 
-        event(new BeforeDeleteEvent($this));
+        event(new BeforeDelete($this));
     }
 
     /**
@@ -81,7 +81,7 @@ trait ModelDeleteable
     {
         $this->model->delete();
 
-        event(new DeleteEvent($this));
+        event(new ModelDelete($this));
     }
 
     /**
@@ -93,6 +93,6 @@ trait ModelDeleteable
     {
         $this->brokenAfterDelete = false;
 
-        event(new AfterDeleteEvent($this));
+        event(new AfterDelete($this));
     }
 }
