@@ -7,6 +7,13 @@ use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 class DummyClass extends ModelAdmin
 {
     /**
+     * Managed Model Instance.
+     * 
+     * @var string
+     */
+    protected static $managedModel = '';
+
+    /**
      * ModelAdmin Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
@@ -16,14 +23,42 @@ class DummyClass extends ModelAdmin
     public static $icon = '';
 
     /**
-     * List of ManagedModels.
+     * Columns for Model.
      *
-     * Note: This must either be a single Namespaced String
-     * or an Array of Namespaced Strings
-     *
-     * @var string|array
+     * Defines which fields to show in the listing tables output.
+     * 
+     * @var array
      */
-    protected $managedModels = [
+    protected $columns = [];
 
-    ];
+    /**
+     * Map Model Attributes to their Attribute Types.
+     * 
+     * @var array
+     */
+    protected $fields = [];
+
+    /**
+     * Validation Rules for onCreate, onEdit actions.
+     * 
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
+     * Allows filtering of the query.
+     * 
+     * @var array
+     */
+    protected $query_filter = [];
+
+    /**
+     * The number of models to return for pagination.
+     *
+     * If int greater than 0 then pagination is used, otherwise
+     * all entries will be output.
+     *
+     * @var int
+     */
+    protected $perPage = 10;
 }

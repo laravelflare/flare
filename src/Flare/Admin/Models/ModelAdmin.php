@@ -33,6 +33,22 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected static $icon = 'user';
 
     /**
+     * Validation Rules for onCreate, onEdit actions.
+     * 
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
+     * Columns for Model.
+     *
+     * Defines which fields to show in the listing tables output.
+     * 
+     * @var array
+     */
+    protected $columns = [];
+
+    /**
      * The Controller to be used by the Model Admin.
      *
      * This defaults to parent::getController()
@@ -51,22 +67,6 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
      * @var string
      */
     protected static $policy = '\LaravelFlare\Flare\Permissions\ModelAdminPolicy';
-
-    /**
-     * Validation Rules for onCreate, onEdit actions.
-     * 
-     * @var array
-     */
-    protected $rules = [];
-
-    /**
-     * Columns for Model.
-     *
-     * Defines which fields to show in the listing tables output.
-     * 
-     * @var array
-     */
-    protected $columns = [];
 
     /**
      * The current model to be managed.

@@ -26,6 +26,21 @@ class UserAdmin extends ModelAdmin
     protected static $icon = 'user';
 
     /**
+     * Columns for Model.
+     *
+     * Defines which fields to show in the listing tables output.
+     * 
+     * @var array
+     */
+    protected $columns = [
+        'id' => 'ID',
+        'name',
+        'email',
+        'created_at' => 'Created',
+        'updated_at' => 'Updated',
+    ];
+
+    /**
      * Map User Attributes to their Attribute Types.
      * 
      * @var array
@@ -46,22 +61,6 @@ class UserAdmin extends ModelAdmin
         'email' => 'required|email',
         'password' => 'required|min:8|max:32',
     ];
-
-    /**
-     * Columns for Model.
-     *
-     * Defines which fields to show in the listing tables output.
-     * 
-     * @var array
-     */
-    protected $columns = [
-        'id' => 'ID',
-        'name',
-        'email',
-        'created_at' => 'Created',
-        'updated_at' => 'Updated',
-    ];
-
     /**
      * The number of models to return for pagination.
      *
