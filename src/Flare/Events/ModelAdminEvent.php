@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare\Events;
 
-
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
 abstract class ModelAdminEvent extends Event

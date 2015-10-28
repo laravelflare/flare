@@ -2,6 +2,6 @@
 
 namespace LaravelFlare\Flare\Events;
 
-class AfterDeleteEvent extends ModelAdminEvent
+class ModelEdit extends ModelAdminEvent
 {
 }

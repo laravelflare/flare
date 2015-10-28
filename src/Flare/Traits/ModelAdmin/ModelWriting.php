@@ -2,9 +2,9 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-use LaravelFlare\Flare\Events\SaveEvent;
-use LaravelFlare\Flare\Events\AfterSaveEvent;
-use LaravelFlare\Flare\Events\BeforeSaveEvent;
+use LaravelFlare\Flare\Events\ModelSave;
+use LaravelFlare\Flare\Events\AfterSave;
+use LaravelFlare\Flare\Events\BeforeSave;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelWriting
@@ -78,7 +78,7 @@ trait ModelWriting
     {
         $this->brokenBeforeSave = false;
 
-        event(new BeforeSaveEvent($this));
+        event(new BeforeSave($this));
     }
 
     /**
@@ -134,7 +134,7 @@ trait ModelWriting
 
         $this->model->save();
 
-        event(new SaveEvent($this));
+        event(new ModelSave($this));
     }
 
     /**
@@ -154,7 +154,7 @@ trait ModelWriting
             }
         }
 
-        event(new AfterSaveEvent($this));
+        event(new AfterSave($this));
     }
 
     /**

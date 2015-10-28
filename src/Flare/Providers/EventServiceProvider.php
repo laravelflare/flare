@@ -13,19 +13,19 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-                        LaravelFlare\Flare\Events\AfterCreateEvent::class,
-                        LaravelFlare\Flare\Events\AfterDeleteEvent::class,
-                        LaravelFlare\Flare\Events\AfterEditEvent::class,
-                        LaravelFlare\Flare\Events\AfterSaveEvent::class,
-                        LaravelFlare\Flare\Events\BeforeCreateEvent::class,
-                        LaravelFlare\Flare\Events\BeforeDeleteEvent::class,
-                        LaravelFlare\Flare\Events\BeforeEditEvent::class,
-                        LaravelFlare\Flare\Events\BeforeSaveEvent::class,
-                        LaravelFlare\Flare\Events\CreateEvent::class,
-                        LaravelFlare\Flare\Events\DeleteEvent::class,
-                        LaravelFlare\Flare\Events\EditEvent::class,
-                        LaravelFlare\Flare\Events\SaveEvent::class,
-                        LaravelFlare\Flare\Events\ViewEvent::class,
+                        LaravelFlare\Flare\Events\AfterCreate::class,
+                        LaravelFlare\Flare\Events\AfterDelete::class,
+                        LaravelFlare\Flare\Events\AfterEdit::class,
+                        LaravelFlare\Flare\Events\AfterSave::class,
+                        LaravelFlare\Flare\Events\BeforeCreate::class,
+                        LaravelFlare\Flare\Events\BeforeDelete::class,
+                        LaravelFlare\Flare\Events\BeforeEdit::class,
+                        LaravelFlare\Flare\Events\BeforeSave::class,
+                        LaravelFlare\Flare\Events\ModelCreate::class,
+                        LaravelFlare\Flare\Events\ModelDelete::class,
+                        LaravelFlare\Flare\Events\ModelEdit::class,
+                        LaravelFlare\Flare\Events\ModelSave::class,
+                        LaravelFlare\Flare\Events\ModelView::class,
                     ];
 
     /**
