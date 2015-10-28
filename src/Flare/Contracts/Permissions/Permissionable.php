@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Contracts\Permissions;
 
-interface PermissionsInterface
+interface Permissionsable
 {
     /**
      * Permissions check.

@@ -82,7 +82,7 @@ return [
     | Permissions
     |--------------------------------------------------------------------------
     |
-    | Class to bind to the PermissionsInterface
+    | Class to bind to the Permissionable Contract
     |
     */
     'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
