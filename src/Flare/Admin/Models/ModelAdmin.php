@@ -61,7 +61,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     /**
      * The Policy used for the Model Authorization logic.
      *
-     * This class should implement the ModelAdminPolicyInterface which
+     * This class should implement the ModelAdminPoliceable which
      * includes authorization checks for the create, view, edit and delete actions.
      * 
      * @var string

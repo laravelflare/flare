@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Contracts\ModelAdmin;
 
-interface ModelAdminPolicyInterface
+interface ModelAdminPoliceable
 {
     /**
      * Determine if the given Model can be created by the user.
