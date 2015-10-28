@@ -113,7 +113,7 @@ trait ModelWriteable
      */
     private function doSave()
     {
-        foreach (\Request::only(array_keys($this->mapping)) as $key => $value) {
+        foreach (\Request::only(array_keys($this->fields)) as $key => $value) {
             if (!\Schema::hasColumn($this->model->getTable(), $key)) {
                 continue;
             }

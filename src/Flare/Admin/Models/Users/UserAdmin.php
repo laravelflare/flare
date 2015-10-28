@@ -30,7 +30,7 @@ class UserAdmin extends ModelAdmin
      * 
      * @var array
      */
-    protected $mapping = [
+    protected $fields = [
         'name' => ['type' => 'text', 'length' => 32, 'required' => 'required'],
         'email' => ['type' => 'email', 'length' => 255, 'required' => 'required'],
         'password' => ['type' => 'password', 'length' => 32, 'required' => 'required'],

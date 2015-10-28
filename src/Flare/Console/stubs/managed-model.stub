@@ -27,7 +27,7 @@ class DummyClass extends ManagedModel
      * 
      * @var array
      */
-    protected $mapping = [];
+    protected $fields = [];
 
     /**
      * Validation Rules for onCreate, onEdit actions.

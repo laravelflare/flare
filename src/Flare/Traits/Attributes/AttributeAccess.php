@@ -6,11 +6,13 @@ trait AttributeAccess
 {
     /**
      * Map Model Attributes to AttributeTypes with
-     * additional parameters.
+     * additional parameters which will be output
+     * as fields when viewing, editting or adding
+     * a new model entry.
      * 
      * @var array
      */
-    protected $mapping = [];
+    protected $fields = [];
 
     /**
      * Gets the Managed Model Mapping.
@@ -19,7 +21,7 @@ trait AttributeAccess
      */
     public function getMapping()
     {
-        return $this->mapping;
+        return $this->fields;
     }
 
     /**
