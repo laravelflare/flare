@@ -60,13 +60,13 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     protected $rules = [];
 
     /**
-     * Summary Fields for Model.
+     * Columns for Model.
      *
      * Defines which fields to show in the listing tables output.
      * 
      * @var array
      */
-    protected $summary_fields = [];
+    protected $columns = [];
 
     /**
      * The current model to be managed.
@@ -114,23 +114,23 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
     }
 
     /**
-     * Formats and returns the Summary fields.
+     * Formats and returns the Columns.
      *
      * This is really gross, I'm removing it soon.
      * 
      * @return
      */
-    public function getSummaryFields()
+    public function getColumns()
     {
-        $summary_fields = [];
+        $columns = [];
 
-        foreach ($this->summary_fields as $field => $fieldTitle) {
+        foreach ($this->columns as $field => $fieldTitle) {
             if (in_array($field, $this->model->getFillable())) {
                 if (!$field) {
                     $field = $fieldTitle;
                     $fieldTitle = Str::title($fieldTitle);
                 }
-                $summary_fields[$field] = $fieldTitle;
+                $columns[$field] = $fieldTitle;
                 continue;
             }
 
@@ -140,7 +140,7 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                     if (method_exists($this->model->$method(), $submethod = str_replace($method.'.', '', $field))) {
                         $this->model->$method()->$submethod();
 
-                        $summary_fields[$field] = $fieldTitle;
+                        $columns[$field] = $fieldTitle;
                         continue;
                     }
                 }
@@ -151,11 +151,11 @@ class ModelAdmin extends Admin implements ModelWriteableInterface
                 $fieldTitle = Str::title($fieldTitle);
             }
 
-            $summary_fields[$field] = $fieldTitle;
+            $columns[$field] = $fieldTitle;
         }
 
-        if (count($summary_fields)) {
-            return $summary_fields;
+        if (count($columns)) {
+            return $columns;
         }
 
         return [$this->model->getKeyName() => $this->model->getKeyName()];

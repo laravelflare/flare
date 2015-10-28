@@ -37,7 +37,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                @foreach ($modelAdmin->getSummaryFields() as $key => $field)
+                                @foreach ($modelAdmin->getColumns() as $key => $field)
                                 <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
                                     @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key))
                                     <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
@@ -58,7 +58,7 @@
                         @if ($modelAdmin->items()->count() > 0)    
                             @foreach($modelAdmin->items() as $modelItem)    
                                 <tr>
-                                    @foreach ($modelAdmin->getSummaryFields() as $key => $field)
+                                    @foreach ($modelAdmin->getColumns() as $key => $field)
                                     <td>
                                         {!! $modelAdmin->getAttribute($key, $modelItem) !!}
                                     </td>
@@ -81,7 +81,7 @@
                             @endforeach
                         @else 
                             <tr>
-                                <td colspan="{{ count($modelAdmin->getSummaryFields())+2 }}">
+                                <td colspan="{{ count($modelAdmin->getColumns())+2 }}">
                                     No {{ $modelAdmin->pluralTitle() }} Found
                                 </td>
                             </tr>

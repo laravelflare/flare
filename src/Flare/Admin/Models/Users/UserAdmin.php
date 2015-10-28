@@ -48,13 +48,13 @@ class UserAdmin extends ModelAdmin
     ];
 
     /**
-     * Summary Fields for Model.
+     * Columns for Model.
      *
      * Defines which fields to show in the listing tables output.
      * 
      * @var array
      */
-    protected $summary_fields = [
+    protected $columns = [
         'id' => 'ID',
         'name',
         'email',
