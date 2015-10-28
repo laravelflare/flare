@@ -2,6 +2,6 @@
 
 namespace LaravelFlare\Flare\Contracts\ModelAdmin;
 
-interface ModelWriteableInterface
+interface ModelValidateable
 {
 }

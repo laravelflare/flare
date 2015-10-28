@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Events\AfterDeleteEvent;
 use LaravelFlare\Flare\Events\BeforeDeleteEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelDeleteable
+trait ModelDeleting
 {
     /**
      * Used by beforeDelete() to ensure child classes call parent::beforeDelete().
@@ -24,7 +24,7 @@ trait ModelDeleteable
     protected $brokenAfterDelete = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 

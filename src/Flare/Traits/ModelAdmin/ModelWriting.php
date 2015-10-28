@@ -7,9 +7,9 @@ use LaravelFlare\Flare\Events\AfterSaveEvent;
 use LaravelFlare\Flare\Events\BeforeSaveEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelWriteable
+trait ModelWriting
 {
-    use ModelCreatable, ModelEditable, ModelDeleteable;
+    use ModelCreating, ModelEditting, ModelDeleting;
 
     /**
      * Used by beforeSave() to ensure child classes call parent::beforeSave().
@@ -61,7 +61,7 @@ trait ModelWriteable
     abstract public function setAttribute($key, $value);
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 

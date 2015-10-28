@@ -6,15 +6,18 @@ use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelQueryable;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidatable;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteableInterface;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\AttributesAccessable;
 
-class ModelAdmin extends Admin implements ModelWriteableInterface
+class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable
 {
-    use AttributeAccess, ModelWriteable, ModelQueryable, ModelValidatable;
+    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidatable;
 
     /**
      * Class of Model to Manage.

@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Events\AfterCreateEvent;
 use LaravelFlare\Flare\Events\BeforeCreateEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelCreatable
+trait ModelCreating
 {
     /**
      * Used by beforeCreate() to ensure child classes call parent::beforeCreate().
@@ -24,7 +24,7 @@ trait ModelCreatable
     protected $brokenAfterCreate = false;
 
     /**
-     * Trait Requires Save Method (usually provided by ModelQueryable).
+     * Trait Requires Save Method (usually provided by ModelQuerying).
      * 
      * @return
      */
@@ -82,7 +82,7 @@ trait ModelCreatable
             return;
         }
 
-        throw new WriteableException('For a Model to be Creatable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
+        throw new WriteableException('For a Model to be Creatable the ModelAdmin must have the Save method implemented using the ModelWriting trait', 1);
     }
 
     /**

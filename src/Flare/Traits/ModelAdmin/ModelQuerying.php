@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Traits\ModelAdmin;
 
-trait ModelQueryable
+trait ModelQuerying
 {
     /**
      * Allows filtering of the query, for instance:.

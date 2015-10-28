@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Events\AfterEditEvent;
 use LaravelFlare\Flare\Events\BeforeEditEvent;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelEditable
+trait ModelEditting
 {
     /**
      * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
@@ -24,7 +24,7 @@ trait ModelEditable
     protected $brokenAfterEdit = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQueryable).
+     * Trait Requires Find Method (usually provided by ModelQuerying).
      *
      * @param int $modelitem_id
      * 
@@ -33,7 +33,7 @@ trait ModelEditable
     abstract protected function find($modelitem_id);
 
     /**
-     * Trait Requires Save Method (usually provided by ModelWriteable).
+     * Trait Requires Save Method (usually provided by ModelWriting).
      * 
      * @return
      */
@@ -95,7 +95,7 @@ trait ModelEditable
             return;
         }
 
-        throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriteable trait', 1);
+        throw new WriteableException('For a Model to be Editable the ModelAdmin must have the Save method implemented using the ModelWriting trait', 1);
     }
 
     /**
