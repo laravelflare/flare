@@ -12,7 +12,7 @@
     </div>
     <form action="" method="post">
         <div class="box-body">
-            @foreach ($modelAdmin->getMapping() as $attribute => $field)
+            @foreach ($modelAdmin->getFields() as $attribute => $field)
                 {!! \Flare::renderAttribute('view', $attribute, $field, $modelItem, $modelAdmin) !!}
             @endforeach
         </div>

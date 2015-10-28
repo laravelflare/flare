@@ -19,7 +19,7 @@ trait AttributeAccess
      * 
      * @return array
      */
-    public function getMapping()
+    public function getFields()
     {
         return $this->fields;
     }
