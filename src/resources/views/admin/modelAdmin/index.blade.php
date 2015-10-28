@@ -12,6 +12,26 @@
                     <h3 class="box-title">
                         All {{ $modelAdmin->pluralTitle() }}
                     </h3>
+                    <div class="box-tools">
+                        <div style="width: 350px;" class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                                    10 Per Page <span class="fa fa-caret-down"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">25 Per Page</a></li>
+                                    <li><a href="#">50 Per Page</a></li>
+                                    <li><a href="#">100 Per Page</a></li>
+                                </ul>
+                            </div>
+
+                            <input type="text" placeholder="Search" class="form-control input-sm pull-right">
+
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body no-padding">
                     <table class="table table-striped">
