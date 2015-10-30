@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Permissions;
 
-use LaravelFlare\Flare\Contracts\Permissionable;
+use LaravelFlare\Flare\Contracts\Permissions\Permissionable;
 
 class Permissions implements Permissionable
 {
@@ -17,6 +17,10 @@ class Permissions implements Permissionable
      */
     public static function check($class, $action = 'view')
     {
+        if (!$class) {
+            return true;
+        }
+
         if (\Auth::user()->can($action, $class)) {
             return true;
         }

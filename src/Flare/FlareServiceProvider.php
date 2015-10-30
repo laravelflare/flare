@@ -32,7 +32,7 @@ class FlareServiceProvider extends ServiceProvider
         $router->middleware('checkpermissions', 'LaravelFlare\Flare\Http\Middleware\CheckPermissions');
 
         // Binds the Permissions interface to the defined Permissions class
-        $this->app->bind('LaravelFlare\Flare\Contracts\Permissionable', \Flare::config('permissions'));
+        $this->app->bind('LaravelFlare\Flare\Contracts\Permissions\Permissionable', \Flare::config('permissions'));
 
         // Routes
         if (!$this->app->routesAreCached()) {

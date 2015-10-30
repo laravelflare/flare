@@ -121,7 +121,7 @@ class AdminManager extends Collection
     {
         $reflection = new \ReflectionClass(new $class());
 
-        if (!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\Permissionable::class)) {
+        if (!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class)) {
             return true;
         }
 

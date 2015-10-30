@@ -12,6 +12,7 @@
         <link href="{{ asset('vendor/flare/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/flare/css/skins/skin-'.Flare::config('admin_theme').'.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/flare/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/flare/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

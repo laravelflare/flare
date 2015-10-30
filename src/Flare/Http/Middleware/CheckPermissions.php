@@ -4,15 +4,15 @@ namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
 use LaravelFlare\Flare\Admin\AdminManager;
-use LaravelFlare\Flare\Contracts\Permissionable;
 use LaravelFlare\Flare\Exceptions\PermissionsException;
+use LaravelFlare\Flare\Contracts\Permissions\Permissionable;
 
 class CheckPermissions
 {
     /**
      * Create a new Permissions Instance.
      * 
-     * @var \LaravelFlare\Flare\Contracts\Permissionable
+     * @var \LaravelFlare\Flare\Contracts\Permissions\Permissionable
      */
     protected $permissions;
 

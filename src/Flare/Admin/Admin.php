@@ -47,6 +47,13 @@ abstract class Admin
     protected static $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
+     * The Policy used for the Admin Authorization logic.
+     * 
+     * @var string
+     */
+    protected static $policy = '\LaravelFlare\Flare\Permissions\AdminPolicy';
+
+    /**
      * An array of subclasses of Admin
      * which allows hierachy in a Module.
      * 
@@ -69,6 +76,7 @@ abstract class Admin
      * @var array
      */
     protected $viewData = [];
+
 
     /**
      * Class Suffix used for matching and removing term
