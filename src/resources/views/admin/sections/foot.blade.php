@@ -6,6 +6,7 @@
         <script src="{{ asset('vendor/flare/plugins/input-mask/jquery.inputmask.js') }}"></script>
         <script src="{{ asset('vendor/flare/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
         <script src="{{ asset('vendor/flare/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
+        <script src="{{ asset('vendor/flare/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript"></script>
 
         @yield('enqueued-js')
