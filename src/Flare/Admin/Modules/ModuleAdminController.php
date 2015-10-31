@@ -27,6 +27,8 @@ class ModuleAdminController extends FlareController
         parent::__construct($adminManager);
 
         $this->admin = $this->adminManager->getAdminInstance();
+
+        view()->share('moduleAdmin', $this->admin);
     }
 
     /**

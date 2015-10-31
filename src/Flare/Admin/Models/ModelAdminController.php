@@ -40,6 +40,8 @@ class ModelAdminController extends FlareController
 
         $this->modelAdmin = $this->adminManager->getAdminInstance();
         $this->model = $this->modelAdmin->model();
+
+        view()->share('modelAdmin', $this->modelAdmin);
     }
 
     /**
@@ -49,7 +51,7 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.modelAdmin.index', ['modelAdmin' => $this->modelAdmin]);
+        return view('flare::admin.modelAdmin.index', []);
     }
 
     /**
@@ -59,7 +61,7 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
-        return view('flare::admin.modelAdmin.create', ['modelAdmin' => $this->modelAdmin]);
+        return view('flare::admin.modelAdmin.create', []);
     }
 
     /**
@@ -85,10 +87,7 @@ class ModelAdminController extends FlareController
 
         event(new ModelView($this->modelAdmin));
 
-        return view('flare::admin.modelAdmin.view', [
-            'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->modelAdmin->model,
-        ]);
+        return view('flare::admin.modelAdmin.view', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
@@ -102,10 +101,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id);
 
-        return view('flare::admin.modelAdmin.edit', [
-            'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->modelAdmin->model,
-        ]);
+        return view('flare::admin.modelAdmin.edit', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
@@ -133,10 +129,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id);
 
-        return view('flare::admin.modelAdmin.delete', [
-            'modelAdmin' => $this->modelAdmin,
-            'modelItem' => $this->modelAdmin->model,
-        ]);
+        return view('flare::admin.modelAdmin.delete', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
