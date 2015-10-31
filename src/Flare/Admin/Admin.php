@@ -77,7 +77,6 @@ abstract class Admin
      */
     protected $viewData = [];
 
-
     /**
      * Class Suffix used for matching and removing term
      * from user provided Admin sections.
