@@ -13,7 +13,7 @@
     <form action="" method="post">
         <div class="box-body">
             <div class="alert alert-danger">
-                <i class="icon fa fa-danger"></i>
+                <i class="icon fa fa-exclamation-triangle"></i>
                 Are you sure you wish to delete this {{ $modelAdmin->title() }}?
             </div>
         </div>

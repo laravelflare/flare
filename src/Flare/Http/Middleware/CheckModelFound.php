@@ -19,7 +19,7 @@ class CheckModelFound
     {
         if (!$adminManager->getAdminInstance() instanceof \LaravelFlare\Flare\Admin\Models\ModelAdmin) {
             return;
-        } 
+        }
 
         $this->model = $adminManager->getAdminInstance()->model();
     }
