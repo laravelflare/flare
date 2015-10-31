@@ -27,7 +27,7 @@
 					@endif
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/login') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						{!! csrf_field() !!}
 
 						<div class="form-group" style="padding-left: 15px; padding-right: 15px;">
 							<div class="col-md-12">

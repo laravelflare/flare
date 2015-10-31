@@ -2,8 +2,6 @@
 
 namespace LaravelFlare\Flare\Permissions;
 
-use LaravelFlare\Flare\Contracts\ModelAdminPoliceable;
-
 class AdminPolicy
 {
     /**
