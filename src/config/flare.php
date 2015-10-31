@@ -63,7 +63,7 @@ return [
         \LaravelFlare\Flare\Admin\Attributes\TextMaskAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\TimeAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\WysiwygAttribute::class,
-   ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
