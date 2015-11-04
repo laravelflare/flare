@@ -157,6 +157,6 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id)->replicate()->save();
 
-        return redirect($this->admin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully cloned.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully cloned.', 'dismissable' => false]]);
     }
 }
