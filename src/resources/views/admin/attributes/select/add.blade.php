@@ -11,10 +11,14 @@
                         id="{{ $attribute }}"
                         @if (isset($field['required'])) required="required" @endif>
                     <option></option>
-                @foreach ($field['options'] as $value => $option)
+                    @foreach ($field['options'] as $value => $option)
                     <option value="{{ $value }}">{{ $option }}</option>
-                @endforeach
+                    @endforeach
                 </select>
+
+                @if(isset($field['help']))
+                    <p class="help-block">{!! $field['help'] !!}</p>
+                @endif
             @else
                 <div class="callout callout-warning">
                     <strong>
@@ -24,9 +28,9 @@
             @endif
             
             @if ($errors->has($attribute))
-                <span class="help-block">
-                    {{ $errors->first($attribute) }}
-                </span>
+                <p class="help-block">
+                    <strong>{{ $errors->first($attribute) }}</strong>
+                </p>
             @endif
         </div>
     </div>
