@@ -72,6 +72,10 @@
                                             <i class="fa fa-edit"></i>
                                             Edit
                                         </a>
+                                        <a class="btn btn-warning btn-xs" href="{{ $modelAdmin::currentUrl('clone/'.$modelItem->getKey()) }}">
+                                            <i class="fa fa-copy"></i>
+                                            Clone
+                                        </a>
                                         <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}">
                                             <i class="fa fa-trash"></i>
                                             Delete
