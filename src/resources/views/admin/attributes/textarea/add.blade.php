@@ -8,10 +8,15 @@
                         class="form-control {{ $field['class'] or null }}"
                         name="{{ $attribute }}"
                         @if (isset($field['required'])) required="required" @endif>{{ old($attribute) }}</textarea>
+                        
+            @if(isset($field['help']))
+                <p class="help-block">{!! $field['help'] !!}</p>
+            @endif
+            
             @if ($errors->has($attribute))
-                <span class="help-block">
-                    {{ $errors->first($attribute) }}
-                </span>
+                <p class="help-block">
+                    <strong>{{ $errors->first($attribute) }}</strong>
+                </p>
             @endif
         </div>
     </div>

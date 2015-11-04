@@ -19,6 +19,12 @@
                         </p>
                     </div>
                     @endforeach
+
+                    @if(isset($field['help']))
+                    <div class="col-sm-12">
+                        <p class="help-block">{!! $field['help'] !!}</p>
+                    </div>
+                    @endif
                 @else
                     <div class="callout callout-warning">
                         <strong>
@@ -27,11 +33,11 @@
                     </div>
                 @endif
             </div>
-
+            
             @if ($errors->has($attribute))
-                <span class="help-block">
-                    {{ $errors->first($attribute) }}
-                </span>
+                <p class="help-block">
+                    <strong>{{ $errors->first($attribute) }}</strong>
+                </p>
             @endif
         </div>
     </div>
