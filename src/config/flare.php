@@ -32,8 +32,8 @@ return [
     |
     */
     'admin' => [
-        // Example of ModelAdmin: \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
-        // Base ModuleAdmin: \LaravelFlare\Flare\Admin\Modules\ModuleAdmin::class,
+        // Example of ModelAdmin:
+        \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
     ],
 
     /*
@@ -92,11 +92,12 @@ return [
     | Policies
     |--------------------------------------------------------------------------
     |
-    | Custom Policy Registration
+    | Policy Registration
     |
     */
     'policies' => [
-        // Example of Custom Policy: \LaravelFlare\Flare\Admin\Models\ModelAdmin::class => \LaravelFlare\Flare\Permissions\ModelAdminPolicy::class,
+        // Example of Policy:
+        \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class => \LaravelFlare\Flare\Admin\Models\Users\UserPolicy::class,
     ],
 
     /*
