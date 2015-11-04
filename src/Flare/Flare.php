@@ -152,7 +152,7 @@ class Flare
      */
     protected function attributeTypeExists($type)
     {
-        return $this->resolveAttributeClass ? true : false;
+        return $this->resolveAttributeClass($type) ? true : false;
     }
 
     /**
