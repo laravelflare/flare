@@ -22,7 +22,7 @@
                             <li>
                                 <a href="{{ $modelAdmin::currentUrl() }}">
                                     <span style="display:inline-block; width: 100px;">
-                                        All Pages
+                                        All {{ $modelAdmin->pluralTitle() }}
                                     </span>
                                     <span class="badge bg-green">{{ $totals['all'] }}</span>
                                 </a>
