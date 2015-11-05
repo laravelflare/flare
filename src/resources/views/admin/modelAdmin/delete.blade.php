@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', $modelAdmin::title())
+@section('page_title', 'Delete '.$modelAdmin::title())
 
 @section('content')
 
@@ -12,9 +12,19 @@
     </div>
     <form action="" method="post">
         <div class="box-body">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger no-margin">
                 <i class="icon fa fa-exclamation-triangle"></i>
-                Are you sure you wish to delete this {{ $modelAdmin->title() }}?
+                @if (isset($modelAdmin->softDeletingModel) && $modelItem->trashed())
+                    <strong>Are you sure you wish to permanently delete this {{ $modelAdmin->title() }}?</strong>
+                    <p>
+                        Once a {{ $modelAdmin->title() }} is permanently deleted it can no longer be recovered.
+                    </p>
+                @else
+                    <strong>Are you sure you wish to trash this {{ $modelAdmin->title() }}?</strong>
+                    <p>
+                        The {{ $modelAdmin->title() }} will be sent to the trash, where it can either be restored or deleted permanently.
+                    </p>
+                @endif 
             </div>
         </div>
         <div class="box-footer">
@@ -24,7 +34,11 @@
             </a>
             <button class="btn btn-danger" type="submit">
                 <i class="fa fa-trash"></i>
+                @if (!isset($modelAdmin->softDeletingModel) || $modelItem->trashed())
                 Delete {{ $modelAdmin->title() }}
+                @else 
+                Trash {{ $modelAdmin->title() }}
+                @endif
             </button>
         </div>
     </form>

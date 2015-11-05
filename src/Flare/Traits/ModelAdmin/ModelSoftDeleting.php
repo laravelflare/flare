@@ -11,27 +11,39 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelSoftDeleting
 {
     /**
-     * Used by beforeDelete() to ensure child classes call parent::beforeDelete().
+     * Shows that this is a soft deleting model.
      * 
      * @var bool
      */
-    protected $brokenBeforeDelete = false;
-
+    public $softDeletingModel = true;
+    
     /**
-     * Used by afterDelete() to ensure child classes call parent::afterDelete().
-     * 
-     * @var bool
-     */
-    protected $brokenAfterDelete = false;
-
-    /**
-     * Trait Requires Find Method (usually provided by ModelQuerying).
+     * Finds model and includes withTrashed() scope in query.
      *
      * @param int $modelitem_id
      * 
      * @return
      */
-    abstract protected function find($modelitem_id);
+    public function findWithTrashed($modelitem_id)
+    {
+        $this->model = $this->model->withTrashed()->findOrFail($modelitem_id);
+
+        return $this->model;
+    }
+
+    /**
+     * Finds model and includes onlyTrashed() scope in query.
+     *
+     * @param int $modelitem_id
+     * 
+     * @return
+     */
+    public function findOnlyTrashed($modelitem_id)
+    {
+        $this->model = $this->model->onlyTrashed()->findOrFail($modelitem_id);
+
+        return $this->model;
+    }
 
     /**
      * Method fired before the Delete action is undertaken.
@@ -56,7 +68,7 @@ trait ModelSoftDeleting
      */
     public function delete($modelitem_id)
     {
-        $this->find($modelitem_id);
+        $this->findWithTrashed($modelitem_id);
 
         $this->brokenBeforeDelete = true;
         $this->beforeDelete();

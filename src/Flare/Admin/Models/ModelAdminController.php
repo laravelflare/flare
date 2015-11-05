@@ -51,7 +51,51 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.modelAdmin.index', []);
+        return view('flare::admin.modelAdmin.index', [
+                                                        'modelItems' => $this->model->get(),
+                                                        'totals' => [
+                                                            'all' => $this->model->get()->count(),
+                                                            'with_trashed' => $this->model->withTrashed()->get()->count(),
+                                                            'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                        ],
+                                                    ]
+                                                );
+    }
+
+    /**
+     * Lists Trashed Model Items.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getTrashed()
+    {
+        return view('flare::admin.modelAdmin.trashed', [
+                                                        'modelItems' => $this->model->onlyTrashed()->get(),
+                                                        'totals' => [
+                                                            'all' => $this->model->get()->count(),
+                                                            'with_trashed' => $this->model->withTrashed()->get()->count(),
+                                                            'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                        ],
+                                                    ]
+                                                );
+    }
+
+    /**
+     * List All Model Items inc Trashed.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll()
+    {
+        return view('flare::admin.modelAdmin.all', [
+                                                    'modelItems' => $this->model->withTrashed()->get(),
+                                                    'totals' => [
+                                                        'all' => $this->model->get()->count(),
+                                                        'with_trashed' => $this->model->withTrashed()->get()->count(),
+                                                        'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                    ],
+                                                ]
+                                            );
     }
 
     /**
@@ -127,7 +171,11 @@ class ModelAdminController extends FlareController
      */
     public function getDelete($modelitem_id)
     {
-        $this->modelAdmin->find($modelitem_id);
+        if (isset($this->modelAdmin->softDeletingModel) && $this->modelAdmin->softDeletingModel) {
+            $this->modelAdmin->findWithTrashed($modelitem_id);
+        } else {
+            $this->modelAdmin->find($modelitem_id);
+        }
 
         return view('flare::admin.modelAdmin.delete', ['modelItem' => $this->modelAdmin->model]);
     }
@@ -144,6 +192,32 @@ class ModelAdminController extends FlareController
         $this->modelAdmin->delete($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully removed.', 'dismissable' => false]]);
+    }
+
+    /**
+     * Restore a ModelItem.
+     *
+     * @param int $modelitem_id
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getRestore($modelitem_id)
+    {
+        return view('flare::admin.modelAdmin.restore', ['modelItem' => $this->modelAdmin->model]);
+    }
+
+    /**
+     * Process Restore ModelItem Request.
+     *
+     * @param int $page_id
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postRestore($modelitem_id)
+    {
+        $this->modelAdmin->findOnlyTrashed($modelitem_id)->restore();
+
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully restored.', 'dismissable' => false]]);
     }
 
     /**

@@ -52,6 +52,8 @@ trait ModelQuerying
     public function find($modelitem_id)
     {
         $this->model = $this->model->findOrFail($modelitem_id);
+
+        return $this->model;
     }
 
     /**

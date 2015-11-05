@@ -34,7 +34,26 @@ class CheckModelFound
      */
     public function handle($request, Closure $next)
     {
+        if (isset($this->modelAdmin->softDeletingModel) && $this->modelAdmin->softDeletingModel) {
+            return $this->handleSoftDeleteCheck();
+        } 
+
         if (!$this->model->find(\Route::getCurrentRoute()->getParameter('one'))) {
+            return view('flare::admin.404', []);
+        }
+
+        return $next($request);
+    }
+
+    /**
+     * When a ModelAdmin implements Soft Deleting, this method
+     * is used to check if the Model actually exists.
+     * 
+     * @return mixed
+     */
+    protected function handleSoftDeleteCheck()
+    {
+        if (!$this->model->withTrashed()->find(\Route::getCurrentRoute()->getParameter('one'))) {
             return view('flare::admin.404', []);
         }
 

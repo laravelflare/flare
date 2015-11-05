@@ -3,11 +3,12 @@
 namespace LaravelFlare\Flare\Admin\Models\Users;
 
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting;
 use LaravelFlare\Flare\Traits\ModelAdmin\HumanTimestampAttributes;
 
 class UserAdmin extends ModelAdmin
 {
-    use HumanTimestampAttributes;
+    use HumanTimestampAttributes, ModelSoftDeleting;
 
     /**
      * Managed Model Instance.
