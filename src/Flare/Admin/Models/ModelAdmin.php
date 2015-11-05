@@ -7,17 +7,19 @@ use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelCloning;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Contracts\ModelAdmin\ModelCloneable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\AttributesAccessable;
 
-class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable
+class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable, ModelCloneable
 {
-    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidating;
+    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidating, ModelCloning;
 
     /**
      * Class of Model to Manage.
