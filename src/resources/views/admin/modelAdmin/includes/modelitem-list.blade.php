@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 @foreach ($modelAdmin->getColumns() as $key => $field)
-                <th {{ ($key == 'id' ? 'style="tight"' : '') }} style="tight">
+                <th>
                     @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key))
                     <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                         {{ $field }}
