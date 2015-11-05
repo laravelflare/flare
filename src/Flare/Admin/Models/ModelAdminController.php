@@ -229,7 +229,7 @@ class ModelAdminController extends FlareController
      */
     public function getClone($modelitem_id)
     {
-        $this->modelAdmin->find($modelitem_id)->replicate()->save();
+        $this->modelAdmin->find($modelitem_id)->replicate($this->modelAdmin->excludeOnClone())->save();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully cloned.', 'dismissable' => false]]);
     }
