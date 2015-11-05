@@ -16,6 +16,19 @@ trait ModelSoftDeleting
      * @var bool
      */
     public $softDeletingModel = true;
+
+    /**
+     * Overrides the ModelQuerying provided method 
+     * with one which searches withTrashed scope.
+     * 
+     * @param int $modelitem_id
+     * 
+     * @return
+     */
+    public function find($modelitem_id)
+    {
+        return $this->findWithTrashed($modelitem_id);
+    }
     
     /**
      * Finds model and includes withTrashed() scope in query.
