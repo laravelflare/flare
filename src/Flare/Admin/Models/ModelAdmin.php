@@ -9,7 +9,7 @@ use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidatable;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
@@ -17,7 +17,7 @@ use LaravelFlare\Flare\Contracts\ModelAdmin\AttributesAccessable;
 
 class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable
 {
-    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidatable;
+    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidating;
 
     /**
      * Class of Model to Manage.

@@ -8,9 +8,9 @@ use LaravelFlare\Flare\Admin\AdminManager;
 class CheckModelFound
 {
     /**
-     * Currently Requested Model.
+     * Currently Requested ModelAdmin.
      */
-    protected $model;
+    protected $modelAdmin;
 
     /**
      * Create a new filter instance.
@@ -21,7 +21,7 @@ class CheckModelFound
             return;
         }
 
-        $this->model = $adminManager->getAdminInstance()->model();
+        $this->modelAdmin = $adminManager->getAdminInstance();
     }
 
     /**
@@ -34,7 +34,7 @@ class CheckModelFound
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->model->find(\Route::getCurrentRoute()->getParameter('one'))) {
+        if (!$this->modelAdmin->find(\Route::getCurrentRoute()->getParameter('one'))) {
             return view('flare::admin.404', []);
         }
 

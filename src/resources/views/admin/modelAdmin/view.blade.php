@@ -25,9 +25,17 @@
                 <i class="fa fa-edit"></i>
                 Edit {{ $modelAdmin->title() }}
             </a>
+            <a href="{{ $modelAdmin::currentUrl('clone/'.$modelItem->getKey()) }}" class="btn btn-warning">
+                <i class="fa fa-clone"></i>
+                Clone {{ $modelAdmin->title() }}
+            </a>
             <a href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}" class="btn btn-danger">      
                 <i class="fa fa-trash"></i>      
-                Delete {{ $modelAdmin->title() }}
+                @if (!isset($modelAdmin->softDeletingModel) || $modelItem->trashed())
+                Delete
+                @else 
+                Trash
+                @endif
             </a>
         </div>
     </form>

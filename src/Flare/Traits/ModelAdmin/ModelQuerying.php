@@ -52,6 +52,8 @@ trait ModelQuerying
     public function find($modelitem_id)
     {
         $this->model = $this->model->findOrFail($modelitem_id);
+
+        return $this->model;
     }
 
     /**
@@ -96,7 +98,7 @@ trait ModelQuerying
      *
      * @return string
      */
-    protected function orderBy()
+    public function orderBy()
     {
         if (\Request::input('order')) {
             return \Request::input('order');
@@ -114,7 +116,7 @@ trait ModelQuerying
      * 
      * @return string
      */
-    protected function sortBy()
+    public function sortBy()
     {
         if (\Request::input('sort')) {
             return \Request::input('sort');

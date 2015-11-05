@@ -152,7 +152,7 @@ class Flare
      */
     protected function attributeTypeExists($type)
     {
-        return $this->resolveAttributeClass ? true : false;
+        return $this->resolveAttributeClass($type) ? true : false;
     }
 
     /**
@@ -190,7 +190,7 @@ class Flare
      */
     protected function resolveAttributeClass($type)
     {
-        $fullClassname = array_search(title_case($type), $this->availableAttributes);
+        $fullClassname = array_search(title_case($type), $this->availableAttributes());
 
         if (!$fullClassname || !class_exists($fullClassname)) {
             return false;
