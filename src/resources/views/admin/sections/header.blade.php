@@ -1,7 +1,5 @@
-<!-- Main Header -->
 <header class="main-header">
 
-    <!-- Logo -->
     <a href="{{ url('admin') }}" class="logo">
         <i class="fa fa-fire"></i>
         <span>
