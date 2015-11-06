@@ -5,7 +5,7 @@ namespace LaravelFlare\Flare\Traits\ModelAdmin;
 trait ModelCloning
 {
     /**
-     * An Array of Fields to Exclude on Clone
+     * An Array of Fields to Exclude on Clone.
      *
      * When cloning a Model ceratin data might need to be skipped
      * either because it is irrelevant (such as datestamps) or

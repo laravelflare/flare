@@ -29,7 +29,7 @@ trait ModelSoftDeleting
     {
         return $this->findWithTrashed($modelitem_id);
     }
-    
+
     /**
      * Finds model and includes withTrashed() scope in query.
      *
@@ -108,6 +108,7 @@ trait ModelSoftDeleting
         if (!$this->model->trashed()) {
             $this->model->delete();
             event(new ModelSoftDelete($this));
+
             return;
         }
 
