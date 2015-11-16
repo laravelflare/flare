@@ -51,7 +51,7 @@ class ModelAdminController extends FlareController
      */
     public function getIndex()
     {
-        return view('flare::admin.modelAdmin.index', [
+        return view('flare::admin.modeladmin.index', [
                                                         'modelItems' => $this->model->get(),
                                                         'totals' => [
                                                             'all' => $this->model->get()->count(),
@@ -69,7 +69,7 @@ class ModelAdminController extends FlareController
      */
     public function getTrashed()
     {
-        return view('flare::admin.modelAdmin.trashed', [
+        return view('flare::admin.modeladmin.trashed', [
                                                         'modelItems' => $this->model->onlyTrashed()->get(),
                                                         'totals' => [
                                                             'all' => $this->model->get()->count(),
@@ -87,7 +87,7 @@ class ModelAdminController extends FlareController
      */
     public function getAll()
     {
-        return view('flare::admin.modelAdmin.all', [
+        return view('flare::admin.modeladmin.all', [
                                                     'modelItems' => $this->model->withTrashed()->get(),
                                                     'totals' => [
                                                         'all' => $this->model->get()->count(),
@@ -105,7 +105,7 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
-        return view('flare::admin.modelAdmin.create', []);
+        return view('flare::admin.modeladmin.create', []);
     }
 
     /**
@@ -131,7 +131,7 @@ class ModelAdminController extends FlareController
 
         event(new ModelView($this->modelAdmin));
 
-        return view('flare::admin.modelAdmin.view', ['modelItem' => $this->modelAdmin->model]);
+        return view('flare::admin.modeladmin.view', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
@@ -145,7 +145,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id);
 
-        return view('flare::admin.modelAdmin.edit', ['modelItem' => $this->modelAdmin->model]);
+        return view('flare::admin.modeladmin.edit', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
@@ -177,7 +177,7 @@ class ModelAdminController extends FlareController
             $this->modelAdmin->find($modelitem_id);
         }
 
-        return view('flare::admin.modelAdmin.delete', ['modelItem' => $this->modelAdmin->model]);
+        return view('flare::admin.modeladmin.delete', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
@@ -203,7 +203,7 @@ class ModelAdminController extends FlareController
      */
     public function getRestore($modelitem_id)
     {
-        return view('flare::admin.modelAdmin.restore', ['modelItem' => $this->modelAdmin->model]);
+        return view('flare::admin.modeladmin.restore', ['modelItem' => $this->modelAdmin->model]);
     }
 
     /**
