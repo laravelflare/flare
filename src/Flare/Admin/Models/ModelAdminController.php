@@ -52,11 +52,11 @@ class ModelAdminController extends FlareController
     public function getIndex()
     {
         return view('flare::admin.modeladmin.index', [
-                                                        'modelItems' => $this->model->get(),
+                                                        'modelItems' => $this->model->paginate($this->model->getPerPage()),
                                                         'totals' => [
-                                                            'all' => $this->model->get()->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->get()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                            'all' => $this->model->count(),
+                                                            'with_trashed' => $this->model->withTrashed()->count(),
+                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
                                                         ],
                                                     ]
                                                 );
@@ -70,11 +70,11 @@ class ModelAdminController extends FlareController
     public function getTrashed()
     {
         return view('flare::admin.modeladmin.trashed', [
-                                                        'modelItems' => $this->model->onlyTrashed()->get(),
+                                                        'modelItems' => $this->model->onlyTrashed()->paginate($this->model->getPerPage()),
                                                         'totals' => [
-                                                            'all' => $this->model->get()->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->get()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                            'all' => $this->model->count(),
+                                                            'with_trashed' => $this->model->withTrashed()->count(),
+                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
                                                         ],
                                                     ]
                                                 );
@@ -88,11 +88,11 @@ class ModelAdminController extends FlareController
     public function getAll()
     {
         return view('flare::admin.modeladmin.all', [
-                                                    'modelItems' => $this->model->withTrashed()->get(),
+                                                    'modelItems' => $this->model->withTrashed()->paginate($this->model->getPerPage()),
                                                     'totals' => [
-                                                        'all' => $this->model->get()->count(),
-                                                        'with_trashed' => $this->model->withTrashed()->get()->count(),
-                                                        'only_trashed' => $this->model->onlyTrashed()->get()->count(),
+                                                        'all' => $this->model->paginate($this->model->getPerPage())->count(),
+                                                        'with_trashed' => $this->model->withTrashed()->count(),
+                                                        'only_trashed' => $this->model->onlyTrashed()->count(),
                                                     ],
                                                 ]
                                             );
