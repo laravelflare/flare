@@ -302,4 +302,16 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     {
         return new DefaultWidget($this);
     }
+
+    /**
+     * Determine if the Managed Model is using the SoftDeletes Trait.
+     *
+     * @return bool
+     */
+    public function hasSoftDeletes()
+    {
+        return in_array(
+            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(static::$managedModel()))
+        );
+    }
 }
