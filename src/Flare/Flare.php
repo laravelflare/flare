@@ -131,12 +131,8 @@ class Flare
         foreach (\Flare::config('attributes') as $attributeFullClassname) {
             $availableAttributes = array_add(
                                             $availableAttributes,
-                                            $attributeFullClassname,
-                                            trim(
-                                                substr(
-                                                        $attributeFullClassname, strrpos($attributeFullClassname, '/') + 1
-                                                    )
-                                                )
+                                            class_basename($attributeFullClassname),
+                                            $attributeFullClassname
                                         );
         }
 
@@ -190,7 +186,7 @@ class Flare
      */
     protected function resolveAttributeClass($type)
     {
-        $fullClassname = array_search(title_case($type), $this->availableAttributes());
+        $fullClassname = array_key_exists(title_case($type).'Attribute', $this->availableAttributes()) ? $this->availableAttributes()[title_case($type).'Attribute'] : false;
 
         if (!$fullClassname || !class_exists($fullClassname)) {
             return false;
