@@ -40,7 +40,7 @@ class FlareAuthenticate
                 return response('Unauthorized.', 401);
             }
 
-            return redirect()->guest('admin/login');
+            return redirect()->guest(\Flare::adminUrl());
         }
 
         return $next($request);

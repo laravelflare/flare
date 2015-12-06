@@ -18,7 +18,7 @@ class Permissions implements Permissionable
     public static function check($class, $action = 'view')
     {
         if (!$class) {
-            return true;
+            return \Auth::user()->is_admin;
         }
 
         if (\Auth::user()->can($action, $class)) {
