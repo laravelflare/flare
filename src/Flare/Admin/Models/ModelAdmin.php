@@ -54,6 +54,13 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     protected $columns = [];
 
     /**
+     * Columns for Model are Sortable.
+     *
+     * @var boolean
+     */
+    protected $sortable = true;
+
+    /**
      * The Controller to be used by the Model Admin.
      *
      * This defaults to parent::getController()
@@ -293,8 +300,31 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     }
 
     /**
-     * Returns a DefaultWidget instance based on the
-     * currently ManagedModel.
+     * Determine if a get mutator exists for an attribute.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function hasGetMutator($key)
+    {
+        return method_exists($this, 'get'.Str::studly($key).'Attribute');
+    }
+
+    /**
+     * Determine if the Model Admin is sortable in it's list view.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return isset($this->sortable) && $this->sortable ? true : false;
+    }
+
+    /**
+     * Returns a DefaultWidget instance based on the currently ManagedModel.
      * 
      * @return DefaultWidget
      */
