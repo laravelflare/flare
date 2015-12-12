@@ -3,10 +3,10 @@
 namespace LaravelFlare\Flare\Http\Controllers;
 
 use Illuminate\Http\Request;
-use LaravelFlare\Flare\Permissions;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use LaravelFlare\Flare\Permissions\Permissions;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
