@@ -42,6 +42,11 @@
                             </p>
                         </li>
                         <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="{{ url('') }}" class="btn btn-default btn-flat">
+                                    View site
+                                </a>
+                            </div>
                             <div class="pull-right">
                                 <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">
                                     Sign out
