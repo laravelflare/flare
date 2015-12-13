@@ -50,7 +50,7 @@ class ModelAdminController extends FlareController
      * @return \Illuminate\Http\Response
      */
     public function getIndex()
-    {
+    {   
         return view('flare::admin.modeladmin.index', [
                                                         'modelItems' => $this->modelAdmin->items(),
                                                         'totals' => $this->modelAdmin->totals(),
@@ -65,6 +65,10 @@ class ModelAdminController extends FlareController
      */
     public function getTrashed()
     {
+        if (!$this->modelAdmin->hasSoftDeletes()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.trashed', [
                                                         'modelItems' => $this->modelAdmin->items(),
                                                         'totals' => $this->modelAdmin->totals(),
@@ -79,6 +83,10 @@ class ModelAdminController extends FlareController
      */
     public function getAll()
     {
+        if (!$this->modelAdmin->hasSoftDeletes()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.all', [
                                                         'modelItems' => $this->modelAdmin->items(),
                                                         'totals' => $this->modelAdmin->totals(),
