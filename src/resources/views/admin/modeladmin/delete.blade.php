@@ -14,17 +14,17 @@
         <div class="box-body">
             <div class="alert alert-danger no-margin">
                 <i class="icon fa fa-exclamation-triangle"></i>
-                @if (isset($modelAdmin->softDeletingModel) && $modelItem->trashed())
+                @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
                     <strong>Are you sure you wish to permanently delete this {{ $modelAdmin->title() }}?</strong>
                     <p>
                         Once a {{ $modelAdmin->title() }} is permanently deleted it can no longer be recovered.
                     </p>
-                @else
+                @else 
                     <strong>Are you sure you wish to trash this {{ $modelAdmin->title() }}?</strong>
                     <p>
                         The {{ $modelAdmin->title() }} will be sent to the trash, where it can either be restored or deleted permanently.
                     </p>
-                @endif 
+                @endif
             </div>
         </div>
         <div class="box-footer">
@@ -34,10 +34,10 @@
             </a>
             <button class="btn btn-danger" type="submit">
                 <i class="fa fa-trash"></i>
-                @if (!isset($modelAdmin->softDeletingModel) || $modelItem->trashed())
-                Delete {{ $modelAdmin->title() }}
+                @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
+                    Delete {{ $modelAdmin->title() }}
                 @else 
-                Trash {{ $modelAdmin->title() }}
+                    Trash {{ $modelAdmin->title() }}
                 @endif
             </button>
         </div>

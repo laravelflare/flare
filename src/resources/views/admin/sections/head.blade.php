@@ -19,6 +19,11 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
+        <script>
+            var APP_URL = {!! json_encode(url('/')) !!};
+            var ADMIN_URL = {!! json_encode(Flare::adminUrl()) !!};
+        </script>
+
         @yield('enqueued-css')
     </head>
     <body class="hold-transition skin-{{ Flare::config('admin_theme') }} sidebar-mini">
