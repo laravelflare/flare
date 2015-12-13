@@ -80,13 +80,9 @@ class ModelAdminController extends FlareController
     public function getAll()
     {
         return view('flare::admin.modeladmin.all', [
-                                                    'modelItems' => $this->model->withTrashed()->paginate($this->model->getPerPage()),
-                                                    'totals' => [
-                                                        'all' => $this->model->paginate($this->model->getPerPage())->count(),
-                                                        'with_trashed' => $this->model->withTrashed()->count(),
-                                                        'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                    ],
-                                                ]
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
+                                                    ]
                                             );
     }
 
