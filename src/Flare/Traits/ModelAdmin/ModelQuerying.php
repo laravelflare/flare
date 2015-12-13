@@ -91,6 +91,21 @@ trait ModelQuerying
         return $model->all();
     }
 
+    public function totals()
+    {
+        if ($this->hasSoftDeletes()) {
+            return [
+                        'all' => $this->model->count(),
+                        'with_trashed' => $this->model->withTrashed()->count(),
+                        'only_trashed' => $this->model->onlyTrashed()->count(),
+                    ];
+        }
+
+        return ['all' => $this->model->count()];
+    }
+
+   
+
     /**
      * Return Managed Model OrderBy.
      *

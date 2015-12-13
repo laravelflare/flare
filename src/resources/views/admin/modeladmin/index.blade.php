@@ -14,6 +14,7 @@
                             All {{ $modelAdmin->pluralTitle() }}
                             <span class="badge bg-green" style="margin-left: 15px">{{ $totals['all'] }}</span>
                         </a>
+                        @if ($modelAdmin->hasSoftDeletes())
                         <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
@@ -36,6 +37,7 @@
                                 </a>
                             </li>
                         </ul>
+                        @endif
                     </div>
 
                     {{--

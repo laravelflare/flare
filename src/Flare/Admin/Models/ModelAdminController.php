@@ -52,12 +52,8 @@ class ModelAdminController extends FlareController
     public function getIndex()
     {
         return view('flare::admin.modeladmin.index', [
-                                                        'modelItems' => $this->model->paginate($this->model->getPerPage()),
-                                                        'totals' => [
-                                                            'all' => $this->model->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                        ],
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
                                                     ]
                                                 );
     }
@@ -70,12 +66,8 @@ class ModelAdminController extends FlareController
     public function getTrashed()
     {
         return view('flare::admin.modeladmin.trashed', [
-                                                        'modelItems' => $this->model->onlyTrashed()->paginate($this->model->getPerPage()),
-                                                        'totals' => [
-                                                            'all' => $this->model->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                        ],
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
                                                     ]
                                                 );
     }

@@ -341,7 +341,9 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     public function hasSoftDeletes()
     {
         return in_array(
-            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(static::$managedModel()))
+            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new static::$managedModel))
+        ) && in_array(
+            \LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
         );
     }
 }
