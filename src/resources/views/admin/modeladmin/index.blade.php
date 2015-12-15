@@ -39,29 +39,6 @@
                         </ul>
                         @endif
                     </div>
-
-                    {{--
-                    <div class="btn-group pull-right">
-                        <div style="width: 350px;" class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
-                                    10 Per Page <span class="fa fa-caret-down"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">25 Per Page</a></li>
-                                    <li><a href="#">50 Per Page</a></li>
-                                    <li><a href="#">100 Per Page</a></li>
-                                </ul>
-                            </div>
-
-                            <input type="text" placeholder="Search" class="form-control pull-right">
-
-                            <div class="input-group-btn">
-                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    --}}
                 </div>
                 
                 @include('flare::admin.modeladmin.includes.modelitem-list')

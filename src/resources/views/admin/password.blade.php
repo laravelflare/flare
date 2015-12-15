@@ -39,9 +39,6 @@
                             <button type="submit" class="btn btn-default pull-right">
                                 Reset Password
                             </button>
-                            {{--<a class="btn btn-link" href="{{ url('/admin/password') }}">
-                                Forgot Your Password?
-                            </a>--}}
                         </div>
 
                         <div class="clearfix"></div>
