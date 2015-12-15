@@ -26,6 +26,11 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/../config/flare.php' => config_path('flare.php'),
         ]);
 
+        // Database Migrations
+        $this->publishes([
+            __DIR__.'/Database/Migrations' => base_path('database/migrations'),
+        ]);
+
         // Middleware
         $router->middleware('flareauthenticate', 'LaravelFlare\Flare\Http\Middleware\FlareAuthenticate');
         $router->middleware('checkmodelfound', 'LaravelFlare\Flare\Http\Middleware\CheckModelFound');

@@ -50,14 +50,10 @@ class ModelAdminController extends FlareController
      * @return \Illuminate\Http\Response
      */
     public function getIndex()
-    {
+    {   
         return view('flare::admin.modeladmin.index', [
-                                                        'modelItems' => $this->model->paginate($this->model->getPerPage()),
-                                                        'totals' => [
-                                                            'all' => $this->model->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                        ],
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
                                                     ]
                                                 );
     }
@@ -69,13 +65,13 @@ class ModelAdminController extends FlareController
      */
     public function getTrashed()
     {
+        if (!$this->modelAdmin->hasSoftDeletes()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.trashed', [
-                                                        'modelItems' => $this->model->onlyTrashed()->paginate($this->model->getPerPage()),
-                                                        'totals' => [
-                                                            'all' => $this->model->count(),
-                                                            'with_trashed' => $this->model->withTrashed()->count(),
-                                                            'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                        ],
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
                                                     ]
                                                 );
     }
@@ -87,14 +83,14 @@ class ModelAdminController extends FlareController
      */
     public function getAll()
     {
+        if (!$this->modelAdmin->hasSoftDeletes()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.all', [
-                                                    'modelItems' => $this->model->withTrashed()->paginate($this->model->getPerPage()),
-                                                    'totals' => [
-                                                        'all' => $this->model->paginate($this->model->getPerPage())->count(),
-                                                        'with_trashed' => $this->model->withTrashed()->count(),
-                                                        'only_trashed' => $this->model->onlyTrashed()->count(),
-                                                    ],
-                                                ]
+                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'totals' => $this->modelAdmin->totals(),
+                                                    ]
                                             );
     }
 

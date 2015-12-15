@@ -3,18 +3,18 @@
         <thead>
             <tr>
                 @foreach ($modelAdmin->getColumns() as $key => $field)
-                <th>
-                    @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key))
-                    <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
-                        {{ $field }}
-                        @if (Request::input('order', 'id') == $key)
-                        <i class="fa fa-caret-{{ ($modelAdmin->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
+                    <th>
+                        @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key) && !$modelAdmin->hasGetMutator($key) && $modelAdmin->isSortable())
+                            <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
+                                {{ $field }}
+                                @if (Request::input('order', 'id') == $key)
+                                    <i class="fa fa-caret-{{ ($modelAdmin->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
+                                @endif
+                            </a>
+                        @else 
+                            {{ $field }}
                         @endif
-                    </a>
-                    @else 
-                    {{ $field }}
-                    @endif
-                </th>
+                    </th>
                 @endforeach
                 <th></th>
             </tr>
@@ -37,7 +37,7 @@
                             <i class="fa fa-edit"></i>
                             Edit
                         </a>
-                        @if (isset($modelAdmin->softDeletingModel) && $modelItem->trashed())
+                        @if ($modelAdmin->hasSoftDeletes() && $modelItem->trashed())
                         <a class="btn btn-info btn-xs" href="{{ $modelAdmin::currentUrl('restore/'.$modelItem->getKey()) }}">
                             <i class="fa fa-undo"></i>
                             Restore
@@ -50,10 +50,10 @@
                         @endif
                         <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}">
                             <i class="fa fa-trash"></i>
-                            @if (!isset($modelAdmin->softDeletingModel) || $modelItem->trashed())
-                            Delete
+                            @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
+                                Delete
                             @else 
-                            Trash
+                                Trash
                             @endif
                         </a>
                     </td>

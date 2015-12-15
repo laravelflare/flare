@@ -15,10 +15,10 @@ class Permissions implements Permissionable
      * 
      * @return
      */
-    public static function check($class, $action = 'view')
+    public static function check($class = null, $action = 'view')
     {
         if (!$class) {
-            return true;
+            return \Auth::user()->is_admin;
         }
 
         if (\Auth::user()->can($action, $class)) {

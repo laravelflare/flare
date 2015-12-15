@@ -4,21 +4,21 @@ namespace LaravelFlare\Flare\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class MakeUserCommand extends Command
+class MakeAdminCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'make:user';
+    protected $name = 'make:admin';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Creates a new user';
+    protected $description = 'Creates a new admin user';
 
     /**
      * __construct.
@@ -34,16 +34,20 @@ class MakeUserCommand extends Command
     public function fire()
     {
         $name = $this->ask('Please provide a username (defaults to admin)', 'admin');
-        $email = $this->ask('Please provide your email (defaults to user@example.com)', 'user@example.com');
+        $email = $this->ask('Please provide your email (defaults to admin@example.com)', 'admin@example.com');
         $password = $this->ask('Please provide a password (defaults to password)', 'password');
 
         $authModel = config('auth.model');
 
-        if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password)])) {
+        $authModel::unguard();
+
+        if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password), 'is_admin' => true])) {
             $this->info('All done!');
 
             return;
         }
+
+        $authModel::reguard();
 
         $this->error('Something went wrong... Please try again.');
     }

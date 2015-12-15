@@ -3,12 +3,11 @@
 namespace LaravelFlare\Flare\Admin\Models\Users;
 
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting;
 use LaravelFlare\Flare\Traits\ModelAdmin\HumanTimestampAttributes;
 
 class UserAdmin extends ModelAdmin
 {
-    use HumanTimestampAttributes, ModelSoftDeleting;
+    use HumanTimestampAttributes;
 
     /**
      * Managed Model Instance.
@@ -62,6 +61,7 @@ class UserAdmin extends ModelAdmin
         'email' => 'required|email',
         'password' => 'required|min:8|max:32',
     ];
+    
     /**
      * The number of models to return for pagination.
      *

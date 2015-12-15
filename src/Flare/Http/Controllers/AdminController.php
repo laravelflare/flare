@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use LaravelFlare\Flare\Permissions\Permissions;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
@@ -32,8 +33,8 @@ class AdminController extends FlareController
 
         $this->auth = $auth;
 
-        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin', 'getEmail', 'postEmail']]);
-        $this->middleware('checkpermissions', ['except' => ['getLogin', 'postLogin', 'getEmail', 'postEmail']]);
+        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin', 'getLogout', 'getEmail', 'postEmail']]);
+        $this->middleware('checkpermissions', ['except' => ['getLogin', 'postLogin', 'getLogout', 'getEmail', 'postEmail']]);
     }
 
     /**
@@ -51,7 +52,7 @@ class AdminController extends FlareController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postLogin(Request $request)
     {
@@ -60,7 +61,7 @@ class AdminController extends FlareController
         $credentials = $request->only('email', 'password');
 
         if ($this->auth->attempt($credentials, $request->has('remember'))) {
-            return redirect()->intended(url('admin'));
+            return $this->loginRedirect();
         }
 
         return redirect(url('admin/login'))
@@ -73,7 +74,7 @@ class AdminController extends FlareController
     /**
      * Log the user.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectReponse
      */
     public function getLogout()
     {
@@ -106,6 +107,25 @@ class AdminController extends FlareController
         }
 
         return view($view, ['widgetAdminManager' => (new WidgetAdminManager())]);
+    }
+
+    /**
+     * Performs the login redirect action.
+     *
+     * If the authenticated user has admin permissions
+     * then they will be redirected into the admin
+     * panel.If they do no, they will be sent
+     * to the homepage of the website.
+     * 
+     * @return \Illuminate\Http\RedirectReponse
+     */
+    protected function loginRedirect()
+    {
+        if (Permissions::check()) {
+            return redirect()->intended(\Flare::adminUrl());
+        }
+
+        return redirect('/');
     }
 
     /**
