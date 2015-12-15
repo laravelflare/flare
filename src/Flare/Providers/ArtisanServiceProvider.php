@@ -4,6 +4,7 @@ namespace LaravelFlare\Flare\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelFlare\Flare\Console\Commands\MakeUserCommand;
+use LaravelFlare\Flare\Console\Commands\MakeAdminCommand;
 use LaravelFlare\Flare\Console\Commands\FlareInstallCommand;
 use LaravelFlare\Flare\Console\Commands\FlareScaffoldCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
@@ -29,6 +30,7 @@ class ArtisanServiceProvider extends ServiceProvider
     protected $commands = [
         'FlareInstall' => 'command.flareinstall',
         'FlareScaffold' => 'command.flarescaffold',
+        'MakeAdmin' => 'command.makeadmin',
         'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
         'ModuleAdminMake' => 'command.moduleadmin.make',
@@ -76,6 +78,20 @@ class ArtisanServiceProvider extends ServiceProvider
     {
         $this->app->singleton($command, function ($app) {
             return new FlareScaffoldCommand($app['ScaffoldManager']);
+        });
+    }
+
+    /**
+     * Register the command.
+     * 
+     * @param $command
+     * 
+     * @return
+     */
+    protected function registerMakeAdminCommand($command)
+    {
+        $this->app->singleton($command, function ($app) {
+            return new MakeAdminCommand();
         });
     }
 
