@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare;
 
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -11,7 +10,7 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Perform post-registration booting of services.
      */
-    public function boot(Router $router)
+    public function boot()
     {
         // Assets
         $this->publishes([
@@ -31,18 +30,8 @@ class FlareServiceProvider extends ServiceProvider
             __DIR__.'/Database/Migrations' => base_path('database/migrations'),
         ]);
 
-        // Middleware
-        $router->middleware('flareauthenticate', 'LaravelFlare\Flare\Http\Middleware\FlareAuthenticate');
-        $router->middleware('checkmodelfound', 'LaravelFlare\Flare\Http\Middleware\CheckModelFound');
-        $router->middleware('checkpermissions', 'LaravelFlare\Flare\Http\Middleware\CheckPermissions');
-
         // Binds the Permissions interface to the defined Permissions class
-        $this->app->bind('LaravelFlare\Flare\Contracts\Permissions\Permissionable', \Flare::config('permissions'));
-
-        // Routes
-        if (!$this->app->routesAreCached()) {
-            require __DIR__.'/Http/routes.php';
-        }
+        $this->app->bind(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class, \Flare::config('permissions'));
 
         // Views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'flare');
@@ -81,6 +70,7 @@ class FlareServiceProvider extends ServiceProvider
         \App::register('LaravelFlare\Flare\Providers\AuthServiceProvider');
         \App::register('LaravelFlare\Flare\Providers\ArtisanServiceProvider');
         \App::register('LaravelFlare\Flare\Providers\EventServiceProvider');
+        \App::register('LaravelFlare\Flare\Providers\RouteServiceProvider');
         \App::register('LaravelFlare\Flare\Providers\ScaffoldServiceProvider');
     }
 
