@@ -8,7 +8,7 @@
 		        </h1>
 
 				<div style="margin: 0 20px; padding: 40px 25px 35px; border: 1px solid rgba(0,0,0,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15)">
-					@if (count($errors) > 0)
+					@if (isset($errors) && count($errors) > 0)
 					<div style="padding-left: 15px; padding-right: 15px">
 						<div class="alert alert-warning">
 							<strong>Whoops!</strong> There were some problems with your input.<br><br>

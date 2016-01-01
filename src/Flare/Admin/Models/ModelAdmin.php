@@ -146,6 +146,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
                 continue;
             }
 
+            // We can replace this with data_get() I believe.
             if (($methodBreaker = strpos($field, '.')) !== false) {
                 $method = substr($field, 0, $methodBreaker);
                 if (method_exists($this->model, $method)) {

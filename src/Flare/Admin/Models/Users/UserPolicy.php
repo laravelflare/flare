@@ -14,6 +14,6 @@ class UserPolicy
      */
     public function view($user, $admin)
     {
-        return $user->isAdmin;
+        return $user->is_admin;
     }
 }

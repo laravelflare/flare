@@ -14,8 +14,6 @@
             </div>
         </div>
 
-        {{--@include('flare::admin.sections.sidebar.search')--}}
-
         <ul class="sidebar-menu">
             <li class="{{ Request::is(Flare::relativeAdminUrl()) ? 'active' : '' }}">
                 <a href="{{ Flare::adminUrl() }}">

@@ -25,9 +25,6 @@ abstract class FlareController extends BaseController
      */
     public function __construct(AdminManager $adminManager)
     {
-        $this->middleware('flareauthenticate');
-        $this->middleware('checkpermissions');
-
         $this->adminManager = $adminManager;
 
         view()->share('adminManager', $this->adminManager);

@@ -39,6 +39,11 @@ class MakeAdminCommand extends Command
 
         $authModel = config('auth.model');
 
+        if (!get_class($authProvider = \Auth::getProvider()) === \Illuminate\Auth\EloquentUserProvider::class || !($authModel = $authProvider->getModel())) {
+            $this->warn('To create a new admin user you must use Eloquent as your Auth Provider');
+            return;
+        }
+
         $authModel::unguard();
 
         if ((new $authModel())->create(['name' => $name, 'email' => $email, 'password' => bcrypt($password), 'is_admin' => true])) {
