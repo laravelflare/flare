@@ -1,18 +1,13 @@
 @include('flare::admin.sections.head')
 	
-	<style>
-		body {
-			background: #d73925;
-		}
-	</style>
 	<div class="container-fluid" style="padding-top: 120px">
 		<div class="row">
 			<div class="col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-				<h1 style="text-align: center; color: white; padding-bottom: 40px;">
+				<h1 class="text-{{ Flare::config('admin_theme') }}" style="text-align: center; padding-bottom: 40px;">
 		            {!! Flare::config('admin_title') !!}
 		        </h1>
 
-				<div style="margin: 0 20px; padding: 40px 25px 35px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15)">
+				<div style="margin: 0 20px; padding: 40px 25px 35px; border: 1px solid rgba(0,0,0,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15)">
 					@if (isset($errors) && count($errors) > 0)
 					<div style="padding-left: 15px; padding-right: 15px">
 						<div class="alert alert-warning">
@@ -43,7 +38,7 @@
 
 						<div class="col-md-6">
 							<div class="checkbox">
-								<label style="color: white;">
+								<label class="text-{{ Flare::config('admin_theme') }}">
 									<input type="checkbox" name="remember">
 									Remember Me
 								</label>
@@ -59,8 +54,8 @@
 					</form>
 				</div>
 
-				<div class="col-lg-12" style="padding-top: 30px;text-align: center;">
-                    <a style="color: white; border-bottom: 1px dotted;" href="{{ url('/admin/email') }}">
+				<div class="col-lg-12" style="padding-top: 30px; text-align: center;">
+                    <a class="text-{{ Flare::config('admin_theme') }}" style="border-bottom: 1px dotted;" href="{{ url('/admin/email') }}">
 						Forgot Your Password?
 					</a>
 				</div>
