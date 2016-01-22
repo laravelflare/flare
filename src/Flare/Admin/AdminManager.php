@@ -49,11 +49,34 @@ class AdminManager extends Collection
             return $classCollection;
         }
 
-        foreach (\Flare::config(static::ADMIN_KEY) as $class) {
-            if (!$this->usableClass($class)) {
+        $classCollection = $this->getSubAdminClasses(\Flare::config(static::ADMIN_KEY));
+
+        return $classCollection;
+    }
+
+    /**
+     * Takes an array of classes and returns the 
+     * classes which are available with the 
+     * current permissions/policy set.
+     * 
+     * @param  array  $classes
+     * 
+     * @return array         
+     */
+    public function getSubAdminClasses(array $classes)
+    {
+        $classCollection = [];
+
+        foreach ($classes as $key => $class) {
+            if ($this->usableClass($key)) {
+                $classCollection[] = [$key => $this->getSubAdminClasses($class)];
                 continue;
             }
-            $classCollection[] = new $class();
+
+            if ($this->usableClass($class)) {
+                $classCollection[] = $class;
+                continue;
+            }
         }
 
         return $classCollection;
@@ -77,13 +100,48 @@ class AdminManager extends Collection
      * Register Admin Routes.
      *
      * Loops through all of the Admin classes in the collection
-     * and registers their Admin Routes
+     * and registers their Admin Routes.
+     *
+     * @return void
      */
     public function registerRoutes()
     {
-        foreach ($this->items as $class) {
-            (new $class())->registerRoutes();
+        $this->registerSubRoutes($this->items);
+    }
+
+    /**
+     * Loops through an array of classes
+     * and registers their Route recursively.
+     * 
+     * @param  array  $classes
+     * 
+     * @return void
+     */
+    public function registerSubRoutes(array $classes)
+    {
+        foreach ($classes as $key => $class) {
+            if (is_array($class)) {
+                if ($this->usableClass($key)) {
+                    $this->registerRoute($key);
+                }
+
+                $this->registerSubRoutes($class);
+                continue;
+            }
+            $this->registerRoute($class);
         }
+    }
+
+    /**
+     * Registers an individual group of Admin routes.
+     * 
+     * @param  string $class
+     * 
+     * @return void
+     */
+    public function registerRoute($class)
+    {
+        (new $class())->registerRoutes();
     }
 
     /**
@@ -96,36 +154,19 @@ class AdminManager extends Collection
      */
     private function usableClass($class)
     {
+        if (!is_scalar($class) || !class_exists($class)) {
+            return false;
+        }
+
         if ($class == static::BASE_CLASS) {
             return false;
         }
 
-        if (!$this->checkAdminPermissions($class)) {
+        if (!$this->checkUserHasAdminPermissions($class)) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * Checks whether a AdminPermissions are set if they are
-     * it will check validity for the current user otherwise
-     * it will return true, since all users have access
-     * to this Admin Section.
-     * 
-     * @param string $class
-     * 
-     * @return bool
-     */
-    private function checkAdminPermissions($class)
-    {
-        $reflection = new \ReflectionClass(new $class());
-
-        if (!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class)) {
-            return true;
-        }
-
-        return $this->checkUserHasAdminPermissions($class);
     }
 
     /**

@@ -5,11 +5,10 @@
         @endif
         <span>{{ $adminItem::pluralTitle() }}</span>
     </a>
-    @if (count($adminItem->menuItems()) > 0)
-    <ul class="treeview-menu">
-        @foreach ($adminItem->menuItems() as $adminItem)
-            @include('flare::admin.sections.sidebar.adminItem', ['adminItem' => $adminItem])
-        @endforeach
-    </ul>
+
+    @if(isset($adminItems) && is_array($adminItems) && !empty($adminItems))
+        <ul class="treeview-menu">
+            @include('flare::admin.sections.sidebar.items', ['items' => $adminItems, 'debug' => true])
+        </ul>
     @endif
 </li>

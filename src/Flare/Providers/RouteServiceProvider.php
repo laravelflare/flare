@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
                 'checkpermissions',
             ]);
 
-        $router->group(['prefix' => \Flare::config('admin_url'), 'namespace' => $this->namespace, 'middleware' => ['flare']], function ($router) {
+        $router->group(['prefix' => \Flare::config('admin_url'), 'middleware' => ['flare']], function ($router) {
             (new \LaravelFlare\Flare\Admin\AdminManager())->registerRoutes();
         });
 

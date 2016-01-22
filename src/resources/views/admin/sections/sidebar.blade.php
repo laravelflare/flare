@@ -22,9 +22,7 @@
                 </a>
             </li>
 
-            @foreach($adminManager as $adminItem)
-                @include('flare::admin.sections.sidebar.adminItem', ['adminItem' => $adminItem])
-            @endforeach
+            @include('flare::admin.sections.sidebar.items', ['items' => $adminManager])
         </ul>
     </section>
 </aside>
