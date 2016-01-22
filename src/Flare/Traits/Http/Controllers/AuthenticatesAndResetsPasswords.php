@@ -9,5 +9,6 @@ trait AuthenticatesAndResetsPasswords
 {
     use AuthenticatesUsers, ResetsPasswords {
         AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
+        AuthenticatesUsers::getGuard insteadof ResetsPasswords;
     }
 }
