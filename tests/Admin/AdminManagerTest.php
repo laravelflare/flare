@@ -23,16 +23,16 @@ class AdminManagerTest extends BaseTest
     public function test_get_admin_classes_returns_object_array_when_admin_key_is_set_and_config_exists_with_classes()
     {
         Config::set('flare.models', [
-                ThisSampleAdmin::class
+                ThisSampleAdmin::class,
             ]);
         $collection = new ThisSampleCollection();
-        $this->assertEquals($collection->getAdminClasses(), [(new ThisSampleAdmin)]);
+        $this->assertEquals($collection->getAdminClasses(), [(new ThisSampleAdmin())]);
     }
 
     public function test_get_admin_classes_returns_empty_array_when_admin_key_is_set_and_config_exists_with_invalid_classes()
     {
         Config::set('flare.models', [
-                \LaravelFlare\Flare\Admin\Admin::class
+                \LaravelFlare\Flare\Admin\Admin::class,
             ]);
         $collection = new ThisSampleCollection();
         $this->assertEquals($collection->getAdminClasses(), []);
@@ -60,5 +60,4 @@ class ThisSampleManagedModel extends ManagedModel
 
 class ThisSampleModel extends Model
 {
-
 }

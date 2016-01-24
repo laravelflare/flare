@@ -22,7 +22,7 @@ class Permissions implements Permissionable
         }
 
         $reflection = new \ReflectionClass(new $class());
-        
+
         if (!$reflection->implementsInterface(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class)) {
             return true;
         }

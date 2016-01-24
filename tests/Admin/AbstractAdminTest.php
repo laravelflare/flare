@@ -33,7 +33,7 @@ class AbstractAdminTest extends BaseTest
 
             $this->assertEquals($stub->title(), $expectedResult);
         }
-    }    
+    }
 
     public function test_title_returns_defined_title_when_defined()
     {
@@ -262,11 +262,9 @@ class AbstractAdminTest extends BaseTest
 
     public function test_current_url()
     {
-        
     }
 
     public function test_relative_current_url()
     {
-        
     }
 }

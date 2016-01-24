@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Tests;
+namespace LaravelFlare\Flare\tests;
 
 use Orchestra\Testbench\TestCase;
 
@@ -13,12 +13,12 @@ abstract class BaseTest extends TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['path.base'] = __DIR__ . '/../../src';
+        $app['path.base'] = __DIR__.'/../../src';
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', array(
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ));
     }
 

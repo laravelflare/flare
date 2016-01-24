@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->group(['prefix' => \Flare::config('admin_url'), 'middleware' => ['flarebase']], function ($router) {
 
             // Needs replacing with implicit routes, as controller is deprecated as of 5.2 and will be removed in 5.3
-            $router->controller('/', $this->namespace . '\AdminController');
+            $router->controller('/', $this->namespace.'\AdminController');
 
         });
     }

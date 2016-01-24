@@ -41,6 +41,7 @@ class MakeAdminCommand extends Command
 
         if (!get_class($authProvider = \Auth::getProvider()) === \Illuminate\Auth\EloquentUserProvider::class || !($authModel = $authProvider->getModel())) {
             $this->warn('To create a new admin user you must use Eloquent as your Auth Provider');
+
             return;
         }
 

@@ -59,9 +59,9 @@ class AdminManager extends Collection
      * classes which are available with the 
      * current permissions/policy set.
      * 
-     * @param  array  $classes
+     * @param array $classes
      * 
-     * @return array         
+     * @return array
      */
     public function getSubAdminClasses(array $classes)
     {
@@ -101,8 +101,6 @@ class AdminManager extends Collection
      *
      * Loops through all of the Admin classes in the collection
      * and registers their Admin Routes.
-     *
-     * @return void
      */
     public function registerRoutes()
     {
@@ -113,9 +111,7 @@ class AdminManager extends Collection
      * Loops through an array of classes
      * and registers their Route recursively.
      * 
-     * @param  array  $classes
-     * 
-     * @return void
+     * @param array $classes
      */
     public function registerSubRoutes(array $classes)
     {
@@ -135,9 +131,7 @@ class AdminManager extends Collection
     /**
      * Registers an individual group of Admin routes.
      * 
-     * @param  string $class
-     * 
-     * @return void
+     * @param string $class
      */
     public function registerRoute($class)
     {

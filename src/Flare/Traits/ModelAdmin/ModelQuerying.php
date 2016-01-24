@@ -104,8 +104,6 @@ trait ModelQuerying
         return ['all' => $this->model->count()];
     }
 
-   
-
     /**
      * Return Managed Model OrderBy.
      *

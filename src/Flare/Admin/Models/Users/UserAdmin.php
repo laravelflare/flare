@@ -61,7 +61,7 @@ class UserAdmin extends ModelAdmin
         'email' => 'required|email',
         'password' => 'required|min:8|max:32',
     ];
-    
+
     /**
      * The number of models to return for pagination.
      *

@@ -50,7 +50,7 @@ class ModelAdminController extends FlareController
      * @return \Illuminate\Http\Response
      */
     public function getIndex()
-    {   
+    {
         return view('flare::admin.modeladmin.index', [
                                                         'modelItems' => $this->modelAdmin->items(),
                                                         'totals' => $this->modelAdmin->totals(),
