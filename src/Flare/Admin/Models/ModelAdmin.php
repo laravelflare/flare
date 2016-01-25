@@ -35,7 +35,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      *
      * @var string
      */
-    protected static $icon = 'user';
+    protected static $icon = '';
 
     /**
      * Validation Rules for onCreate, onEdit actions.
