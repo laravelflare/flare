@@ -9,7 +9,7 @@
             .logo i {
                 display: none;
             }
-            .sidebar-collapse span {
+            .sidebar-collapse > span {
                 display: none;
             }
             .sidebar-collapse .logo i {
