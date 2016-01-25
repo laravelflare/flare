@@ -2,7 +2,7 @@
     <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('/vendor/flare/user.jpg') }}" class="img-circle" alt="User Image" />
+                <img src="{{ asset(isset(Auth::user()->pic) ? Auth::user()->pic : '/vendor/flare/user.jpg') }}" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
                 <p>
