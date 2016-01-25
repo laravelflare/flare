@@ -3,7 +3,7 @@
         @if ($adminItem::getIcon())
         <i class="fa fa-{{ $adminItem::getIcon() }}"></i>
         @endif
-        <span>{{ $adminItem::pluralTitle() }}</span>
+        {{ $adminItem::pluralTitle() }}
     </a>
 
     @if(isset($adminItems) && is_array($adminItems) && !empty($adminItems))
