@@ -55,6 +55,8 @@ return [
         \LaravelFlare\Flare\Admin\Attributes\DateAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\DateTimeAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\EmailAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\FileAttribute::class,
+        \LaravelFlare\Flare\Admin\Attributes\ImageAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\PasswordAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\RadioAttribute::class,
         \LaravelFlare\Flare\Admin\Attributes\SelectAttribute::class,
