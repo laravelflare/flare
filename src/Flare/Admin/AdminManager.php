@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin;
 
+use Illuminate\Routing\Router;
 use LaravelFlare\Flare\Permissions\Permissions;
 
 class AdminManager
