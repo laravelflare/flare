@@ -165,7 +165,7 @@ class Flare
     public function renderAttribute($action, $attribute, $field, $model, $modelManager)
     {
         if (!isset($field['type'])) {
-            throw new Exception('Attribute Field Type cannot be empty or undefined.');
+            throw new \Exception('Attribute Field Type cannot be empty or undefined.');
         }
 
         if ($this->attributeTypeExists($field['type'])) {
