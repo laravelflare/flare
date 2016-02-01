@@ -40,8 +40,8 @@ class Permissions implements Permissionable
      * 
      * @param  string $class 
      * @param  string $action
-     * 
-     * @return [type]        
+     *
+     * @return mixed
      */
     public static function denied($class = null, $action = 'view')
     {
