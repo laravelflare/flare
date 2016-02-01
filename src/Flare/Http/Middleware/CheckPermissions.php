@@ -41,7 +41,7 @@ class CheckPermissions
         }
 
         if (!$this->permissions->check($class)) {
-            throw new PermissionsException('Permission denied!');
+            return $this->permissions->denied($class);
         }
 
         return $next($request);

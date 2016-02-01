@@ -27,4 +27,24 @@ class Permissions implements Permissionable
 
         return \Auth::user()->is_admin;
     }
+
+    /**
+     * Method called when a User attempts to access
+     * an area of the site or admin which they do 
+     * not have the permissions to interact with.
+     *
+     * This is typically called from the CheckPermissions
+     * Middleware during a request (see: \LaravelFlare\Flare\Http\Middleware\CheckPermissions::handle())
+     * and can be used to throw an exception, return a 
+     * view (abort() etc.) or anything else really.
+     * 
+     * @param  string $class 
+     * @param  string $action
+     * 
+     * @return [type]        
+     */
+    public static function denied($class = null, $action = 'view')
+    {
+        throw new PermissionsException('Permission denied!');
+    }
 }
