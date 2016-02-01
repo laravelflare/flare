@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Admin;
 
 use Illuminate\Support\Str;
+use Illuminate\Routing\Router;
 
 abstract class Admin
 {
@@ -105,7 +106,7 @@ abstract class Admin
      * 
      * @return void
      */
-    public function registerRoutes()
+    public function registerRoutes(Router $router)
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
