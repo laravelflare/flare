@@ -1,6 +1,0 @@
-    /**
-     * The attributes that should be visible in arrays.
-     *
-     * @var array
-     */
-    protected $visible = [{{visibleArray}}];
