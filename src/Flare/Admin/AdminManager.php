@@ -2,10 +2,9 @@
 
 namespace LaravelFlare\Flare\Admin;
 
-use Illuminate\Support\Collection;
 use LaravelFlare\Flare\Permissions\Permissions;
 
-class AdminManager extends Collection
+class AdminManager
 {
     /**
      * Base Class.
@@ -29,9 +28,12 @@ class AdminManager extends Collection
      */
     public function __construct()
     {
-        parent::__construct();
 
-        $this->items = $this->getAdminClasses();
+    }
+
+    public function getAdminMenu()
+    {
+        return $this->getAdminClasses();
     }
 
     /**
@@ -104,7 +106,7 @@ class AdminManager extends Collection
      */
     public function registerRoutes()
     {
-        $this->registerSubRoutes($this->items);
+        $this->registerSubRoutes($this->getAdminClasses());
     }
 
     /**

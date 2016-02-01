@@ -22,7 +22,7 @@
                 </a>
             </li>
 
-            @include('flare::admin.sections.sidebar.items', ['items' => $adminManager])
+            @include('flare::admin.sections.sidebar.items', ['items' => $adminManager->getAdminMenu()])
         </ul>
     </section>
 </aside>
