@@ -6,8 +6,8 @@
 
 <div class="row">
 
-    @if (count($widgetAdminManager) > 0)
-        @foreach ($widgetAdminManager as $widget)
+    @if (count($widgetAdminManager->items()) > 0)
+        @foreach ($widgetAdminManager->items() as $widget)
 
             {!! $widget->render() !!}
 

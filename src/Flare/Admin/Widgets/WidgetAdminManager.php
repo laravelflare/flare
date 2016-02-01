@@ -29,7 +29,15 @@ class WidgetAdminManager extends AdminManager
     public function __construct()
     {
         parent::__construct();
+    }
 
-        $this->items = $this->getAdminClasses();
+    /**
+     * Returns a collection of Widget Classes
+     * 
+     * @return
+     */
+    public function items()
+    {
+        return collect($this->getAdminClasses());
     }
 }
