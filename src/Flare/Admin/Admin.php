@@ -100,16 +100,18 @@ abstract class Admin
      * Also attempts to load in ModelAdminController
      * based on the shortName of the class, for
      * overloading and adding additional routes
+     *
+     * @param \Illuminate\Routing\Router $router
      * 
-     * @return
+     * @return void
      */
     public function registerRoutes()
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        \Route::group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function () {
+        $router->group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function () {
             $this->registerSubRoutes();
-            \Route::controller('/', static::getController());
+            $router->controller('/', static::getController());
         });
     }
 
