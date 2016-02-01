@@ -31,6 +31,14 @@ class AdminManager
 
     }
 
+    /**
+     * Returns the array used for the Admin Menu.
+     *
+     * This is temporary but it shouldn't be a breaking
+     * change when it is altered or removed.
+     * 
+     * @return 
+     */
     public function getAdminMenu()
     {
         return $this->getAdminClasses();
