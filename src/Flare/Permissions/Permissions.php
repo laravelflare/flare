@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Permissions;
 
+use LaravelFlare\Flare\Exceptions\PermissionsException;
 use LaravelFlare\Flare\Contracts\Permissions\Permissionable;
 
 class Permissions implements Permissionable

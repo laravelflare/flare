@@ -4,7 +4,6 @@ namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
 use LaravelFlare\Flare\Admin\AdminManager;
-use LaravelFlare\Flare\Exceptions\PermissionsException;
 use LaravelFlare\Flare\Contracts\Permissions\Permissionable;
 
 class CheckPermissions
