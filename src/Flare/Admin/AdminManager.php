@@ -156,23 +156,6 @@ class AdminManager extends Collection
             return false;
         }
 
-        if (!$this->checkUserHasAdminPermissions($class)) {
-            return false;
-        }
-
         return true;
-    }
-
-    /**
-     * Checks if the current user has access to a given 
-     * Admin class and returns a boolean.
-     *
-     * @param string $class
-     * 
-     * @return bool
-     */
-    private function checkUserHasAdminPermissions($class)
-    {
-        return Permissions::check($class, 'view');
     }
 }
