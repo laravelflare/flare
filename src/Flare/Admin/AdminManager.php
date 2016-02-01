@@ -146,7 +146,7 @@ class AdminManager
      */
     public function registerRoute($class)
     {
-        (new $class())->registerRoutes(new Router);
+        (new $class())->registerRoutes(\App::make(\Illuminate\Routing\Router::class));
     }
 
     /**
