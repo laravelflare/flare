@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
             ]);
 
         $router->group(['prefix' => \Flare::config('admin_url'), 'middleware' => ['flare']], function ($router) {
-            (new \LaravelFlare\Flare\Admin\AdminManager())->registerRoutes();
+            (new \LaravelFlare\Flare\Admin\AdminManager())->registerRoutes($router);
         });
 
         $router->group(['prefix' => \Flare::config('admin_url'), 'middleware' => ['flarebase']], function ($router) {
