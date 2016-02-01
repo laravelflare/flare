@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin;
 
+use Illuminate\Routing\Router;
 use LaravelFlare\Flare\Permissions\Permissions;
 
 class AdminManager
@@ -112,7 +113,7 @@ class AdminManager
      * Loops through all of the Admin classes in the collection
      * and registers their Admin Routes.
      */
-    public function registerRoutes()
+    public function registerRoutes(Router $router)
     {
         $this->registerSubRoutes($this->getAdminClasses());
     }
@@ -145,7 +146,7 @@ class AdminManager
      */
     public function registerRoute($class)
     {
-        (new $class())->registerRoutes();
+        (new $class())->registerRoutes(new Router);
     }
 
     /**
