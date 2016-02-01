@@ -88,7 +88,7 @@ trait ModelQuerying
             return $model->paginate($this->perPage);
         }
 
-        return $model->all();
+        return $model->get();
     }
 
     public function totals()
