@@ -14,7 +14,7 @@
                     class="form-control {{ $field['class'] or null }}"
                     type="file"
                     name="{{ $attribute }}"
-                    accept="{{ isset($field['accept']) ? $field['accept'] : 'image/*' }}" @endif
+                    accept="{{ isset($field['accept']) ? $field['accept'] : 'image/*' }}"
                     @if (isset($field['maxlength'])) maxlength="{{ $field['maxlength'] }}" @endif
                     @if (isset($field['disabled'])) disabled="disabled" @endif
                     @if (isset($field['autofocus'])) autofocus="autofocus" @endif
