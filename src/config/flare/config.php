@@ -4,19 +4,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Admin Configuration
+    | Administration Configuration
     |--------------------------------------------------------------------------
     | 
-    | 'admin_title' : The Title of your Admin Panel. Usually your sitename.
+    | 'admin_title' : The title of your admin panel, usually your sites name.
     |
-    | 'admin_url'   : Admin URL Path without slashes.
+    | 'admin_url'   : Admin path without slashes, for instance:
+    |                 'admin' would be available at http://example.com/admin
     |
     | 'admin_theme' : Choose an admin theme from the following colours:
     |                 'red', 'blue', 'green', 'yellow', 'black'.
-    |                 Flare Default is 'red'.
     |
     */
-    'admin_title' => 'Laravel <b>Flare</b>',
+    'admin_title' => 'Laravel Flare',
     'admin_url' => 'admin',
     'admin_theme' => 'red',
 
@@ -41,8 +41,8 @@ return [
     | Administration Attributes
     |--------------------------------------------------------------------------
     |
-    | This array of Attribute classes allows you to define all of the
-    | available Attribute types which will usuable in your ModelAdmin sections.
+    | This array of Attribute classes includes the defined list of
+    | attribute types which will be available in your ModelAdmin sections.
     |
     | You can add your own custom attributes here, replace or even remove
     | some of the defaults.

@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare;
 
+use Illuminate\Routing\Router;
 use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
 
 class Flare
@@ -11,7 +12,7 @@ class Flare
      *
      * @var string
      */
-    const VERSION = '0.3.x-dev';
+    const VERSION = '0.9.x-dev';
 
     /**
      * Array of expected configuration keys
@@ -20,7 +21,7 @@ class Flare
      * @var array
      */
     protected $configurationKeys = [
-        'admin_title' => 'Laravel <b>Flare</b>',
+        'admin_title' => 'Laravel Flare',
         'admin_url' => 'admin',
         'admin_theme' => 'red',
         'admin' => [],
@@ -34,10 +35,32 @@ class Flare
     ];
 
     /**
+     * The Title of the Admin Panel
+     * 
+     * @var string
+     */
+    protected $adminTitle;
+
+    /**
+     * Safe Title of the Admin Panel
+     * 
+     * @var string
+     */
+    protected $safeAdminTitle;
+
+    /**
+     * Relative Base URL of Admin Panel
+     * 
+     * @var string
+     */
+    protected $relativeAdminUrl;
+
+    /**
      * __construct.
      */
-    public function __construct()
+    public function __construct(Router $router)
     {
+
     }
 
     /**
@@ -53,20 +76,52 @@ class Flare
     public function config($key)
     {
         if (array_key_exists($key, $this->configurationKeys)) {
-            return config('flare.'.$key, $this->configurationKeys[$key]);
+            return config('flare.config.'.$key, $this->configurationKeys[$key]);
         }
 
-        return config($key);
+        return config('flare.'.$key);
+    }
+
+    /**
+     * @return string
+     * 
+     * @deprecated 0.9 Use getAdminTitle() instead.
+     */
+    public function adminTitle()
+    {
+        return $this->getAdminTitle();
     }
 
     /**
      * Returns the defined Admin Title.
-     * 
+     *
      * @return string
      */
-    public function adminTitle()
+    public function getAdminTitle()
     {
-        return \Flare::config('admin_title');
+        return $this->adminTitle ? $this->adminTitle : \Flare::config('admin_title');
+    }
+
+    /**
+     * Sets the Admin Title
+     * 
+     * @param mixed $title
+     *
+     * @return void
+     */
+    public function setAdminTitle($title = null)
+    {
+        $this->adminTitle = $title;
+    }
+
+    /**
+     * @return string
+     * 
+     * @deprecated 0.9 Use getSafeAdminTitle() instead.
+     */
+    public function safeAdminTitle()
+    {
+        return $this->getSafeAdminTitle();
     }
 
     /**
@@ -75,9 +130,22 @@ class Flare
      * 
      * @return string
      */
-    public function safeAdminTitle()
+    public function getSafeAdminTitle()
     {
-        return strip_tags(\Flare::config('admin_title'));
+        return $this->safeAdminTitle ? $this->adminTitle : strip_tags(\Flare::config('admin_title'));
+    }
+
+    /**
+     * Sets the Safe Admin Title which is used 
+     * in <title> tags etc.
+     *
+     * @param mixed $title
+     * 
+     * @return void
+     */
+    public function setSafeAdminTitle($title = null)
+    {
+        $this->safeAdminTitle = $title;
     }
 
     /**
@@ -90,7 +158,7 @@ class Flare
      */
     public function adminUrl($path = '')
     {
-        return url($this->relativeAdminUrl($path));
+        return url($this->getRelativeAdminUrl($path));
     }
 
     /**
@@ -103,7 +171,32 @@ class Flare
      */
     public function relativeAdminUrl($path = '')
     {
-        return rtrim(\Flare::config('admin_url').'/'.$path, '/');
+        return rtrim($this->getRelativeAdminUrl().'/'.$path, '/');
+    }
+
+    /**
+     * Returns URL to a path in the Admin Panel, using the 
+     * Admin URL defined in the Flare Config.
+     * 
+     * @return string
+     */
+    public function getRelativeAdminUrl()
+    {
+        return $this->relativeAdminUrl ? $this->relativeAdminUrl : \Flare::config('admin_url');
+    }
+
+    /**
+     * Set the Flare Relative Admin URL.
+     *
+     * If the provided path is null the relative path provided
+     * with the getRelativeAdminUrl() method will return the
+     * configuration file default (or the Flare fallbacks).
+     * 
+     * @param mixed $path
+     */
+    public function setRelativeAdminUrl($path = null)
+    {
+        $this->relativeAdminUrl = $path;
     }
 
     /**

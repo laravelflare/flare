@@ -8,75 +8,147 @@ use Illuminate\Support\ServiceProvider;
 class FlareServiceProvider extends ServiceProvider
 {
     /**
+     * Array of Flare Service Providers to be Registered.
+     * 
+     * @var array
+     */
+    protected $serviceProviders = [
+        \LaravelFlare\Flare\Providers\AuthServiceProvider::class,
+        \LaravelFlare\Flare\Providers\ArtisanServiceProvider::class,
+        \LaravelFlare\Flare\Providers\EventServiceProvider::class,
+        \LaravelFlare\Flare\Providers\RouteServiceProvider::class,
+    ];
+
+    /**
+     * Array of Flare assets and where they should be published to.
+     * 
+     * @var array
+     */
+    protected $assets = [
+        'public/flare' => 'vendor/flare',
+        'public/AdminLTE/dist' => 'vendor/flare',
+        'public/AdminLTE/plugins' => 'vendor/flare/plugins',
+        'public/AdminLTE/bootstrap' => 'vendor/flare/bootstrap',
+    ];
+
+    /**
      * Perform post-registration booting of services.
+     *
+     * @return void
      */
     public function boot()
     {
-        // Assets
-        $this->publishes([
-            __DIR__.'/../public/flare' => public_path('vendor/flare'),
-            __DIR__.'/../public/AdminLTE/bootstrap' => public_path('vendor/flare/bootstrap'),
-            __DIR__.'/../public/AdminLTE/dist' => public_path('vendor/flare'),
-            __DIR__.'/../public/AdminLTE/plugins' => public_path('vendor/flare/plugins'),
-        ], 'public');
+        $this->publishAssets();
+        $this->publishConfig();
+        $this->publishMigrations();
+        $this->publishViews();
 
-        // Config
-        $this->publishes([
-            __DIR__.'/../config/flare.php' => config_path('flare.php'),
-        ]);
-
-        // Database Migrations
-        $this->publishes([
-            __DIR__.'/Database/Migrations' => base_path('database/migrations'),
-        ]);
-
-        // Binds the Permissions interface to the defined Permissions class
-        $this->app->bind(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class, \Flare::config('permissions'));
-
-        // Views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'flare');
-        $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/flare'),
-        ]);
-
-        $this->registerBladeOperators();
+        $this->app->bind(
+            \LaravelFlare\Flare\Contracts\Permissions\Permissionable::class,
+            \Config::get('flare.config.permissions')
+        );
     }
 
     /**
      * Register any package services.
+     *
+     * @return void
      */
     public function register()
     {
-        // Merge Config 
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/flare.php', 'flare'
-        );
-
         $this->registerServiceProviders();
-
-        $this->app->singleton('flare', function () {
-            return new Flare();
-        });
-
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
+        $this->registerFlareFacade();
     }
 
     /**
-     * Register Service Providers.
+     * Register Service Providers
+     *
+     * @return void
      */
     protected function registerServiceProviders()
     {
-        \App::register('LaravelFlare\Flare\Providers\AuthServiceProvider');
-        \App::register('LaravelFlare\Flare\Providers\ArtisanServiceProvider');
-        \App::register('LaravelFlare\Flare\Providers\EventServiceProvider');
-        \App::register('LaravelFlare\Flare\Providers\RouteServiceProvider');
+        foreach ($this->serviceProviders as $class) {
+            $this->app->register($class);
+        }
     }
 
     /**
-     * Register Blade Operators.
+     * Register the Flare Facade
+     * 
+     * @return void
      */
-    protected function registerBladeOperators()
+    protected function registerFlareFacade()
     {
+        $this->app->singleton('flare', function ($app) {
+            return $app->make(\LaravelFlare\Flare\Flare::class);
+        });
+
+        AliasLoader::getInstance()->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
+    }
+
+    /**
+     * Publishes the Flare Assets to the appropriate directories.
+     * 
+     * @return void
+     */
+    protected function publishAssets()
+    {
+        $assets = [];
+
+        foreach ($this->assets as $location => $asset) {
+            $assets[$this->basePath($location)] = base_path($asset);
+        }
+
+        $this->publishes($assets, 'public');
+    }
+
+    /**
+     * Publishes the Flare Config File
+     * 
+     * @return void
+     */
+    protected function publishConfig()
+    {
+        $this->publishes([
+            $this->basePath('config/flare/config.php') => config_path('flare/config.php'),
+        ]);
+    }
+
+    /**
+     * Publishes the Flare Database Migrations
+     * 
+     * @return void
+     */
+    protected function publishMigrations()
+    {
+        $this->publishes([
+            $this->basePath('Flare/Database/Migrations') => base_path('database/migrations'),
+        ]);
+    }
+
+    /**
+     * Publishes the Flare Views and defines the location
+     * they should be looked for in the application.
+     * 
+     * @return void
+     */
+    protected function publishViews()
+    {
+        $this->loadViewsFrom($this->basePath('resources/views'), 'flare');
+        $this->publishes([
+            $this->basePath('resources/views') => base_path('resources/views/vendor/flare'),
+        ]);
+    }
+
+    /**
+     * Returns the path to a provided file within the Flare package.
+     * 
+     * @param  boolean $fiepath 
+     * 
+     * @return string           
+     */
+    private function basePath($filepath = false)
+    {
+        return __DIR__.'/../' . $filepath;
     }
 }
