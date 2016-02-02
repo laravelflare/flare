@@ -10,7 +10,7 @@
             Create {{ $modelAdmin->title() }}
         </h3>
     </div>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="box-body">
             @foreach ($modelAdmin->getFields() as $attribute => $field)
                 {!! \Flare::renderAttribute('add', $attribute, $field, false, $modelAdmin) !!}
