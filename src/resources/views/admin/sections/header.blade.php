@@ -3,7 +3,7 @@
     <a href="{{ url('admin') }}" class="logo">
         <i class="fa fa-fire"></i>
         <span>
-            {!! Flare::config('admin_title') !!}
+            {!! Flare::getAdminTitle() !!}
         </span>
         <style>
             .logo i {

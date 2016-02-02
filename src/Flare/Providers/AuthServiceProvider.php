@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-                            LaravelFlare\Flare\Admin\Models\ModelAdmin::class => LaravelFlare\Flare\Permissions\ModelAdminPolicy::class,
+                            \LaravelFlare\Flare\Admin\Models\ModelAdmin::class => \LaravelFlare\Flare\Permissions\ModelAdminPolicy::class,
                         ];
 
     /**

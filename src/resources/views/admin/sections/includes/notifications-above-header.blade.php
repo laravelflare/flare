@@ -1,4 +1,4 @@
-@if (Flare::config('core_notifications'))
+@if (Flare::show('notifications'))
 <section class="content-header notifications">
     <div class="row">
         <div class="col-md-12">

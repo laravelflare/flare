@@ -31,8 +31,19 @@ class Flare
         'widgets' => [],
         'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
         'policies' => [],
-        'core_notifications' => true,
+        'show' => [
+            'github' => true,
+            'notifications' => true,
+            'version' => true,
+        ]
     ];
+
+    /**
+     * Flare Configuration
+     * 
+     * @var array
+     */
+    protected $config;
 
     /**
      * The Title of the Admin Panel
@@ -58,16 +69,13 @@ class Flare
     /**
      * __construct.
      */
-    public function __construct(Router $router)
+    public function __construct()
     {
-
+        $this->setLoadedConfig();
     }
 
     /**
-     * Returns Flare configuration values, falling
-     * back to the defined bare-minimum configuration
-     * defaults if, for whatever reason the config is
-     * undefined.
+     * Returns a Flare configuration value(s).
      * 
      * @param string $key
      * 
@@ -75,11 +83,45 @@ class Flare
      */
     public function config($key)
     {
-        if (array_key_exists($key, $this->configurationKeys)) {
-            return config('flare.config.'.$key, $this->configurationKeys[$key]);
+        return $this->getConfig($key);
+    }
+
+    /**
+     * Returns a Flare configuration value(s), falling back 
+     * to the defined bare-minimum configuration defaults 
+     * if, for whatever reason the config is undefined.
+     * 
+     * @param string $key
+     * 
+     * @return mixed
+     */
+    public function getConfig($key)
+    {
+        if (array_key_exists($key, $this->config)) {
+            return $this->config[$key];
         }
 
         return config('flare.'.$key);
+    }
+
+    /**
+     * Allow setting of the Flare config at runtime.
+     *
+     * @return void
+     */
+    public function setConfig()
+    {
+
+    }
+
+    /**
+     * Set the loaded config to the protected property.
+     *
+     * @return void
+     */
+    public function setLoadedConfig()
+    {
+        $this->config = config('flare.config');   
     }
 
     /**
@@ -213,6 +255,50 @@ class Flare
     }
 
     /**
+     * Determines whether part of the Flare Admin Panel
+     * should be displayed or not and returns true / false.
+     * 
+     * @param  string $key
+     * 
+     * @return boolean
+     */
+    public function show($key = false)
+    {
+        if (!$key) {
+            return false;
+        }
+
+        return $this->getShow($key);
+    }
+
+    /**
+     * Determines whether part of the Flare Admin Panel
+     * should be displayed or not and returns true / false.
+     *
+     * Accessor for getShow().
+     * 
+     * @param  string $key
+     * 
+     * @return boolean
+     */
+    public function getShow($key = false)
+    {
+        if (array_key_exists($key, $showConfig = $this->getConfig('show'))) {
+            return $showConfig[$key];
+        }
+    }
+
+    /**
+     * Returns the current Flare Version.
+     * 
+     * @return string
+     */
+    public function version()
+    {
+        return self::VERSION;
+    }
+
+    /**
      * Returns an array of all of the Available Attribute Types.
      * 
      * @return array
@@ -286,15 +372,5 @@ class Flare
         }
 
         return $fullClassname;
-    }
-
-    /**
-     * Returns the current Flare Version.
-     * 
-     * @return string
-     */
-    public function version()
-    {
-        return self::VERSION;
     }
 }

@@ -19,7 +19,6 @@ return [
     'admin_title' => 'Laravel Flare',
     'admin_url' => 'admin',
     'admin_theme' => 'red',
-
     /*
     |--------------------------------------------------------------------------
     | Administration Classes
@@ -32,8 +31,7 @@ return [
     |
     */
     'admin' => [
-        // Example of ModelAdmin:
-        \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class,
+
     ],
 
     /*
@@ -41,8 +39,8 @@ return [
     | Administration Attributes
     |--------------------------------------------------------------------------
     |
-    | This array of Attribute classes includes the defined list of
-    | attribute types which will be available in your ModelAdmin sections.
+    | This array of Attribute classes allows you to define all of the
+    | available Attribute types which will usuable in your ModelAdmin sections.
     |
     | You can add your own custom attributes here, replace or even remove
     | some of the defaults.
@@ -73,10 +71,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This array of Admin Widget Classes
+    | 
+    | Example of Base WidgetAdmin:
+    |       \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
     |
     */
     'widgets' => [
-        // Example of Base WidgetAdmin: \LaravelFlare\Flare\Admin\Widgets\WidgetAdmin::class,
+
     ],
 
     /*
@@ -87,19 +88,25 @@ return [
     | Class to bind to the Permissionable Contract
     |
     */
-    'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
+    'permissions' => \App\Support\Flare\Permissions\Permissions::class,
 
     /*
     |--------------------------------------------------------------------------
     | Policies
     |--------------------------------------------------------------------------
     |
-    | Policy Registration
+    | This is an array of policies to register and the admin class to register
+    | them against. Policies allow you to restrict certain areas of your
+    | admin panel from being accessed by certain user types, for certain
+    | request types or even actions.
+    | 
+    | Example Policy Registration:
+    |       \App\Users\Members\MemberAdmin::class =>
+    |       \LaravelFlare\Flare\Admin\Models\Users\UserPolicy::class,
     |
     */
     'policies' => [
-        // Example of Policy:
-        \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class => \LaravelFlare\Flare\Admin\Models\Users\UserPolicy::class,
+
     ],
 
     /*
@@ -108,8 +115,14 @@ return [
     |--------------------------------------------------------------------------
     |
     | Configuration which is not Application specific, you probably don't 
-    | need to change anything here!
+    | need to change anything here! But feel free to play :)
     |
     */
-    'core_notifications' => true,
+    'show' => [
+        'github' => true,
+        'notifications' => true,
+        'version' => true,
+    ],
+
+    
 ];

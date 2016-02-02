@@ -5,7 +5,6 @@ namespace LaravelFlare\Flare\Providers;
 use Illuminate\Support\ServiceProvider;
 use LaravelFlare\Flare\Console\Commands\MakeUserCommand;
 use LaravelFlare\Flare\Console\Commands\MakeAdminCommand;
-use LaravelFlare\Flare\Console\Commands\FlareInstallCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
 use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
@@ -27,7 +26,6 @@ class ArtisanServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'FlareInstall' => 'command.flareinstall',
         'MakeAdmin' => 'command.makeadmin',
         'MakeUser' => 'command.makeuser',
         'ModelAdminMake' => 'command.modeladmin.make',
@@ -49,20 +47,6 @@ class ArtisanServiceProvider extends ServiceProvider
         }
 
         $this->commands(array_values($this->commands));
-    }
-
-    /**
-     * Register the command.
-     * 
-     * @param $command
-     * 
-     * @return
-     */
-    protected function registerFlareInstallCommand($command)
-    {
-        $this->app->singleton($command, function () {
-            return new FlareInstallCommand();
-        });
     }
 
     /**
