@@ -32,9 +32,22 @@ class AdminController extends FlareController
         parent::__construct($adminManager);
 
         $this->auth = $auth;
+    }
 
-        $this->middleware('flareauthenticate', ['except' => ['getLogin', 'postLogin', 'getLogout', 'getEmail', 'postEmail']]);
-        $this->middleware('checkpermissions', ['except' => ['getLogin', 'postLogin', 'getLogout', 'getEmail', 'postEmail']]);
+    /**
+     * Show the Dashboard.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getDashboard()
+    {
+        $view = 'admin.dashboard';
+
+        if (!view()->exists($view)) {
+            $view = 'flare::'.$view;
+        }
+
+        return view($view, ['widgetAdminManager' => (new WidgetAdminManager())]);
     }
 
     /**
@@ -88,25 +101,9 @@ class AdminController extends FlareController
      *
      * @return \Illuminate\Http\Response
      */
-    public function getEmail()
+    public function getReset()
     {
         return view('flare::admin.password');
-    }
-
-    /**
-     * Show the Dashboard.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function getIndex()
-    {
-        $view = 'admin.dashboard';
-
-        if (!view()->exists($view)) {
-            $view = 'flare::'.$view;
-        }
-
-        return view($view, ['widgetAdminManager' => (new WidgetAdminManager())]);
     }
 
     /**

@@ -113,7 +113,7 @@ class AdminManager
      * Loops through all of the Admin classes in the collection
      * and registers their Admin Routes.
      */
-    public function registerRoutes()
+    public function registerRoutes(Router $router)
     {
         $this->registerSubRoutes($this->getAdminClasses());
     }

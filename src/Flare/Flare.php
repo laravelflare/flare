@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare;
 
 use Illuminate\Routing\Router;
+use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
 
 class Flare
@@ -33,10 +34,18 @@ class Flare
         'policies' => [],
         'show' => [
             'github' => true,
+            'login' => true,
             'notifications' => true,
             'version' => true,
         ]
     ];
+
+    /**
+     * Admin Manager
+     * 
+     * @var \LaravelFlare\Flare\Admin\AdminManager
+     */
+    protected $admin;
 
     /**
      * Flare Configuration
@@ -69,9 +78,21 @@ class Flare
     /**
      * __construct.
      */
-    public function __construct()
+    public function __construct(AdminManager $adminManager)
     {
         $this->setLoadedConfig();
+
+        $this->admin = $adminManager;
+    }
+
+    /**
+     * Returns the instance of the Admin Manager
+     * 
+     * @return \LaravelFlare\Flare\Admin\AdminManager
+     */
+    public function admin()
+    {
+        return $this->admin;
     }
 
     /**
@@ -200,7 +221,7 @@ class Flare
      */
     public function adminUrl($path = '')
     {
-        return url($this->getRelativeAdminUrl($path));
+        return url($this->relativeAdminUrl($path));
     }
 
     /**

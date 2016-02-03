@@ -120,6 +120,7 @@ return [
     */
     'show' => [
         'github' => true,
+        'login' => true,
         'notifications' => true,
         'version' => true,
     ],
