@@ -323,17 +323,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     {
         return isset($this->sortable) && $this->sortable ? true : false;
     }
-
-    /**
-     * Returns a DefaultWidget instance based on the currently ManagedModel.
-     * 
-     * @return DefaultWidget
-     */
-    public function defaultWidget()
-    {
-        return new DefaultWidget($this);
-    }
-
+    
     /**
      * Determine if the Managed Model is using the SoftDeletes Trait.
      *

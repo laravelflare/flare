@@ -80,7 +80,7 @@ class FlareServiceProvider extends ServiceProvider
     protected function registerFlareFacade()
     {
         $this->app->singleton('flare', function ($app) {
-            return $app->make(\LaravelFlare\Flare\Flare::class);
+            return $app->make(\LaravelFlare\Flare\Flare::class, [$app]);
         });
 
         AliasLoader::getInstance()->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);

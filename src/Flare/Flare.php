@@ -3,7 +3,6 @@
 namespace LaravelFlare\Flare;
 
 use Illuminate\Routing\Router;
-use LaravelFlare\Flare\Admin\AdminManager;
 use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
 
 class Flare
@@ -41,11 +40,20 @@ class Flare
     ];
 
     /**
-     * Admin Manager
-     * 
-     * @var \LaravelFlare\Flare\Admin\AdminManager
+     * Array of Helper Methods.
+     *
+     * @var array
      */
-    protected $admin;
+    protected $helpers = [
+        'admin' => \LaravelFlare\Flare\Admin\AdminManager::class,
+    ];
+
+    /**
+     * Application Instance
+     * 
+     * @var \Illuminate\Foundation\Application
+     */
+    protected $app;
 
     /**
      * Flare Configuration
@@ -77,22 +85,24 @@ class Flare
 
     /**
      * __construct.
+     *
+     * @param \Illuminate\Foundation\Application $app
      */
-    public function __construct(AdminManager $adminManager)
+    public function __construct($app)
     {
-        $this->setLoadedConfig();
+        $this->app = $app;
 
-        $this->admin = $adminManager;
+        $this->setLoadedConfig();
     }
 
     /**
-     * Returns the instance of the Admin Manager
+     * Returns the Application Instance.
      * 
-     * @return \LaravelFlare\Flare\Admin\AdminManager
+     * @return mixed
      */
-    public function admin()
+    public function app()
     {
-        return $this->admin;
+        return $this->app;
     }
 
     /**
@@ -393,5 +403,39 @@ class Flare
         }
 
         return $fullClassname;
+    }
+
+    /**
+     * Call a Helper Method.
+     * 
+     * @param string $method
+     * @param mixed  $parameters
+     * 
+     * @return mixed
+     */
+    protected function callHelperMethod($method, $parameters)
+    {
+        return $this->app->make($this->helpers[$method], $parameters);
+    }
+
+    /**
+     * Provide access to Helper Methods.
+     *
+     * This provides an extensible way of adding helper classes
+     * which are registerable and available to adccess through
+     * the Flare Facade.
+     *
+     * @param string $method
+     * @param array  $parameters
+     * 
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if (array_key_exists($method, $this->helpers)) {
+            return $this->callHelperMethod($method, $parameters);
+        }
+
+        return call_user_func_array([$this, $method], $parameters);
     }
 }
