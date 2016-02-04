@@ -101,7 +101,7 @@ return [
     | request types or even actions.
     | 
     | Example Policy Registration:
-    |       \App\Users\Members\MemberAdmin::class =>
+    |       \App\Users\UserAdmin::class =>
     |       \LaravelFlare\Flare\Admin\Models\Users\UserPolicy::class,
     |
     */
