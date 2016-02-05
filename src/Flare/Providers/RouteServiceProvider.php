@@ -132,7 +132,7 @@ class RouteServiceProvider extends ServiceProvider
 
                 $router->get('logout', $this->namespace.'\AdminController@getLogout')->name('logout');
                 $router->get('reset', $this->namespace.'\AdminController@getReset')->name('reset');
-                $router->post('reset', $this->namespace.'\AdminController@postReset')->name('reset');
+                $router->post('reset', $this->namespace.'\AdminController@postEmail')->name('reset');
             }
         );
     }
