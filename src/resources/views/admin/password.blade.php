@@ -1,14 +1,9 @@
 @include('flare::admin.sections.head')
-    
-    <style>
-        body {
-            background: #d73925;
-        }
-    </style>
+ 
     <div class="container-fluid" style="padding-top: 120px">
         <div class="row">
             <div class="col-md-6 col-lg-4 col-md-offset-3 col-lg-offset-4">
-                <h1 style="text-align: center; color: white; padding-bottom: 40px;">
+                <h1 class="text-{{ Flare::config('admin_theme') }}" style="text-align: center; padding-bottom: 40px;">
                     {!! Flare::config('admin_title') !!}
                 </h1>
 

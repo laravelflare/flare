@@ -77,7 +77,7 @@ class AdminController extends FlareController
             return $this->loginRedirect();
         }
 
-        return redirect(url('admin/login'))
+        return redirect(route('flare::login'))
                     ->withInput($request->only('email', 'remember'))
                     ->withErrors([
                         'email' => $this->getFailedLoginMessage(),
