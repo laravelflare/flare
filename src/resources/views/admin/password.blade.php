@@ -21,7 +21,7 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/email') }}">                     
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('flare::reset') }}">                     
                         {!! csrf_field() !!}
 
                         <div class="form-group" style="padding-left: 15px; padding-right: 15px;">
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="col-lg-12" style="padding-top: 30px;text-align: center;">
-                    <a style="color: white; border-bottom: 1px dotted;" href="{{ url('/admin/login') }}">
+                    <a style="color: white; border-bottom: 1px dotted;" href="{{ route('flare::login') }}">
                         Login
                     </a>
                 </div>
