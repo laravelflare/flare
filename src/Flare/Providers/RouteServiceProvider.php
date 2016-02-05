@@ -123,16 +123,22 @@ class RouteServiceProvider extends ServiceProvider
                 'middleware' => ['flarebase']
             ], 
             function ($router) {
-                $router->get('index', $this->namespace.'\AdminController@getIndex')->name('index');
-
+                // Login route if set to show...
                 if (\Flare::show('login')) {
                     $router->get('login', $this->namespace.'\AdminController@getLogin')->name('login');
                     $router->post('login', $this->namespace.'\AdminController@postLogin')->name('login');
                 } 
 
+                // Logout route...
                 $router->get('logout', $this->namespace.'\AdminController@getLogout')->name('logout');
-                $router->get('reset', $this->namespace.'\AdminController@getReset')->name('reset');
-                $router->post('reset', $this->namespace.'\AdminController@postEmail')->name('reset');
+
+                // Password reset link request routes...
+                $router->get('email', $this->namespace.'\AdminController@getEmail')->name('email');
+                $router->post('email', $this->namespace.'\AdminController@postEmail')->name('email');
+
+                // Password reset routes...
+                $router->get('reset/{token}', $this->namespace.'\AdminController@getReset')->name('reset');
+                $router->post('reset', $this->namespace.'\AdminController@postReset')->name('reset');
             }
         );
     }

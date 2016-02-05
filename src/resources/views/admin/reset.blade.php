@@ -21,30 +21,41 @@
                         </div>
                     @endif
 
-                    @if (session('status'))
-                        <div style="padding-left: 15px; padding-right: 15px">
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('flare::email') }}">                     
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('flare::reset') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group" style="padding-left: 15px; padding-right: 15px;">
-                            <div class="col-md-12">
-                                <input type="email" class="form-control" placeholder="Email Address" name="email" value="{{ old('email') }}">
+                        <input type="hidden" name="token" value="{{ $token }}">
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}">
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-default pull-right">
-                                Reset Password
-                            </button>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password">
+                            </div>
                         </div>
 
-                        <div class="clearfix"></div>
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password_confirmation">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-refresh"></i>Reset Password
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 

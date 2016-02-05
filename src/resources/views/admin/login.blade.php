@@ -55,7 +55,7 @@
 				</div>
 
 				<div class="col-lg-12" style="padding-top: 30px; text-align: center;">
-                    <a class="text-{{ Flare::config('admin_theme') }}" style="border-bottom: 1px dotted;" href="{{ route('flare::reset') }}">
+                    <a class="text-{{ Flare::config('admin_theme') }}" style="border-bottom: 1px dotted;" href="{{ route('flare::email') }}">
 						Forgot Your Password?
 					</a>
 				</div>

@@ -101,9 +101,19 @@ class AdminController extends FlareController
      *
      * @return \Illuminate\Http\Response
      */
-    public function getReset()
+    public function getEmail()
     {
         return view('flare::admin.password');
+    }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getReset()
+    {
+        return view('flare::admin.reset');
     }
 
     /**
