@@ -88,7 +88,7 @@ return [
     | Class to bind to the Permissionable Contract
     |
     */
-    'permissions' => \App\Support\Flare\Permissions\Permissions::class,
+    'permissions' => \LaravelFlare\Flare\Permissions\Permissions::class,
 
     /*
     |--------------------------------------------------------------------------
