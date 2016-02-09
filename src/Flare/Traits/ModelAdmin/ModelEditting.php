@@ -10,6 +10,16 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelEditting
 {
     /**
+     * Map Model Attributes to AttributeTypes with
+     * additional parameters which will be output
+     * as fields when viewing, editting or adding
+     * a new model entry.
+     * 
+     * @var array
+     */
+    protected $fields = [];
+    
+    /**
      * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
      * 
      * @var bool

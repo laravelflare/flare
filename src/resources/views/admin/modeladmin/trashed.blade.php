@@ -1,7 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-
 @section('page_title', $modelAdmin->getPluralTitle())
-
 @section('content')
 
 <div class="">

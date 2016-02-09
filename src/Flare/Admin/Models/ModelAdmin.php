@@ -5,21 +5,12 @@ namespace LaravelFlare\Flare\Admin\Models;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelCloning;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelCloneable;
-use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
 
-class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelValidatable, ModelCloneable
+class ModelAdmin extends Admin implements ModelQueryable
 {
-    use ModelWriting;
     use ModelQuerying;
-    use ModelValidating;
-    use ModelCloning;
 
     /**
      * Class of Model to Manage.
@@ -52,16 +43,6 @@ class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelV
      * @var array
      */
     protected $columns = [];
-
-    /**
-     * Map Model Attributes to AttributeTypes with
-     * additional parameters which will be output
-     * as fields when viewing, editting or adding
-     * a new model entry.
-     * 
-     * @var array
-     */
-    protected $fields = [];
 
     /**
      * Columns for Model are Sortable.
@@ -392,8 +373,6 @@ class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelV
 
     /**
      * Determine if the Model Admin is sortable in it's list view.
-     *
-     * @param string $key
      * 
      * @return bool
      */
@@ -403,12 +382,69 @@ class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelV
     }
 
     /**
+     * Determine if the Model Admin has Viewing Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasViewing()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelViewing::class);
+    }
+
+    /**
+     * Determine if the Model Admin has Creating Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasCreating()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelCreating::class);
+    }
+
+    /**
+     * Determine if the Model Admin has Cloning Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasCloning()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelCloning::class);
+    }
+
+    /**
+     * Determine if the Model Admin has Editting Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasEditting()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelEditting::class);
+    }
+
+    /**
+     * Determine if the Model Admin has Deleting Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasDeleting()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelDeleting::class);
+    }
+
+    /**
      * Determine if the Managed Model is using the SoftDeletes Trait.
+     *
+     * This is guarded by hasDeleting, since we shouldn't allow SoftDeleting
+     * without the deleting trait (even though it isn't really required).
      *
      * @return bool
      */
     public function hasSoftDeletes()
     {
+        if (!$this->hasDeleting()) {
+            return false;
+        }
+
         $managedModelClass = $this->getManagedModel();
 
         return in_array(
@@ -416,5 +452,59 @@ class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelV
         ) && in_array(
             \LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
         );
+    }
+
+    /**
+     * Determine if the Model Admin has Validating Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasValidating()
+    {
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelValidating::class);
+    }
+
+    /**
+     * Determine if the Managed Model has a Trait and Contract
+     *
+     * @return bool
+     */
+    public function hasTraitAndContract($trait = null, $contract = null)
+    {
+        return ($this->hasTrait($trait) && $this->hasContract($contract));
+    }
+
+    /**
+     * Returns whether the current ModelAdmin has a given trait.
+     * 
+     * @param  string  $trait  
+     * 
+     * @return boolean        
+     */
+    public function hasTrait($trait = null)
+    {
+        if (!$trait) {
+            return;
+        }
+        
+        $managedModelClass = $this->getManagedModel();
+
+        return in_array($trait, class_uses_recursive(get_class(new $managedModelClass())));
+    }
+
+    /**
+     * Returns whether the current ModelAdmin has a given contract.
+     * 
+     * @param  string  $contract  
+     * 
+     * @return boolean        
+     */
+    public function hasContract($contract = null)
+    {
+        if (!$trait) {
+            return;
+        }
+        
+        $managedModelClass = $this->getManagedModel();
     }
 }

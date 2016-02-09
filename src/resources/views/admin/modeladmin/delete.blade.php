@@ -1,7 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-
 @section('page_title', 'Delete '.$modelAdmin->getTitle())
-
 @section('content')
 
 <div class="box box-danger">
