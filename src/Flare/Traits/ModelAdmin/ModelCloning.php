@@ -21,4 +21,14 @@ trait ModelCloning
             $this->model->getUpdatedAtColumn(),
         ];
     }
+
+    /**
+     * 
+     */
+    public function unCloneableColumns()
+    {
+        // We will use this: SHOW INDEXES FROM users WHERE Non_unique != 0 AND Column_name != 'id'
+        // To determine if there are unCloneable Columns and if that is the case, we will render
+        // the clone view and validate the unCloneable Columns to be unique before saving.
+    }
 }
