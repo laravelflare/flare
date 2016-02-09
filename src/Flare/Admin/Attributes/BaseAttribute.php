@@ -2,6 +2,8 @@
 
 namespace LaravelFlare\Flare\Admin\Attributes;
 
+use \Illuminate\Support\HtmlString;
+
 class BaseAttribute
 {
     /**
@@ -61,6 +63,22 @@ class BaseAttribute
         $this->field = $field;
         $this->model = $model;
         $this->modelManager = $modelManager;
+    }
+
+    /**
+     * Returns the View to Render as an HTMLString
+     * 
+     * @param  boolean $view 
+     * 
+     * @return /Illuminate/Support/String
+     */
+    public function render($view = false)
+    {
+        if (method_exists($this, $method = 'render'.ucfirst($view))) {
+            return new HtmlString(
+                call_user_func_array([$this, $method], [])
+            );
+        }
     }
 
     /**

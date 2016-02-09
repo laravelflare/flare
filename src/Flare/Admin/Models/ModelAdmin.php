@@ -8,6 +8,7 @@ use LaravelFlare\Flare\Traits\ModelAdmin\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Admin\Attributes\AttributeCollection;
 
 class ModelAdmin extends Admin implements ModelQueryable
 {
@@ -98,6 +99,8 @@ class ModelAdmin extends Admin implements ModelQueryable
         $this->getManagedModel();
 
         $this->model = $this->model();
+
+        $this->formatFields();
     }
 
     /**
@@ -370,17 +373,37 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function getFields()
     {
+        $this->setFields($this->fields);
+        
         return $this->fields;
     }
 
     /**
-     * Gets the Managed Model Mapping.
+     * Sets the Managed Model Mapping.
      * 
      * @param array $fields
      */
     public function setFields($fields = [])
     {
         $this->fields = $fields;
+
+        $this->formatFields();
+    }
+
+    /**
+     * Format the provided Attribute Fields into a more usable format.
+     * 
+     * @return void
+     */
+    protected function formatFields()
+    {
+        $fields = $this->fields;
+
+        if (!$fields instanceof AttributeCollection) {
+            $fields = new AttributeCollection($fields);
+        }
+
+        return $this->fields = $fields->formatFields();
     }
 
     /**

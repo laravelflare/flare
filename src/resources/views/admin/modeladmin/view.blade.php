@@ -11,7 +11,7 @@
     <form action="" method="post">
         <div class="box-body">
             @foreach ($modelAdmin->outputFields() as $attribute => $field)
-                {!! \Flare::attributes()->renderAttribute('view', $attribute, $field, $modelItem, $modelAdmin) !!}
+                {{ $field->render('view') }}
             @endforeach
         </div>
         <div class="box-footer">

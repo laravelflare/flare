@@ -5,6 +5,27 @@ namespace LaravelFlare\Flare\Admin\Attributes;
 class AttributeManager
 {
     /**
+     * Create a new Attribute Instance 
+     * 
+     * @param string $type
+     * @param string $action
+     * @param string $attribute
+     * @param string $field
+     * @param string $model
+     * @param string $modelManager
+     */
+    public function createAttribute($type, $attribute, $field, $model = null, $modelManager = null)
+    {
+        if ($this->attributeTypeExists($type)) {
+            $fieldType = $this->resolveAttributeClass($type);
+
+            return new $fieldType($attribute, $field, $model, $modelManager);
+        }
+
+        return new BaseAttribute($attribute, $field, $model, $modelManager);
+    }
+
+    /**
      * Render Attribute.
      *
      * @param string $action
@@ -15,19 +36,25 @@ class AttributeManager
      *
      * @return \Illuminate\Http\Response
      */
-    public function renderAttribute($action, $attribute, $field, $model, $modelManager)
+    public function renderAttribute($action, $attribute, $field, $model = null, $modelManager = null)
     {
         if (!isset($field['type'])) {
             throw new \Exception('Attribute Field Type cannot be empty or undefined.');
         }
 
-        if ($this->attributeTypeExists($field['type'])) {
-            $fieldType = $this->resolveAttributeClass($field['type']);
+        return call_user_func_array([$this->createAttribute($field['type'], $action, $attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
+    }
 
-            return call_user_func_array([new $fieldType($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
-        }
-
-        return call_user_func_array([new BaseAttribute($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
+    /**
+     * Determines if an AttributeType class exists or not.
+     * 
+     * @param string $type
+     * 
+     * @return bool
+     */
+    public function attributeTypeExists($type)
+    {
+        return $this->resolveAttributeClass($type) ? true : false;
     }
 
     /**
@@ -48,18 +75,6 @@ class AttributeManager
         }
 
         return $availableAttributes;
-    }
-
-    /**
-     * Determines if an AttributeType class exists or not.
-     * 
-     * @param string $type
-     * 
-     * @return bool
-     */
-    protected function attributeTypeExists($type)
-    {
-        return $this->resolveAttributeClass($type) ? true : false;
     }
 
     /**
