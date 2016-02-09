@@ -7,7 +7,7 @@
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Create {{ $modelAdmin->title() }}
+            View {{ $modelAdmin->title() }}
         </h3>
     </div>
     <form action="" method="post">
