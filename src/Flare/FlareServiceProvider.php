@@ -33,8 +33,6 @@ class FlareServiceProvider extends ServiceProvider
 
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -51,8 +49,6 @@ class FlareServiceProvider extends ServiceProvider
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register()
     {
@@ -61,9 +57,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Service Providers
-     *
-     * @return void
+     * Register Service Providers.
      */
     protected function registerServiceProviders()
     {
@@ -73,9 +67,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Flare Facade
-     * 
-     * @return void
+     * Register the Flare Facade.
      */
     protected function registerFlareFacade()
     {
@@ -88,8 +80,6 @@ class FlareServiceProvider extends ServiceProvider
 
     /**
      * Publishes the Flare Assets to the appropriate directories.
-     * 
-     * @return void
      */
     protected function publishAssets()
     {
@@ -103,9 +93,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publishes the Flare Config File
-     * 
-     * @return void
+     * Publishes the Flare Config File.
      */
     protected function publishConfig()
     {
@@ -115,9 +103,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publishes the Flare Database Migrations
-     * 
-     * @return void
+     * Publishes the Flare Database Migrations.
      */
     protected function publishMigrations()
     {
@@ -129,8 +115,6 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Publishes the Flare Views and defines the location
      * they should be looked for in the application.
-     * 
-     * @return void
      */
     protected function publishViews()
     {
@@ -143,12 +127,12 @@ class FlareServiceProvider extends ServiceProvider
     /**
      * Returns the path to a provided file within the Flare package.
      * 
-     * @param  boolean $fiepath 
+     * @param bool $fiepath
      * 
-     * @return string           
+     * @return string
      */
     private function basePath($filepath = false)
     {
-        return __DIR__.'/../' . $filepath;
+        return __DIR__.'/../'.$filepath;
     }
 }

@@ -39,8 +39,8 @@ class Permissions implements Permissionable
      * and can be used to throw an exception, return a 
      * view (abort() etc.) or anything else really.
      * 
-     * @param  string $class 
-     * @param  string $action
+     * @param string $class
+     * @param string $action
      *
      * @return mixed
      */

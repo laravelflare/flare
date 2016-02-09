@@ -1,7 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-
-@section('page_title', $modelAdmin->pluralTitle())
-
+@section('page_title', $modelAdmin->getPluralTitle())
 @section('content')
 
 <div class="">
@@ -10,9 +8,11 @@
             <div class="box">
                 <div class="box-header with-border">
                     <div class="btn-group">
-                        <a href="{{ $modelAdmin::currentUrl('all') }}" class="btn btn-default btn-flat">
+                        <a href="{{ $modelAdmin->currentUrl('all') }}" class="btn btn-default btn-flat">
                             With Trashed
-                            <span class="badge bg-yellow" style="margin-left: 15px">{{ $totals['with_trashed'] }}</span>
+                            <span class="badge bg-yellow" style="margin-left: 15px">
+                                {{ $totals['with_trashed'] }}
+                            </span>
                         </a>
                         <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
                             <span class="caret"></span>
@@ -20,15 +20,15 @@
                         </button>
                         <ul role="menu" class="dropdown-menu">
                             <li>
-                                <a href="{{ $modelAdmin::currentUrl() }}">
+                                <a href="{{ $modelAdmin->currentUrl() }}">
                                     <span style="display:inline-block; width: 100px;">
-                                        All {{ $modelAdmin->pluralTitle() }}
+                                        All {{ $modelAdmin->getPluralTitle() }}
                                     </span>
                                     <span class="badge bg-green">{{ $totals['all'] }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $modelAdmin::currentUrl('trashed') }}">
+                                <a href="{{ $modelAdmin->currentUrl('trashed') }}">
                                     <span style="display:inline-block; width: 100px;">
                                         Trashed Only
                                     </span>
@@ -48,4 +48,4 @@
     </div>
 </div>
 
-@stop
+@endsection

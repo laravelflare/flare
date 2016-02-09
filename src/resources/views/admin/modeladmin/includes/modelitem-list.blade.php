@@ -5,7 +5,7 @@
                 @foreach ($modelAdmin->getColumns() as $key => $field)
                     <th>
                         @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key) && !$modelAdmin->hasGetMutator($key) && $modelAdmin->isSortable())
-                            <a href="{{ $modelAdmin::currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
+                            <a href="{{ $modelAdmin->currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                                 {{ $field }}
                                 @if (Request::input('order', 'id') == $key)
                                     <i class="fa fa-caret-{{ ($modelAdmin->sortBy() == 'asc' ? 'up' : 'down') }}"></i>
@@ -29,26 +29,26 @@
                     </td>
                     @endforeach
                     <td style="width: 1%; white-space:nowrap">
-                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin::currentUrl('view/'.$modelItem->getKey()) }}">
+                        <a class="btn btn-success btn-xs" href="{{ $modelAdmin->currentUrl('view/'.$modelItem->getKey()) }}">
                             <i class="fa fa-eye"></i>
                             View
                         </a>
-                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin::currentUrl('edit/'.$modelItem->getKey()) }}">
+                        <a class="btn btn-primary btn-xs" href="{{ $modelAdmin->currentUrl('edit/'.$modelItem->getKey()) }}">
                             <i class="fa fa-edit"></i>
                             Edit
                         </a>
                         @if ($modelAdmin->hasSoftDeletes() && $modelItem->trashed())
-                        <a class="btn btn-info btn-xs" href="{{ $modelAdmin::currentUrl('restore/'.$modelItem->getKey()) }}">
+                        <a class="btn btn-info btn-xs" href="{{ $modelAdmin->currentUrl('restore/'.$modelItem->getKey()) }}">
                             <i class="fa fa-undo"></i>
                             Restore
                         </a>
                         @else
-                        <a class="btn btn-warning btn-xs" href="{{ $modelAdmin::currentUrl('clone/'.$modelItem->getKey()) }}">
+                        <a class="btn btn-warning btn-xs" href="{{ $modelAdmin->currentUrl('clone/'.$modelItem->getKey()) }}">
                             <i class="fa fa-clone"></i>
                             Clone
                         </a>
                         @endif
-                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin::currentUrl('delete/'.$modelItem->getKey()) }}">
+                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin->currentUrl('delete/'.$modelItem->getKey()) }}">
                             <i class="fa fa-trash"></i>
                             @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
                                 Delete
@@ -62,7 +62,7 @@
         @else 
             <tr>
                 <td colspan="{{ count($modelAdmin->getColumns())+2 }}">
-                    No {{ $modelAdmin->pluralTitle() }} Found
+                    No {{ $modelAdmin->getPluralTitle() }} Found
                 </td>
             </tr>
         @endif

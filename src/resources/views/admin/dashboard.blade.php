@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="row">
-        @if (count($widgetAdminManager->items()) > 0)
-            @foreach ($widgetAdminManager->items() as $widget)
+        @if (count($widgetAdminManager->all()) > 0)
+            @foreach ($widgetAdminManager->all() as $widget)
                 {!! $widget->render() !!}
             @endforeach
         @else 

@@ -1,6 +1,6 @@
 @extends('flare::admin.sections.wrapper')
 
-@section('page_title', $modelAdmin->pluralTitle())
+@section('page_title', $modelAdmin->getPluralTitle())
 
 @section('content')
 
@@ -10,8 +10,8 @@
             <div class="box">
                 <div class="box-header with-border">
                     <div class="btn-group">
-                        <a href="{{ $modelAdmin::currentUrl() }}" class="btn btn-default btn-flat">
-                            All {{ $modelAdmin->pluralTitle() }}
+                        <a href="{{ $modelAdmin->currentUrl() }}" class="btn btn-default btn-flat">
+                            All {{ $modelAdmin->getPluralTitle() }}
                             <span class="badge bg-green" style="margin-left: 15px">{{ $totals['all'] }}</span>
                         </a>
                         @if ($modelAdmin->hasSoftDeletes())
@@ -21,7 +21,7 @@
                         </button>
                         <ul role="menu" class="dropdown-menu">
                             <li>
-                                <a href="{{ $modelAdmin::currentUrl('all') }}">
+                                <a href="{{ $modelAdmin->currentUrl('all') }}">
                                     <span style="display:inline-block; width: 100px;">
                                         With Trashed
                                     </span>
@@ -29,7 +29,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $modelAdmin::currentUrl('trashed') }}">
+                                <a href="{{ $modelAdmin->currentUrl('trashed') }}">
                                     <span style="display:inline-block; width: 100px;">
                                         Trashed Only
                                     </span>
@@ -50,4 +50,4 @@
     </div>
 </div>
 
-@stop
+@endsection

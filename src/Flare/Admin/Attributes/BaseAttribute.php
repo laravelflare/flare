@@ -61,38 +61,50 @@ class BaseAttribute
         $this->field = $field;
         $this->model = $model;
         $this->modelManager = $modelManager;
-
-        $this->viewShare();
     }
 
     /**
      * Renders the Add (Create) Field View.
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function renderAdd()
     {
-        return view($this->viewpath.'.add', []);
+        return view($this->viewpath.'.add', $this->viewData());
     }
 
     /**
      * Renders the Edit (Update) Field View.
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function renderEdit()
     {
-        return view($this->viewpath.'.edit', []);
+        return view($this->viewpath.'.edit', $this->viewData());
+    }
+
+    /**
+     * Renders the Clone (Update) Field View.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function renderClone()
+    {
+        if (view()->exists($this->viewpath.'.clone')) {
+            view($this->viewpath.'.clone', $this->viewData());
+        }
+
+        return view($this->viewpath.'.edit', $this->viewData());
     }
 
     /**
      * Renders the Viewable Field View.
      * 
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function renderView()
     {
-        return view($this->viewpath.'.view', []);
+        return view($this->viewpath.'.view', $this->viewData());
     }
 
     /**
@@ -178,17 +190,19 @@ class BaseAttribute
     }
 
     /**
-     * Shares all of the accessible date to the Attribute View.
+     * Returns all of the accessible data for the Attirbute View
+     *
+     * @return array
      */
-    protected function viewShare()
+    protected function viewData()
     {
-        view()->share([
-                        'field' => $this->getField(),
-                        'model' => $this->getModel(),
-                        'attribute' => $this->getAttribute(),
-                        'modelManager' => $this->getModelManager(),
-                        'attributeType' => $this->getAttributeType(),
-                        'attributeTitle' => $this->getAttributeTitle(),
-                    ]);
+        return [
+                'field' => $this->getField(),
+                'model' => $this->getModel(),
+                'attribute' => $this->getAttribute(),
+                'modelManager' => $this->getModelManager(),
+                'attributeType' => $this->getAttributeType(),
+                'attributeTitle' => $this->getAttributeTitle(),
+            ];
     }
 }

@@ -113,7 +113,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->create();
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully created.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully created.', 'dismissable' => false]]);
     }
 
     /**
@@ -155,7 +155,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->edit($modelitem_id);
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully updated.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully updated.', 'dismissable' => false]]);
     }
 
     /**
@@ -187,7 +187,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->delete($modelitem_id);
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully removed.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully removed.', 'dismissable' => false]]);
     }
 
     /**
@@ -213,7 +213,7 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->findOnlyTrashed($modelitem_id)->restore();
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully restored.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully restored.', 'dismissable' => false]]);
     }
 
     /**
@@ -227,6 +227,6 @@ class ModelAdminController extends FlareController
     {
         $this->modelAdmin->find($modelitem_id)->replicate($this->modelAdmin->excludeOnClone())->save();
 
-        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->title().' was successfully cloned.', 'dismissable' => false]]);
+        return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully cloned.', 'dismissable' => false]]);
     }
 }

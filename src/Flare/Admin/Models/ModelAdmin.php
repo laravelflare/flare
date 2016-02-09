@@ -4,29 +4,29 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Admin\Widgets\DefaultWidget;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelWriting;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelCloning;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
-use LaravelFlare\Flare\Traits\Attributes\AttributeAccess;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelWriteable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelCloneable;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelValidatable;
-use LaravelFlare\Flare\Contracts\ModelAdmin\AttributesAccessable;
 
-class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, ModelQueryable, ModelValidatable, ModelCloneable
+class ModelAdmin extends Admin implements ModelWriteable, ModelQueryable, ModelValidatable, ModelCloneable
 {
-    use AttributeAccess, ModelWriting, ModelQuerying, ModelValidating, ModelCloning;
+    use ModelWriting;
+    use ModelQuerying;
+    use ModelValidating;
+    use ModelCloning;
 
     /**
      * Class of Model to Manage.
      * 
      * @var string
      */
-    protected static $managedModel;
+    protected $managedModel;
 
     /**
      * ModelAdmin Icon.
@@ -35,7 +35,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      *
      * @var string
      */
-    protected static $icon = '';
+    protected $icon = '';
 
     /**
      * Validation Rules for onCreate, onEdit actions.
@@ -54,6 +54,16 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     protected $columns = [];
 
     /**
+     * Map Model Attributes to AttributeTypes with
+     * additional parameters which will be output
+     * as fields when viewing, editting or adding
+     * a new model entry.
+     * 
+     * @var array
+     */
+    protected $fields = [];
+
+    /**
      * Columns for Model are Sortable.
      *
      * @var bool
@@ -68,7 +78,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      * 
      * @var string
      */
-    protected static $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
+    protected $controller = '\LaravelFlare\Flare\Admin\Models\ModelAdminController';
 
     /**
      * The Policy used for the Model Authorization logic.
@@ -78,7 +88,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      * 
      * @var string
      */
-    protected static $policy = '\LaravelFlare\Flare\Permissions\ModelAdminPolicy';
+    protected $policy = '\LaravelFlare\Flare\Permissions\ModelAdminPolicy';
 
     /**
      * The current model to be managed.
@@ -92,25 +102,61 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      */
     public function __construct()
     {
-        if (!isset(static::$managedModel) || static::$managedModel === null) {
-            throw new ModelAdminException('You have a ModelAdmin which does not have a model assigned to it. ModelAdmins must include a model to manage.', 1);
-        }
+        $this->getManagedModel();
 
         $this->model = $this->model();
     }
 
     /**
      * Returns a Model Instance.
-     *
-     * Note: We should revisit this as really we shouldn't
-     * be returning a new instance of the object on every
-     * request.
-     *
+     * 
      * @return Model
      */
     public function model()
     {
-        return new static::$managedModel();
+        if (!$this->model) {
+            $class = $this->getManagedModel();
+
+            return $this->model = new $class();
+        }
+
+        return $this->model;
+    }
+
+    /**
+     * Returns a New Model Instance.
+     *
+     * @return Model
+     */
+    public function newModel()
+    {
+        $class = self::getManagedModel();
+
+        return new $class();
+    }
+
+    /**
+     * Returns the Managed Model Class.
+     * 
+     * @return string
+     */
+    public function getManagedModel()
+    {
+        if (!isset($this->managedModel) || $this->managedModel === null) {
+            throw new ModelAdminException('You have a ModelAdmin which does not have a model assigned to it. ModelAdmins must include a model to manage.', 1);
+        }
+
+        return $this->managedModel;
+    }
+
+    /**
+     * Set the Managed Model Class.
+     * 
+     * @param string $managedModel
+     */
+    public function setManagedModel($managedModel = null)
+    {
+        $this->managedModel = $managedModel;
     }
 
     /**
@@ -313,6 +359,38 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     }
 
     /**
+     * Returns an array of Attribute Fields ready for output.
+     *
+     * @param  string $type 
+     * 
+     * @return array
+     */
+    public function outputFields($type = 'view')
+    {
+        return $this->getFields();
+    }
+
+    /**
+     * Gets the Managed Model Mapping.
+     * 
+     * @return array
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    /**
+     * Gets the Managed Model Mapping.
+     * 
+     * @param array $fields
+     */
+    public function setFields($fields = [])
+    {
+        $this->fields = $fields;
+    }
+
+    /**
      * Determine if the Model Admin is sortable in it's list view.
      *
      * @param string $key
@@ -323,7 +401,7 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
     {
         return isset($this->sortable) && $this->sortable ? true : false;
     }
-    
+
     /**
      * Determine if the Managed Model is using the SoftDeletes Trait.
      *
@@ -331,8 +409,10 @@ class ModelAdmin extends Admin implements AttributesAccessable, ModelWriteable, 
      */
     public function hasSoftDeletes()
     {
+        $managedModelClass = $this->getManagedModel();
+
         return in_array(
-            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new static::$managedModel()))
+            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new $managedModelClass()))
         ) && in_array(
             \LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
         );

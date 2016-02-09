@@ -1,9 +1,9 @@
-<li class="treeview {{ Request::is( $adminItem::relativeUrl() . '*' ) ? 'active' : '' }}">
-    <a href="{{ $adminItem::url() }}">
-        @if ($adminItem::getIcon())
-        <i class="fa fa-{{ $adminItem::getIcon() }}"></i>
+<li class="treeview {{ Request::is( (new $adminItem)->relativeUrl() . '*' ) ? 'active' : '' }}">
+    <a href="{{ (new $adminItem)->url() }}">
+        @if ((new $adminItem)->getIcon())
+        <i class="fa fa-{{ (new $adminItem)->getIcon() }}"></i>
         @endif
-        <span>{{ $adminItem::pluralTitle() }}</span>
+        <span>{{ (new $adminItem)->getPluralTitle() }}</span>
     </a>
 
     @if(isset($adminItems) && is_array($adminItems) && !empty($adminItems))

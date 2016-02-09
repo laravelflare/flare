@@ -32,11 +32,11 @@ class WidgetAdminManager extends AdminManager
     }
 
     /**
-     * Returns a collection of Widget Classes
+     * Returns a collection of Widget Classes.
      * 
      * @return
      */
-    public function items()
+    public function all()
     {
         return collect($this->getAdminClasses());
     }

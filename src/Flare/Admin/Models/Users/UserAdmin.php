@@ -14,7 +14,7 @@ class UserAdmin extends ModelAdmin
      * 
      * @var string
      */
-    protected static $managedModel = \App\User::class;
+    protected $managedModel = \App\User::class;
 
     /**
      * ManagedModel Icon.
@@ -23,7 +23,7 @@ class UserAdmin extends ModelAdmin
      *
      * @var string
      */
-    protected static $icon = 'user';
+    protected $icon = 'user';
 
     /**
      * Columns for Model.

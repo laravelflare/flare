@@ -5,11 +5,6 @@ namespace LaravelFlare\Flare\Providers;
 use Illuminate\Support\ServiceProvider;
 use LaravelFlare\Flare\Console\Commands\MakeUserCommand;
 use LaravelFlare\Flare\Console\Commands\MakeAdminCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminMakeCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminMakeCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\WidgetAdminMakeCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\ModelAdminControllerMakeCommand;
-use LaravelFlare\Flare\Console\Commands\Generators\ModuleAdminControllerMakeCommand;
 
 class ArtisanServiceProvider extends ServiceProvider
 {

@@ -14,28 +14,28 @@ abstract class Admin
      *
      * @var string
      */
-    protected static $icon;
+    protected $icon;
 
     /**
      * Title of Admin Section.
      *
      * @var string
      */
-    protected static $title;
+    protected $title;
 
     /**
      * Plural Title of Admin Section.
      *
      * @var string
      */
-    protected static $pluralTitle;
+    protected $pluralTitle;
 
     /**
      * URL Prefix of Admin Section.
      *
      * @var string
      */
-    protected static $urlPrefix;
+    protected $urlPrefix;
 
     /**
      * The Controller to be used by the Admin.
@@ -45,14 +45,14 @@ abstract class Admin
      * 
      * @var string
      */
-    protected static $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
+    protected $controller = \LaravelFlare\Flare\Http\Controllers\AdminController::class;
 
     /**
      * The Policy used for the Admin Authorization logic.
      * 
      * @var string
      */
-    protected static $policy = '\LaravelFlare\Flare\Permissions\AdminPolicy';
+    protected $policy = '\LaravelFlare\Flare\Permissions\AdminPolicy';
 
     /**
      * An array of subclasses of Admin
@@ -69,7 +69,7 @@ abstract class Admin
      *
      * @var string
      */
-    protected static $view = 'admin.404';
+    protected $view = 'admin.404';
 
     /**
      * Array of View Data to Render.
@@ -103,16 +103,14 @@ abstract class Admin
      * overloading and adding additional routes
      *
      * @param \Illuminate\Routing\Router $router
-     * 
-     * @return void
      */
     public function registerRoutes(Router $router)
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        $router->group(['prefix' => static::urlPrefix(), 'namespace' => get_called_class(), 'as' => static::urlPrefix()], function ($router) {
+        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function ($router) {
             $this->registerSubRoutes();
-            $router->controller('/', static::getController());
+            $router->controller('/', $this->getController());
         });
     }
 
@@ -128,7 +126,7 @@ abstract class Admin
         }
 
         foreach ($this->subAdmin as $adminItem) {
-            static::registerRoute($adminItem->getController(), $adminItem->routeParameters());
+            $this->registerRoute($adminItem->getController(), $adminItem->routeParameters());
         }
     }
 
@@ -188,9 +186,19 @@ abstract class Admin
      * 
      * @return string
      */
-    public static function getController()
+    public function getController()
     {
-        return static::$controller;
+        return $this->controller;
+    }
+
+    /**
+     * Set the Controller Class for the current Admin section.
+     * 
+     * @return string
+     */
+    public function setController($controller = null)
+    {
+        $this->controller = $controller;
     }
 
     /**
@@ -200,11 +208,21 @@ abstract class Admin
      */
     public function getView()
     {
-        if (view()->exists(static::$view)) {
-            return static::$view;
+        if (view()->exists($this->view)) {
+            return $this->view;
         }
 
-        return 'flare::'.static::$view;
+        return 'flare::'.$this->view;
+    }
+
+    /**
+     * Set the Module Admin View.
+     * 
+     * @param string $view
+     */
+    public function setView($view = null)
+    {
+        $this->view = $view;
     }
 
     /**
@@ -215,6 +233,16 @@ abstract class Admin
     public function getViewData()
     {
         return $this->viewData;
+    }
+
+    /**
+     * Set the View Data.
+     * 
+     * @param array $viewData
+     */
+    public function setViewData($viewData = [])
+    {
+        $this->viewData = $viewData;
     }
 
     /**
@@ -242,9 +270,19 @@ abstract class Admin
      *
      * @return string
      */
-    public static function getIcon()
+    public function getIcon()
     {
-        return static::$icon;
+        return $this->icon;
+    }
+
+    /**
+     * Set Icon of a Admin Section Class.
+     *
+     * @param string $icon
+     */
+    public function setIcon($icon = null)
+    {
+        $this->icon = $icon;
     }
 
     /**
@@ -252,13 +290,23 @@ abstract class Admin
      *
      * @return string
      */
-    public static function title()
+    public function getTitle()
     {
-        if (!isset(static::$title) || !static::$title) {
+        if (!isset($this->title) || !$this->title) {
             return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_SUFFIX, '', static::shortName()))));
         }
 
-        return static::$title;
+        return $this->title;
+    }
+
+    /**
+     * Set Title of a Admin Section Class.
+     *
+     * @param string $title
+     */
+    public function setTitle($title = null)
+    {
+        $this->title = $title;
     }
 
     /**
@@ -266,13 +314,23 @@ abstract class Admin
      *
      * @return string
      */
-    public static function pluralTitle()
+    public function getPluralTitle()
     {
-        if (!isset(static::$pluralTitle) || !static::$pluralTitle) {
-            return Str::plural(static::title());
+        if (!isset($this->getPluralTitle) || !$this->getPluralTitle) {
+            return Str::plural($this->getTitle());
         }
 
-        return static::$pluralTitle;
+        return $this->getPluralTitle;
+    }
+
+    /**
+     * Set Plural Title.
+     * 
+     * @param string $pluralTitle
+     */
+    public function setPluralTitle($pluralTitle = null)
+    {
+        $this->getPluralTitle = $pluralTitle;
     }
 
     /**
@@ -280,13 +338,13 @@ abstract class Admin
      *
      * @return string
      */
-    public static function urlPrefix()
+    public function urlPrefix()
     {
-        if (!isset(static::$urlPrefix) || !static::$urlPrefix) {
-            return str_slug(static::pluralTitle());
+        if (!isset($this->urlPrefix) || !$this->urlPrefix) {
+            return str_slug($this->getPluralTitle());
         }
 
-        return static::$urlPrefix;
+        return $this->urlPrefix;
     }
 
     /**
@@ -296,9 +354,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function url($path = '')
+    public function url($path = '')
     {
-        return url(self::relativeUrl($path));
+        return url($this->relativeUrl($path));
     }
 
     /**
@@ -308,9 +366,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function relativeUrl($path = '')
+    public function relativeUrl($path = '')
     {
-        return \Flare::relativeAdminUrl(static::urlPrefix().($path ? '/'.$path : ''));
+        return \Flare::relativeAdminUrl($this->urlPrefix().($path ? '/'.$path : ''));
     }
 
     /**
@@ -320,9 +378,9 @@ abstract class Admin
      *
      * @return string
      */
-    public static function currentUrl($path = '')
+    public function currentUrl($path = '')
     {
-        return url(static::relativeCurrentUrl($path));
+        return url($this->relativeCurrentUrl($path));
     }
 
     /**
@@ -332,7 +390,7 @@ abstract class Admin
      *
      * @return string
      */
-    public static function relativeCurrentUrl($path)
+    public function relativeCurrentUrl($path)
     {
         return \Route::current() ? \Route::current()->getPrefix().'/'.$path : null;
     }

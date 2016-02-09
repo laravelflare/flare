@@ -47,9 +47,7 @@ class RouteServiceProvider extends ServiceProvider
      * since it is possible that a user has amended the default middleware 
      * of their application in a way that could break Flare.
      * 
-     * @param  Router $router
-     * 
-     * @return void
+     * @param Router $router
      */
     protected function registerMiddleware(Router $router)
     {
@@ -79,9 +77,7 @@ class RouteServiceProvider extends ServiceProvider
      * (or in the runtime config if anotehr service provider
      * has already started manipulating these dynamically).
      * 
-     * @param  Router $router 
-     * 
-     * @return void
+     * @param Router $router
      */
     protected function registerDefinedRoutes(Router $router)
     {
@@ -89,8 +85,8 @@ class RouteServiceProvider extends ServiceProvider
             [
                 'prefix' => \Flare::config('admin_url'),
                 'as' => 'flare::',
-                'middleware' => ['flare']
-            ], 
+                'middleware' => ['flare'],
+            ],
             function ($router) {
                 \Flare::admin()->registerRoutes($router);
                 $router->get('/', $this->namespace.'\AdminController@getDashboard')->name('dashboard');
@@ -109,9 +105,7 @@ class RouteServiceProvider extends ServiceProvider
      * The login form can however be hidden by setting the 
      * 'show' config for 'login' to false.
      * 
-     * @param  Router $router 
-     * 
-     * @return void
+     * @param Router $router
      */
     protected function registerDefaultRoutes(Router $router)
     {
@@ -119,8 +113,8 @@ class RouteServiceProvider extends ServiceProvider
             [
                 'prefix' => \Flare::config('admin_url'),
                 'as' => 'flare::',
-                'middleware' => ['flarebase']
-            ], 
+                'middleware' => ['flarebase'],
+            ],
             function ($router) {
                 // Logout route...
                 $router->get('logout', $this->namespace.'\AdminController@getLogout')->name('logout');

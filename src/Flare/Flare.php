@@ -2,9 +2,6 @@
 
 namespace LaravelFlare\Flare;
 
-use Illuminate\Routing\Router;
-use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
-
 class Flare
 {
     /**
@@ -36,7 +33,7 @@ class Flare
             'login' => true,
             'notifications' => true,
             'version' => true,
-        ]
+        ],
     ];
 
     /**
@@ -46,38 +43,39 @@ class Flare
      */
     protected $helpers = [
         'admin' => \LaravelFlare\Flare\Admin\AdminManager::class,
+        'attributes' => \LaravelFlare\Flare\Admin\Attributes\AttributeManager::class,
     ];
 
     /**
-     * Application Instance
+     * Application Instance.
      * 
      * @var \Illuminate\Foundation\Application
      */
     protected $app;
 
     /**
-     * Flare Configuration
+     * Flare Configuration.
      * 
      * @var array
      */
     protected $config;
 
     /**
-     * The Title of the Admin Panel
+     * The Title of the Admin Panel.
      * 
      * @var string
      */
     protected $adminTitle;
 
     /**
-     * Safe Title of the Admin Panel
+     * Safe Title of the Admin Panel.
      * 
      * @var string
      */
     protected $safeAdminTitle;
 
     /**
-     * Relative Base URL of Admin Panel
+     * Relative Base URL of Admin Panel.
      * 
      * @var string
      */
@@ -137,22 +135,17 @@ class Flare
 
     /**
      * Allow setting of the Flare config at runtime.
-     *
-     * @return void
      */
     public function setConfig()
     {
-
     }
 
     /**
      * Set the loaded config to the protected property.
-     *
-     * @return void
      */
     public function setLoadedConfig()
     {
-        $this->config = config('flare.config');   
+        $this->config = config('flare.config');
     }
 
     /**
@@ -176,11 +169,9 @@ class Flare
     }
 
     /**
-     * Sets the Admin Title
+     * Sets the Admin Title.
      * 
      * @param mixed $title
-     *
-     * @return void
      */
     public function setAdminTitle($title = null)
     {
@@ -213,8 +204,6 @@ class Flare
      * in <title> tags etc.
      *
      * @param mixed $title
-     * 
-     * @return void
      */
     public function setSafeAdminTitle($title = null)
     {
@@ -286,12 +275,22 @@ class Flare
     }
 
     /**
+     * Takes a named route inside the Flare namespace
+     * and returns the URL.
+     * 
+     * @return string
+     */
+    public function route()
+    {
+    }
+
+    /**
      * Determines whether part of the Flare Admin Panel
      * should be displayed or not and returns true / false.
      * 
-     * @param  string $key
+     * @param string $key
      * 
-     * @return boolean
+     * @return bool
      */
     public function show($key = false)
     {
@@ -308,9 +307,9 @@ class Flare
      *
      * Accessor for getShow().
      * 
-     * @param  string $key
+     * @param string $key
      * 
-     * @return boolean
+     * @return bool
      */
     public function getShow($key = false)
     {
@@ -327,82 +326,6 @@ class Flare
     public function version()
     {
         return self::VERSION;
-    }
-
-    /**
-     * Returns an array of all of the Available Attribute Types.
-     * 
-     * @return array
-     */
-    protected function availableAttributes()
-    {
-        $availableAttributes = [];
-
-        foreach (\Flare::config('attributes') as $attributeFullClassname) {
-            $availableAttributes = array_add(
-                                            $availableAttributes,
-                                            class_basename($attributeFullClassname),
-                                            $attributeFullClassname
-                                        );
-        }
-
-        return $availableAttributes;
-    }
-
-    /**
-     * Determines if an AttributeType class exists or not.
-     * 
-     * @param string $type
-     * 
-     * @return bool
-     */
-    protected function attributeTypeExists($type)
-    {
-        return $this->resolveAttributeClass($type) ? true : false;
-    }
-
-    /**
-     * Render Attribute.
-     *
-     * @param string $action
-     * @param string $attribute
-     * @param string $field
-     * @param string $model
-     * @param string $modelManager
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function renderAttribute($action, $attribute, $field, $model, $modelManager)
-    {
-        if (!isset($field['type'])) {
-            throw new \Exception('Attribute Field Type cannot be empty or undefined.');
-        }
-
-        if ($this->attributeTypeExists($field['type'])) {
-            $fieldType = $this->resolveAttributeClass($field['type']);
-
-            return call_user_func_array([new $fieldType($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
-        }
-
-        return call_user_func_array([new BaseAttribute($attribute, $field, $model, $modelManager), camel_case('render_'.$action)], []);
-    }
-
-    /**
-     * Resolves the Class of an Attribute and returns it as a string.
-     * 
-     * @param string $type
-     * 
-     * @return string
-     */
-    protected function resolveAttributeClass($type)
-    {
-        $fullClassname = array_key_exists(title_case($type).'Attribute', $this->availableAttributes()) ? $this->availableAttributes()[title_case($type).'Attribute'] : false;
-
-        if (!$fullClassname || !class_exists($fullClassname)) {
-            return false;
-        }
-
-        return $fullClassname;
     }
 
     /**

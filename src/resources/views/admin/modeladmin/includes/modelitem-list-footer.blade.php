@@ -1,8 +1,8 @@
 <div class="box-footer clearfix">
     <div class="pull-left">
-        <a href="{{ $modelAdmin::currentUrl('create') }}" class="btn btn-success">
-            <i class="fa fa-{{ $modelAdmin::getIcon() }}"></i>
-            Add {{ $modelAdmin->title() }}
+        <a href="{{ $modelAdmin->currentUrl('create') }}" class="btn btn-success">
+            <i class="fa fa-{{ $modelAdmin->getIcon() }}"></i>
+            Add {{ $modelAdmin->getTitle() }}
         </a>
     </div>
 

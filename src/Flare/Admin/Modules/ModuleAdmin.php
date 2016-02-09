@@ -14,14 +14,14 @@ abstract class ModuleAdmin extends Admin
      * 
      * @var string
      */
-    protected static $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
+    protected $controller = '\LaravelFlare\Flare\Admin\Modules\ModuleAdminController';
 
     /**
      * The Module Admin Default View.
      *
      * @var string
      */
-    protected static $view = 'admin.modules.index';
+    protected $view = 'admin.modules.index';
 
     /**
      * Returns the Module Admin View.
@@ -36,20 +36,20 @@ abstract class ModuleAdmin extends Admin
      */
     public function getView()
     {
-        if (view()->exists(static::$view)) {
-            return static::$view;
+        if (view()->exists($this->view)) {
+            return $this->view;
         }
 
-        if (view()->exists('admin.'.static::urlPrefix().'.index')) {
-            return 'admin.'.static::urlPrefix().'.index';
+        if (view()->exists('admin.'.$this->urlPrefix().'.index')) {
+            return 'admin.'.$this->urlPrefix().'.index';
         }
 
-        if (view()->exists('admin.'.static::urlPrefix())) {
-            return 'admin.'.static::urlPrefix();
+        if (view()->exists('admin.'.$this->urlPrefix())) {
+            return 'admin.'.$this->urlPrefix();
         }
 
-        if (view()->exists('flare::'.self::$view)) {
-            return 'flare::'.self::$view;
+        if (view()->exists('flare::'.$this->view)) {
+            return 'flare::'.$this->view;
         }
 
         return parent::getView();
