@@ -10,16 +10,6 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelEditting
 {
     /**
-     * Map Model Attributes to AttributeTypes with
-     * additional parameters which will be output
-     * as fields when viewing, editting or adding
-     * a new model entry.
-     * 
-     * @var array
-     */
-    protected $fields = [];
-    
-    /**
      * Used by beforeEdit() to ensure child classes call parent::beforeEdit().
      * 
      * @var bool
@@ -32,22 +22,6 @@ trait ModelEditting
      * @var bool
      */
     protected $brokenAfterEdit = false;
-
-    /**
-     * Trait Requires Find Method (usually provided by ModelQuerying).
-     *
-     * @param int $modelitem_id
-     * 
-     * @return
-     */
-    abstract protected function find($modelitem_id);
-
-    /**
-     * Trait Requires Save Method (usually provided by ModelWriting).
-     * 
-     * @return
-     */
-    abstract protected function save();
 
     /**
      * Method fired before the Edit action is undertaken.

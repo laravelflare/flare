@@ -65,7 +65,7 @@ class ModelAdminController extends FlareController
      */
     public function getTrashed()
     {
-        if (!$this->modelAdmin->hasSoftDeletes()) {
+        if (!$this->modelAdmin->hasSoftDeleting()) {
             return $this->missingMethod();
         }
 
@@ -83,7 +83,7 @@ class ModelAdminController extends FlareController
      */
     public function getAll()
     {
-        if (!$this->modelAdmin->hasSoftDeletes()) {
+        if (!$this->modelAdmin->hasSoftDeleting()) {
             return $this->missingMethod();
         }
 
@@ -101,6 +101,10 @@ class ModelAdminController extends FlareController
      */
     public function getCreate()
     {
+        if (!$this->modelAdmin->hasCreating()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.create', []);
     }
 
@@ -111,6 +115,10 @@ class ModelAdminController extends FlareController
      */
     public function postCreate(ModelCreateRequest $request)
     {
+        if (!$this->modelAdmin->hasCreating()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->create();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully created.', 'dismissable' => false]]);
@@ -123,6 +131,10 @@ class ModelAdminController extends FlareController
      */
     public function getView($modelitem_id)
     {
+        if (!$this->modelAdmin->hasViewing()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->find($modelitem_id);
 
         event(new ModelView($this->modelAdmin));
@@ -139,6 +151,10 @@ class ModelAdminController extends FlareController
      */
     public function getEdit($modelitem_id)
     {
+        if (!$this->modelAdmin->hasEditting()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->find($modelitem_id);
 
         return view('flare::admin.modeladmin.edit', ['modelItem' => $this->modelAdmin->model]);
@@ -153,6 +169,10 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelEditRequest $request, $modelitem_id)
     {
+        if (!$this->modelAdmin->hasEditting()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->edit($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully updated.', 'dismissable' => false]]);
@@ -167,7 +187,11 @@ class ModelAdminController extends FlareController
      */
     public function getDelete($modelitem_id)
     {
-        if (isset($this->modelAdmin->softDeletingModel) && $this->modelAdmin->softDeletingModel) {
+        if (!$this->modelAdmin->hasDeleting()) {
+            return $this->missingMethod();
+        }
+
+        if ($this->modelAdmin->hasSoftDeleting()) {
             $this->modelAdmin->findWithTrashed($modelitem_id);
         } else {
             $this->modelAdmin->find($modelitem_id);
@@ -185,6 +209,10 @@ class ModelAdminController extends FlareController
      */
     public function postDelete($modelitem_id)
     {
+        if (!$this->modelAdmin->hasDeleting()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->delete($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully removed.', 'dismissable' => false]]);
@@ -199,6 +227,10 @@ class ModelAdminController extends FlareController
      */
     public function getRestore($modelitem_id)
     {
+        if (!$this->modelAdmin->hasSoftDeleting()) {
+            return $this->missingMethod();
+        }
+
         return view('flare::admin.modeladmin.restore', ['modelItem' => $this->modelAdmin->model]);
     }
 
@@ -211,6 +243,10 @@ class ModelAdminController extends FlareController
      */
     public function postRestore($modelitem_id)
     {
+        if (!$this->modelAdmin->hasSoftDeleting()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->findOnlyTrashed($modelitem_id)->restore();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully restored.', 'dismissable' => false]]);
@@ -225,6 +261,10 @@ class ModelAdminController extends FlareController
      */
     public function getClone($modelitem_id)
     {
+        if (!$this->modelAdmin->hasCloning()) {
+            return $this->missingMethod();
+        }
+
         $this->modelAdmin->find($modelitem_id)->replicate($this->modelAdmin->excludeOnClone())->save();
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully cloned.', 'dismissable' => false]]);

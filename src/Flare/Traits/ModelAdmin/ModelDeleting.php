@@ -24,15 +24,6 @@ trait ModelDeleting
     protected $brokenAfterDelete = false;
 
     /**
-     * Trait Requires Find Method (usually provided by ModelQuerying).
-     *
-     * @param int $modelitem_id
-     * 
-     * @return
-     */
-    abstract protected function find($modelitem_id);
-
-    /**
      * Method fired before the Delete action is undertaken.
      * 
      * @return

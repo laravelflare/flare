@@ -29,7 +29,7 @@
             </a>
             <a href="{{ $modelAdmin->currentUrl('delete/'.$modelItem->getKey()) }}" class="btn btn-danger">      
                 <i class="fa fa-trash"></i>      
-                @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
+                @if (!$modelAdmin->hasSoftDeleting() || $modelItem->trashed())
                     Delete
                 @else 
                     Trash

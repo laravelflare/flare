@@ -10,16 +10,6 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelCreating
 {
     /**
-     * Map Model Attributes to AttributeTypes with
-     * additional parameters which will be output
-     * as fields when viewing, editting or adding
-     * a new model entry.
-     * 
-     * @var array
-     */
-    protected $fields = [];
-    
-    /**
      * Used by beforeCreate() to ensure child classes call parent::beforeCreate().
      * 
      * @var bool
@@ -32,13 +22,6 @@ trait ModelCreating
      * @var bool
      */
     protected $brokenAfterCreate = false;
-
-    /**
-     * Trait Requires Save Method (usually provided by ModelQuerying).
-     * 
-     * @return
-     */
-    abstract protected function save();
 
     /**
      * Method fired before the Create action is undertaken.

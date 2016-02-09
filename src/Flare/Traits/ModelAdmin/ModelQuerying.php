@@ -93,7 +93,7 @@ trait ModelQuerying
 
     public function totals()
     {
-        if ($this->hasSoftDeletes()) {
+        if ($this->hasSoftDeleting()) {
             return [
                         'all' => $this->model->count(),
                         'with_trashed' => $this->model->withTrashed()->count(),

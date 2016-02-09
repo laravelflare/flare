@@ -4,6 +4,7 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
+use LaravelFlare\Flare\Traits\ModelAdmin\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
@@ -11,6 +12,7 @@ use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 class ModelAdmin extends Admin implements ModelQueryable
 {
     use ModelQuerying;
+    use ModelSaving;
 
     /**
      * Class of Model to Manage.
@@ -43,6 +45,16 @@ class ModelAdmin extends Admin implements ModelQueryable
      * @var array
      */
     protected $columns = [];
+
+    /**
+     * Map Model Attributes to AttributeTypes with
+     * additional parameters which will be output
+     * as fields when viewing, editting or adding
+     * a new model entry.
+     * 
+     * @var array
+     */
+    protected $fields = [];
 
     /**
      * Columns for Model are Sortable.
@@ -388,7 +400,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasViewing()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelViewing::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelViewing::class);
     }
 
     /**
@@ -398,7 +410,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCreating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelCreating::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelCreating::class);
     }
 
     /**
@@ -408,7 +420,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCloning()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelCloning::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelCloning::class);
     }
 
     /**
@@ -418,7 +430,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasEditting()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelEditting::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelEditting::class);
     }
 
     /**
@@ -428,7 +440,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasDeleting()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelDeleting::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelDeleting::class);
     }
 
     /**
@@ -439,7 +451,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      *
      * @return bool
      */
-    public function hasSoftDeletes()
+    public function hasSoftDeleting()
     {
         if (!$this->hasDeleting()) {
             return false;
@@ -461,7 +473,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasValidating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelValidating::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating::class);
     }
 
     /**
@@ -486,10 +498,8 @@ class ModelAdmin extends Admin implements ModelQueryable
         if (!$trait) {
             return;
         }
-        
-        $managedModelClass = $this->getManagedModel();
 
-        return in_array($trait, class_uses_recursive(get_class(new $managedModelClass())));
+        return in_array($trait, class_uses_recursive(get_class($this)));
     }
 
     /**

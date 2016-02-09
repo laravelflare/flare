@@ -41,7 +41,7 @@
                                 Edit
                             </a>
                         @endif
-                        @if ($modelAdmin->hasDeleting() && ($modelAdmin->hasSoftDeletes() && $modelItem->trashed()))
+                        @if ($modelAdmin->hasDeleting() && ($modelAdmin->hasSoftDeleting() && $modelItem->trashed()))
                             <a class="btn btn-info btn-xs" href="{{ $modelAdmin->currentUrl('restore/'.$modelItem->getKey()) }}">
                                 <i class="fa fa-undo"></i>
                                 Restore
@@ -53,14 +53,14 @@
                             </a>
                         @endif
                         @if ($modelAdmin->hasDeleting())
-                        <a class="btn btn-danger btn-xs" href="{{ $modelAdmin->currentUrl('delete/'.$modelItem->getKey()) }}">
-                            <i class="fa fa-trash"></i>
-                            @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
-                                Delete
-                            @else 
-                                Trash
-                            @endif
-                        </a>
+                            <a class="btn btn-danger btn-xs" href="{{ $modelAdmin->currentUrl('delete/'.$modelItem->getKey()) }}">
+                                <i class="fa fa-trash"></i>
+                                @if (!$modelAdmin->hasSoftDeleting() || $modelItem->trashed())
+                                    Delete
+                                @else 
+                                    Trash
+                                @endif
+                            </a>
                         @endif
                     </td>
                 </tr>

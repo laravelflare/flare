@@ -14,7 +14,7 @@
                                 {{ $totals['all'] }}
                             </span>
                         </a>
-                        @if ($modelAdmin->hasSoftDeletes())
+                        @if ($modelAdmin->hasSoftDeleting())
                             <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>

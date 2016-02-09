@@ -10,13 +10,8 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 
 trait ModelSoftDeleting
 {
-    /**
-     * Shows that this is a soft deleting model.
-     * 
-     * @var bool
-     */
-    public $softDeletingModel = true;
-
+    use ModelDeleting;
+    
     /**
      * Overrides the ModelQuerying provided method 
      * with one which searches withTrashed scope.

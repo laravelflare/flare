@@ -12,7 +12,7 @@
         <div class="box-body">
             <div class="alert alert-danger no-margin">
                 <i class="icon fa fa-exclamation-triangle"></i>
-                @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
+                @if (!$modelAdmin->hasSoftDeleting() || $modelItem->trashed())
                     <strong>Are you sure you wish to permanently delete this {{ $modelAdmin->getTitle() }}?</strong>
                     <p>
                         Once a {{ $modelAdmin->getTitle() }} is permanently deleted it can no longer be recovered.
@@ -32,7 +32,7 @@
             </a>
             <button class="btn btn-danger" type="submit">
                 <i class="fa fa-trash"></i>
-                @if (!$modelAdmin->hasSoftDeletes() || $modelItem->trashed())
+                @if (!$modelAdmin->hasSoftDeleting() || $modelItem->trashed())
                     Delete {{ $modelAdmin->getTitle() }}
                 @else 
                     Trash {{ $modelAdmin->getTitle() }}
