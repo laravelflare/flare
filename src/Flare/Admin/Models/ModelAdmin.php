@@ -239,7 +239,7 @@ class ModelAdmin extends Admin implements ModelQueryable
 
         if ($this->hasRelatedKey($key, $model)) {
             return $this->relatedKey($key, $model);
-        }
+        }    
 
         return $model->getAttribute($key);
     }
@@ -374,7 +374,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     public function getFields()
     {
         $this->setFields($this->fields);
-        
+
         return $this->fields;
     }
 
@@ -400,7 +400,7 @@ class ModelAdmin extends Admin implements ModelQueryable
         $fields = $this->fields;
 
         if (!$fields instanceof AttributeCollection) {
-            $fields = new AttributeCollection($fields);
+            $fields = new AttributeCollection($fields, $this);
         }
 
         return $this->fields = $fields->formatFields();

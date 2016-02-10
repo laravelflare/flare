@@ -22,20 +22,24 @@ class AttributeCollection extends Collection
     protected $items = [];
 
     /**
+     * ModelAdmin which contains this Attribute Collection.
+     * 
+     * @var \LaravelFlare\Flare\Admin\Models\ModelAdmin
+     */
+    protected $modelManager;
+
+    /**
      * Create a new collection.
      *
      * @param  mixed  $items
      * 
      * @return void
      */
-    public function __construct($items = [])
+    public function __construct($items = [], $modelManager = null)
     {
-        if (!is_array($items) || func_num_args() > 1) {
-            $items = func_get_args();
-        }
-
         $this->attributeManager = new AttributeManager();
         $this->items = $items;
+        $this->modelManager = $modelManager;
 
         $this->formatFields();
     }
@@ -101,17 +105,23 @@ class AttributeCollection extends Collection
         }
 
         if (is_scalar($inner) && $this->attributeManager->attributeTypeExists($inner)) {
-            return $this->attributeManager->createAttribute($inner, $name, []);
+            return $this->attributeManager->createAttribute($inner, $name, [], $this->modelManager);
         }
 
-        if (is_array($inner) && array_key_exists('type', $inner) && $this->attributeManager->attributeTypeExists($inner['type'])) {
+        if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->attributeManager->attributeTypeExists($inner['type'])) {
             $type = $inner['type'];
             array_forget($inner, 'type');
-            return $this->attributeManager->createAttribute($type, $name, $inner);
+            return $this->attributeManager->createAttribute($type, $name, $inner, $this->modelManager);
         }
 
         if (is_array($inner)) {
-            return new AttributeCollection($inner);
+            $formattedItems = [];
+
+            foreach ($inner as $name => $inner) {
+                $formattedItems[$name] = $this->formatInnerField($inner);
+            }
+
+            return $formattedItems;
         }
     }
 }

@@ -10,8 +10,8 @@
     </div>
     <form action="" method="post" enctype="multipart/form-data">
         <div class="box-body">
-            @foreach ($modelAdmin->getFields() as $attribute => $field)
-                {!! \Flare::attributes()->renderAttribute('edit', $attribute, $field, $modelItem, $modelAdmin) !!}
+            @foreach ($modelAdmin->outputFields() as $attribute => $field)
+                {{ $field->render('edit') }}
             @endforeach
         </div>
         <div class="box-footer">

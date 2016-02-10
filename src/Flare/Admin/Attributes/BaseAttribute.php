@@ -2,7 +2,8 @@
 
 namespace LaravelFlare\Flare\Admin\Attributes;
 
-use \Illuminate\Support\HtmlString;
+use Illuminate\Support\HtmlString;
+use LaravelFlare\Flare\Admin\Models\ModelAdmin;
 
 class BaseAttribute
 {
@@ -54,15 +55,17 @@ class BaseAttribute
      * 
      * @param string $attribute
      * @param string $field
-     * @param string $model
      * @param string $modelManager
      */
-    public function __construct($attribute, $field, $model = null, $modelManager = null)
+    public function __construct($attribute, $field, $modelManager = null)
     {
         $this->attribute = $attribute;
         $this->field = $field;
-        $this->model = $model;
         $this->modelManager = $modelManager;
+
+        if ($modelManager instanceof ModelAdmin) {
+            $this->model = $modelManager->model();
+        }
     }
 
     /**

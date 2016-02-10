@@ -36,8 +36,8 @@
                 </p>
             @endif        
         </div>
-
-        @if($field['type'] == 'password' && $field['confirm'])
+        
+        @if(isset($field['type']) && $field['type'] == 'password' && isset($field['confirm']) && $field['confirm'])
             <div class="form-group @if ($errors->has($attribute)) has-error @endif">
                 <label class="control-label" for="{{ $attribute }}">
                     Confirm {{ $attributeTitle }}
