@@ -84,12 +84,12 @@ class AttributeManager
      */
     protected function resolveAttributeClass($type)
     {
-        if (class_exists($type)) {
-            return $type;
-        }
-
         if (array_key_exists($type, $attributes = $this->availableAttributes())) {
             return $this->availableAttributes()[$type];
+        }
+
+        if (class_exists($type)) {
+            return $type;
         }
 
         return false;

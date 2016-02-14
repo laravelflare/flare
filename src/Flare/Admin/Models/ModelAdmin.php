@@ -417,6 +417,33 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
+     * Determine if the Model Admin is sortable by a defined key / column.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function isSortableBy($key)
+    {
+        // Sorting is not allowed on Model Admin
+        if (!$this->isSortable()) {
+            return false;
+        }
+
+        // Key results are mutated, so sorting is not available
+        if ($this->model()->hasGetMutator($key) || $this->hasGetMutator($key)) {
+            return false;
+        }
+
+        // Key is a relation, so sorting is not available 
+        if (strpos($key, '.') !== false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Determine if the Model Admin has Viewing Capabilities.
      * 
      * @return bool
