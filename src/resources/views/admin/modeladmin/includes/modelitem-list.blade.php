@@ -4,7 +4,7 @@
             <tr>
                 @foreach ($modelAdmin->getColumns() as $key => $field)
                     <th>
-                        @if (strpos($key, '.') == 0 && !$modelAdmin->model()->hasGetMutator($key) && !$modelAdmin->hasGetMutator($key) && $modelAdmin->isSortable())
+                        @if ($modelAdmin->isSortableBy($key))
                             <a href="{{ $modelAdmin->currentUrl('') }}?order={{ $key }}&sort={{ ($modelAdmin->sortBy() == 'asc' ? 'desc' : 'asc') }}">
                                 {{ $field }}
                                 @if (Request::input('order', 'id') == $key)
