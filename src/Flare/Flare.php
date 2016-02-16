@@ -329,6 +329,32 @@ class Flare
     }
 
     /**
+     * Register a helper method
+     * 
+     * @return void
+     */
+    public function registerHelper($helper, $class)
+    {
+        if (array_key_exists($helper, $this->helpers)) {
+            throw new Exception("Helper method `$helper` has already been defined");
+        }
+
+        $this->helpers[$helper] = $class;
+    }
+
+    /**
+     * Unregister a helper method
+     *
+     * @param string $helper
+     * 
+     * @return void
+     */
+    public function unregisterHelper($helper)
+    {
+        unset($this->helpers[$helper]);
+    }
+
+    /**
      * Call a Helper Method.
      * 
      * @param string $method
@@ -340,6 +366,7 @@ class Flare
     {
         return $this->app->make($this->helpers[$method], $parameters);
     }
+
 
     /**
      * Provide access to Helper Methods.
