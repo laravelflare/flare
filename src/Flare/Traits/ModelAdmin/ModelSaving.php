@@ -84,10 +84,6 @@ trait ModelSaving
     private function doSave()
     {
         foreach (\Request::only(array_keys($this->fields->toArray())) as $key => $value) {
-            if (!\Schema::hasColumn($this->model->getTable(), $key)) {
-                continue;
-            }
-
             if ($this->hasSetMutator($key)) {
                 $this->setAttribute($key, $value);
                 continue;
