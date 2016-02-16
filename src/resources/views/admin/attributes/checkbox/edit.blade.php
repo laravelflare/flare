@@ -14,22 +14,21 @@
             <div class="col-sm-12">            
                 @if(isset($field['options']) && count($field['options']) > 0)
                     @foreach ($field['options'] as $value => $option)
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <p>
-                            <input type="checkbox"
-                                    value="{{ ($value === 0 && count($field['options']) === 1) ? 1 : $value }}"
-                                    name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
-                                    @if (isset($field['required'])) required="required" @endif
-                                    @if (
-                                            (is_scalar($model->getOriginal($attribute)) && $model->getOriginal($attribute) == $value)
-                                        ||
-                                            (is_array($model->getOriginal($attribute)) && array_key_exists($value, $model->getOriginal($attribute)))
-                                        )
-                                        checked="checked" @endif
-                                    >
-                            {{ $option }}
-                        </p>
-                    </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <p>
+                                <input type="checkbox"
+                                        value="{{ ($value === 0 && count($field['options']) === 1) ? 1 : $value }}"
+                                        name="{{ $attribute }}{{ (count($field['options']) > 1 ? '[]' : '') }}"
+                                        @if (
+                                                (is_scalar(old($attribute, $modelManager->getAttribute($attribute))) && old($attribute, $modelManager->getAttribute($attribute)) == $value)
+                                            ||
+                                                (is_array(old($attribute, $modelManager->getAttribute($attribute))) && array_key_exists($value, old($attribute, $modelManager->getAttribute($attribute))))
+                                            )
+                                            checked="checked" @endif
+                                        >
+                                {{ $option }}
+                            </p>
+                        </div>
                     @endforeach
 
                     @if(isset($field['help']))

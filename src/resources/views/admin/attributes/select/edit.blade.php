@@ -19,7 +19,7 @@
                     <option></option>
                     @foreach ($field['options'] as $value => $option)
                     <option value="{{ $value }}"
-                                    @if ($model->getOriginal($attribute) == $value) selected="selected" @endif
+                                    @if ($model->getAttribute($attribute) == $value) selected="selected" @endif
                                 >{{ $option }}</option>
                     @endforeach
                 </select>
