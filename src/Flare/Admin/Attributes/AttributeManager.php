@@ -13,15 +13,15 @@ class AttributeManager
      * @param string $field
      * @param string $modelManager
      */
-    public function createAttribute($type, $attribute, $field, $modelManager = null)
+    public function createAttribute($type, $attribute, $field, $value = null, $modelManager = null)
     {
         if ($this->attributeTypeExists($type)) {
             $fieldType = $this->resolveAttributeClass($type);
 
-            return new $fieldType($attribute, $field, $value = null, $modelManager);
+            return new $fieldType($attribute, $field, $value, $modelManager);
         }
 
-        return new BaseAttribute($attribute, $field, $value = null, $modelManager);
+        return new BaseAttribute($attribute, $field, $value, $modelManager);
     }
 
     /**
@@ -34,13 +34,13 @@ class AttributeManager
      *
      * @return \Illuminate\Http\Response
      */
-    public function renderAttribute($action, $attribute, $field, $modelManager = null)
+    public function renderAttribute($action, $attribute, $field, $value = null, $modelManager = null)
     {
         if (!isset($field['type'])) {
             throw new \Exception('Attribute Field Type cannot be empty or undefined.');
         }
 
-        return call_user_func_array([$this->createAttribute($field['type'], $action, $attribute, $field, $value = null, $modelManager), camel_case('render_'.$action)], []);
+        return call_user_func_array([$this->createAttribute($field['type'], $action, $attribute, $field, $value, $modelManager), camel_case('render_'.$action)], []);
     }
 
     /**
