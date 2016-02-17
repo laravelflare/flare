@@ -13,7 +13,7 @@
             <textarea id="{{ $attribute }}"
                         class="form-control {{ $field['class'] or null }}"
                         name="{{ $attribute }}"
-                        @if (isset($field['required'])) required="required" @endif>{{ old($attribute, $modelManager->getAttribute($attribute) ) }}</textarea>
+                        @if (isset($field['required'])) required="required" @endif>{{ $oldValue }}</textarea>
             @if(isset($field['help']))
                 <p class="help-block">{!! $field['help'] !!}</p>
             @endif

@@ -21,9 +21,9 @@
                                     name="{{ $attribute }}"
                                     @if (isset($field['required'])) required="required" @endif
                                     @if (
-                                            (is_scalar(old($attribute, $modelManager->getAttribute($attribute))) && old($attribute, $modelManager->getAttribute($attribute)) == $value)
+                                            (is_scalar($oldValue) && $oldValue == $value)
                                         ||
-                                            (is_array(old($attribute, $modelManager->getAttribute($attribute))) && array_key_exists($value, old($attribute, $modelManager->getAttribute($attribute))))
+                                            (is_array($oldValue) && array_key_exists($value, $oldValue))
                                         )
                                         checked="checked" @endif
                                     >

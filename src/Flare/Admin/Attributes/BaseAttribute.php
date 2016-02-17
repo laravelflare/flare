@@ -37,6 +37,13 @@ class BaseAttribute
     protected $field;
 
     /**
+     * Value.
+     * 
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected $value;
+
+    /**
      * Eloquent Model.
      * 
      * @var \Illuminate\Database\Eloquent\Model
@@ -57,10 +64,11 @@ class BaseAttribute
      * @param string $field
      * @param string $modelManager
      */
-    public function __construct($attribute, $field, $modelManager = null)
+    public function __construct($attribute, $field, $value, $modelManager = null)
     {
         $this->attribute = $attribute;
         $this->field = $field;
+        $this->value = $value;
         $this->modelManager = $modelManager;
 
         if ($modelManager instanceof ModelAdmin) {
@@ -151,6 +159,34 @@ class BaseAttribute
     }
 
     /**
+     * Returns the current value
+     * 
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if ($this->modelManager) {
+            return $this->modelManager->getAttribute($this->attribute);
+        }
+
+        if ($this->model) {
+            return $this->model->getAttribute($this->attribute);
+        }
+
+        return $this->value;
+    }
+
+    /**
+     * Returns the old or current value
+     * 
+     * @return mixed
+     */
+    public function getOldValue()
+    {
+        return old($this->attribute, $this->getValue());
+    }
+
+    /**
      * Gets Field Options if they are defined.
      */
     public function getFieldOptions()
@@ -221,6 +257,8 @@ class BaseAttribute
                 'field' => $this->getField(),
                 'model' => $this->getModel(),
                 'attribute' => $this->getAttribute(),
+                'value' => $this->getValue(),
+                'oldValue' => $this->getOldValue(),
                 'modelManager' => $this->getModelManager(),
                 'attributeType' => $this->getAttributeType(),
                 'attributeTitle' => $this->getAttributeTitle(),

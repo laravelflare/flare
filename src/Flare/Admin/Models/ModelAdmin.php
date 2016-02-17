@@ -226,7 +226,11 @@ class ModelAdmin extends Admin implements ModelQueryable
      * @return mixed
      */
     public function getAttribute($key, $model = false)
-    {
+    {   
+        if (!$key) {
+            return;
+        }
+
         if (!$model) {
             $model = $this->model;
         }

@@ -10,6 +10,7 @@
                 <span title="" data-placement="right" data-toggle="tooltip" class="badge bg-black" data-original-title="{{ $field['tooltip'] }}">?</span>
                 @endif
             </label>
+
             <input id="{{ $attribute }}"
                     class="form-control {{ $field['class'] or null }}"
                     type="{{ $field['type'] or 'text' }}"
@@ -22,7 +23,7 @@
                     @if (isset($field['pattern'])) pattern="{{ $field['pattern'] }}" @endif
                     @if (isset($field['required'])) required="required" @endif
                     @if (isset($field['placeholder'])) placeholder="{{ $field['placeholder'] }}" @endif
-                    value="{{ old($attribute, $modelManager->getAttribute($attribute) ) }}">
+                    value="{{ $oldValue }}">
 
             @if(isset($field['help']))
                 <p class="help-block">{!! $field['help'] !!}</p>
@@ -58,7 +59,7 @@
                         @if (isset($field['pattern'])) pattern="{{ $field['pattern'] }}" @endif
                         @if (isset($field['required'])) required="required" @endif
                         @if (isset($field['placeholder'])) placeholder="{{ $field['placeholder'] }}" @endif
-                        value="{{ old($attribute, $modelManager->getAttribute($attribute) ) }}">
+                        value="{{ $oldValue }}">
 
                 @if(isset($field['help']))
                     <p class="help-block">{!! $field['help'] !!}</p>

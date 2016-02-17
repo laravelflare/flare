@@ -18,10 +18,10 @@ class AttributeManager
         if ($this->attributeTypeExists($type)) {
             $fieldType = $this->resolveAttributeClass($type);
 
-            return new $fieldType($attribute, $field, $modelManager);
+            return new $fieldType($attribute, $field, $value = null, $modelManager);
         }
 
-        return new BaseAttribute($attribute, $field, $modelManager);
+        return new BaseAttribute($attribute, $field, $value = null, $modelManager);
     }
 
     /**
@@ -40,7 +40,7 @@ class AttributeManager
             throw new \Exception('Attribute Field Type cannot be empty or undefined.');
         }
 
-        return call_user_func_array([$this->createAttribute($field['type'], $action, $attribute, $field, $modelManager), camel_case('render_'.$action)], []);
+        return call_user_func_array([$this->createAttribute($field['type'], $action, $attribute, $field, $value = null, $modelManager), camel_case('render_'.$action)], []);
     }
 
     /**
