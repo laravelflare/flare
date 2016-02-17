@@ -8,9 +8,9 @@ class AttributeManager
      * Create a new Attribute Instance 
      * 
      * @param string $type
-     * @param string $action
      * @param string $attribute
      * @param string $field
+     * @param string $value
      * @param string $modelManager
      */
     public function createAttribute($type, $attribute, $field, $value = null, $modelManager = null)
