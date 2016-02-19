@@ -18,7 +18,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "5.*"
+        "laravel/framework": "5.*", 
+        "laravelflare/fields": "dev-master"
     },
     "require-dev": {
         "mockery/mockery": "~0.9.1",
