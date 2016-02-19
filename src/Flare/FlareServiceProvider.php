@@ -17,6 +17,9 @@ class FlareServiceProvider extends ServiceProvider
         \LaravelFlare\Flare\Providers\ArtisanServiceProvider::class,
         \LaravelFlare\Flare\Providers\EventServiceProvider::class,
         \LaravelFlare\Flare\Providers\RouteServiceProvider::class,
+
+        // External Components
+        \LaravelFlare\Fields\FieldServiceProvider::class,
     ];
 
     /**
