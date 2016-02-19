@@ -31,6 +31,7 @@ class FlareModuleProvider extends ServiceProvider
      */
     public function boot()
     {
+        
     }
 
     /**
