@@ -48,7 +48,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     protected $columns = [];
 
     /**
-     * Map Model Attributes to AttributeTypes with
+     * Map Model Attributes to FieldTypes with
      * additional parameters which will be output
      * as fields when viewing, editting or adding
      * a new model entry.
