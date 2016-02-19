@@ -35,6 +35,21 @@ class FlareServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Create a new service provider instance.
+     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @return void
+     */
+    public function __construct($app)
+    {
+        parent::__construct($app);
+
+        $this->app->singleton('flare', function ($app) {
+            return $app->make(\LaravelFlare\Flare\Flare::class, [$app]);
+        });
+    }
+
+    /**
      * Perform post-registration booting of services.
      */
     public function boot()
@@ -55,8 +70,8 @@ class FlareServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerServiceProviders();
         $this->registerFlareFacade();
+        $this->registerServiceProviders();
     }
 
     /**
@@ -74,10 +89,6 @@ class FlareServiceProvider extends ServiceProvider
      */
     protected function registerFlareFacade()
     {
-        $this->app->singleton('flare', function ($app) {
-            return $app->make(\LaravelFlare\Flare\Flare::class, [$app]);
-        });
-
         AliasLoader::getInstance()->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
     }
 

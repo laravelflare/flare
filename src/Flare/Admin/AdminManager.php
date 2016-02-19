@@ -129,7 +129,7 @@ class AdminManager
         foreach ($classes as $key => $class) {
             if (is_array($class)) {
                 if ($this->usableClass($key)) {
-                    $this->registerRoute($key);
+                    $this->registerAdminRoutes($key);
                 }
 
                 $this->registerSubRoutes($class);

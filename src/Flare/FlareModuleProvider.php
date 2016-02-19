@@ -22,7 +22,7 @@ class FlareModuleProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        
+
         $this->flare = $this->app->make('flare');
     }
     

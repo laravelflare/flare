@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Admin\ModelAdmin;
+namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Collection;
 use LaravelFlare\Fields\FieldManager;
@@ -106,13 +106,13 @@ class AttributeCollection extends Collection
         }
 
         if (is_scalar($inner) && $this->fields->typeExists($inner)) {
-            return $this->fields->create($inner, $name, [], $this->modelManager);
+            return $this->fields->create($inner, $name, $this->getValue(), $inner);
         }
 
         if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->fields->typeExists($inner['type'])) {
             $type = $inner['type'];
             array_forget($inner, 'type');
-            return $this->fields->create($type, $name, $inner, $this->modelManager);
+            return $this->fields->create($type, $name, $this->getValue(), $inner);
         }
 
         if (is_array($inner)) {
@@ -124,5 +124,10 @@ class AttributeCollection extends Collection
 
             return $formattedItems;
         }
+    }
+
+    private function getValue()
+    {
+
     }
 }

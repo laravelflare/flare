@@ -7,8 +7,8 @@ use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
+use LaravelFlare\Flare\Admin\Models\AttributeCollection;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
-use LaravelFlare\Flare\Admin\Attributes\AttributeCollection;
 
 class ModelAdmin extends Admin implements ModelQueryable
 {
