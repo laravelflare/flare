@@ -135,7 +135,7 @@ class AdminManager
                 $this->registerSubRoutes($class);
                 continue;
             }
-            $this->registerRoute($class);
+            $this->registerAdminRoutes($class);
         }
     }
 
@@ -144,7 +144,7 @@ class AdminManager
      * 
      * @param string $class
      */
-    public function registerRoute($class)
+    public function registerAdminRoutes($class)
     {
         (new $class())->registerRoutes(\App::make(\Illuminate\Routing\Router::class));
     }

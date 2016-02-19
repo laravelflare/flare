@@ -255,15 +255,6 @@ abstract class Admin
         return [];
     }
 
-    /**
-     * shortName of a Admin Section Class.
-     *
-     * @return string
-     */
-    public static function shortName()
-    {
-        return (new \ReflectionClass(new static()))->getshortName();
-    }
 
     /**
      * Icon of a Admin Section Class.
@@ -283,6 +274,16 @@ abstract class Admin
     public function setIcon($icon = null)
     {
         $this->icon = $icon;
+    }
+
+    /**
+     * Shortname of a Admin Section Class.
+     *
+     * @return string
+     */
+    public static function shortName()
+    {
+        return (new \ReflectionClass(new static()))->getShortName();
     }
 
     /**
