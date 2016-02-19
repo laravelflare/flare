@@ -11,7 +11,7 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelSoftDeleting
 {
     use ModelDeleting;
-    
+
     /**
      * Overrides the ModelQuerying provided method 
      * with one which searches withTrashed scope.

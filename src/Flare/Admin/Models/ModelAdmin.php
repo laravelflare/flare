@@ -7,7 +7,6 @@ use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
-use LaravelFlare\Flare\Admin\Models\AttributeCollection;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 
 class ModelAdmin extends Admin implements ModelQueryable
@@ -226,7 +225,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      * @return mixed
      */
     public function getAttribute($key, $model = false)
-    {   
+    {
         if (!$key) {
             return;
         }
@@ -243,7 +242,7 @@ class ModelAdmin extends Admin implements ModelQueryable
 
         if ($this->hasRelatedKey($key, $model)) {
             return $this->relatedKey($key, $model);
-        }    
+        }
 
         return $model->getAttribute($key);
     }
@@ -361,7 +360,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     /**
      * Returns an array of Attribute Fields ready for output.
      *
-     * @param  string $type 
+     * @param string $type
      * 
      * @return array
      */
@@ -396,8 +395,6 @@ class ModelAdmin extends Admin implements ModelQueryable
 
     /**
      * Format the provided Attribute Fields into a more usable format.
-     * 
-     * @return void
      */
     protected function formatFields()
     {
@@ -531,7 +528,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Determine if the Managed Model has a Trait and Contract
+     * Determine if the Managed Model has a Trait and Contract.
      *
      * @return bool
      */
@@ -543,9 +540,9 @@ class ModelAdmin extends Admin implements ModelQueryable
     /**
      * Returns whether the current ModelAdmin has a given trait.
      * 
-     * @param  string  $trait  
+     * @param string $trait
      * 
-     * @return boolean        
+     * @return bool
      */
     public function hasTrait($trait = null)
     {
@@ -559,16 +556,16 @@ class ModelAdmin extends Admin implements ModelQueryable
     /**
      * Returns whether the current ModelAdmin has a given contract.
      * 
-     * @param  string  $contract  
+     * @param string $contract
      * 
-     * @return boolean        
+     * @return bool
      */
     public function hasContract($contract = null)
     {
         if (!$trait) {
             return;
         }
-        
+
         $managedModelClass = $this->getManagedModel();
     }
 }

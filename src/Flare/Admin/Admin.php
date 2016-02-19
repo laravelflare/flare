@@ -255,7 +255,6 @@ abstract class Admin
         return [];
     }
 
-
     /**
      * Icon of a Admin Section Class.
      *

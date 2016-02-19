@@ -328,9 +328,7 @@ class Flare
     }
 
     /**
-     * Register a helper method
-     * 
-     * @return void
+     * Register a helper method.
      */
     public function registerHelper($helper, $class)
     {
@@ -342,11 +340,9 @@ class Flare
     }
 
     /**
-     * Unregister a helper method
+     * Unregister a helper method.
      *
      * @param string $helper
-     * 
-     * @return void
      */
     public function unregisterHelper($helper)
     {
@@ -365,7 +361,6 @@ class Flare
     {
         return $this->app->make($this->helpers[$method], $parameters);
     }
-
 
     /**
      * Provide access to Helper Methods.

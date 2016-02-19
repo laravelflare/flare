@@ -16,7 +16,7 @@ class AttributeCollection extends Collection
     protected $items = [];
 
     /**
-     * Field Manager Instance
+     * Field Manager Instance.
      * 
      * @var \LaravelFlare\Fields\FieldManager
      */
@@ -32,9 +32,7 @@ class AttributeCollection extends Collection
     /**
      * Create a new collection.
      *
-     * @param  mixed  $items
-     * 
-     * @return void
+     * @param mixed $items
      */
     public function __construct($items = [], $modelManager = null)
     {
@@ -48,8 +46,6 @@ class AttributeCollection extends Collection
     /**
      * Attempt to reformat the current attribute items array
      * into the most usable format (an Attribute Collection).
-     * 
-     * @return void
      */
     public function formatFields()
     {
@@ -66,7 +62,7 @@ class AttributeCollection extends Collection
     }
 
     /**
-     * Allows adding fields to the Attribute Collection 
+     * Allows adding fields to the Attribute Collection.
      * 
      * @param array $items
      */
@@ -84,8 +80,8 @@ class AttributeCollection extends Collection
      * of an Array, an instance of BaseAttribute or even an
      * AttributeCollection object (which contains more!).
      *
-     * @param  mixed $name
-     * @param  mixed  $inner 
+     * @param mixed $name
+     * @param mixed $inner
      * 
      * @return mixed
      */
@@ -95,7 +91,7 @@ class AttributeCollection extends Collection
             return $inner;
         }
 
-        if ($inner instanceof AttributeCollection) {
+        if ($inner instanceof self) {
             $formattedItems = [];
 
             foreach ($inner->toArray() as $name => $inner) {
@@ -112,6 +108,7 @@ class AttributeCollection extends Collection
         if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->fields->typeExists($inner['type'])) {
             $type = $inner['type'];
             array_forget($inner, 'type');
+
             return $this->fields->create($type, $name, $this->getValue(), $inner);
         }
 
@@ -128,6 +125,5 @@ class AttributeCollection extends Collection
 
     private function getValue()
     {
-
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class FlareModuleProvider extends ServiceProvider
 {
     /**
-     * Flare
+     * Flare.
      * 
      * @var \LaravelFlare\Flare\Flare
      */
@@ -16,8 +16,7 @@ class FlareModuleProvider extends ServiceProvider
     /**
      * Create a new service provider instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return void
+     * @param \Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct($app)
     {
@@ -25,13 +24,12 @@ class FlareModuleProvider extends ServiceProvider
 
         $this->flare = $this->app->make('flare');
     }
-    
+
     /**
      * Perform post-registration booting of services.
      */
     public function boot()
     {
-        
     }
 
     /**
@@ -39,6 +37,5 @@ class FlareModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        
     }
 }

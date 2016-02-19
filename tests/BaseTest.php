@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\tests;
+namespace LaravelFlare\flare\tests;
 
 use Orchestra\Testbench\TestCase;
 
