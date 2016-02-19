@@ -3,23 +3,24 @@
 namespace LaravelFlare\Flare\Admin\Attributes;
 
 use Illuminate\Support\Collection;
-use LaravelFlare\Flare\Admin\Attributes\BaseAttribute;
+use LaravelFlare\Fields\FieldManager;
+use LaravelFlare\Fields\Types\BaseField;
 
 class AttributeCollection extends Collection
 {
-    /**
-     * Attribute Manager Instance
-     * 
-     * @var 
-     */
-    protected $attributeManager;
-
     /**
      * The items contained in the collection.
      *
      * @var array
      */
     protected $items = [];
+
+    /**
+     * Field Manager Instance
+     * 
+     * @var \LaravelFlare\Fields\FieldManager
+     */
+    protected $fields;
 
     /**
      * ModelAdmin which contains this Attribute Collection.
@@ -37,7 +38,7 @@ class AttributeCollection extends Collection
      */
     public function __construct($items = [], $modelManager = null)
     {
-        $this->attributeManager = new AttributeManager();
+        $this->fields = \App::make(FieldManager::class);
         $this->items = $items;
         $this->modelManager = $modelManager;
 
@@ -90,7 +91,7 @@ class AttributeCollection extends Collection
      */
     protected function formatInnerField($name = null, $inner = [])
     {
-        if ($inner instanceof BaseAttribute) {
+        if ($inner instanceof BaseField) {
             return $inner;
         }
 

@@ -43,7 +43,6 @@ class Flare
      */
     protected $helpers = [
         'admin' => \LaravelFlare\Flare\Admin\AdminManager::class,
-        'attributes' => \LaravelFlare\Flare\Admin\Attributes\AttributeManager::class,
     ];
 
     /**
