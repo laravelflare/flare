@@ -105,14 +105,14 @@ class AttributeCollection extends Collection
             return $formattedItems;
         }
 
-        if (is_scalar($inner) && $this->attributeManager->attributeTypeExists($inner)) {
-            return $this->attributeManager->createAttribute($inner, $name, [], $this->modelManager);
+        if (is_scalar($inner) && $this->fields->typeExists($inner)) {
+            return $this->fields->create($inner, $name, [], $this->modelManager);
         }
 
-        if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->attributeManager->attributeTypeExists($inner['type'])) {
+        if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->fields->typeExists($inner['type'])) {
             $type = $inner['type'];
             array_forget($inner, 'type');
-            return $this->attributeManager->createAttribute($type, $name, $inner, $this->modelManager);
+            return $this->fields->create($type, $name, $inner, $this->modelManager);
         }
 
         if (is_array($inner)) {
