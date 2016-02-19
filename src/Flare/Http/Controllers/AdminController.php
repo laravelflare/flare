@@ -7,12 +7,15 @@ use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use LaravelFlare\Flare\Permissions\Permissions;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
 class AdminController extends FlareController
 {
-    use AuthenticatesAndResetsPasswords, DispatchesJobs;
+    use AuthenticatesAndResetsPasswords;
+    use ThrottlesLogins;
+    use DispatchesJobs;
 
     /**
      * Auth.
