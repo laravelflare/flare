@@ -64,30 +64,6 @@ class AdminController extends FlareController
     }
 
     /**
-     * Processes the login form.
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postLogin(Request $request)
-    {
-        $this->validate($request, ['email' => 'required|email', 'password' => 'required']);
-
-        $credentials = $request->only('email', 'password');
-
-        if ($this->auth->attempt($credentials, $request->has('remember'))) {
-            return $this->loginRedirect();
-        }
-
-        return redirect(route('flare::login'))
-                    ->withInput($request->only('email', 'remember'))
-                    ->withErrors([
-                        'email' => $this->getFailedLoginMessage(),
-                    ]);
-    }
-
-    /**
      * Log the user.
      *
      * @return \Illuminate\Http\RedirectReponse
