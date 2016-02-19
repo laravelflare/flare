@@ -36,39 +36,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Administration Attributes
-    |--------------------------------------------------------------------------
-    |
-    | This array of Attribute classes allows you to define all of the
-    | available Attribute types which will usuable in your ModelAdmin sections.
-    |
-    | You can add your own custom attributes here, replace or even remove
-    | some of the defaults. Each attribute requires a unique key in order to 
-    | allow you to reference the class in the shorthand $fields property of
-    | any ModelAdmin classes that you decide to create.
-    |
-    | Note: These classnames should be unique regardless of Namespace.
-    |
-    */
-    'attributes' => [
-        'checkbox' => \LaravelFlare\Flare\Admin\Attributes\CheckboxAttribute::class,
-        'date' => \LaravelFlare\Flare\Admin\Attributes\DateAttribute::class,
-        'datetime' => \LaravelFlare\Flare\Admin\Attributes\DateTimeAttribute::class,
-        'email' => \LaravelFlare\Flare\Admin\Attributes\EmailAttribute::class,
-        'file' => \LaravelFlare\Flare\Admin\Attributes\FileAttribute::class,
-        'image' => \LaravelFlare\Flare\Admin\Attributes\ImageAttribute::class,
-        'password' => \LaravelFlare\Flare\Admin\Attributes\PasswordAttribute::class,
-        'radio' => \LaravelFlare\Flare\Admin\Attributes\RadioAttribute::class,
-        'select' => \LaravelFlare\Flare\Admin\Attributes\SelectAttribute::class,
-        'textarea' => \LaravelFlare\Flare\Admin\Attributes\TextareaAttribute::class,
-        'text' => \LaravelFlare\Flare\Admin\Attributes\TextAttribute::class,
-        'textmask' => \LaravelFlare\Flare\Admin\Attributes\TextMaskAttribute::class,
-        'time' => \LaravelFlare\Flare\Admin\Attributes\TimeAttribute::class,
-        'wysiwyg' => \LaravelFlare\Flare\Admin\Attributes\WysiwygAttribute::class,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Administration Widgets
     |--------------------------------------------------------------------------
     |

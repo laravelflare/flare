@@ -29,6 +29,7 @@ class AdminManager
      */
     public function __construct()
     {
+        
     }
 
     /**
