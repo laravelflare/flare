@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Admin\Attributes;
+namespace LaravelFlare\Flare\Admin\ModelAdmin;
 
 use Illuminate\Support\Collection;
 use LaravelFlare\Fields\FieldManager;
