@@ -63,6 +63,7 @@ class RouteServiceProvider extends ServiceProvider
             ]);
 
         $router->middlewareGroup('flare', [
+                'web',
                 'flarebase',
                 'flareauthenticate',
                 'checkpermissions',
@@ -113,7 +114,7 @@ class RouteServiceProvider extends ServiceProvider
             [
                 'prefix' => \Flare::config('admin_url'),
                 'as' => 'flare::',
-                'middleware' => ['flarebase'],
+                'middleware' => ['web', 'flarebase'],
             ],
             function ($router) {
                 // Logout route...
