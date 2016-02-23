@@ -141,9 +141,19 @@ class Flare
 
     /**
      * Set the loaded config to the protected property.
+     *
+     * Defaults to the configuration provided in this file 
+     * (the bare minimum) if no config is found available.
+     *
+     * @return void
      */
     public function setLoadedConfig()
     {
+        if (!config('flare.config')) {
+            $this->config = $this->configurationKeys;
+            return;
+        }
+
         $this->config = config('flare.config');
     }
 
