@@ -28,10 +28,10 @@ class FlareServiceProvider extends ServiceProvider
      * @var array
      */
     protected $assets = [
-        'public/flare' => 'vendor/flare',
-        'public/AdminLTE/dist' => 'vendor/flare',
-        'public/AdminLTE/plugins' => 'vendor/flare/plugins',
-        'public/AdminLTE/bootstrap' => 'vendor/flare/bootstrap',
+        'public/flare' => 'public/vendor/flare',
+        'public/AdminLTE/dist' => 'public/vendor/flare',
+        'public/AdminLTE/plugins' => 'public/vendor/flare/plugins',
+        'public/AdminLTE/bootstrap' => 'public/vendor/flare/bootstrap',
     ];
 
     /**
@@ -102,7 +102,7 @@ class FlareServiceProvider extends ServiceProvider
             $assets[$this->basePath($location)] = base_path($asset);
         }
 
-        $this->publishes($assets, 'public');
+        $this->publishes($assets);
     }
 
     /**
