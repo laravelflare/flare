@@ -118,8 +118,8 @@ trait ModelQuerying
      */
     private function query($model)
     {
-        if (count($this->query_filter) > 0) {
-            foreach ($this->query_filter as $filter => $parameters) {
+        if (count($this->queryFilter) > 0) {
+            foreach ($this->queryFilter as $filter => $parameters) {
                 if (!is_array($parameters)) {
                     $parameters = [$parameters];
                 }
