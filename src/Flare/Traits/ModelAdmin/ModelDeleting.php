@@ -23,13 +23,13 @@ trait ModelDeleting
      *
      * Fires off beforeDelete(), doDelete() and afterDelete()
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function delete($modelitem_id)
+    public function delete($modelitemId)
     {
-        $this->find($modelitem_id);
+        $this->find($modelitemId);
 
         event(new BeforeDelete($this));
 

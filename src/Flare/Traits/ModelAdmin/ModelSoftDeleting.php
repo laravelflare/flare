@@ -19,25 +19,25 @@ trait ModelSoftDeleting
      * Overrides the ModelQuerying provided method 
      * with one which searches withTrashed scope.
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function find($modelitem_id)
+    public function find($modelitemId)
     {
-        return $this->findWithTrashed($modelitem_id);
+        return $this->findWithTrashed($modelitemId);
     }
 
     /**
      * Finds model and includes withTrashed() scope in query.
      *
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function findWithTrashed($modelitem_id)
+    public function findWithTrashed($modelitemId)
     {
-        $this->model = $this->model->withTrashed()->findOrFail($modelitem_id);
+        $this->model = $this->model->withTrashed()->findOrFail($modelitemId);
 
         return $this->model;
     }
@@ -45,13 +45,13 @@ trait ModelSoftDeleting
     /**
      * Finds model and includes onlyTrashed() scope in query.
      *
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function findOnlyTrashed($modelitem_id)
+    public function findOnlyTrashed($modelitemId)
     {
-        $this->model = $this->model->onlyTrashed()->findOrFail($modelitem_id);
+        $this->model = $this->model->onlyTrashed()->findOrFail($modelitemId);
 
         return $this->model;
     }
@@ -70,15 +70,15 @@ trait ModelSoftDeleting
      *
      * Fires off beforeDelete(), doDelete() and afterDelete()
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function delete($modelitem_id)
+    public function delete($modelitemId)
     {
         event(new BeforeDelete($this));
 
-        $this->findWithTrashed($modelitem_id);
+        $this->findWithTrashed($modelitemId);
 
         $this->beforeDelete();
 
@@ -130,15 +130,15 @@ trait ModelSoftDeleting
      *
      * Fires off beforeRestore(), doRestore() and afterRestore()
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function restore($modelitem_id)
+    public function restore($modelitemId)
     {
         event(new BeforeRestore($this));
 
-        $this->findOnlyTrashed($modelitem_id);
+        $this->findOnlyTrashed($modelitemId);
 
         $this->beforeRestore();
 

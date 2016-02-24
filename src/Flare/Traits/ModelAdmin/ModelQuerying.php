@@ -45,13 +45,13 @@ trait ModelQuerying
     /**
      * Finds an existing Model entry and sets it to the current model.
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function find($modelitem_id)
+    public function find($modelitemId)
     {
-        $this->model = $this->model->findOrFail($modelitem_id);
+        $this->model = $this->model->findOrFail($modelitemId);
 
         return $this->model;
     }

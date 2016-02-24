@@ -23,13 +23,13 @@ trait ModelEditting
      *
      * Fires off beforeEdit(), doEdit() and afterEdit()
      * 
-     * @param int $modelitem_id
+     * @param int $modelitemId
      * 
      * @return
      */
-    public function edit($modelitem_id)
+    public function edit($modelitemId)
     {
-        $this->find($modelitem_id);
+        $this->find($modelitemId);
 
         event(new BeforeEdit($this));
 
