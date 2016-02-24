@@ -37,6 +37,8 @@
                             </li>
                         </ul>
                     </div>
+
+                    @include('flare::admin.modeladmin.includes.header.filter', ['type' => 'all'])
                 </div>
                 
                 @include('flare::admin.modeladmin.includes.modelitem-list')

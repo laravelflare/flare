@@ -39,6 +39,8 @@
                             </ul>
                         @endif
                     </div>
+                    
+                    @include('flare::admin.modeladmin.includes.header.filter', ['type' => null])
                 </div>
                 
                 @include('flare::admin.modeladmin.includes.modelitem-list')

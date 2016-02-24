@@ -35,6 +35,8 @@
                             </li>
                         </ul>
                     </div>
+
+                    @include('flare::admin.modeladmin.includes.header.filter', ['type' => 'trashed'])
                 </div>
                 
                 @include('flare::admin.modeladmin.includes.modelitem-list')

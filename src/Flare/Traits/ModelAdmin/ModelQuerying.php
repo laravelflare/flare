@@ -30,6 +30,21 @@ trait ModelQuerying
     protected $queryFilter = [];
 
     /**
+     * Any array of Filters.
+     *
+     * Filter should be setup in the same fashion as a default
+     * $queryFilter is setup, however, inside an associative
+     * array.
+     *
+     * The associative array is your filter 'action' and is 
+     * used as the filter label (and converted to a URL safe
+     * query parameter).
+     * 
+     * @var array
+     */
+    protected $filters = [];
+
+    /**
      * The number of models to return for pagination.
      *
      * @var int
@@ -74,11 +89,12 @@ trait ModelQuerying
      * 
      * @return
      */
-    public function items()
+    public function items($count = false)
     {
+        \DB::enableQueryLog();
         $this->query = $this->model->newQuery();
 
-        return $this->query();
+        return $this->query($count);
     }
 
     /**
@@ -89,7 +105,7 @@ trait ModelQuerying
      * 
      * @return
      */
-    public function allItems()
+    public function allItems($count = false)
     {
         if (!$this->hasSoftDeleting()) {
             throw new \Exception('Model does not have Soft Deleting');
@@ -97,7 +113,7 @@ trait ModelQuerying
 
         $this->query = $this->model->newQuery()->withTrashed();
 
-        return $this->query();
+        return $this->query($count);
     }
 
     /**
@@ -108,7 +124,7 @@ trait ModelQuerying
      * 
      * @return
      */
-    public function onlyTrashedItems()
+    public function onlyTrashedItems($count = false)
     {
         if (!$this->hasSoftDeleting()) {
             throw new \Exception('Model does not have Soft Deleting');
@@ -116,7 +132,7 @@ trait ModelQuerying
 
         $this->query = $this->model->newQuery()->onlyTrashed();
 
-        return $this->query();
+        return $this->query($count);
     }
 
     /**
@@ -124,7 +140,7 @@ trait ModelQuerying
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function query()
+    private function query($count)
     {
         $this->applyQueryFilters();
 
@@ -133,6 +149,12 @@ trait ModelQuerying
                                 $this->orderBy(),
                                 $this->sortBy()
                             );
+        }
+
+        //dd(\DB::getQueryLog());
+
+        if ($count) {
+            return $this->query->count();
         }
 
         if ($this->perPage > 0) {
@@ -151,9 +173,9 @@ trait ModelQuerying
     {
         if ($this->hasSoftDeleting()) {
             return [
-                        'all' => $this->model->count(),
-                        'with_trashed' => $this->model->withTrashed()->count(),
-                        'only_trashed' => $this->model->onlyTrashed()->count(),
+                        'all' => $this->items($count = true),
+                        'with_trashed' => $this->allItems($count = true),
+                        'only_trashed' => $this->onlyTrashedItems($count = true),
                     ];
         }
 
@@ -225,11 +247,26 @@ trait ModelQuerying
      */
     private function applyQueryFilters()
     {
-        if (is_array($this->getQueryFilter())) {
-            return $this->createQueryFilter();
+        if (is_array($this->queryFilter())) {
+            $this->createQueryFilter();
+        } else {
+            $this->queryFilter();
         }
 
-        return $this->getQueryFilter();
+        $this->queryFilterRequest();
+    }
+
+    private function queryFilterRequest()
+    {
+        if (!$safeFilter = \Request::get('filter')) {
+            return false;
+        } 
+
+        if (!isset($this->safeFilters()[$safeFilter])) {
+            return false;
+        }
+
+        return $this->query = $this->filters()[$this->safeFilters()[$safeFilter]];
     }
 
     /**
@@ -239,8 +276,8 @@ trait ModelQuerying
      */
     private function createQueryFilter()
     {
-        if (count($this->getQueryFilter()) > 0) {
-            foreach ($this->getQueryFilter() as $filter => $parameters) {
+        if (count($this->queryFilter()) > 0) {
+            foreach ($this->queryFilter() as $filter => $parameters) {
                 if (!is_array($parameters)) {
                     $parameters = [$parameters];
                 }
@@ -254,9 +291,36 @@ trait ModelQuerying
      * 
      * @return 
      */
-    public function getQueryFilter()
+    public function queryFilter()
     {
         return $this->queryFilter;
+    }
+
+    /**
+     * Access the Query Filter Options
+     * 
+     * @return 
+     */
+    public function filters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * Associative array of safe filter names to 
+     * their corresponding normal counterpart.
+     * 
+     * @return 
+     */
+    public function safeFilters()
+    {
+        $filters = [];
+
+        foreach ($this->filters() as $filterName => $query) {
+            $filters[str_slug($filterName)] = $filterName;
+        }
+
+        return $filters;
     }
 
     /**
