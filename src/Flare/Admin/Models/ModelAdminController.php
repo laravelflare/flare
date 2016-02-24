@@ -247,7 +247,7 @@ class ModelAdminController extends FlareController
             return $this->missingMethod();
         }
 
-        $this->modelAdmin->findOnlyTrashed($modelitem_id)->restore();
+        $this->modelAdmin->restore($modelitem_id);
 
         return redirect($this->modelAdmin->currentUrl())->with('notifications_below_header', [['type' => 'success', 'icon' => 'check-circle', 'title' => 'Success!', 'message' => 'The '.$this->modelAdmin->getTitle().' was successfully restored.', 'dismissable' => false]]);
     }

@@ -10,20 +10,6 @@ use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableExcep
 trait ModelSaving
 {
     /**
-     * Used by beforeSave() to ensure child classes call parent::beforeSave().
-     * 
-     * @var bool
-     */
-    protected $brokenBeforeSave = false;
-
-    /**
-     * Used by afterSave() to ensure child classes call parent::afterSave().
-     * 
-     * @var bool
-     */
-    protected $brokenAfterSave = false;
-
-    /**
      * Relations to Update during Save and
      * the appropriate method to fire the update with.
      * 
@@ -46,9 +32,6 @@ trait ModelSaving
      */
     protected function beforeSave()
     {
-        $this->brokenBeforeSave = false;
-
-        event(new BeforeSave($this));
     }
 
     /**
@@ -60,19 +43,15 @@ trait ModelSaving
      */
     public function save()
     {
-        $this->brokenBeforeSave = true;
+        event(new BeforeSave($this));
+
         $this->beforeSave();
-        if ($this->brokenBeforeSave) {
-            throw new WriteableException('ModelAdmin has a broken beforeSave method. Make sure you call parent::beforeSave() on all instances of beforeSave()', 1);
-        }
 
         $this->doSave();
 
-        $this->brokenAfterSave = true;
         $this->afterSave();
-        if ($this->brokenAfterSave) {
-            throw new WriteableException('ModelAdmin has a broken afterSave method. Make sure you call parent::afterSave() on all instances of afterSave()', 1);
-        }
+
+        event(new AfterSave($this));
     }
 
     /**
@@ -120,7 +99,6 @@ trait ModelSaving
             }
         }
 
-        event(new AfterSave($this));
     }
 
     /**
