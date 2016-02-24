@@ -5,7 +5,14 @@ namespace LaravelFlare\Flare\Traits\ModelAdmin;
 trait ModelQuerying
 {
     /**
-     * Allows filtering of the query, for instance:.
+     * Query
+     * 
+     * @var string
+     */
+    public $query;
+
+    /**
+     * Allows filtering of the default query, for instance:.
      *
      *      $queryFilter = [
      *                          'whereNotNull' => ['parent_id'],
@@ -14,6 +21,9 @@ trait ModelQuerying
      *
      * Would result in an Eloquent query with the following scope:
      *     Model::whereNotNull('parent_id')->where('name', 'John')->get();
+     *
+     * Note: This queryFilter is not used for custom filters and
+     * can also be overridden by setQueryFilter();
      * 
      * @var array
      */
@@ -66,9 +76,9 @@ trait ModelQuerying
      */
     public function items()
     {
-        $model = $this->model;
+        $this->query = $this->model->newQuery();
 
-        return $this->query($model);
+        return $this->query();
     }
 
     /**
@@ -84,10 +94,10 @@ trait ModelQuerying
         if (!$this->hasSoftDeleting()) {
             throw new \Exception('Model does not have Soft Deleting');
         }
-        
-        $model = $this->model->withTrashed();
 
-        return $this->query($model);
+        $this->query = $this->model->newQuery()->withTrashed();
+
+        return $this->query();
     }
 
     /**
@@ -103,42 +113,33 @@ trait ModelQuerying
         if (!$this->hasSoftDeleting()) {
             throw new \Exception('Model does not have Soft Deleting');
         }
-        
-        $model = $this->model->onlyTrashed();
 
-        return $this->query($model);
+        $this->query = $this->model->newQuery()->onlyTrashed();
+
+        return $this->query();
     }
 
     /**
      * Performs the Model Query
      * 
-     * @param  \Illuminate\Database\Eloquent\Model $model
-     * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function query($model)
+    private function query()
     {
-        if (count($this->queryFilter) > 0) {
-            foreach ($this->queryFilter as $filter => $parameters) {
-                if (!is_array($parameters)) {
-                    $parameters = [$parameters];
-                }
-                $model = call_user_func_array([$this->model, $filter], $parameters);
-            }
-        }
+        $this->applyQueryFilters();
 
         if ($this->orderBy()) {
-            $model = $model->orderBy(
+            $this->query = $this->query->orderBy(
                                 $this->orderBy(),
                                 $this->sortBy()
                             );
         }
 
         if ($this->perPage > 0) {
-            return $model->paginate($this->perPage);
+            return $this->query->paginate($this->perPage);
         }
 
-        return $model->get();
+        return $this->query->get();
     }
 
     /**
@@ -215,5 +216,58 @@ trait ModelQuerying
     public function setPerPage($perPage)
     {
         $this->perPage = $perPage;
+    }
+
+    /**
+     * Apply the Query Filters
+     * 
+     * @return 
+     */
+    private function applyQueryFilters()
+    {
+        if (is_array($this->getQueryFilter())) {
+            return $this->createQueryFilter();
+        }
+
+        return $this->getQueryFilter();
+    }
+
+    /**
+     * Create the Query Filter from Array
+     * 
+     * @return
+     */
+    private function createQueryFilter()
+    {
+        if (count($this->getQueryFilter()) > 0) {
+            foreach ($this->getQueryFilter() as $filter => $parameters) {
+                if (!is_array($parameters)) {
+                    $parameters = [$parameters];
+                }
+                $this->query = call_user_func_array([$this->query, $filter], $parameters);
+            }
+        }
+    }
+
+    /**
+     * Access the Query Filter
+     * 
+     * @return 
+     */
+    public function getQueryFilter()
+    {
+        return $this->queryFilter;
+    }
+
+    /**
+     * Set the Query Filter
+     * 
+     * @param array $filter
+     *
+     * @return void
+     */
+    public function setQueryFilter($filter = [])
+    {
+        $this->queryFilter = $filter;
     }
 }
