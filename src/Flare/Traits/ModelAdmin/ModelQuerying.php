@@ -68,6 +68,56 @@ trait ModelQuerying
     {
         $model = $this->model;
 
+        return $this->query($model);
+    }
+
+    /**
+     * Returns All Model Items, either all() or paginated().
+     *
+     * Filtered by any defined query filters ($query_filter)
+     * Ordered by Managed Model orderBy and sortBy methods
+     * 
+     * @return
+     */
+    public function allItems()
+    {
+        if (!$this->hasSoftDeleting()) {
+            throw new \Exception('Model does not have Soft Deleting');
+        }
+        
+        $model = $this->model->withTrashed();
+
+        return $this->query($model);
+    }
+
+    /**
+     * Returns Model Items, either all() or paginated().
+     *
+     * Filtered by any defined query filters ($query_filter)
+     * Ordered by Managed Model orderBy and sortBy methods
+     * 
+     * @return
+     */
+    public function onlyTrashedItems()
+    {
+        if (!$this->hasSoftDeleting()) {
+            throw new \Exception('Model does not have Soft Deleting');
+        }
+        
+        $model = $this->model->onlyTrashed();
+
+        return $this->query($model);
+    }
+
+    /**
+     * Performs the Model Query
+     * 
+     * @param  \Illuminate\Database\Eloquent\Model $model
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function query($model)
+    {
         if (count($this->query_filter) > 0) {
             foreach ($this->query_filter as $filter => $parameters) {
                 if (!is_array($parameters)) {
@@ -91,6 +141,11 @@ trait ModelQuerying
         return $model->get();
     }
 
+    /**
+     * Return Totals of All, With Trashed and Only Trashed
+     * 
+     * @return array
+     */
     public function totals()
     {
         if ($this->hasSoftDeleting()) {

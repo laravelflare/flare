@@ -70,7 +70,7 @@ class ModelAdminController extends FlareController
         }
 
         return view('flare::admin.modeladmin.trashed', [
-                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'modelItems' => $this->modelAdmin->onlyTrashedItems(),
                                                         'totals' => $this->modelAdmin->totals(),
                                                     ]
                                                 );
@@ -88,7 +88,7 @@ class ModelAdminController extends FlareController
         }
 
         return view('flare::admin.modeladmin.all', [
-                                                        'modelItems' => $this->modelAdmin->items(),
+                                                        'modelItems' => $this->modelAdmin->allItems(),
                                                         'totals' => $this->modelAdmin->totals(),
                                                     ]
                                             );
