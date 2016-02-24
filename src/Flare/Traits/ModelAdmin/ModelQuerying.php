@@ -7,7 +7,7 @@ trait ModelQuerying
     /**
      * Allows filtering of the query, for instance:.
      *
-     *      $query_filter = [
+     *      $queryFilter = [
      *                          'whereNotNull' => ['parent_id'],
      *                          'where' => ['name', 'John'],
      *                      ]
@@ -17,7 +17,7 @@ trait ModelQuerying
      * 
      * @var array
      */
-    protected $query_filter = [];
+    protected $queryFilter = [];
 
     /**
      * The number of models to return for pagination.
@@ -59,7 +59,7 @@ trait ModelQuerying
     /**
      * Returns Model Items, either all() or paginated().
      *
-     * Filtered by any defined query filters ($query_filter)
+     * Filtered by any defined query filters ($queryFilter)
      * Ordered by Managed Model orderBy and sortBy methods
      * 
      * @return
@@ -74,7 +74,7 @@ trait ModelQuerying
     /**
      * Returns All Model Items, either all() or paginated().
      *
-     * Filtered by any defined query filters ($query_filter)
+     * Filtered by any defined query filters ($queryFilter)
      * Ordered by Managed Model orderBy and sortBy methods
      * 
      * @return
@@ -93,7 +93,7 @@ trait ModelQuerying
     /**
      * Returns Model Items, either all() or paginated().
      *
-     * Filtered by any defined query filters ($query_filter)
+     * Filtered by any defined query filters ($queryFilter)
      * Ordered by Managed Model orderBy and sortBy methods
      * 
      * @return
