@@ -8,7 +8,7 @@
             <div class="box">
                 <div class="box-header with-border">
                    <div class="btn-group">
-                        <a href="{{ $modelAdmin->currentUrl('trashed') }}" class="btn btn-default btn-flat">
+                        <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? 'trashed?filter='.\Request::get('filter') : 'trashed') }}" class="btn btn-default btn-flat">
                             Trashed Only
                             <span class="badge bg-red" style="margin-left: 15px">{{ $totals['only_trashed'] }}</span>
                         </a>
@@ -18,7 +18,7 @@
                         </button>
                         <ul role="menu" class="dropdown-menu">
                             <li>
-                                <a href="{{ $modelAdmin->currentUrl() }}">
+                                <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false)  }}">
                                     <span style="display:inline-block; width: 100px;">
                                         All {{ $modelAdmin->getPluralTitle() }}
                                     </span>
@@ -26,7 +26,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $modelAdmin->currentUrl('all') }}">
+                                <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? 'all?filter='.\Request::get('filter') : 'all')  }}">
                                     <span style="display:inline-block; width: 100px;">
                                         With Trashed
                                     </span>

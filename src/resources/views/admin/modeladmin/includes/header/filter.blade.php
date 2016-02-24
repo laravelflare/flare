@@ -1,6 +1,6 @@
 @if ($modelAdmin->filters())
     <div class="btn-group">
-        <a href="{{ $modelAdmin->currentUrl($type) }}" class="btn btn-default btn-flat">
+        <a href="{{ $modelAdmin->currentUrl($type.'?filter='.\Request::get('filter')) }}" class="btn btn-default btn-flat">
             Filter:
             @if ($filter = \Request::get('filter'))
                 {{ $modelAdmin->safeFilters()[$filter] }}

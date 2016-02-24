@@ -13,6 +13,7 @@
             {!! $modelItems->appends([
                                     'sort' => $modelAdmin->sortBy() == 'asc' ? 'asc' : null,
                                     'order' => $modelAdmin->orderBy(),
+                                    'filter' => \Request::get('filter'),
                                 ])->render() !!}
         </div>
     @endif
