@@ -338,6 +338,24 @@ class Flare
     }
 
     /**
+     * Returns the compatibility version of Flare to use.
+     *
+     * This will either return 'LTS' for Laravel installs of
+     * the Long Term Support branch (5.1.x) or 'Edge' for all
+     * other versions (including dev-master).
+     * 
+     * @return string
+     */
+    public function compatibility()
+    {
+        if (strpos($this->app->version(), '5.1.') !== false && strpos($this->app->version(), '(LTS)') !== false) {
+            return 'LTS';
+        }
+
+        return 'Edge';
+    }
+
+    /**
      * Register a helper method.
      */
     public function registerHelper($helper, $class)

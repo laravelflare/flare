@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Providers;
+namespace LaravelFlare\Flare\Providers\LTS;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -23,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
         parent::boot($router);
     }
 
@@ -54,20 +52,6 @@ class RouteServiceProvider extends ServiceProvider
         $router->middleware('flareauthenticate', \LaravelFlare\Flare\Http\Middleware\FlareAuthenticate::class);
         $router->middleware('checkmodelfound', \LaravelFlare\Flare\Http\Middleware\CheckModelFound::class);
         $router->middleware('checkpermissions', \LaravelFlare\Flare\Http\Middleware\CheckPermissions::class);
-
-        $router->middlewareGroup('flarebase', [
-                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-                \App\Http\Middleware\VerifyCsrfToken::class,
-                \App\Http\Middleware\EncryptCookies::class,
-            ]);
-
-        $router->middlewareGroup('flare', [
-                'web',
-                'flarebase',
-                'flareauthenticate',
-                'checkpermissions',
-            ]);
     }
 
     /**
@@ -86,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
             [
                 'prefix' => \Flare::config('admin_url'),
                 'as' => 'flare::',
-                'middleware' => ['flare'],
+                'middleware' => ['flareauthenticate', 'checkpermissions'],
             ],
             function ($router) {
                 \Flare::admin()->registerRoutes($router);
@@ -114,7 +98,6 @@ class RouteServiceProvider extends ServiceProvider
             [
                 'prefix' => \Flare::config('admin_url'),
                 'as' => 'flare::',
-                'middleware' => ['web', 'flarebase'],
             ],
             function ($router) {
                 // Logout route...
