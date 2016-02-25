@@ -12,7 +12,7 @@ class RouteServiceProvider extends RouteServiceProvider
      * 
      * @var string
      */
-    protected $compatibilityVersion = 'LTS';
+    protected $compatibilityVersion = 'Edge';
 
     /**
      * Register all the Flare Provided Middleware and Middleware Groups.
