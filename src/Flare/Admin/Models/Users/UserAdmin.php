@@ -3,7 +3,7 @@
 namespace LaravelFlare\Flare\Admin\Models\Users;
 
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
-use LaravelFlare\Flare\Traits\ModelAdmin\HumanTimestampAttributes;
+use LaravelFlare\Flare\Admin\Models\Traits\HumanTimestampAttributes;
 
 class UserAdmin extends ModelAdmin
 {

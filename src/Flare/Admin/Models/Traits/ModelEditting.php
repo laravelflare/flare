@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Traits\ModelAdmin;
+namespace LaravelFlare\Flare\Admin\Models\Traits;
 
 use LaravelFlare\Flare\Events\ModelEdit;
 use LaravelFlare\Flare\Events\AfterEdit;

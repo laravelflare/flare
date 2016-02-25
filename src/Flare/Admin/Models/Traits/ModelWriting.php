@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Traits\ModelAdmin;
+namespace LaravelFlare\Flare\Admin\Models\Traits;
 
 trait ModelWriting
 {

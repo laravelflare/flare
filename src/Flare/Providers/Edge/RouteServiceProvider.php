@@ -3,40 +3,16 @@
 namespace LaravelFlare\Flare\Providers\Edge;
 
 use Illuminate\Routing\Router;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use LaravelFlare\Flare\Providers\RouteServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider
+class RouteServiceProvider extends RouteServiceProvider
 {
     /**
-     * This namespace is applied to the controller routes in your routes file.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
+     * The compatibility version of this RouteServiceProvider
+     * 
      * @var string
      */
-    protected $namespace = '\LaravelFlare\Flare\Http\Controllers';
-
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-    }
-
-    /**
-     * Define the routes for the application.
-     *
-     * @param \Illuminate\Routing\Router $router
-     */
-    public function map(Router $router)
-    {
-        $this->registerMiddleware($router);
-        $this->registerDefinedRoutes($router);
-        $this->registerDefaultRoutes($router);
-    }
+    protected $compatibilityVersion = 'LTS';
 
     /**
      * Register all the Flare Provided Middleware and Middleware Groups.
@@ -88,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
             ],
             function ($router) {
                 \Flare::admin()->registerRoutes($router);
-                $router->get('/', $this->namespace.'\AdminController@getDashboard')->name('dashboard');
+                $router->get('/', $this->adminController('getDashboard'))->name('dashboard');
             }
         );
     }
@@ -116,20 +92,20 @@ class RouteServiceProvider extends ServiceProvider
             ],
             function ($router) {
                 // Logout route...
-                $router->get('logout', $this->namespace.'\AdminController@getLogout')->name('logout');
+                $router->get('logout', $this->adminController('getLogout'))->name('logout');
 
                 if (\Flare::show('login')) {
                     // Login request reoutes...
-                    $router->get('login', $this->namespace.'\AdminController@getLogin')->name('login');
-                    $router->post('login', $this->namespace.'\AdminController@postLogin')->name('login');
+                    $router->get('login', $this->adminController('getLogin'))->name('login');
+                    $router->post('login', $this->adminController('postLogin'))->name('login');
 
                     // Password reset link request routes...
-                    $router->get('email', $this->namespace.'\AdminController@getEmail')->name('email');
-                    $router->post('email', $this->namespace.'\AdminController@postEmail')->name('email');
+                    $router->get('email', $this->adminController('getEmail'))->name('email');
+                    $router->post('email', $this->adminController('postEmail'))->name('email');
 
                     // Password reset routes...
-                    $router->get('reset/{token}', $this->namespace.'\AdminController@getReset')->name('reset');
-                    $router->post('reset', $this->namespace.'\AdminController@postReset')->name('reset');
+                    $router->get('reset/{token}', $this->adminController('getReset'))->name('reset');
+                    $router->post('reset', $this->adminController('postReset'))->name('reset');
                 }
             }
         );

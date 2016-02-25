@@ -4,9 +4,9 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelSaving;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
-use LaravelFlare\Flare\Traits\ModelAdmin\ModelQuerying;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelQuerying;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 
 class ModelAdmin extends Admin implements ModelQueryable
@@ -451,7 +451,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasViewing()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelViewing::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelViewing::class);
     }
 
     /**
@@ -461,7 +461,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCreating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelCreating::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelCreating::class);
     }
 
     /**
@@ -471,7 +471,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCloning()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelCloning::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelCloning::class);
     }
 
     /**
@@ -481,7 +481,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasEditting()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelEditting::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelEditting::class);
     }
 
     /**
@@ -491,7 +491,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasDeleting()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelDeleting::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelDeleting::class);
     }
 
     /**
@@ -513,7 +513,7 @@ class ModelAdmin extends Admin implements ModelQueryable
         return in_array(
             \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new $managedModelClass()))
         ) && in_array(
-            \LaravelFlare\Flare\Traits\ModelAdmin\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
+            \LaravelFlare\Flare\Admin\Models\Traits\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
         );
     }
 
@@ -524,7 +524,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasValidating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Traits\ModelAdmin\ModelValidating::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelValidating::class);
     }
 
     /**

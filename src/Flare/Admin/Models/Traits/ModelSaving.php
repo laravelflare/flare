@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelFlare\Flare\Traits\ModelAdmin;
+namespace LaravelFlare\Flare\Admin\Models\Traits;
 
 use LaravelFlare\Flare\Events\ModelSave;
 use LaravelFlare\Flare\Events\AfterSave;

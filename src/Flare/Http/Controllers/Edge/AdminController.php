@@ -1,19 +1,25 @@
 <?php
 
-namespace LaravelFlare\Flare\Http\Controllers;
+namespace LaravelFlare\Flare\Http\Controllers\Edge;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use LaravelFlare\Flare\Permissions\Permissions;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
-use LaravelFlare\Flare\Traits\Http\Controllers\AuthenticatesAndResetsPasswords;
 
 class AdminController extends FlareController
 {
-    use AuthenticatesAndResetsPasswords;
+    use AuthenticatesUsers {
+        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
+        AuthenticatesUsers::getGuard insteadof ResetsPasswords;
+    }
+    use ResetsPasswords;
     use ThrottlesLogins;
     use DispatchesJobs;
 
@@ -50,7 +56,7 @@ class AdminController extends FlareController
             $view = 'flare::'.$view;
         }
 
-        return view($view, ['widgetAdminManager' => (new WidgetAdminManager())]);
+        return view($view, ['widgets' => (new WidgetAdminManager())]);
     }
 
     /**
@@ -100,7 +106,7 @@ class AdminController extends FlareController
      *
      * If the authenticated user has admin permissions
      * then they will be redirected into the admin
-     * panel.If they do no, they will be sent
+     * panel. If they do no, they will be sent
      * to the homepage of the website.
      * 
      * @return \Illuminate\Http\RedirectReponse
