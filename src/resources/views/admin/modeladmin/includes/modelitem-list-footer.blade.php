@@ -3,12 +3,7 @@
 @else
     <div class="box-footer clearfix">
         @if ($modelAdmin->hasCreating())
-            <div class="pull-left">
-                <a href="{{ $modelAdmin->currentUrl('create') }}" class="btn btn-success">
-                    <i class="fa fa-{{ $modelAdmin->getIcon() }}"></i>
-                    Add {{ $modelAdmin->getTitle() }}
-                </a>
-            </div>
+            @include('flare::admin.modeladmin.includes.actions.create')
         @endif
 
         @if ($modelAdmin->getPerPage())
