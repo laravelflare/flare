@@ -362,7 +362,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function outputFields()
     {
-        return $this->formatFields();
+        return $this->getFields();
     }
 
     /**
