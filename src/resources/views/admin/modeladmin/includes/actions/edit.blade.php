@@ -1,8 +1,8 @@
-@if (method_exists($modelAdmin, 'editAction'))
-    {{ $modelAdmin->editAction($modelItem) }}
+@if (method_exists($modelAdmin, 'actionsDelete'))
+    {{ $modelAdmin->actionsDelete($modelItem) }}
 @else
-    <a class="btn btn-primary btn-xs" href="{{ $modelAdmin->currentUrl('edit/'.$modelItem->getKey()) }}">
+    <a href="{{ $modelAdmin->currentUrl('edit/'.$modelItem->getKey()) }}" class="btn btn-primary">
         <i class="fa fa-edit"></i>
-        Edit
+        Edit {{ $modelAdmin->getTitle() }}
     </a>
 @endif

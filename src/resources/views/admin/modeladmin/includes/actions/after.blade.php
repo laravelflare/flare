@@ -1,3 +1,3 @@
-@if (method_exists($modelAdmin, 'afterActions'))
-    {{ $modelAdmin->afterActions($modelItem) }}
+@if (method_exists($modelAdmin, 'actionsAfter'))
+    {{ $modelAdmin->actionsAfter($modelItem) }}
 @endif

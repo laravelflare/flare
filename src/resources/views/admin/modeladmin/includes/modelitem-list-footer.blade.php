@@ -1,5 +1,5 @@
-@if (method_exists($modelAdmin, 'modelItemListFooter'))
-    {{ $modelAdmin->modelItemListFooter($modelItems) }}
+@if (method_exists($modelAdmin, 'modelitemListFooter'))
+    {{ $modelAdmin->modelitemListFooter($modelItems) }}
 @else
     <div class="box-footer clearfix">
         @if ($modelAdmin->hasCreating())

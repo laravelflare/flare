@@ -1,5 +1,5 @@
-@if (method_exists($modelAdmin, 'tableHeadRow')) 
-    {{ $modelAdmin->tableHeadRow() }}
+@if (method_exists($modelAdmin, 'tableTheadRow')) 
+    {{ $modelAdmin->tableTheadRow() }}
 @else
     <tr>
         @foreach ($modelAdmin->getColumns() as $key => $field)

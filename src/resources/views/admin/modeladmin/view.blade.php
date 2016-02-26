@@ -16,36 +16,24 @@
         </div>
         <div class="box-footer">
             {!! csrf_field() !!}
-            <a href="{{ $modelAdmin->currentUrl() }}" class="btn btn-default">
-                Back
-            </a>
+
+            @include('flare::admin.modeladmin.includes.actions.before')
+
+            @include('flare::admin.modeladmin.includes.actions.back')
+
             @if ($modelAdmin->hasEditting())
-                <a href="{{ $modelAdmin->currentUrl('edit/'.$modelItem->getKey()) }}" class="btn btn-primary">
-                    <i class="fa fa-edit"></i>
-                    Edit {{ $modelAdmin->getTitle() }}
-                </a>
+                @include('flare::admin.modeladmin.includes.actions.edit')
             @endif
             @if ($modelAdmin->hasDeleting() && ($modelAdmin->hasSoftDeleting() && $modelItem->trashed()))
-                <a href="{{ $modelAdmin->currentUrl('restore/'.$modelItem->getKey()) }}" class="btn btn-info">
-                    <i class="fa fa-undo"></i>
-                    Restore
-                </a>
+                @include('flare::admin.modeladmin.includes.actions.restore')
             @elseif ($modelAdmin->hasCloning())
-                <a href="{{ $modelAdmin->currentUrl('clone/'.$modelItem->getKey()) }}" class="btn btn-warning">
-                    <i class="fa fa-clone"></i>
-                    Clone
-                </a>
+                @include('flare::admin.modeladmin.includes.actions.clone')
             @endif
             @if ($modelAdmin->hasDeleting())
-                <a href="{{ $modelAdmin->currentUrl('delete/'.$modelItem->getKey()) }}" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                    @if (!$modelAdmin->hasSoftDeleting() || $modelItem->trashed())
-                        Delete
-                    @else 
-                        Trash
-                    @endif
-                </a>
+                @include('flare::admin.modeladmin.includes.actions.delete')
             @endif
+
+            @include('flare::admin.modeladmin.includes.table.actions.after')
         </div>
     </form>
 </div>

@@ -1,5 +1,5 @@
-@if (method_exists($modelAdmin, 'modelItemList'))
-    {{ $modelAdmin->modelItemList($modelItems) }}
+@if (method_exists($modelAdmin, 'modelitemList'))
+    {{ $modelAdmin->modelitemList($modelItems) }}
 @else
     <div class="box-body no-padding">
         <table class="table table-striped">
