@@ -138,7 +138,7 @@ class ModelAdminController extends FlareController
         $this->modelAdmin->find($modelitemId);
 
         event(new ModelView($this->modelAdmin));
-
+        
         return view('flare::admin.modeladmin.view', ['modelItem' => $this->modelAdmin->model]);
     }
 

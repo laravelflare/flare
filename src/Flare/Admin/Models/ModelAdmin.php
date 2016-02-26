@@ -4,8 +4,8 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelQuerying;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 
@@ -98,8 +98,6 @@ class ModelAdmin extends Admin implements ModelQueryable
         $this->getManagedModel();
 
         $this->model = $this->model();
-
-        $this->formatFields();
     }
 
     /**
@@ -359,14 +357,12 @@ class ModelAdmin extends Admin implements ModelQueryable
 
     /**
      * Returns an array of Attribute Fields ready for output.
-     *
-     * @param string $type
      * 
      * @return array
      */
-    public function outputFields($type = 'view')
+    public function outputFields()
     {
-        return $this->getFields();
+        return $this->formatFields();
     }
 
     /**
