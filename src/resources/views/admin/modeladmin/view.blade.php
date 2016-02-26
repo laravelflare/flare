@@ -33,7 +33,7 @@
                 @include('flare::admin.modeladmin.includes.actions.delete')
             @endif
 
-            @include('flare::admin.modeladmin.includes.table.actions.after')
+            @include('flare::admin.modeladmin.includes.actions.after')
         </div>
     </form>
 </div>
