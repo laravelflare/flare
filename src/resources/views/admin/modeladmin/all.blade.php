@@ -21,17 +21,13 @@
                         <ul role="menu" class="dropdown-menu">
                             <li>
                                 <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false) }}">
-                                    <span style="display:inline-block; width: 100px;">
-                                        All {{ $modelAdmin->getPluralTitle() }}
-                                    </span>
+                                    All {{ $modelAdmin->getPluralTitle() }}
                                     <span class="badge bg-green">{{ $totals['all'] }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? 'trashed?filter='.\Request::get('filter') : 'trashed') }}">
-                                    <span style="display:inline-block; width: 100px;">
-                                        Trashed Only
-                                    </span>
+                                    Trashed Only
                                     <span class="badge bg-red">{{ $totals['only_trashed'] }}</span>
                                 </a>
                             </li>
