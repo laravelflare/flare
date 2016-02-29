@@ -51,6 +51,6 @@ class ModuleAdminController extends FlareController
      */
     public function missingMethod($parameters = array())
     {
-        parent::missingMethod();
+        return parent::missingMethod();
     }
 }
