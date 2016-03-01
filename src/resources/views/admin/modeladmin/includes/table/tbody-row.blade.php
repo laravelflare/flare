@@ -3,9 +3,7 @@
 @else
     <tr>
         @foreach ($modelAdmin->getColumns() as $key => $field)
-            <td>
-                {!! $modelAdmin->getAttribute($key, $modelItem) !!}
-            </td>
+            <td>{!! $modelAdmin->getAttribute($key, $modelItem) !!}</td>
         @endforeach
         <td style="width: 1%; white-space:nowrap">
             @include('flare::admin.modeladmin.includes.table.actions.before')
