@@ -1,7 +1,7 @@
 <li class="treeview {{ Request::is( (new $adminItem)->relativeUrl() . '*' ) ? 'active' : '' }}">
     <a href="{{ (new $adminItem)->url() }}">
         @if ((new $adminItem)->getIcon())
-        <i class="fa fa-{{ (new $adminItem)->getIcon() }}"></i>
+        <i class="fa fa-fw fa-{{ (new $adminItem)->getIcon() }}"></i>
         @endif
         <span>{{ (new $adminItem)->getPluralTitle() }}</span>
     </a>
