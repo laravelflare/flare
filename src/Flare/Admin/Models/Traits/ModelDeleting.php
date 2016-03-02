@@ -5,7 +5,6 @@ namespace LaravelFlare\Flare\Admin\Models\Traits;
 use LaravelFlare\Flare\Events\ModelDelete;
 use LaravelFlare\Flare\Events\AfterDelete;
 use LaravelFlare\Flare\Events\BeforeDelete;
-use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelDeleting
 {

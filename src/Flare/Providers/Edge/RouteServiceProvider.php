@@ -8,7 +8,7 @@ use LaravelFlare\Flare\Providers\RouteServiceProvider as AbstractRouteServicePro
 class RouteServiceProvider extends AbstractRouteServiceProvider
 {
     /**
-     * The compatibility version of this RouteServiceProvider
+     * The compatibility version of this RouteServiceProvider.
      * 
      * @var string
      */

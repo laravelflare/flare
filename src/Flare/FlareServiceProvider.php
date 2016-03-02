@@ -69,7 +69,6 @@ class FlareServiceProvider extends ServiceProvider
         $this->registerBindings();
     }
 
-
     /**
      * Register the Flare Facade.
      */
@@ -89,7 +88,7 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Flare Bindings
+     * Register the Flare Bindings.
      */
     protected function registerBindings()
     {

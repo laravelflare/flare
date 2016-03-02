@@ -5,7 +5,6 @@ namespace LaravelFlare\Flare\Admin\Models\Traits;
 use LaravelFlare\Flare\Events\ModelSave;
 use LaravelFlare\Flare\Events\AfterSave;
 use LaravelFlare\Flare\Events\BeforeSave;
-use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelSaving
 {
@@ -98,7 +97,6 @@ trait ModelSaving
                 $this->saveRelation('afterSave', $key, $value);
             }
         }
-
     }
 
     /**

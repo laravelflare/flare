@@ -5,7 +5,7 @@ namespace LaravelFlare\Flare\Admin\Models\Traits;
 trait ModelQuerying
 {
     /**
-     * Query
+     * Query.
      * 
      * @var string
      */
@@ -136,7 +136,7 @@ trait ModelQuerying
     }
 
     /**
-     * Performs the Model Query
+     * Performs the Model Query.
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -165,7 +165,7 @@ trait ModelQuerying
     }
 
     /**
-     * Return Totals of All, With Trashed and Only Trashed
+     * Return Totals of All, With Trashed and Only Trashed.
      * 
      * @return array
      */
@@ -241,7 +241,7 @@ trait ModelQuerying
     }
 
     /**
-     * Apply the Query Filters
+     * Apply the Query Filters.
      * 
      * @return 
      */
@@ -260,7 +260,7 @@ trait ModelQuerying
     {
         if (!$safeFilter = \Request::get('filter')) {
             return false;
-        } 
+        }
 
         if (!isset($this->safeFilters()[$safeFilter])) {
             return false;
@@ -270,7 +270,7 @@ trait ModelQuerying
     }
 
     /**
-     * Create the Query Filter from Array
+     * Create the Query Filter from Array.
      * 
      * @return
      */
@@ -287,7 +287,7 @@ trait ModelQuerying
     }
 
     /**
-     * Access the Query Filter
+     * Access the Query Filter.
      * 
      * @return 
      */
@@ -297,7 +297,7 @@ trait ModelQuerying
     }
 
     /**
-     * Access the Query Filter Options
+     * Access the Query Filter Options.
      * 
      * @return 
      */
@@ -324,11 +324,9 @@ trait ModelQuerying
     }
 
     /**
-     * Set the Query Filter
+     * Set the Query Filter.
      * 
      * @param array $filter
-     *
-     * @return void
      */
     public function setQueryFilter($filter = [])
     {

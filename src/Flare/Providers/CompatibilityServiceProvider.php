@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use LaravelFlare\Flare\FlareModuleProvider as ServiceProvider;
 
 class CompatibilityServiceProvider extends ServiceProvider
@@ -26,7 +25,6 @@ class CompatibilityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**

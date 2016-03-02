@@ -125,17 +125,17 @@ class AttributeCollection extends Collection
     }
 
     /**
-     * Create and return a Field Instance
+     * Create and return a Field Instance.
      * 
-     * @param  mixed $type  
-     * @param  string $name  
-     * @param  string $value 
-     * @param  mixed $inner 
+     * @param mixed  $type
+     * @param string $name
+     * @param string $value
+     * @param mixed  $inner
      * 
      * @return 
      */
     private function createField($type, $name, $value, $inner)
-    {   
+    {
         if ($this->hasOptionsMethod($name)) {
             $inner = array_merge($inner, ['options' => $this->getOptions($name)]);
         }
@@ -144,11 +144,11 @@ class AttributeCollection extends Collection
     }
 
     /**
-     * Get any dynamic options for an attribute
+     * Get any dynamic options for an attribute.
      * 
-     * @param  string $name 
+     * @param string $name
      * 
-     * @return mixed       
+     * @return mixed
      */
     private function getOptions($name)
     {
@@ -172,9 +172,9 @@ class AttributeCollection extends Collection
     /**
      * Get the value of an attribute for the field.
      * 
-     * @param  string $name 
+     * @param string $name
      * 
-     * @return mixed       
+     * @return mixed
      */
     private function getValue($name)
     {

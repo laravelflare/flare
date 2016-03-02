@@ -15,9 +15,9 @@ abstract class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = '\LaravelFlare\Flare\Http\Controllers';
-    
+
     /**
-     * The compatibility version of this RouteServiceProvider
+     * The compatibility version of this RouteServiceProvider.
      * 
      * @var string
      */
@@ -86,7 +86,7 @@ abstract class RouteServiceProvider extends ServiceProvider
     /**
      * Return the Controller or Controller and Route if provided.
      * 
-     * @param  string $route 
+     * @param string $route
      * 
      * @return string
      */
