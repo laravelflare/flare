@@ -1,21 +1,21 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', 'Restore '.$modelAdmin->getTitle())
+@section('page_title', 'Restore '.$modelAdmin->getEntityTitle())
 @section('content')
 
 <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Restore {{ $modelAdmin->getTitle() }}
+            Restore {{ $modelAdmin->getEntityTitle() }}
         </h3>
     </div>
     <form action="" method="post">
         <div class="box-body">
             <div class="alert alert-info no-margin">
                 <strong>
-                    Are you sure you wish to restore this {{ $modelAdmin->getTitle() }}?
+                    Are you sure you wish to restore this {{ $modelAdmin->getEntityTitle() }}?
                 </strong>
                 <p>
-                    Once this {{ $modelAdmin->getTitle() }} is restored it will be publically available again.
+                    Once this {{ $modelAdmin->getEntityTitle() }} is restored it will be publically available again.
                 </p>
             </div>
         </div>
@@ -26,7 +26,7 @@
             </a>
             <button class="btn btn-info" type="submit">
                 <i class="fa fa-undo"></i>
-                Restore {{ $modelAdmin->getTitle() }}
+                Restore {{ $modelAdmin->getEntityTitle() }}
             </button>
         </div>
     </form>

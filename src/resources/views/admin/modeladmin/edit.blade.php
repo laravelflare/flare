@@ -1,11 +1,11 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getTitle())
+@section('page_title', $modelAdmin->getEntityTitle())
 @section('content')
 
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Edit {{ $modelAdmin->getTitle() }}
+            Edit {{ $modelAdmin->getEntityTitle() }}
         </h3>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
             </a>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-edit"></i>
-                Update {{ $modelAdmin->getTitle() }}
+                Update {{ $modelAdmin->getEntityTitle() }}
             </button>
         </div>
     </form>

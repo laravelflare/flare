@@ -1,5 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getPluralTitle())
+@section('page_title', $modelAdmin->getPluralEntityTitle())
 @section('content')
 
 <div class="">
@@ -21,7 +21,7 @@
                         <ul role="menu" class="dropdown-menu">
                             <li>
                                 <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false) }}">
-                                    All {{ $modelAdmin->getPluralTitle() }}
+                                    All {{ $modelAdmin->getPluralEntityTitle() }}
                                     <span class="badge bg-green">{{ $totals['all'] }}</span>
                                 </a>
                             </li>

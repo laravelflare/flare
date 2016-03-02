@@ -3,6 +3,6 @@
 @else
     <a href="{{ $modelAdmin->currentUrl('edit/'.$modelItem->getKey()) }}" class="btn btn-primary">
         <i class="fa fa-edit"></i>
-        Edit {{ $modelAdmin->getTitle() }}
+        Edit {{ $modelAdmin->getEntityTitle() }}
     </a>
 @endif

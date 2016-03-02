@@ -4,7 +4,7 @@
     <div class="pull-left">
         <a href="{{ $modelAdmin->currentUrl('create') }}" class="btn btn-success">
             <i class="fa fa-{{ $modelAdmin->getIcon() }}"></i>
-            Add {{ $modelAdmin->getTitle() }}
+            Add {{ $modelAdmin->getEntityTitle() }}
         </a>
     </div>
 @endif

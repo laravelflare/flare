@@ -1,11 +1,11 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getTitle())
+@section('page_title', $modelAdmin->getEntityTitle())
 @section('content')
 
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            View {{ $modelAdmin->getTitle() }}
+            View {{ $modelAdmin->getEntityTitle() }}
         </h3>
     </div>
     <form action="" method="post">

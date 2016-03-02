@@ -1,5 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getPluralTitle())
+@section('page_title', $modelAdmin->getPluralEntityTitle())
 @section('content')
 
 <div class="">
@@ -9,7 +9,7 @@
                 <div class="box-header with-border">
                     <div class="btn-group">
                         <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false) }}" class="btn btn-default btn-flat">
-                            All {{ $modelAdmin->getPluralTitle() }}
+                            All {{ $modelAdmin->getPluralEntityTitle() }}
                             <span class="badge bg-green" style="margin-left: 15px">
                                 {{ $totals['all'] }}
                             </span>
