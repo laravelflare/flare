@@ -1,4 +1,4 @@
-        <script src="{{ asset('vendor/flare/plugins/jQuery/jQuery-2.1.4.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('vendor/flare/plugins/jQuery/jQuery-2.2.0.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/flare/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/flare/js/app.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/flare/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
