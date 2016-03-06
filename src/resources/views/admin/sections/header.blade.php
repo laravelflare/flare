@@ -48,7 +48,7 @@
                                 </a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">
+                                <a href="{{ \Flare::adminUrl('logout') }}" class="btn btn-default btn-flat">
                                     Sign out
                                 </a>
                             </div>
