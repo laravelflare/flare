@@ -1,7 +1,7 @@
-@if (method_exists($modelAdmin, 'restoreAction'))
-    {{ $modelAdmin->restoreAction($modelItem) }}
+@if (method_exists($modelAdmin, 'actionsDelete'))
+    {{ $modelAdmin->actionsDelete($modelItem) }}
 @else
-    <a class="btn btn-info btn-xs" href="{{ $modelAdmin->currentUrl('restore/'.$modelItem->getKey()) }}">
+    <a href="{{ $modelAdmin->currentUrl('restore/'.$modelItem->getKey()) }}" class="btn btn-info">
         <i class="fa fa-undo"></i>
         Restore
     </a>

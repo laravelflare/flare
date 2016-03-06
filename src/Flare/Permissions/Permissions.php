@@ -22,10 +22,6 @@ class Permissions implements Permissionable
             return \Auth::user()->is_admin;
         }
 
-        if ((new \ReflectionClass(new $class()))->implementsInterface(\LaravelFlare\Flare\Contracts\Permissions\Permissionable::class)) {
-            return \Auth::user()->can($action, $class);
-        }
-
         return \Auth::user()->is_admin;
     }
 

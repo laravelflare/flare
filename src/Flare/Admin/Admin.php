@@ -316,11 +316,11 @@ abstract class Admin
      */
     public function getPluralTitle()
     {
-        if (!isset($this->getPluralTitle) || !$this->getPluralTitle) {
+        if (!isset($this->pluralTitle) || !$this->pluralTitle) {
             return Str::plural($this->getTitle());
         }
 
-        return $this->getPluralTitle;
+        return $this->pluralTitle;
     }
 
     /**
@@ -330,7 +330,7 @@ abstract class Admin
      */
     public function setPluralTitle($pluralTitle = null)
     {
-        $this->getPluralTitle = $pluralTitle;
+        $this->pluralTitle = $pluralTitle;
     }
 
     /**
@@ -395,7 +395,7 @@ abstract class Admin
         return \Route::current() ? \Route::current()->getPrefix().'/'.$path : null;
     }
 
-    /**
+    /*
      * Handle dynamic static method calls into the Admin.
      *
      * @param string $method

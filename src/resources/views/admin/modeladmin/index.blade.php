@@ -1,5 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getPluralTitle())
+@section('page_title', $modelAdmin->getPluralEntityTitle())
 @section('content')
 
 <div class="">
@@ -9,7 +9,7 @@
                 <div class="box-header with-border">
                     <div class="btn-group">
                         <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false) }}" class="btn btn-default btn-flat">
-                            All {{ $modelAdmin->getPluralTitle() }}
+                            All {{ $modelAdmin->getPluralEntityTitle() }}
                             <span class="badge bg-green" style="margin-left: 15px">
                                 {{ $totals['all'] }}
                             </span>
@@ -22,17 +22,13 @@
                             <ul role="menu" class="dropdown-menu">
                                 <li>
                                     <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? 'all?filter='.\Request::get('filter') : 'all') }}">
-                                        <span style="display:inline-block; width: 100px;">
-                                            With Trashed
-                                        </span>
+                                        With Trashed
                                         <span class="badge bg-yellow">{{ $totals['with_trashed'] }}</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ $modelAdmin->currentUrl(\Request::get('trashed') ? 'trashed?filter='.\Request::get('filter') : 'trashed') }}">
-                                        <span style="display:inline-block; width: 100px;">
-                                            Trashed Only
-                                        </span>
+                                        Trashed Only
                                         <span class="badge bg-red">{{ $totals['only_trashed'] }}</span>
                                     </a>
                                 </li>

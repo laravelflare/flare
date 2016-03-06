@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use LaravelFlare\Fields\FieldManager;
 use LaravelFlare\Fields\Types\BaseField;
@@ -27,7 +28,7 @@ class AttributeCollection extends Collection
      * 
      * @var \LaravelFlare\Flare\Admin\Models\ModelAdmin
      */
-    protected $modelManager;
+    public $modelManager;
 
     /**
      * Create a new collection.
@@ -102,14 +103,14 @@ class AttributeCollection extends Collection
         }
 
         if (is_scalar($inner) && $this->fields->typeExists($inner)) {
-            return $this->fields->create($inner, $name, $this->getValue(), $inner);
+            return $this->createField($inner, $name, $this->getValue($name), $inner);
         }
 
         if (is_array($inner) && array_key_exists('type', $inner) && is_scalar($inner['type']) && $this->fields->typeExists($inner['type'])) {
             $type = $inner['type'];
             array_forget($inner, 'type');
 
-            return $this->fields->create($type, $name, $this->getValue(), $inner);
+            return $this->createField($type, $name, $this->getValue($name), $inner);
         }
 
         if (is_array($inner)) {
@@ -123,7 +124,64 @@ class AttributeCollection extends Collection
         }
     }
 
-    private function getValue()
+    /**
+     * Create and return a Field Instance.
+     * 
+     * @param mixed  $type
+     * @param string $name
+     * @param string $value
+     * @param mixed  $inner
+     * 
+     * @return 
+     */
+    private function createField($type, $name, $value, $inner)
     {
+        if ($this->hasOptionsMethod($name)) {
+            $inner = array_merge($inner, ['options' => $this->getOptions($name)]);
+        }
+
+        return $this->fields->create($type, $name, $this->getValue($name), $inner);
+    }
+
+    /**
+     * Get any dynamic options for an attribute.
+     * 
+     * @param string $name
+     * 
+     * @return mixed
+     */
+    private function getOptions($name)
+    {
+        $method = 'get'.Str::studly($name).'Options';
+
+        return $this->modelManager->{$method}();
+    }
+
+    /**
+     * Determine if an options method exists for an attribute.
+     *
+     * @param string $key
+     * 
+     * @return bool
+     */
+    public function hasOptionsMethod($key)
+    {
+        return method_exists($this->modelManager, 'get'.Str::studly($key).'Options');
+    }
+
+    /**
+     * Get the value of an attribute for the field.
+     * 
+     * @param string $name
+     * 
+     * @return mixed
+     */
+    private function getValue($name)
+    {
+        if (!$name) {
+            return;
+        }
+
+        return $this->modelManager->getAttribute($name);
     }
 }

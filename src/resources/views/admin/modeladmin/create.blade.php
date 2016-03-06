@@ -1,11 +1,11 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getTitle())
+@section('page_title', $modelAdmin->getEntityTitle())
 @section('content')
 
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">
-            Create {{ $modelAdmin->getTitle() }}
+            Create {{ $modelAdmin->getEntityTitle() }}
         </h3>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
                 Cancel
             </a>
             <button class="btn btn-success" type="submit">
-                Add {{ $modelAdmin->getTitle() }}
+                Add {{ $modelAdmin->getEntityTitle() }}
             </button>
         </div>
     </form>

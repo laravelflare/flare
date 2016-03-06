@@ -3,12 +3,12 @@
 namespace LaravelFlare\Flare\Providers\LTS;
 
 use Illuminate\Routing\Router;
-use LaravelFlare\Flare\Providers\RouteServiceProvider;
+use LaravelFlare\Flare\Providers\RouteServiceProvider as AbstractRouteServiceProvider;
 
-class RouteServiceProvider extends RouteServiceProvider
+class RouteServiceProvider extends AbstractRouteServiceProvider
 {
     /**
-     * The compatibility version of this RouteServiceProvider
+     * The compatibility version of this RouteServiceProvider.
      * 
      * @var string
      */

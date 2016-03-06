@@ -9,7 +9,6 @@ use LaravelFlare\Flare\Events\ModelRestore;
 use LaravelFlare\Flare\Events\AfterRestore;
 use LaravelFlare\Flare\Events\BeforeRestore;
 use LaravelFlare\Flare\Events\ModelSoftDelete;
-use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelSoftDeleting
 {
@@ -157,7 +156,7 @@ trait ModelSoftDeleting
     private function doRestore()
     {
         $this->model->restore();
-        
+
         event(new ModelRestore($this));
     }
 

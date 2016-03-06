@@ -15,17 +15,13 @@
         <ul role="menu" class="dropdown-menu">
             <li>
                 <a href="{{ $modelAdmin->currentUrl($type) }}">
-                    <span style="display:inline-block; width: 100px;">
-                        None
-                    </span>
+                    None
                 </a>
             </li>
             @foreach ($modelAdmin->safeFilters() as $filterAction => $filter)
                 <li>
                     <a href="{{ $modelAdmin->currentUrl($type.'?filter='.$filterAction) }}">
-                        <span style="display:inline-block; width: 100px;">
-                            {{ $filter }}
-                        </span>
+                       {{ $filter }}
                     </a>
                 </li>
             @endforeach

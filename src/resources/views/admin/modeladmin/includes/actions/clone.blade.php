@@ -1,7 +1,7 @@
-@if (method_exists($modelAdmin, 'cloneAction'))
-    {{ $modelAdmin->cloneAction($modelItem) }}
+@if (method_exists($modelAdmin, 'actionsClone'))
+    {{ $modelAdmin->actionsClone($modelItem) }}
 @else
-    <a class="btn btn-warning btn-xs" href="{{ $modelAdmin->currentUrl('clone/'.$modelItem->getKey()) }}">
+    <a href="{{ $modelAdmin->currentUrl('clone/'.$modelItem->getKey()) }}" class="btn btn-warning">
         <i class="fa fa-clone"></i>
         Clone
     </a>

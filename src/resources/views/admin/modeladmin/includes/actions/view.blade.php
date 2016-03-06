@@ -1,7 +1,7 @@
-@if (method_exists($modelAdmin, 'viewAction'))
-    {{ $modelAdmin->viewAction($modelItem) }}
+@if (method_exists($modelAdmin, 'actionsDelete'))
+    {{ $modelAdmin->actionsDelete($modelItem) }}
 @else
-    <a class="btn btn-success btn-xs" href="{{ $modelAdmin->currentUrl('view/'.$modelItem->getKey()) }}">
+    <a href="{{ $modelAdmin->currentUrl('view/'.$modelItem->getKey()) }}" class="btn btn-success">
         <i class="fa fa-eye"></i>
         View
     </a>

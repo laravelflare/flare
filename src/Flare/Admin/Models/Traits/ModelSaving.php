@@ -5,7 +5,6 @@ namespace LaravelFlare\Flare\Admin\Models\Traits;
 use LaravelFlare\Flare\Events\ModelSave;
 use LaravelFlare\Flare\Events\AfterSave;
 use LaravelFlare\Flare\Events\BeforeSave;
-use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
 trait ModelSaving
 {
@@ -62,7 +61,7 @@ trait ModelSaving
      */
     private function doSave()
     {
-        foreach (\Request::only(array_keys($this->fields->toArray())) as $key => $value) {
+        foreach (\Request::only(array_keys($this->fields)) as $key => $value) {
             if ($this->hasSetMutator($key)) {
                 $this->setAttribute($key, $value);
                 continue;
@@ -98,7 +97,6 @@ trait ModelSaving
                 $this->saveRelation('afterSave', $key, $value);
             }
         }
-
     }
 
     /**

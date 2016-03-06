@@ -57,11 +57,6 @@ class FlareServiceProvider extends ServiceProvider
         $this->publishConfig();
         $this->publishMigrations();
         $this->publishViews();
-
-        $this->app->bind(
-            \LaravelFlare\Flare\Contracts\Permissions\Permissionable::class,
-            \Config::get('flare.config.permissions')
-        );
     }
 
     /**
@@ -71,6 +66,15 @@ class FlareServiceProvider extends ServiceProvider
     {
         $this->registerFlareFacade();
         $this->registerServiceProviders();
+        $this->registerBindings();
+    }
+
+    /**
+     * Register the Flare Facade.
+     */
+    protected function registerFlareFacade()
+    {
+        AliasLoader::getInstance()->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
     }
 
     /**
@@ -84,11 +88,14 @@ class FlareServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Flare Facade.
+     * Register the Flare Bindings.
      */
-    protected function registerFlareFacade()
+    protected function registerBindings()
     {
-        AliasLoader::getInstance()->alias('Flare', \LaravelFlare\Flare\Facades\Flare::class);
+        $this->app->bind(
+            \LaravelFlare\Flare\Contracts\Permissions\Permissionable::class,
+            \Flare::config('permissions')
+        );
     }
 
     /**

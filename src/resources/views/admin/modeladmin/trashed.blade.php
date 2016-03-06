@@ -1,5 +1,5 @@
 @extends('flare::admin.sections.wrapper')
-@section('page_title', $modelAdmin->getPluralTitle())
+@section('page_title', $modelAdmin->getPluralEntityTitle())
 @section('content')
 
 <div class="">
@@ -19,17 +19,13 @@
                         <ul role="menu" class="dropdown-menu">
                             <li>
                                 <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false)  }}">
-                                    <span style="display:inline-block; width: 100px;">
-                                        All {{ $modelAdmin->getPluralTitle() }}
-                                    </span>
+                                    All {{ $modelAdmin->getPluralEntityTitle() }}
                                     <span class="badge bg-green">{{ $totals['all'] }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? 'all?filter='.\Request::get('filter') : 'all')  }}">
-                                    <span style="display:inline-block; width: 100px;">
-                                        With Trashed
-                                    </span>
+                                    With Trashed
                                     <span class="badge bg-yellow">{{ $totals['with_trashed'] }}</span>
                                 </a>
                             </li>

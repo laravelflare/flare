@@ -4,8 +4,8 @@ namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelQuerying;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
 
@@ -22,13 +22,18 @@ class ModelAdmin extends Admin implements ModelQueryable
     protected $managedModel;
 
     /**
-     * ModelAdmin Icon.
-     *
-     * Font Awesome Defined Icon, eg 'user' = 'fa-user'
+     * Entiy Title .
      *
      * @var string
      */
-    protected $icon = '';
+    protected $entityTitle;
+
+    /**
+     * Plural Entity Title.
+     *
+     * @var string
+     */
+    protected $pluralEntityTitle;
 
     /**
      * Validation Rules for onCreate, onEdit actions.
@@ -98,8 +103,6 @@ class ModelAdmin extends Admin implements ModelQueryable
         $this->getManagedModel();
 
         $this->model = $this->model();
-
-        $this->formatFields();
     }
 
     /**
@@ -153,6 +156,55 @@ class ModelAdmin extends Admin implements ModelQueryable
     {
         $this->managedModel = $managedModel;
     }
+
+    /**
+     * Get the Entity Title.
+     *
+     * @return string
+     */
+    public function getEntityTitle()
+    {
+        if (!isset($this->entityTitle) || !$this->entityTitle) {
+            return $this->getTitle();
+        }
+
+        return $this->entityTitle;
+    }
+
+    /**
+     * Set Entity Title.
+     *
+     * @param string $entityTitle
+     */
+    public function setTitle($entityTitle = null)
+    {
+        $this->entityTitle = $title;
+    }
+
+    /**
+     * Plural Entity Title
+     *
+     * @return string
+     */
+    public function getPluralEntityTitle()
+    {
+        if (!isset($this->pluralEntityTitle) || !$this->pluralEntityTitle) {
+            return Str::plural($this->getEntityTitle());
+        }
+
+        return $this->pluralEntityTitle;
+    }
+
+    /**
+     * Set Plural Title.
+     * 
+     * @param string $pluralEntityTitle
+     */
+    public function setPluralTitle($pluralEntityTitle = null)
+    {
+        $this->pluralEntityTitle = $pluralEntityTitle;
+    }
+
 
     /**
      * Returns the Route Paramets.
@@ -359,12 +411,10 @@ class ModelAdmin extends Admin implements ModelQueryable
 
     /**
      * Returns an array of Attribute Fields ready for output.
-     *
-     * @param string $type
      * 
      * @return array
      */
-    public function outputFields($type = 'view')
+    public function outputFields()
     {
         return $this->getFields();
     }
