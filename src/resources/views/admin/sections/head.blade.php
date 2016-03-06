@@ -17,7 +17,7 @@
         <link href="{{ asset('vendor/flare/css/skins/skin-'.Flare::config('admin_theme').'.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/flare/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/flare/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('vendor/flare/plugins/pace/pace.min.css') }}">
+        <link href="{{ asset('vendor/flare/plugins/pace/pace.min.css') }}" rel="stylesheet" type="text/css" />
 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
