@@ -38,7 +38,14 @@
                             <img src="{{ asset(isset(Auth::user()->pic) ? Auth::user()->pic : '/vendor/flare/user.jpg') }}" class="img-circle" alt="User Image" />
                             <p>
                                 {{ Auth::user()->name }}
-                                <small>Laravel <strong>Flare</strong></small>
+
+                                @if (Flare::show('github'))
+                                    <small>Laravel <strong>Flare</strong></small>
+                                @else
+                                    <small>
+                                        {{ Flare::getAdminTitle() }}
+                                    </small>
+                                @endif
                             </p>
                         </li>
                         <li class="user-footer">
