@@ -13,6 +13,10 @@ trait HumanTimestampAttributes
      */
     protected function getCreatedAtAttribute(Model $model)
     {
+        if (!$model->created_at) {
+            return;
+        }
+
         return $model->created_at->diffForHumans();
     }
 
@@ -23,6 +27,10 @@ trait HumanTimestampAttributes
      */
     protected function getUpdatedAtAttribute(Model $model)
     {
+        if (!$model->updated_at) {
+            return;
+        }
+
         return $model->updated_at->diffForHumans();
     }
 }

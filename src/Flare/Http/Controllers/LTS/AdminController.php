@@ -120,6 +120,16 @@ class AdminController extends FlareController
     }
 
     /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
+    public function loginPath()
+    {
+        return \Flare::adminUrl('login');
+    }
+
+    /**
      * Method is called when the appropriate controller
      * method is unable to be found or called.
      * 
