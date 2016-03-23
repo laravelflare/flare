@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Admin;
 
 use Illuminate\Routing\Router;
+use LaravelFlare\Flare\Permissions\Permissions;
 
 class AdminManager
 {
@@ -148,8 +149,7 @@ class AdminManager
     }
 
     /**
-     * Determines if a class is usable by the currently
-     * defined user and their permission set.
+     * Determines if a class is usable.
      * 
      * @param string $class
      * 
@@ -162,6 +162,22 @@ class AdminManager
         }
 
         if ($class == static::BASE_CLASS) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Determines if a class is available for the current User.
+     * 
+     * @param  string $class 
+     * 
+     * @return boolean
+     */
+    private function availableClass($class)
+    {
+        if (!Permissions::check($class)) {
             return false;
         }
 

@@ -43,6 +43,7 @@ class Flare
      */
     protected $helpers = [
         'admin' => \LaravelFlare\Flare\Admin\AdminManager::class,
+        'permissions' => \LaravelFlare\Flare\Contracts\Permissions\Permissionable::class,
     ];
 
     /**
