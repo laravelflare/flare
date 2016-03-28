@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Http\Controllers;
 
+use Response;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -40,6 +41,6 @@ abstract class FlareController extends BaseController
      */
     public function missingMethod($parameters = array())
     {
-        return view('flare::admin.404', []);
+        return Response::view('flare::admin.404', [], 404);
     }
 }
