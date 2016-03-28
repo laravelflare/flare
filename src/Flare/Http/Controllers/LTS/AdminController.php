@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Http\Controllers\LTS;
 
+use Response;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
@@ -126,7 +127,7 @@ class AdminController extends FlareController
      */
     public function loginPath()
     {
-        return \Flare::adminUrl('login');
+        return Flare::adminUrl('login');
     }
 
     /**
@@ -139,6 +140,6 @@ class AdminController extends FlareController
      */
     public function missingMethod($parameters = array())
     {
-        return view('flare::admin.404', []);
+        return Response::view('flare::admin.404', [], 404);
     }
 }

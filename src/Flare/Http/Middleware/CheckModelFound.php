@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Http\Middleware;
 
 use Closure;
+use Response;
 use LaravelFlare\Flare\Admin\AdminManager;
 
 class CheckModelFound
@@ -35,7 +36,7 @@ class CheckModelFound
     public function handle($request, Closure $next)
     {
         if (!$this->modelAdmin->find(\Route::getCurrentRoute()->getParameter('one'))) {
-            return view('flare::admin.404', []);
+            return Response::view('flare::admin.404', [], 404);
         }
 
         return $next($request);
