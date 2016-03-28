@@ -268,6 +268,36 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
+     * Return the Validation Rules
+     * 
+     * @return array
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
+    /**
+     * Return the Create Model Entry Validation Rules
+     * 
+     * @return array
+     */
+    public function getCreateRules()
+    {
+        return $this->getRules();
+    }
+
+    /**
+     * Return the Update Model Entry Validation Rules
+     * 
+     * @return array
+     */
+    public function getUpdateRules()
+    {
+        return $this->getRules();
+    }
+
+    /**
      * Gets an Attribute by the provided key
      * on either the current model or a provided model instance.
      * 

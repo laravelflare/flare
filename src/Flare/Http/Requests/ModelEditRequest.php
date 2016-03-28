@@ -2,6 +2,8 @@
 
 namespace LaravelFlare\Flare\Http\Requests;
 
+use LaravelFlare\Flare\Admin\AdminManager;
+
 class ModelEditRequest extends AdminRequest
 {
     /**
@@ -21,8 +23,9 @@ class ModelEditRequest extends AdminRequest
      */
     public function rules()
     {
-        return [
-
-        ];
+        return 
+            \App::make(AdminManager::class)
+            ->getAdminInstance()
+            ->getUpdateRules();
     }
 }
