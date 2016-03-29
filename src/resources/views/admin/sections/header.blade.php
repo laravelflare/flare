@@ -26,6 +26,17 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ url('/') }}" aria-expanded="true" data-toggle="tooltip" data-placement="bottom" data-original-title="Home">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ Flare::adminUrl('/') }}" aria-expanded="true" data-toggle="tooltip" data-placement="bottom" data-original-title="Dashboard">
+                        <i class="fa fa-dashboard"></i>
+                    </a>
+                </li>
+
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset(isset(Auth::user()->pic) ? Auth::user()->pic : '/vendor/flare/user.jpg') }}" class="user-image" alt="User Image"/>
@@ -50,9 +61,7 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ url('') }}" class="btn btn-default btn-flat">
-                                    View site
-                                </a>
+                               
                             </div>
                             <div class="pull-right">
                                 <a href="{{ \Flare::adminUrl('logout') }}" class="btn btn-default btn-flat">
