@@ -2,6 +2,8 @@
 
 namespace LaravelFlare\Flare\Admin\Models\Traits;
 
+use Request;
+
 trait ModelQuerying
 {
     /**
@@ -151,8 +153,6 @@ trait ModelQuerying
                             );
         }
 
-        //dd(\DB::getQueryLog());
-
         if ($count) {
             return $this->query->count();
         }
@@ -191,8 +191,8 @@ trait ModelQuerying
      */
     public function orderBy()
     {
-        if (\Request::input('order')) {
-            return \Request::input('order');
+        if (Request::input('order')) {
+            return Request::input('order');
         }
 
         if ($this->orderBy) {
@@ -209,8 +209,8 @@ trait ModelQuerying
      */
     public function sortBy()
     {
-        if (\Request::input('sort')) {
-            return \Request::input('sort');
+        if (Request::input('sort')) {
+            return Request::input('sort');
         }
 
         if ($this->sortBy == 'asc') {
@@ -256,9 +256,14 @@ trait ModelQuerying
         $this->queryFilterRequest();
     }
 
+    /**
+     * Apply the Query Filters specific to this Request.
+     * 
+     * @return 
+     */
     private function queryFilterRequest()
     {
-        if (!$safeFilter = \Request::get('filter')) {
+        if (!$safeFilter = Request::get('filter')) {
             return false;
         }
 
