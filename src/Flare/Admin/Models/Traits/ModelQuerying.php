@@ -93,7 +93,6 @@ trait ModelQuerying
      */
     public function items($count = false)
     {
-        \DB::enableQueryLog();
         $this->query = $this->model->newQuery();
 
         return $this->query($count);
