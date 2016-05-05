@@ -10,16 +10,19 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use LaravelFlare\Flare\Permissions\Permissions;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 
 class AdminController extends FlareController
 {
-    use AuthenticatesUsers, RegistersUsers {
+    use AuthenticatesUsers {
         AuthenticatesUsers::redirectPath insteadof RegistersUsers;
+        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
     }
     use ThrottlesLogins;
+    use ResetsPasswords;
     use RegistersUsers;
     use DispatchesJobs;
 
