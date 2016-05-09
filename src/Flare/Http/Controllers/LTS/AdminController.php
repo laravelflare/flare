@@ -5,6 +5,7 @@ namespace LaravelFlare\Flare\Http\Controllers\LTS;
 use Flare;
 use Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -18,10 +19,7 @@ use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 
 class AdminController extends FlareController
 {
-    use AuthenticatesUsers {
-        AuthenticatesUsers::redirectPath insteadof RegistersUsers;
-        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
-    }
+    use AuthenticatesUsers;
     use ThrottlesLogins;
     use ResetsPasswords;
     use RegistersUsers;
@@ -115,7 +113,7 @@ class AdminController extends FlareController
      * 
      * @return \Illuminate\Http\RedirectReponse
      */
-    protected function loginRedirect()
+    public function redirectPath()
     {
         if (Permissions::check()) {
             return redirect()->intended(Flare::adminUrl());
