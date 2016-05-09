@@ -2,6 +2,7 @@
 
 namespace LaravelFlare\Flare\Http\Controllers\Edge;
 
+use Flare;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
@@ -115,7 +116,7 @@ class AdminController extends FlareController
     protected function loginRedirect()
     {
         if (Permissions::check()) {
-            return redirect()->intended(\Flare::adminUrl());
+            return redirect()->intended(Flare::adminUrl());
         }
 
         return redirect('/');
