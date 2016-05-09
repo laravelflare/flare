@@ -116,10 +116,10 @@ class AdminController extends FlareController
     public function redirectPath()
     {
         if (Permissions::check()) {
-            return redirect()->intended(Flare::adminUrl());
+            return Flare::adminUrl();
         }
 
-        return redirect('/');
+        return '/';
     }
 
     /**
