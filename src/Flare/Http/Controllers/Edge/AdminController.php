@@ -18,8 +18,9 @@ use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 class AdminController extends FlareController
 {
     use AuthenticatesUsers {
-        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
         AuthenticatesUsers::getGuard insteadof ResetsPasswords;
+        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
+        AuthenticatesUsers::guestMiddleware insteadof ResetsPasswords;
     }
     use ResetsPasswords;
     use ThrottlesLogins;
