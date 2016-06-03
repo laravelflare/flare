@@ -197,6 +197,8 @@ trait ModelQuerying
         if ($this->orderBy) {
             return $this->orderBy;
         }
+
+        return $this->model->getKeyName();
     }
 
     /**
@@ -212,11 +214,11 @@ trait ModelQuerying
             return Request::input('sort');
         }
 
-        if ($this->sortBy == 'asc') {
-            return 'asc';
+        if ($this->sortBy == 'desc') {
+            return 'desc';
         }
 
-        return 'desc';
+        return 'asc';
     }
 
     /**
