@@ -21,7 +21,7 @@
 
             @include('flare::admin.modeladmin.includes.actions.back')
 
-            @if ($modelAdmin->hasEditting())
+            @if ($modelAdmin->hasEditing())
                 @include('flare::admin.modeladmin.includes.actions.edit')
             @endif
             @if ($modelAdmin->hasDeleting() && ($modelAdmin->hasSoftDeleting() && $modelItem->trashed()))

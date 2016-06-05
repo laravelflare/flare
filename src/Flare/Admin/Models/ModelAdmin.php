@@ -54,7 +54,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     /**
      * Map Model Attributes to FieldTypes with
      * additional parameters which will be output
-     * as fields when viewing, editting or adding
+     * as fields when viewing, editing or adding
      * a new model entry.
      * 
      * @var array
@@ -555,13 +555,13 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Determine if the Model Admin has Editting Capabilities.
+     * Determine if the Model Admin has Editing Capabilities.
      * 
      * @return bool
      */
-    public function hasEditting()
+    public function hasEditing()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelEditting::class);
+        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelEditing::class);
     }
 
     /**

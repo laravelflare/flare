@@ -3,11 +3,13 @@
 namespace LaravelFlare\Flare\Admin\Models\Users;
 
 use LaravelFlare\Flare\Admin\Models\ModelAdmin;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelWriting;
 use LaravelFlare\Flare\Admin\Models\Traits\HumanTimestampAttributes;
 
 class UserAdmin extends ModelAdmin
 {
     use HumanTimestampAttributes;
+    use ModelWriting;
 
     /**
      * Managed Model Instance.

@@ -7,7 +7,7 @@ use LaravelFlare\Flare\Events\AfterEdit;
 use LaravelFlare\Flare\Events\BeforeEdit;
 use LaravelFlare\Flare\Exceptions\ModelAdminWriteableException as WriteableException;
 
-trait ModelEditting
+trait ModelEditing
 {
     /**
      * Method fired before the Edit action is undertaken.

@@ -11,7 +11,7 @@
             @if ($modelAdmin->hasViewing())
                 @include('flare::admin.modeladmin.includes.table.actions.view')
             @endif
-            @if ($modelAdmin->hasEditting())
+            @if ($modelAdmin->hasEditing())
                 @include('flare::admin.modeladmin.includes.table.actions.edit')
             @endif
             @if ($modelAdmin->hasDeleting() && ($modelAdmin->hasSoftDeleting() && $modelItem->trashed()))

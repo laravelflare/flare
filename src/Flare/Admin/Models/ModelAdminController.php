@@ -151,7 +151,7 @@ class ModelAdminController extends FlareController
      */
     public function getEdit($modelitemId)
     {
-        if (!$this->modelAdmin->hasEditting()) {
+        if (!$this->modelAdmin->hasEditing()) {
             return $this->missingMethod();
         }
 
@@ -169,7 +169,7 @@ class ModelAdminController extends FlareController
      */
     public function postEdit(ModelEditRequest $request, $modelitemId)
     {
-        if (!$this->modelAdmin->hasEditting()) {
+        if (!$this->modelAdmin->hasEditing()) {
             return $this->missingMethod();
         }
 
