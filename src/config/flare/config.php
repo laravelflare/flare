@@ -70,7 +70,7 @@ return [
     | request types or even actions.
     | 
     | Example Policy Registration:
-    |       \App\Users\UserAdmin::class =>
+    |       \LaravelFlare\Flare\Admin\Models\Users\UserAdmin::class =>
     |       \LaravelFlare\Flare\Admin\Models\Users\UserPolicy::class,
     |
     */
@@ -93,5 +93,5 @@ return [
         'notifications' => true,
         'version' => true,
     ],
-
+    
 ];

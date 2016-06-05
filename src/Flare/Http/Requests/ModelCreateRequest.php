@@ -24,7 +24,7 @@ class ModelCreateRequest extends AdminRequest
     public function rules()
     {
         return 
-            \App::make(AdminManager::class)
+            app(AdminManager::class)
             ->getAdminInstance()
             ->getCreateRules();
     }

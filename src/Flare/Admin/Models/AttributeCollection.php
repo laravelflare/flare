@@ -37,7 +37,7 @@ class AttributeCollection extends Collection
      */
     public function __construct($items = [], $modelManager = null)
     {
-        $this->fields = \App::make(FieldManager::class);
+        $this->fields = app(FieldManager::class);
         $this->items = $items;
         $this->modelManager = $modelManager;
 
