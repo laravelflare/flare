@@ -9,6 +9,8 @@
         <script src="{{ asset('vendor/flare/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('vendor/flare/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
         <script src="{{ asset('vendor/flare/plugins/pace/pace.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
+        <script src="{{ asset('vendor/flare/plugins/daterangepicker/daterangepicker.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript"></script>
 
         @yield('enqueued-js')
