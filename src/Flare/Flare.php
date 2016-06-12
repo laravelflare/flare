@@ -2,6 +2,8 @@
 
 namespace LaravelFlare\Flare;
 
+use Illuminate\Foundation\Application;
+
 class Flare
 {
     /**
@@ -86,7 +88,7 @@ class Flare
      *
      * @param \Illuminate\Foundation\Application $app
      */
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
 
