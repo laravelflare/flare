@@ -178,7 +178,7 @@ trait ModelQuerying
                     ];
         }
 
-        return ['all' => $this->model->count()];
+        return ['all' => $this->items($count = true)];
     }
 
     /**
