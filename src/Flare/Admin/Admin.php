@@ -293,7 +293,7 @@ abstract class Admin
     public function getTitle()
     {
         if (!isset($this->title) || !$this->title) {
-            return Str::title(str_replace('_', ' ', snake_case(str_replace(static::CLASS_SUFFIX, '', static::shortName()))));
+            return Str::title(str_replace('_', ' ', snake_case(preg_replace('/'.static::CLASS_SUFFIX.'$/', '', static::shortName()))));
         }
 
         return $this->title;
