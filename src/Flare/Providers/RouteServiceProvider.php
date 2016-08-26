@@ -24,22 +24,12 @@ abstract class RouteServiceProvider extends ServiceProvider
     protected $compatibilityVersion;
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-    }
-
-    /**
      * Define the routes for the application.
-     *
-     * @param \Illuminate\Routing\Router $router
      */
-    public function map(Router $router)
+    public function map()
     {
+        $router = app(Router::class);
+
         $this->registerMiddleware($router);
         $this->registerDefinedRoutes($router);
         $this->registerDefaultRoutes($router);

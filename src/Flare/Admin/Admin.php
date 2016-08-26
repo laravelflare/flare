@@ -4,6 +4,7 @@ namespace LaravelFlare\Flare\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 abstract class Admin
 {
@@ -140,8 +141,8 @@ abstract class Admin
      */
     public static function registerRoute($controller, $parameters = [])
     {
-        \Route::group($parameters, function ($controller) {
-            \Route::controller('/', $controller);
+        Route::group($parameters, function ($controller) {
+            Route::controller('/', $controller);
         });
     }
 

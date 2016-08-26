@@ -2,7 +2,7 @@
 
 namespace LaravelFlare\Flare\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,23 +18,11 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register the application's policies.
-     *
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      */
-    public function registerPolicies(GateContract $gate)
+    public function registerPolicies()
     {
         foreach (array_merge($this->policies, \Flare::config('policies')) as $key => $value) {
-            $gate->policy($key, $value);
+            Gate::policy($key, $value);
         }
-    }
-
-    /**
-     * Register any application authentication / authorization services.
-     *
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
-     */
-    public function boot(GateContract $gate)
-    {
-        $this->registerPolicies($gate);
     }
 }
