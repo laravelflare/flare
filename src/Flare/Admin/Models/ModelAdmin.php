@@ -541,7 +541,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCreating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelCreating::class);
+        return is_callable([$this, 'create']);
     }
 
     /**
@@ -551,7 +551,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasCloning()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelCloning::class);
+        return is_callable([$this, 'clone']);
     }
 
     /**
@@ -561,7 +561,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasEditing()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelEditing::class);
+        return is_callable([$this, 'edit']);
     }
 
     /**
@@ -571,7 +571,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasDeleting()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelDeleting::class);
+        return is_callable([$this, 'delete']);
     }
 
     /**
@@ -592,9 +592,7 @@ class ModelAdmin extends Admin implements ModelQueryable
 
         return in_array(
             \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new $managedModelClass()))
-        ) && in_array(
-            \LaravelFlare\Flare\Admin\Models\Traits\ModelSoftDeleting::class, class_uses_recursive(get_class($this))
-        );
+        ) && $this->hasDeleting();
     }
 
     /**
