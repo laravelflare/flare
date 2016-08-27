@@ -182,7 +182,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Plural Entity Title
+     * Plural Entity Title.
      *
      * @return string
      */
@@ -204,7 +204,6 @@ class ModelAdmin extends Admin implements ModelQueryable
     {
         $this->pluralEntityTitle = $pluralEntityTitle;
     }
-
 
     /**
      * Returns the Route Paramets.
@@ -268,7 +267,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Return the Validation Rules
+     * Return the Validation Rules.
      * 
      * @return array
      */
@@ -278,7 +277,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Return the Create Model Entry Validation Rules
+     * Return the Create Model Entry Validation Rules.
      * 
      * @return array
      */
@@ -288,7 +287,7 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
-     * Return the Update Model Entry Validation Rules
+     * Return the Update Model Entry Validation Rules.
      * 
      * @return array
      */
@@ -612,7 +611,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasTraitAndContract($trait = null, $contract = null)
     {
-        return ($this->hasTrait($trait) && $this->hasContract($contract));
+        return $this->hasTrait($trait) && $this->hasContract($contract);
     }
 
     /**

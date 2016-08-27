@@ -171,9 +171,9 @@ class AdminManager
     /**
      * Determines if a class is available for the current User.
      * 
-     * @param  string $class 
+     * @param string $class
      * 
-     * @return boolean
+     * @return bool
      */
     private function availableClass($class)
     {

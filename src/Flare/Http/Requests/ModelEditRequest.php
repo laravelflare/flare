@@ -2,7 +2,6 @@
 
 namespace LaravelFlare\Flare\Http\Requests;
 
-use Route;
 use LaravelFlare\Flare\Admin\AdminManager;
 
 class ModelEditRequest extends AdminRequest

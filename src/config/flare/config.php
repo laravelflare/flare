@@ -93,5 +93,5 @@ return [
         'notifications' => true,
         'version' => true,
     ],
-    
+
 ];
