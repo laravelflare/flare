@@ -3,6 +3,7 @@
 namespace LaravelFlare\Flare\Admin\Models;
 
 use Illuminate\Support\Str;
+use Illuminate\Routing\Router;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Exceptions\ModelAdminException;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
@@ -205,6 +206,35 @@ class ModelAdmin extends Admin implements ModelQueryable
         $this->pluralEntityTitle = $pluralEntityTitle;
     }
 
+    /**
+     * Register the routes for this Admin Section.
+     *
+     * Default routes include, create:, read:, update:, delete:
+     *
+     * Also attempts to load in ModelAdminController
+     * based on the shortName of the class, for
+     * overloading and adding additional routes
+     *
+     * @param \Illuminate\Routing\Router $router
+     */
+    public function registerRoutes(Router $router)
+    {
+        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function ($router) {
+            $router->get('/', $this->getController() . '@getIndex');
+            $router->get('trashed', $this->getController() . '@getTrashed');
+            $router->get('all', $this->getController() . '@getAll');
+            $router->get('create', $this->getController() . '@getCreate');
+            $router->post('create', $this->getController() . '@postCreate');
+            $router->get('view/{modelitemId}', $this->getController() . '@getView');
+            $router->get('edit/{modelitemId}', $this->getController() . '@getEdit');
+            $router->post('edit/{modelitemId}', $this->getController() . '@postEdit');
+            $router->get('delete/{modelitemId}', $this->getController() . '@getDelete');
+            $router->post('delete/{modelitemId}', $this->getController() . '@postDelete');
+            $router->get('restore/{modelitemId}', $this->getController() . '@getRestore');
+            $router->post('restore/{modelitemId}', $this->getController() . '@postRestore');
+            $router->get('clone/{modelitemId}', $this->getController() . '@getClone');
+        });
+    }
 
     /**
      * Returns the Route Paramets.
@@ -213,9 +243,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function routeParameters()
     {
-        return array_merge(parent::routeParameters(), [
-                                                    'model' => $this->managedModel,
-                                                ]);
+        return array_merge(parent::routeParameters(), ['model' => $this->managedModel]);
     }
 
     /**

@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Route;
 abstract class Admin
 {
     /**
+     * Class Suffix used for matching and removing term
+     * from user provided Admin sections.
+     *
+     * @var string
+     */
+    const CLASS_SUFFIX = 'Admin';
+
+    /**
      * Admin Section Icon.
      *
      * Font Awesome Defined Icon, eg 'user' = 'fa-user'
@@ -80,21 +88,6 @@ abstract class Admin
     protected $viewData = [];
 
     /**
-     * Class Suffix used for matching and removing term
-     * from user provided Admin sections.
-     *
-     * @var string
-     */
-    const CLASS_SUFFIX = 'Admin';
-
-    /**
-     * __construct.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Register the routes for this Admin Section.
      *
      * Default routes include, create:, read:, update:, delete:
@@ -107,43 +100,6 @@ abstract class Admin
      */
     public function registerRoutes(Router $router)
     {
-        // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
-        // such as (create, edit, view, delete etc) 
-        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function ($router) {
-            $this->registerSubRoutes();
-            $router->controller('/', $this->getController());
-        });
-    }
-
-    /**
-     * Register subRoutes for Defined Admin instances.
-     *
-     * @return
-     */
-    public function registerSubRoutes()
-    {
-        if (!is_array($this->subAdmin)) {
-            return;
-        }
-
-        foreach ($this->subAdmin as $adminItem) {
-            $this->registerRoute($adminItem->getController(), $adminItem->routeParameters());
-        }
-    }
-
-    /**
-     * Register an individual route.
-     *
-     * @param string $controller
-     * @param array  $parameters
-     *
-     * @return
-     */
-    public static function registerRoute($controller, $parameters = [])
-    {
-        Route::group($parameters, function ($controller) {
-            Route::controller('/', $controller);
-        });
     }
 
     /**

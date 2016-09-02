@@ -8,22 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use LaravelFlare\Flare\Admin\AdminManager;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use LaravelFlare\Flare\Permissions\Permissions;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LaravelFlare\Flare\Http\Controllers\FlareController;
 use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 
 class AdminController extends FlareController
 {
-    use AuthenticatesUsers {
-        AuthenticatesUsers::getGuard insteadof ResetsPasswords;
-        AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
-        AuthenticatesUsers::guestMiddleware insteadof ResetsPasswords;
-    }
-    use ResetsPasswords;
-    use ThrottlesLogins;
+    use AuthenticatesUsers;
     use DispatchesJobs;
 
     /**
