@@ -2,8 +2,10 @@
 
 namespace LaravelFlare\Flare\Admin;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Router;
+use LaravelFlare\Flare\Support\ControllerInspector;
 
 abstract class Admin
 {
@@ -108,9 +110,9 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function ($router) {
+        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function () {
             $this->registerSubRoutes();
-            $router->controller('/', $this->getController());
+            $this->registerController($this->getController());
         });
     }
 
@@ -141,8 +143,35 @@ abstract class Admin
     public static function registerRoute($controller, $parameters = [])
     {
         \Route::group($parameters, function ($controller) {
-            \Route::controller('/', $controller);
+            \Route::registerController($controller);
         });
+    }
+
+    /**
+     * Stolen Method from 5.2 Illumiante/Routing/Router.
+     * 
+     * @param  string $controller 
+     * @return void          
+     */
+    public static function registerController($controller)
+    {
+        $uri = '/';
+
+        $routable = (new ControllerInspector)
+                            ->getRoutable($controller, $uri);
+
+        // When a controller is routed using this method, we use Reflection to parse
+        // out all of the routable methods for the controller, then register each
+        // route explicitly for the developers, so reverse routing is possible.
+        foreach ($routable as $method => $routes) {
+            foreach ($routes as $route) {
+                $action = ['uses' => $controller.'@'.$method];
+
+                \Route::{$route['verb']}($route['uri'], $action);
+            }
+        }
+
+        \Route::any($uri.'/{_missing}', $controller.'@missingMethod');
     }
 
     /**

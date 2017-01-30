@@ -18,13 +18,11 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register the application's policies.
-     *
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      */
-    public function registerPolicies(GateContract $gate)
+    public function registerPolicies()
     {
         foreach (array_merge($this->policies, \Flare::config('policies')) as $key => $value) {
-            $gate->policy($key, $value);
+            app(GateContract::class)->policy($key, $value);
         }
     }
 
@@ -33,8 +31,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies(app(GateContract::class));
     }
 }

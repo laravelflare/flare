@@ -18,12 +18,11 @@ use LaravelFlare\Flare\Admin\Widgets\WidgetAdminManager;
 class AdminController extends FlareController
 {
     use AuthenticatesUsers {
-        AuthenticatesUsers::getGuard insteadof ResetsPasswords;
         AuthenticatesUsers::redirectPath insteadof ResetsPasswords;
-        AuthenticatesUsers::guestMiddleware insteadof ResetsPasswords;
+        AuthenticatesUsers::credentials insteadof ResetsPasswords;
+        AuthenticatesUsers::guard insteadof ResetsPasswords;
     }
     use ResetsPasswords;
-    use ThrottlesLogins;
     use DispatchesJobs;
 
     /**
@@ -73,6 +72,16 @@ class AdminController extends FlareController
     }
 
     /**
+     * Show the login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postLogin(Request $request)
+    {
+        return $this->login($request);
+    }
+
+    /**
      * Log the user.
      *
      * @return \Illuminate\Http\RedirectReponse
@@ -116,6 +125,7 @@ class AdminController extends FlareController
      */
     protected function loginRedirect()
     {
+        dd('here');
         if (Permissions::check()) {
             return redirect()->intended(Flare::adminUrl());
         }
