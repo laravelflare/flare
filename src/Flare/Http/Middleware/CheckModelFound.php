@@ -35,7 +35,7 @@ class CheckModelFound
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->modelAdmin->find(\Route::getCurrentRoute()->getParameter('one'))) {
+        if (!$this->modelAdmin->find(\Route::getCurrentRoute()->parameter('one'))) {
             return Response::view('flare::admin.404', [], 404);
         }
 

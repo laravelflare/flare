@@ -24,7 +24,7 @@ class ModelEditRequest extends AdminRequest
     public function rules()
     {
         $modelManager = app(AdminManager::class)->getAdminInstance();
-        $modelManager->find(\Route::current()->getParameter('one'));
+        $modelManager->find(\Route::current()->parameter('one'));
 
         return $modelManager->getUpdateRules();
     }
