@@ -25,9 +25,9 @@ class RouteServiceProvider extends AbstractRouteServiceProvider
      */
     protected function registerMiddleware(Router $router)
     {
-        $router->middleware('flareauthenticate', \LaravelFlare\Flare\Http\Middleware\FlareAuthenticate::class);
-        $router->middleware('checkmodelfound', \LaravelFlare\Flare\Http\Middleware\CheckModelFound::class);
-        $router->middleware('checkpermissions', \LaravelFlare\Flare\Http\Middleware\CheckPermissions::class);
+        $router->aliasMiddleware('flareauthenticate', \LaravelFlare\Flare\Http\Middleware\FlareAuthenticate::class);
+        $router->aliasMiddleware('checkmodelfound', \LaravelFlare\Flare\Http\Middleware\CheckModelFound::class);
+        $router->aliasMiddleware('checkpermissions', \LaravelFlare\Flare\Http\Middleware\CheckPermissions::class);
 
         $router->middlewareGroup('flarebase', [
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
