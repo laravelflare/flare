@@ -108,7 +108,7 @@ abstract class Admin
     {
         // We will need to throw an exception if a ModelAdmin manages a Model which conflicts with an internal flare endpoint
         // such as (create, edit, view, delete etc) 
-        $router->group(['prefix' => $this->urlPrefix(), 'namespace' => get_called_class(), 'as' => $this->urlPrefix()], function ($router) {
+        $router->group(['prefix' => $this->urlPrefix(), 'as' => $this->urlPrefix()], function ($router) {
             $this->registerSubRoutes();
             $router->controller('/', $this->getController());
         });
