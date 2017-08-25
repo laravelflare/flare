@@ -315,6 +315,14 @@ class ModelAdmin extends Admin implements ModelQueryable
             $model = $this->model;
         }
 
+        $formattedKey = str_replace('.', '_', $key);
+
+        if ($this->hasGetAccessor($formattedKey)) {
+            $method = 'get'.Str::studly($formattedKey).'Attribute';
+
+            return $this->{$method}($model);
+        }
+
         if ($this->hasGetAccessor($key)) {
             $method = 'get'.Str::studly($key).'Attribute';
 
