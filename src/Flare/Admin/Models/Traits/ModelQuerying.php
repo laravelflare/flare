@@ -145,6 +145,10 @@ trait ModelQuerying
     {
         $this->applyQueryFilters();
 
+        if ($this->hasTranslating()) {
+            $this->applyTranslationFilter();
+        }
+
         if ($this->orderBy()) {
             $this->query = $this->query->orderBy(
                                 $this->orderBy(),

@@ -9,10 +9,11 @@
         @if ($modelAdmin->getPerPage())
             <div class="pull-right" style="margin-top: -20px; margin-bottom: -20px;">
                 {!! $modelItems->appends([
-                                        'sort' => $modelAdmin->sortBy() == 'asc' ? 'asc' : null,
-                                        'order' => $modelAdmin->orderBy(),
-                                        'filter' => \Request::get('filter'),
-                                    ])->render() !!}
+                    'sort' => $modelAdmin->sortBy() == 'asc' ? 'asc' : null,
+                    'order' => $modelAdmin->orderBy(),
+                    'filter' => \Request::get('filter'),
+                    'lang' => \Request::get('lang'),
+                ])->render() !!}
             </div>
         @endif
     </div>

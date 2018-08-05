@@ -9,6 +9,9 @@
                 <div class="box-header with-border">
                     <div class="btn-group">
                         <a href="{{ $modelAdmin->currentUrl(\Request::get('filter') ? '?filter='.\Request::get('filter') : false) }}" class="btn btn-default btn-flat">
+                            @if($modelAdmin->hasTranslating())
+                                <i class="fa fa-globe" style="margin-right: 5px"></i>
+                            @endif
                             All {{ $modelAdmin->getPluralEntityTitle() }}
                             <span class="badge bg-green" style="margin-left: 15px">
                                 {{ $totals['all'] }}

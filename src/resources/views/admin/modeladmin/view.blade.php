@@ -8,6 +8,19 @@
             View {{ $modelAdmin->getEntityTitle() }}
         </h3>
     </div>
+    <div class="box-body">
+        <label style="padding: 7px 10px 0">
+            View Language:
+        </label>
+        @foreach($modelAdmin->languages() as $key => $language)
+            <a href="{{ $modelAdmin->modelHasLanguage($modelAdmin->model, $key)
+                      ? $modelAdmin->routeToViewModelTranslation($key, $modelAdmin->model)
+                      : $modelAdmin->routeToCreateModelTranslation($key, $modelAdmin->model)
+                }}" class="btn {{ $modelAdmin->isLanguage($key) ? 'btn-info' : 'btn-default' }} btn-flat">
+                {{ $modelAdmin->modelHasLanguage($modelAdmin->model, $key) ? $language : 'Add '.$language }}
+            </a>
+        @endforeach
+    </div>
     <form action="" method="post">
         <div class="box-body">
             @foreach ($modelAdmin->outputFields() as $attribute => $field)

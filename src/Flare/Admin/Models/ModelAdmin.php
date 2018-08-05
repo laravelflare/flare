@@ -2,12 +2,16 @@
 
 namespace LaravelFlare\Flare\Admin\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
-use LaravelFlare\Flare\Exceptions\ModelAdminException;
-use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelQuerying;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelTranslating;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelValidating;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelViewing;
 use LaravelFlare\Flare\Contracts\ModelAdmin\ModelQueryable;
+use LaravelFlare\Flare\Exceptions\ModelAdminException;
 
 class ModelAdmin extends Admin implements ModelQueryable
 {
@@ -538,7 +542,17 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasViewing()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelViewing::class);
+        return $this->hasTrait(ModelViewing::class);
+    }
+
+    /**
+     * Determine if the Model Admin has Translating Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasTranslating()
+    {
+        return $this->hasTrait(ModelTranslating::class);
     }
 
     /**
@@ -598,7 +612,7 @@ class ModelAdmin extends Admin implements ModelQueryable
         $managedModelClass = $this->getManagedModel();
 
         return in_array(
-            \Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive(get_class(new $managedModelClass()))
+            SoftDeletes::class, class_uses_recursive(get_class(new $managedModelClass()))
         ) && $this->hasDeleting();
     }
 
@@ -609,7 +623,7 @@ class ModelAdmin extends Admin implements ModelQueryable
      */
     public function hasValidating()
     {
-        return $this->hasTrait(\LaravelFlare\Flare\Admin\Models\Traits\ModelValidating::class);
+        return $this->hasTrait(ModelValidating::class);
     }
 
     /**

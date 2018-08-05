@@ -1,3 +1,5 @@
+        <!-- Filthy, even though Vue is god damn gorgeous -->
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('vendor/flare/plugins/jQuery/jQuery-2.2.0.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/flare/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/flare/js/app.min.js') }}" type="text/javascript"></script>
