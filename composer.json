@@ -20,7 +20,7 @@
     "require": {
         "php": ">=7.1",
         "laravel/framework": "^5.5", 
-        "laravelflare/fields": "^2.0"
+        "laravelflare/fields": "dev-master"
     },
     "require-dev": {
         "mockery/mockery": "~1.0",
