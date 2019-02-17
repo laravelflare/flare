@@ -285,6 +285,16 @@ abstract class Admin
     }
 
     /**
+     * Whether Admin Class should be displayed in Sidebar Menu.
+     * 
+     * @return bool
+     */
+    public function showInMenu()
+    {
+        return true;
+    }
+
+    /**
      * Icon of a Admin Section Class.
      *
      * @return string

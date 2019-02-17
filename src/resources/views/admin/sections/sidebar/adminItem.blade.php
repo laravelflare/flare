@@ -1,4 +1,4 @@
-@if (Flare::permissions()->check($adminItem))
+@if (Flare::permissions()->check($adminItem) && (new $adminItem)->showInMenu())
     <li class="treeview {{ Request::is( (new $adminItem)->relativeUrl() . '*' ) ? 'active' : '' }}">
         <a href="{{ (new $adminItem)->url() }}">
             @if ((new $adminItem)->getIcon())
