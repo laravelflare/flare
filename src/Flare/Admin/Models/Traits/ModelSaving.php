@@ -61,7 +61,7 @@ trait ModelSaving
      */
     private function doSave()
     {
-        foreach (\Request::only(array_keys($this->fields)) as $key => $value) {
+        foreach (\Request::only(array_keys($this->getFields()->toArray())) as $key => $value) {
             if ($this->hasSetMutator($key)) {
                 $this->setAttribute($key, $value);
                 continue;
