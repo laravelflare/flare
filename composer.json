@@ -41,5 +41,5 @@
         "psr-4": {
             "LaravelFlare\\Flare\\Tests\\": "tests/"
         }
-    },
+    }
 }
