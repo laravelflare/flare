@@ -35,6 +35,22 @@
                             </ul>
                         @endif
                     </div>
+                    @if($modelAdmin->hasSearch ?? false)
+                        <div class="box-tools pull-right" style="margin-top: 7px; width: 200px;">
+                            <form action="" method="get">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" placeholder="Search {{ $modelAdmin->getPluralTitle() }}" name="query">
+
+                                    <div class="input-group-btn">
+                                        <button type="button"  class="btn btn-primary btn-sm btn-flat">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
                     
                     @include('flare::admin.modeladmin.includes.header.filter', ['type' => null])
                 </div>
