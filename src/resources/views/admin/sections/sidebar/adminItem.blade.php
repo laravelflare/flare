@@ -2,9 +2,12 @@
     <li class="treeview {{ Request::is( (new $adminItem)->relativeUrl() . '*' ) ? 'active' : '' }}">
         <a href="{{ (new $adminItem)->url() }}">
             @if ((new $adminItem)->getIcon())
-            <i class="fa fa-fw fa-{{ (new $adminItem)->getIcon() }}"></i>
+                <i class="fa fa-fw fa-{{ (new $adminItem)->getIcon() }}"></i>
             @endif
             <span>{{ (new $adminItem)->getPluralTitle() }}</span>
+            @if (method_exists((new $adminItem), 'menuLabel'))
+                {{ (new $adminItem)->menuLabel() }}
+            @endif
         </a>
 
         @if(isset($adminItems) && is_array($adminItems) && !empty($adminItems))
