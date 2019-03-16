@@ -596,6 +596,16 @@ class ModelAdmin extends Admin implements ModelQueryable
     }
 
     /**
+     * Determine if the Model Admin has Language Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasLanguages()
+    {
+        return is_callable([$this, 'languages']);
+    }
+
+    /**
      * Determine if the Managed Model is using the SoftDeletes Trait.
      *
      * This is guarded by hasDeleting, since we shouldn't allow SoftDeleting

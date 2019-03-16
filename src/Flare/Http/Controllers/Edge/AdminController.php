@@ -125,7 +125,6 @@ class AdminController extends FlareController
      */
     protected function loginRedirect()
     {
-        dd('here');
         if (Permissions::check()) {
             return redirect()->intended(Flare::adminUrl());
         }

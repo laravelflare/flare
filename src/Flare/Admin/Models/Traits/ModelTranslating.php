@@ -38,6 +38,10 @@ trait ModelTranslating
             return true;
         }
 
+        if ($model->translations->get($key)) {
+            return true;
+        }
+
         return $this->model->language === $key;
     }
 
@@ -80,13 +84,9 @@ trait ModelTranslating
      */
     public function routeToViewModelTranslation($key, $model)
     {
-        $id = $model->children()->whereLanguage($key)->first();
-
-        if (!$id) {
-            return;
+        if ($translation = $model->translations->get($key)) {
+            return $this->currentUrl('view/'.$translation->id);
         }
-
-        return $this->currentUrl('view/'.$id);
     }
 
     /**
