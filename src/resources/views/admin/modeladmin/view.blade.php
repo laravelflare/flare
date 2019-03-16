@@ -36,6 +36,9 @@
 
             @include('flare::admin.modeladmin.includes.actions.back')
 
+            @if ($modelAdmin->hasRouting())
+                @include('flare::admin.modeladmin.includes.actions.route')
+            @endif
             @if ($modelAdmin->hasEditing())
                 @include('flare::admin.modeladmin.includes.actions.edit')
             @endif

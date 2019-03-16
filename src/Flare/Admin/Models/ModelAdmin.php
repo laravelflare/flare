@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use LaravelFlare\Flare\Admin\Admin;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelQuerying;
+use LaravelFlare\Flare\Admin\Models\Traits\ModelRouting;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelSaving;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelTranslating;
 use LaravelFlare\Flare\Admin\Models\Traits\ModelValidating;
@@ -530,6 +531,24 @@ class ModelAdmin extends Admin implements ModelQueryable
         // Key is a relation, so sorting is not available 
         if (strpos($key, '.') !== false) {
             return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine if the Model Admin has Viewing Capabilities.
+     * 
+     * @return bool
+     */
+    public function hasRouting()
+    {
+        if (!$this->hasTrait(ModelRouting::class)) {
+            return false;
+        }
+
+        if (!is_callable([$this, 'routeTo'])) {
+            throw new \Exception('ModelAdmin implementation must include a routeTo method when ModelRouting trait is applied');
         }
 
         return true;

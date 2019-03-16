@@ -8,6 +8,9 @@
         <td style="width: 1%; white-space:nowrap">
             @include('flare::admin.modeladmin.includes.table.actions.before')
 
+            @if ($modelAdmin->hasRouting())
+                @include('flare::admin.modeladmin.includes.table.actions.route')
+            @endif
             @if ($modelAdmin->hasViewing())
                 @include('flare::admin.modeladmin.includes.table.actions.view')
             @endif
