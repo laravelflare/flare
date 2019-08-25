@@ -101,11 +101,11 @@ class RouteServiceProvider extends AbstractRouteServiceProvider
 
                     // Password reset link request routes...
                     $router->get('email', $this->adminController('getEmail'))->name('email');
-                    $router->post('email', $this->adminController('postEmail'))->name('email');
+                    $router->post('email', $this->adminController('sendResetLinkEmail'))->name('email');
 
                     // Password reset routes...
-                    $router->get('reset/{token}', $this->adminController('getReset'))->name('reset');
-                    $router->post('reset', $this->adminController('postReset'))->name('reset');
+                    $router->get('reset', $this->adminController('getReset'))->name('reset');
+                    $router->post('reset', $this->adminController('reset'))->name('reset');
                 }
             }
         );
